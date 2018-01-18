@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html class="no-js css-menubar" lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+  <meta name="description" content="bootstrap admin template">
+  <meta name="author" content="">
+
+  <title>重庆存己科技</title>
+
+  <link rel="apple-touch-icon" href="/static/assets/images/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/static/assets/images/favicon.ico">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="/static/assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/static/assets/css/bootstrap-extend.min.css">
+  <link rel="stylesheet" href="/static/assets/css/site.min.css">
+
+  <!-- Plugins -->
+  <link rel="stylesheet" href="/static/assets/vendor/animsition/animsition.css">
+  <link rel="stylesheet" href="/static/assets/vendor/asscrollable/asScrollable.css">
+  <link rel="stylesheet" href="/static/assets/vendor/switchery/switchery.css">
+  <link rel="stylesheet" href="/static/assets/vendor/intro-js/introjs.css">
+  <link rel="stylesheet" href="/static/assets/vendor/slidepanel/slidePanel.css">
+  <link rel="stylesheet" href="/static/assets/vendor/flag-icon-css/flag-icon.css">
+
+  <!-- Fonts -->
+  <link rel="stylesheet" href="/static/assets/fonts/web-icons/web-icons.min.css">
+  <link rel="stylesheet" href="/static/assets/fonts/brand-icons/brand-icons.min.css">
+  <!-- 谷歌字体 -->
+  <link href='https://fonts.cat.net/css?family=Open+Sans' rel='stylesheet'>
+  <!-- Inline -->
+  <link rel="stylesheet" href="/static/assets/examples/css/pages/login-v2.css">
+
+  <!-- Bootstrap验证插件 -->
+  {css href="/static/bootstrapvalidator/dist/css/bootstrapValidator.css" /}
+  <!-- sweetalert弹窗插件 -->
+  {css href="/static/sweetalert2/dist/sweetalert2.min.css" /}
+
+  <!-- 当前页面css -->
+  {css href="/static/index/login/css/index.css" /}
+
+  <!--[if lt IE 9]>
+    <script src="/static/assets/vendor/html5shiv/html5shiv.min.js"></script>
+    <![endif]-->
+
+  <!--[if lt IE 10]>
+    <script src="/static/assets/vendor/media-match/media.match.min.js"></script>
+    <script src="/static/assets/vendor/respond/respond.min.js"></script>
+    <![endif]-->
+
+  <!-- Scripts -->
+  <script src="/static/assets/vendor/modernizr/modernizr.js"></script>
+  <script src="/static/assets/vendor/breakpoints/breakpoints.js"></script>
+  <script>
+    Breakpoints();
+  </script>
+</head>
+<body class="page-login-v2 layout-full page-dark">
+  <!--[if lt IE 8]>
+        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+
+  <!-- Page -->
+  <div class="page animsition" data-animsition-in="fade-in" data-animsition-out="fade-out">
+    <div class="page-content">
+      <div class="page-brand-info">
+        <div class="brand">
+          <img class="brand-img" src="/static/assets/images/logo@2x.png" alt="...">
+          <h2 class="brand-text font-size-40">重庆存己科技</h2>
+        </div>
+        <p class="font-size-20">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+          tempor incididunt ut labore et dolore magna aliqua.</p>
+      </div>
+
+      <div class="page-login-main">
+        <div class="brand visible-xs">
+          <img class="brand-img" src="/static/assets/images/logo-blue@2x.png" alt="...">
+          <h3 class="brand-text font-size-40">重庆存己科技</h3>
+        </div>
+        <h3 class="font-size-24" style="text-align: center;">登 录</h3>
+
+        <form id="loginForm" action="/admin/Login/index" method="post">
+          <div class="form-group form-material floating">
+            <input type="text" class="form-control empty" name="username">
+            <label class="floating-label">用户名</label>
+          </div>
+          <div class="form-group form-material floating">
+            <input type="password" class="form-control empty" name="password">
+            <label class="floating-label">密码</label>
+          </div>
+          <div class="form-group form-material floating row">
+            <div class="col-sm-6">
+              <input type="text" class="form-control empty" name="code">
+              <label class="floating-label">验证码</label>
+            </div>
+            <div class="col-sm-6">
+              <img src="/admin/Login/captcha" class="img-responsive img-captcha" title="看不清换一张" alt="看不清换一张" onclick="this.src='/admin/Login/captcha/d/'+Math.random();">
+            </div>
+          </div>
+          <div class="form-group clearfix">
+            <!-- <div class="checkbox-custom checkbox-inline checkbox-primary pull-left">
+              <input type="checkbox" id="remember" name="checkbox">
+              <label for="inputCheckbox">Remember me</label>
+            </div> -->
+            <a class="pull-right" href="javascript:;" onclick="javascript:swal('提示', '请联系网站管理员！', 'error');">忘记密码？</a>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">立 即 登 录</button>
+        </form>
+
+        <footer class="page-copyright">
+          <p>WEBSITE BY getcunji</p>
+          <p>© 2017. All RIGHT RESERVED.</p>
+        </footer>
+      </div>
+
+    </div>
+  </div>
+  <!-- End Page -->
+
+
+  <!-- Core  -->
+  <script src="/static/assets/vendor/jquery/jquery.js"></script>
+  <script src="/static/assets/vendor/bootstrap/bootstrap.js"></script>
+  <script src="/static/assets/vendor/animsition/jquery.animsition.js"></script>
+  <script src="/static/assets/vendor/asscroll/jquery-asScroll.js"></script>
+  <script src="/static/assets/vendor/mousewheel/jquery.mousewheel.js"></script>
+  <script src="/static/assets/vendor/asscrollable/jquery.asScrollable.all.js"></script>
+  <script src="/static/assets/vendor/ashoverscroll/jquery-asHoverScroll.js"></script>
+
+  <!-- Plugins -->
+  <script src="/static/assets/vendor/switchery/switchery.min.js"></script>
+  <script src="/static/assets/vendor/intro-js/intro.js"></script>
+  <script src="/static/assets/vendor/screenfull/screenfull.js"></script>
+  <script src="/static/assets/vendor/slidepanel/jquery-slidePanel.js"></script>
+
+  <!-- Plugins For This Page -->
+  <script src="/static/assets/vendor/jquery-placeholder/jquery.placeholder.js"></script>
+
+  <!-- Scripts -->
+  <script src="/static/assets/js/core.js"></script>
+  <script src="/static/assets/js/site.js"></script>
+
+  <script src="/static/assets/js/sections/menu.js"></script>
+  <script src="/static/assets/js/sections/menubar.js"></script>
+  <script src="/static/assets/js/sections/gridmenu.js"></script>
+  <script src="/static/assets/js/sections/sidebar.js"></script>
+
+  <script src="/static/assets/js/configs/config-colors.js"></script>
+  <script src="/static/assets/js/configs/config-tour.js"></script>
+
+  <script src="/static/assets/js/components/asscrollable.js"></script>
+  <script src="/static/assets/js/components/animsition.js"></script>
+  <script src="/static/assets/js/components/slidepanel.js"></script>
+  <script src="/static/assets/js/components/switchery.js"></script>
+
+  <!-- Scripts For This Page -->
+  <script src="/static/assets/js/components/jquery-placeholder.js"></script>
+  <script src="/static/assets/js/components/material.js"></script>
+
+  <!-- Bootstrap验证插件 -->
+  {js href="/static/bootstrapvalidator/dist/js/bootstrapValidator.js" /}
+  {js href="/static/bootstrapvalidator/dist/js/language/zh_CN.js" /}
+  <!-- sweetalert弹窗插件 -->
+  {js href="/static/sweetalert2/dist/sweetalert2.min.js" /}
+
+  <!-- 当前页面js -->
+  {js href="/static/index/login/js/index.js" /}
+
+  <script>
+    (function(document, window, $) {
+      'use strict';
+
+      var Site = window.Site;
+      $(document).ready(function() {
+        Site.run();
+      });
+    })(document, window, jQuery);
+  </script>
+
+
+</body>
+
+</html>
