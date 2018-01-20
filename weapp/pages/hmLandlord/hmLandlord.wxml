@@ -1,0 +1,41 @@
+<view class="page">
+  <form bindsubmit="formSubmit" bindreset="formReset">
+    <!-- 房东信息  开始-->
+        <view class="page_bd">
+          <view class="body_title">房东信息</view>
+          <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+              <view class="weui-label">联系人</view>
+            </view>
+            <view class="weui-cell__bd">
+              <input class="weui-input" name="userName" placeholder="请输入联系人" confirm-type="next" 
+              focus="{{whoFocus=='name'?true:false}}" bindblur="nameBlurFocus"/>
+            </view>
+          </view>
+          <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+              <view class="weui-label">联系电话</view>
+            </view>
+            <view class="weui-cell__bd">
+              <input class="weui-input" name="phone"  placeholder="请输入联系电话" bindblur="mobileInputEvent"/>
+            </view>
+          </view>
+          <view class="weui-cell weui-cell_input weui-cell_vcode borderBom">
+            <view class="weui-cell__hd">
+                <view class="weui-label">验证码</view>
+            </view>
+            <view class="weui-cell__bd">
+               <input class="weui-input" placeholder="请输入验证码" />
+            </view>
+            <button class="weui-cell__ft" bindtap="verifyCodeEvent" size="mini" type="default" disabled="{{buttonDisable}}">
+            {{verifyCodeTime}}</button>
+          </view>
+        </view>
+        <view class="page__bd page__bd_spacing">
+        <button class="weui-btn mini-btn" type="primary"   formType="submit">发布房源信息</button>
+    </view>
+    <view class="page__bd page__bd_spacing">
+        <button class="weui-btn mini-btn" type="primary" bindtap='gotoNext'>下一页</button>
+    </view>
+  </form>
+</view>

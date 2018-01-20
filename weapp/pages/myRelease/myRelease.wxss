@@ -1,0 +1,51 @@
+page,
+.page{
+  background-color: #f1f1f1;
+  width: 100%;
+}
+.page_weui_hd{
+  position: fixed;
+  top:0;
+  left: 0;
+  width: 100%;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  background-color: #fff;
+  color: #ff8900;
+}
+.marTop30{
+  margin-top: 30px;
+}
+.rt{
+  float: right;
+}
+.red{
+  color: #f00;
+}
+.page__bd{
+  padding:15px;
+  background-color: #fff;
+  border-bottom: 1px solid #eee;
+  border-top:1px solid #eee;
+}
+.weui-media-box__desc{
+  line-height: 30px;
+  height: 30px;
+}
+.color333{
+  color: #333;
+}
+.green{
+  color: green;
+}
+.weui-media-box{
+  padding: 0;
+}
+.errorMsg{
+  width: 100%;
+  height: 200px;
+  line-height: 200px;
+  text-align: center;
+  font-size: 16px;
+}

@@ -1,5 +1,8 @@
 //app.js
+// 引入表单验证
+import wxValidate from 'utils/wxValidate'
 App({
+  
   onLaunch: function () {
     // 展示本地存储能力
     var logs = wx.getStorageSync('logs') || []
@@ -35,5 +38,8 @@ App({
   },
   globalData: {
     userInfo: null
-  }
+  },
+  //创建表单验证
+  wxValidate: (rules, messages) => new wxValidate(rules, messages),
+  
 })

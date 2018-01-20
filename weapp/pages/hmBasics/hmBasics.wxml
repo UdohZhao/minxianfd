@@ -1,0 +1,70 @@
+<view class="page">
+  <form bindsubmit="formSubmit" bindreset="formReset">
+      <!--  基础信息 开始 -->
+        <view class="page_bd">
+          <view class="body_title">基础信息</view>
+          <!-- 遍历朝向，楼层等信息 -->
+            <view class="weui-cell_input weui-cell">
+              <view class="weui-btn-area">
+                <picker bindchange="bindPickerChange1" value="{{index1}}"  range="{{array1}}">
+                    <view class="labelStyle">房源类型: {{array1[index1]}}</view>
+                    <view class="labelRightStyle">
+                      <image src='../../dist/images/down.png'></image>
+                    </view>
+                </picker>
+              </view>
+            </view>
+            <view class="weui-cell_input weui-cell">
+              <view class="weui-btn-area">
+                <picker bindchange="bindPickerChange2" value="{{index2}}"  range="{{array2}}">
+                    <view class="labelStyle">装修: {{array2[index2]}}</view>
+                    <view class="labelRightStyle">
+                      <image src='../../dist/images/down.png'></image>
+                    </view>
+                </picker>
+              </view>
+            </view>
+            <view class="weui-cell_input weui-cell">
+              <view class="weui-btn-area">
+                <picker bindchange="bindPickerChange3" value="{{index3}}"  range="{{array3}}">
+                    <view class="labelStyle">朝向: {{array3[index3]}}</view>
+                    <view class="labelRightStyle">
+                      <image src='../../dist/images/down.png'></image>
+                    </view>
+                </picker>
+              </view>
+            </view>
+          <view class="weui_cell_box">
+              <view class="weui_cell_box_key">户型:</view>
+              <view class="weui_cell_box_input">
+                <input class="input"  name="habitable_room"></input>
+                室
+              </view>
+              <view class="weui_cell_box_input">
+                <input class="input"  name="living_room"></input>
+                厅
+              </view>
+              <view class="weui_cell_box_input">
+                <input class="input"  name="shower_room"></input>
+                卫
+              </view>
+            </view>
+          <view class="weui-cell weui-cell_input borTop">
+            <view class="weui-cell__hd">
+              <view class="weui-label">面积</view>
+            </view>
+            <view class="weui-cell__bd posR ">
+              <input class="weui-input picStyle" name="area"  placeholder="请输入出租屋面积"/>
+              <text class="label">㎡</text>
+            </view>
+          </view>
+        </view>
+        <!-- 基础信息 结束 -->
+        <view class="page__bd page__bd_spacing">
+            <button class="weui-btn mini-btn" type="primary"   formType="submit">发布房源信息</button>
+        </view>
+        <view class="page__bd page__bd_spacing">
+            <button class="weui-btn mini-btn" type="primary" bindtap='gotoNext'>下一页</button>
+        </view>
+  </form>
+</view>
