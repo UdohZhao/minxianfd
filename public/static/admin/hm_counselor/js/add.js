@@ -1,6 +1,28 @@
 $(function(){
 
-$('#AdminUserForm').bootstrapValidator({
+// fileinput控件
+$("#avatar-1").fileinput({
+    theme: 'fa',
+    language: 'zh',
+    overwriteInitial: true,
+    maxFileSize: 1500,
+    showClose: false,
+    showCaption: false,
+    browseLabel: '',
+    removeLabel: '',
+    browseIcon: '<i class="fa fa-folder-open"></i>',
+    removeIcon: '<i class="fa fa-remove"></i>',
+    removeTitle: '重新选择头像',
+    elErrorContainer: '#kv-avatar-errors-1',
+    msgErrorClass: 'alert alert-block alert-danger',
+    defaultPreviewContent: '<img src="/static/assets/default/uploads/default_avatar_male.jpg" alt="你的头像">',
+    layoutTemplates: {main2: '{preview} {remove} {browse}'},
+    allowedFileExtensions: ["jpg", "jpeg", "png", "gif"]
+});
+
+
+// 验证表单
+$('#HmCounselorForm').bootstrapValidator({
     message: 'This value is not valid',
     feedbackIcons: {
         valid: 'glyphicon glyphicon-ok',
@@ -8,48 +30,25 @@ $('#AdminUserForm').bootstrapValidator({
         validating: 'glyphicon glyphicon-refresh'
     },
     fields: {
-        username: {
+        head_portrait: {
             message: 'The username is not valid',
             validators: {
                 notEmpty: {
-                    message: '用户名不能为空！'
-                },
-                stringLength: {
-                    min: 6,
-                    max: 30,
-                    message: '用户名必须大于6，小于30个字符！'
+                    message: "<span style='color:red;'>请上传头像！</span>"
                 }
             }
         },
-        password: {
+        cname: {
             validators: {
                 notEmpty: {
-                    message: '密码不能为空！'
-                },
-                stringLength: {
-                    min: 6,
-                    max: 30,
-                    message: '密码必须大于6，小于30个字符！'
-                },
-                identical: {
-                    field: 'rePassword',
-                    message: '两次输入的密码不相符！'
+                    message: '姓名不能为空！'
                 }
             }
         },
-        rePassword: {
+        telephone: {
             validators: {
                 notEmpty: {
-                    message: '密码不能为空！'
-                },
-                stringLength: {
-                    min: 6,
-                    max: 30,
-                    message: '密码必须大于6，小于30个字符！'
-                },
-                identical: {
-                    field: 'password',
-                    message: '两次输入的密码不相符！'
+                    message: '电话号码不能为空！'
                 }
             }
         }
@@ -58,28 +57,69 @@ $('#AdminUserForm').bootstrapValidator({
     // Prevent form submission
     e.preventDefault();
 
-    // Get the form instance
-    var $form = $(e.target);
-
-    // Get the BootstrapValidator instance
-    var bv = $form.data('bootstrapValidator');
-
-    // Use Ajax to submit form data
-    $.post($form.attr('action'), $form.serialize(), function(result) {
-        console.log(result);
-        // if
-        if (result.status == 0)
+    // Ajax
+    $("#HmCounselorForm").ajaxSubmit({
+        dataType: 'json',
+        success: function (res)
         {
-            swal("成功提示", result.msg,"success");
-            setTimeout("window.location='/admin/AdminUser/index'",2000);
-        }
-        else
+            // if
+            if (res.status == 0)
+            {
+                swal('成功提示',res.msg,'success');
+                setTimeout("window.location='/admin/HmCounselor/index'",2000);
+            }
+            else
+            {
+                swal('错误提示',res.msg,'error');
+            }
+        },
+        error: function (e)
         {
-            swal("错误提示", result.msg,"error");
+            console.log(e);
         }
-    }, 'json');
+    });
+
 });
 
 
 })
+
+// 删除头像
+function delAvatar(id,head_portrait)
+{
+    swal({
+      title: '确定删除吗？',
+      text: '你将无法恢复它！',
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: '确定',
+    }).then(function(){
+        // Ajax
+        $.ajax({
+            type: 'POST',
+            url: '/admin/HmCounselor/delAvatar?id='+id,
+            data: {head_portrait:head_portrait},
+            dataType: 'JSON',
+            success: function(res)
+            {
+                // if
+                if (res.status == 0)
+                {
+                    swal('成功提示',res.msg,'success');
+                    setTimeout("window.location.reload();",2000);
+                }
+                else
+                {
+                    swal('错误提示',res.msg,'error');
+                }
+            },
+            error: function(e)
+            {
+                console.log(e);
+            }
+        });
+    })
+}
 

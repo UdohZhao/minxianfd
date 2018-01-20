@@ -5,11 +5,11 @@ $(function(){
 // 修改
 function modif(id)
 {
-    window.location.href = '/admin/AdminUser/add?id='+id;
+    window.location.href = '/admin/HmCounselor/add?id='+id;
 }
 
 // 删除
-function del(id)
+function del(id,head_portrait)
 {
     swal({
       title: '确认删除吗？',
@@ -22,9 +22,9 @@ function del(id)
     }).then(function(){
       // Ajax
       $.ajax({
-        type: 'GET',
-        url: '/admin/AdminUser/del',
-        data: {id:id},
+        type: 'POST',
+        url: '/admin/HmCounselor/del?id='+id,
+        data: {head_portrait:head_portrait},
         dataType: 'json',
         success: function(res)
         {
@@ -55,13 +55,13 @@ function freeze(id,status)
     var text = '';
     if (status == 1)
     {
-        title = '确认冻结吗？';
-        text = '冻结后管理员无法正常登录！';
+        title = '确认弃用吗？';
+        text = '弃用后该顾问将不再显示！';
     }
     else
     {
-        title = '确认恢复正常吗？';
-        text = '恢复正常后管理员将正常登录！';
+        title = '确认启用吗？';
+        text = '启用后该顾问将正常显示！';
     }
     swal({
       title: title,
@@ -75,7 +75,7 @@ function freeze(id,status)
       // Ajax
       $.ajax({
         type: 'GET',
-        url: '/admin/AdminUser/freeze',
+        url: '/admin/HmCounselor/freeze',
         data: {id:id,status:status},
         dataType: 'json',
         success: function(res)
