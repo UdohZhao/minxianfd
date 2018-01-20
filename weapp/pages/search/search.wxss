@@ -1,0 +1,64 @@
+page,
+.page{
+  background-color: #f1f1f1;
+  width: 100%;
+}
+.searchBox{
+  margin: 20px;
+  padding: 10px;
+  background-color: #fff;
+}
+.searchBox input{
+  width: 65%;
+  background-color: #f1f1f1;
+  display: inline-block;
+  border-radius: 5px;
+  text-indent: 10px;
+}
+.btnStyle{
+  display: inline-block;
+  width: 30%;
+  height: 1.4rem;
+  line-height: 1.4rem;
+  text-align: center;
+  border: 1px solid #eee;
+  background-color: #f1f1f1;
+  margin-left: 5%;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+.Newlocation{
+  width: 100%;
+  height: 30px;
+  line-height: 30px;
+  margin-top:20px;
+  background-color: #fff;
+  text-align: center;
+  font-size: 14px; 
+  vertical-align: middle;
+}
+.Newlocation image{
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  vertical-align: middle;
+}
+.searchBoxMsg{
+  background-color: #fff;
+  width: 100%;
+  margin-top: 30px;
+}
+.searchBoxMsg_list{
+  padding: 10px 5px;
+  font-size: 16px;
+  border-bottom: 1px solid #ddd;
+}
+.searchBoxMsg_list view{
+  line-height: 1.7;
+}
+.color666{
+  color: #666;
+  }
+.color999{
+  color: #999;
+}

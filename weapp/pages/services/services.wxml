@@ -1,0 +1,82 @@
+<view class="page">
+  <form bindsubmit="formSubmit" bindreset="formReset">
+      <view class="page_bd">
+        <!-- 房源信息 开始-->
+        <view class="margBom20">
+          <view class="body_title border0">房源信息</view>
+          <!-- 上传图片 -->
+          <view class="weui-cells">
+                  <view class="weui-cell">
+                      <view class="weui-cell__bd">
+                          <view class="weui-uploader">
+                              <view class="weui-uploader__hd">
+                                  <view class="weui-uploader__title">环境照片最多填5张</view>
+                                  <view class="weui-uploader__info">{{files.length}}/5</view>
+                              </view>
+                              <view class="weui-uploader__bd">
+                                  <view class="weui-uploader__files" id="uploaderFiles">
+                                      <block wx:for="{{files}}" wx:key="*this">
+                                          <view class="weui-uploader__file" bindtap="previewImage" id="{{item}}">
+                                              <image class="weui-uploader__img" src="{{item}}" mode="aspectFill" />
+                                          </view>
+                                      </block>
+                                  </view>
+                                  <view class="weui-uploader__input-box">
+                                      <view class="weui-uploader__input" bindtap="chooseImage" ></view>
+                                  </view>
+                              </view>
+                          </view>
+                      </view>
+                  </view>
+              </view>
+          <!-- 上传图片结束 -->
+          <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+              <view class="weui-label">房源标题</view>
+            </view>
+            <view class="weui-cell__bd">
+              <input class="weui-input " name="title" placeholder="请输入房源标题"/>
+            </view>
+          </view>
+          
+          <!--特点  -->
+          <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+              <view class="weui-label">特点</view>
+            </view>
+            <view class="weui-cell__bd">
+              <input class="weui-input" name="trait" placeholder="请输入特点"/>
+            </view>
+          </view>
+          <!--入住时间  -->
+          <view class="weui-cell_input weui-cell">
+            <view class="weui-btn-area">
+              <picker bindchange="bindDateChange" value="{{date}}"  mode="date" start="2018-01-01" end="2020-09-01">
+                  <view class="labelStyle">入住时间 : {{date}}</view>
+                  <view class="labelRightStyle">
+                    <image src='../../dist/images/down.png'></image>
+                  </view>
+              </picker>
+            </view>
+          </view>
+          <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+              <view class="weui-label">周边环境</view>
+            </view>
+            <view class="weui-cell__bd">
+              <input class="weui-input" name="describe" placeholder="请输入周边环境"/>
+            </view>
+          </view>
+        </view>
+        <!-- 房源信息 结束-->
+      </view>
+    <view class="page__bd page__bd_spacing">
+        <button class="weui-btn mini-btn" type="primary"   formType="submit">发布房源信息</button>
+    </view>
+    <view class="page__bd page__bd_spacing">
+        <button class="weui-btn mini-btn" type="primary" bindtap='gotoNext'>下一页</button>
+    </view>
+</form>   
+   
+
+</view>
