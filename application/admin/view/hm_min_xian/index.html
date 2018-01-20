@@ -1,0 +1,95 @@
+{include file="layouts/header" /}
+{include file="layouts/nav" /}
+{include file="layouts/menu" /}
+
+<!-- Page -->
+<div class="page animsition">
+  <div class="page-header">
+    <h1 class="page-title"># 用户管理</h1>
+  </div>
+  <div class="page-content">
+    <div class="panel">
+      <div class="panel-heading">
+        <h3 class="panel-title">@ 管理员列表</h3>
+      </div>
+      <form action="/admin/AdminUser/index" method="post">
+        <div class="input-group" style="width: 300px;float: right;margin-right: 30px;">
+          <input type="text" class="form-control" name="search" placeholder="请输入搜索关键字">
+          <span class="input-group-btn">
+            <button type="submit" class="btn btn-primary"><i class="icon wb-search" aria-hidden="true"></i></button>
+          </span>
+        </div>
+      </form>
+      <div class="panel-body">
+        <table class="table table-hover">
+            <thead>
+              <tr>
+                <th></th>
+                <th>用户名</th>
+                <th>类型</th>
+                <th>时间</th>
+                <th>操作</th>
+              </tr>
+            </thead>
+            <tbody>
+            {if condition="(!$data->isEmpty())"}
+            {foreach name="data" item="v" key="k"}
+              <tr>
+                <td>
+                  {eq name="v.status" value="0"}
+                    <span class="text-success">{正常}</span>
+                  {/eq}
+                  {eq name="v.status" value="1"}
+                    <span class="text-danger">{冻结}</span>
+                  {/eq}
+                </td>
+                <td>{$v.username}</td>
+                <td>
+                  {eq name="v.type" value="0"}
+                    <span class="text-primary">{超级管理员}</span>
+                  {/eq}
+                  {eq name="v.type" value="1"}
+                    <span class="text-info">{管理员}</span>
+                  {/eq}
+                </td>
+                <td>{$v.ctime|date='Y-m-d H:i',###}</td>
+                <td>
+                    {eq name="v.type" value="1"}
+                    <button type="button" class="btn btn-primary btn-xs" onclick="modif({$v.id});">修改</button>
+                    {eq name="v.status" value="0"}
+                    <button type="button" class="btn btn-danger btn-xs" onclick="freeze({$v.id},1);">冻结</button>
+                    {/eq}
+                    {eq name="v.status" value="1"}
+                    <button type="button" class="btn btn-success btn-xs" onclick="freeze({$v.id},0);">正常</button>
+                    {/eq}
+                    <button type="button" class="btn btn-default btn-xs" onclick="del({$v.id});">删除</button>
+                    {else /}
+                    - - -
+                    {/eq}
+                </td>
+              </tr>
+            {/foreach}
+            {else /}
+            <tr>
+              <td colspan="10">
+                <blockquote>
+                  <p>暂无数据 ~</p>
+                </blockquote>
+              </td>
+            </tr>
+            {/if}
+            </tbody>
+        </table>
+        <div style="float: right;">
+          {$data->render()}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Page -->
+
+{include file="layouts/footer" /}
+
+<!-- 当前页面js -->
+{js href="/static/admin/admin_user/js/index.js" /}

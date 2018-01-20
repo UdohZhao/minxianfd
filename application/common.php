@@ -705,3 +705,22 @@ function slog($log,$type='log',$css='')
 
     throw new Exception($type.' is not SocketLog method');
 }
+
+/**
+ * 密码加密
+ */
+function enPassword($password)
+{
+    return md5(crypt($password,substr($password,0,2)));
+}
+
+/**
+ * 接口结果集
+ */
+function Rs($status = 0, $msg, $data)
+{
+  $res['status'] = $status;
+  $res['msg'] = $msg;
+  $res['data'] = $data;
+  return $res;
+}

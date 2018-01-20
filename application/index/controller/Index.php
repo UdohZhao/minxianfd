@@ -18,9 +18,7 @@ class Index extends Base
         // Get
         if ($this->request->isGet())
         {
-
             slog('hello world!','log','color:red;font-size:20px;');
-
             // 渲染模板输出
             return $this->fetch('index');
         }

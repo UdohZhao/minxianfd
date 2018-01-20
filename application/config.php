@@ -242,4 +242,11 @@ return [
 
     // SocketLog ip
     'socketlogip'   => '114.115.164.141',
+
+    // 分页数
+    'pages'         =>  '25',
+
+    // 后台标题
+    'admin_title'   =>  '岷县房东',
+
 ];
