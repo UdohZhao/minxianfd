@@ -10,10 +10,10 @@
   <div class="page-content">
     <div class="panel">
       <div class="panel-heading">
-        <h3 class="panel-title">@ 添加出租方式</h3>
+        <h3 class="panel-title">@ 添加付款方式</h3>
       </div>
       <div class="panel-body">
-        <form class="form-horizontal" action="/admin/HmLeaseManner/add?id={$id}" method="post" id="HmLeaseMannerForm">
+        <form class="form-horizontal" action="/admin/HmPaymentMethod/add?id={$id}" method="post" id="HmPaymentMethodForm">
           <div class="form-group">
             <label class="col-sm-2 control-label">名称</label>
             <div class="col-sm-10">
@@ -41,4 +41,4 @@
 {include file="layouts/footer" /}
 
 <!-- 当前页面js -->
-{js href="/static/admin/hm_lease_manner/js/add.js" /}
+{js href="/static/admin/hm_payment_method/js/add.js" /}

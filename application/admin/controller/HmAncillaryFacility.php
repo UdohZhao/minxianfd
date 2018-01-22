@@ -1,6 +1,6 @@
 <?php
 namespace app\admin\controller;
-class HmPaymentMethod extends Base
+class HmAncillaryFacility extends Base
 {
     public $id;
     /**
@@ -22,7 +22,7 @@ class HmPaymentMethod extends Base
             if ($this->id)
             {
                 // 读取数据
-                $data = db('hm_payment_method')->where('id',$this->id)->find();
+                $data = db('hm_ancillary_facility')->where('id',$this->id)->find();
             }
             else
             {
@@ -39,7 +39,7 @@ class HmPaymentMethod extends Base
             // data
             $data = $this->getData();
             // 防止重复添加
-            if (db('hm_payment_method')->where('cname',$data['cname'])->count() && $this->id == 0)
+            if (db('hm_ancillary_facility')->where('cname',$data['cname'])->count() && $this->id == 0)
             {
                 return Rs(2,'请勿重复添加！',false);
             }
@@ -47,12 +47,12 @@ class HmPaymentMethod extends Base
             if ($this->id)
             {
                 // 更新数据表
-                $result = db('hm_payment_method')->where('id',$this->id)->update($data);
+                $result = db('hm_ancillary_facility')->where('id',$this->id)->update($data);
             }
             else
             {
                 // 写入数据表
-                $result = db('hm_payment_method')->insert($data);
+                $result = db('hm_ancillary_facility')->insert($data);
 
             }
             if ($result)
@@ -83,7 +83,7 @@ class HmPaymentMethod extends Base
         $search = "%%";
         if (input('?post.search')) $search = "%".input('post.search')."%";
         // 读取数据表
-        $data = db('hm_payment_method')->where('cname','like',$search)->order('sort asc')->paginate(config('pages'),false,['query' => request()->param()]);
+        $data = db('hm_ancillary_facility')->where('cname','like',$search)->order('sort asc')->paginate(config('pages'),false,['query' => request()->param()]);
         // assign
         $this->assign('data',$data);
         // 渲染模板输出
@@ -97,7 +97,7 @@ class HmPaymentMethod extends Base
         if ($this->request->isAjax())
         {
             // 删除数据
-            if (db('hm_payment_method')->where('id',$this->id)->delete())
+            if (db('hm_ancillary_facility')->where('id',$this->id)->delete())
             {
               return Rs(0,'受影响的操作！',true);
             }
