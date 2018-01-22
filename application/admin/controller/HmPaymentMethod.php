@@ -1,6 +1,6 @@
 <?php
 namespace app\admin\controller;
-class HmLeaseManner extends Base
+class HmPaymentMethod extends Base
 {
     public $id;
     /**
@@ -22,7 +22,7 @@ class HmLeaseManner extends Base
             if ($this->id)
             {
                 // 读取数据
-                $data = db('hm_lease_manner')->where('id',$this->id)->find();
+                $data = db('hm_payment_method')->where('id',$this->id)->find();
             }
             else
             {
@@ -39,7 +39,7 @@ class HmLeaseManner extends Base
             // data
             $data = $this->getData();
             // 防止重复添加
-            if (db('hm_lease_manner')->where('cname',$data['cname'])->count() && $this->id == 0)
+            if (db('hm_payment_method')->where('cname',$data['cname'])->count() && $this->id == 0)
             {
                 return Rs(2,'请勿重复添加！',false);
             }
@@ -47,12 +47,12 @@ class HmLeaseManner extends Base
             if ($this->id)
             {
                 // 更新数据表
-                $result = db('hm_lease_manner')->where('id',$this->id)->update($data);
+                $result = db('hm_payment_method')->where('id',$this->id)->update($data);
             }
             else
             {
                 // 写入数据表
-                $result = db('hm_lease_manner')->insert($data);
+                $result = db('hm_payment_method')->insert($data);
             }
             if ($result)
             {
@@ -82,7 +82,7 @@ class HmLeaseManner extends Base
         $search = "%%";
         if (input('?post.search')) $search = "%".input('post.search')."%";
         // 读取数据表
-        $data = db('hm_lease_manner')->where('cname','like',$search)->order('sort asc')->paginate(config('pages'),false,['query' => request()->param()]);
+        $data = db('hm_payment_method')->where('cname','like',$search)->order('sort asc')->paginate(config('pages'),false,['query' => request()->param()]);
         slog($data);
         // assign
         $this->assign('data',$data);
@@ -97,7 +97,7 @@ class HmLeaseManner extends Base
         if ($this->request->isAjax())
         {
             // 删除数据
-            if (db('hm_lease_manner')->where('id',$this->id)->delete())
+            if (db('hm_payment_method')->where('id',$this->id)->delete())
             {
               return Rs(0,'受影响的操作！',true);
             }
