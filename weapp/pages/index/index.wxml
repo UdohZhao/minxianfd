@@ -1,12 +1,12 @@
 <view class="page">
   <!--轮播图  -->
-  <swiper class="swiper" indicator-dots="true" autoplay="true" interval="5000" duration="1000">    
-      <block wx:for="{{movies}}" wx:for-index="index" wx:key="k">    
-        <swiper-item>    
-          <image src="{{item.url}}" class="slide-image" mode="aspectFill"/>    
-        </swiper-item>    
-      </block>    
-    </swiper> 
+  <swiper class="swiper" indicator-dots="true" autoplay="true" interval="5000" duration="1000">
+      <block wx:for="{{movies}}" wx:for-index="index" wx:key="k">
+        <swiper-item>
+          <image src="{{item.url}}" class="slide-image" mode="aspectFill"/>
+        </swiper-item>
+      </block>
+    </swiper>
 
   <!--搜索条件  -->
   <view class="page__bd">
@@ -36,7 +36,7 @@
                       <!-- 需要先判断 是否为空 -->
                       <block wx:for="{{dishesList[curIndex]}}">
                         <view class="nav_right_items" data-id="{{item.id}}" bindtap='searchTap'>{{item.name}}</view>
-                      </block>  
+                      </block>
                       </view>
                    </view>
                 </view>
@@ -47,7 +47,7 @@
                   <view class="list">2000~3000</view>
                   <view class="list">3000~4000</view>
                   <view class="list">4000~5000</view>
-                  
+
                 </view>
                 <view class="weui-tab__content" hidden="{{activeIndex != 2}}">
                     <!-- 房源类型 -->
@@ -57,7 +57,7 @@
                   <view class="list">写字楼</view>
                   <view class="list">商铺</view>
                 </view>
-                
+
                 <view class="weui-tab__content" hidden="{{activeIndex != 3}}">
                   <!--朝向，楼层 装修 居室 方式 面积等 -->
                   <block wx:for="{{objArray}}"  wx:for-item="v"  wx:for-index="k">
@@ -88,7 +88,7 @@
                         <view class="weui-media-box__desc">果园习总屯精品次卧</view>
                         <view class="weui-media-box__desc">
                           <view class="weui-media-box__desc_left">2室1厅 86㎡</view>
-                          <view class="weui-media-box__desc_right">3500元/月</view>  
+                          <view class="weui-media-box__desc_right">3500元/月</view>
                         </view>
                         <view class="weui-media-box__desc">乔庄东区</view>
                     </view>
@@ -101,7 +101,7 @@
                         <view class="weui-media-box__desc">果园习总屯精品次卧</view>
                         <view class="weui-media-box__desc">
                           <view class="weui-media-box__desc_left">2室1厅 86㎡</view>
-                          <view class="weui-media-box__desc_right">3500元/月</view>  
+                          <view class="weui-media-box__desc_right">3500元/月</view>
                         </view>
                         <view class="weui-media-box__desc">乔庄东区</view>
                     </view>
@@ -114,7 +114,7 @@
                         <view class="weui-media-box__desc">果园习总屯精品次卧</view>
                         <view class="weui-media-box__desc">
                           <view class="weui-media-box__desc_left">2室1厅 86㎡</view>
-                          <view class="weui-media-box__desc_right">3500元/月</view>  
+                          <view class="weui-media-box__desc_right">3500元/月</view>
                         </view>
                         <view class="weui-media-box__desc">乔庄东区</view>
                     </view>
@@ -127,7 +127,7 @@
                         <view class="weui-media-box__desc">果园习总屯精品次卧</view>
                         <view class="weui-media-box__desc">
                           <view class="weui-media-box__desc_left">2室1厅 86㎡</view>
-                          <view class="weui-media-box__desc_right">3500元/月</view>  
+                          <view class="weui-media-box__desc_right">3500元/月</view>
                         </view>
                         <view class="weui-media-box__desc">乔庄东区</view>
                     </view>
