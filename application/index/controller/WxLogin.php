@@ -1,6 +1,6 @@
 <?php
 namespace app\index\controller;
-class Index extends Base
+class WxLogin extends Base
 {
     /**
      * 构造方法
@@ -10,16 +10,13 @@ class Index extends Base
 
     }
 
-    /**
-     * 默认方法
-     */
-    public function index()
+    // add
+    public function add()
     {
         // Get
         if ($this->request->isGet())
         {
-            // 渲染模板输出
-            return $this->fetch('index');
+
         }
     }
 }

@@ -4,8 +4,8 @@ import wxValidate from 'utils/wxValidate'
 App({
   data:{
     //域名
-    //domain: "https://weapp.icunji.com",
-    domain: "http://dev.minxianfd.vag",
+    domain: "https://ngrok.getcunji.com",
+    // domain: "http://dev.minxianfd.vag",
     phone: "18883867534",
   },
   onLaunch: function () {
@@ -18,8 +18,10 @@ App({
     wx.login({
       success: res => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
+        console.log(res);
       }
     })
+    
     // 获取用户信息
     wx.getSetting({
       success: res => {
