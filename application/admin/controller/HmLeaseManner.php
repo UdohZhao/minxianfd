@@ -83,7 +83,6 @@ class HmLeaseManner extends Base
         if (input('?post.search')) $search = "%".input('post.search')."%";
         // 读取数据表
         $data = db('hm_lease_manner')->where('cname','like',$search)->order('sort asc')->paginate(config('pages'),false,['query' => request()->param()]);
-        slog($data);
         // assign
         $this->assign('data',$data);
         // 渲染模板输出
