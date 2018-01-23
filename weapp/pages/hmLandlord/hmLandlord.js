@@ -111,5 +111,11 @@ Page({
     }
     app.sendVerifyCode(function () { }, mobile);//获取短信验证码接口
   },
+  //跳转到支付页面
+  gotoNext:function(){
+    wx.redirectTo({
+      url: '/pages/pay/pay',
+    })
+  }
 
 })
