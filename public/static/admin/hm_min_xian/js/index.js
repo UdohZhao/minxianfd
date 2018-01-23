@@ -5,7 +5,7 @@ $(function(){
 // 修改
 function modif(id)
 {
-    window.location.href = '/admin/AdminUser/add?id='+id;
+    window.location.href = '/admin/HmMinXian/add?id='+id;
 }
 
 // 删除
@@ -23,7 +23,7 @@ function del(id)
       // Ajax
       $.ajax({
         type: 'GET',
-        url: '/admin/AdminUser/del',
+        url: '/admin/HmMinXian/del',
         data: {id:id},
         dataType: 'json',
         success: function(res)
@@ -75,7 +75,7 @@ function freeze(id,status)
       // Ajax
       $.ajax({
         type: 'GET',
-        url: '/admin/AdminUser/freeze',
+        url: '/admin/HmMinXian/freeze',
         data: {id:id,status:status},
         dataType: 'json',
         success: function(res)

@@ -1,6 +1,6 @@
 $(function(){
 
-$('#HmMinXianForm').bootstrapValidator({
+$('#HmLeaseMannerForm').bootstrapValidator({
     message: 'This value is not valid',
     feedbackIcons: {
         valid: 'glyphicon glyphicon-ok',
@@ -8,7 +8,7 @@ $('#HmMinXianForm').bootstrapValidator({
         validating: 'glyphicon glyphicon-refresh'
     },
     fields: {
-        town_village: {
+        cname: {
             message: 'The username is not valid',
             validators: {
                 notEmpty: {
@@ -43,7 +43,7 @@ $('#HmMinXianForm').bootstrapValidator({
         if (result.status == 0)
         {
             swal("成功提示", result.msg,"success");
-            setTimeout("window.location='/admin/HmMinXian/index'",2000);
+            setTimeout("window.location='/admin/HmLeaseManner/index'",2000);
         }
         else
         {

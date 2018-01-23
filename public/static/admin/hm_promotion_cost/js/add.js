@@ -1,6 +1,6 @@
 $(function(){
 
-$('#HmMinXianForm').bootstrapValidator({
+$('#HmPromotionCostForm').bootstrapValidator({
     message: 'This value is not valid',
     feedbackIcons: {
         valid: 'glyphicon glyphicon-ok',
@@ -8,11 +8,26 @@ $('#HmMinXianForm').bootstrapValidator({
         validating: 'glyphicon glyphicon-refresh'
     },
     fields: {
-        town_village: {
+        day: {
             message: 'The username is not valid',
             validators: {
                 notEmpty: {
-                    message: '名称不能为空！'
+                    message: '推广天数不能为空！'
+                },
+                digits: {
+                    message: '该值只能包含数字！'
+                }
+            }
+        },
+        cost: {
+            message: 'The username is not valid',
+            validators: {
+                notEmpty: {
+                    message: '对应费用不能为空！'
+                },
+                regexp: {
+                    regexp: /^\d+(\.\d+)?$/,
+                    message: '该值只能包含整数或者小数！'
                 }
             }
         },
@@ -38,18 +53,27 @@ $('#HmMinXianForm').bootstrapValidator({
     var bv = $form.data('bootstrapValidator');
 
     // Use Ajax to submit form data
-    $.post($form.attr('action'), $form.serialize(), function(result) {
+    $.ajax({
+      type: 'POST',
+      url: $form.attr('action'),
+      data: $form.serialize(),
+      dataType: 'JSON',
+      success: function (result) {
         // if
         if (result.status == 0)
         {
             swal("成功提示", result.msg,"success");
-            setTimeout("window.location='/admin/HmMinXian/index'",2000);
+            setTimeout("window.location='/admin/HmPromotionCost/index'",2000);
         }
         else
         {
             swal("错误提示", result.msg,"error");
         }
-    }, 'json');
+      },
+      error: function (e) {
+        console.info(e);
+      }
+    });
 });
 
 
