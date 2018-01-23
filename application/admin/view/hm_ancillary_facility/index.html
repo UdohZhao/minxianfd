@@ -5,14 +5,14 @@
 <!-- Page -->
 <div class="page animsition">
   <div class="page-header">
-    <h1 class="page-title"># 区域管理</h1>
+    <h1 class="page-title"># 租赁管理</h1>
   </div>
   <div class="page-content">
     <div class="panel">
       <div class="panel-heading">
-        <h3 class="panel-title">@ 岷县列表</h3>
+        <h3 class="panel-title">@ 配套设施列表</h3>
       </div>
-      <form action="/admin/HmMinXian/index?type={$type}" method="post">
+      <form action="/admin/HmAncillaryFacility/index" method="post">
         <div class="input-group" style="width: 300px;float: right;margin-right: 30px;">
           <input type="text" class="form-control" name="search" placeholder="请输入搜索关键字">
           <span class="input-group-btn">
@@ -20,10 +20,6 @@
           </span>
         </div>
       </form>
-      <ul class="nav nav-pills" style="margin-left: 30px;">
-        <li role="presentation" {eq name="type" value="0"}class="active"{/eq} ><a href="/admin/HmMinXian/index?type=0">城镇</a></li>
-        <li role="presentation" {eq name="type" value="1"}class="active"{/eq} ><a href="/admin/HmMinXian/index?type=1">乡村</a></li>
-      </ul>
       <div class="panel-body">
         <table class="table table-hover">
             <thead>
@@ -39,7 +35,7 @@
             {foreach name="data" item="v" key="k"}
               <tr>
                 <td></td>
-                <td>{$v.town_village}</td>
+                <td>{$v.cname}</td>
                 <td>{$v.sort}</td>
                 <td>
                     <button type="button" class="btn btn-primary btn-xs" onclick="modif({$v.id});">修改</button>
@@ -70,4 +66,4 @@
 {include file="layouts/footer" /}
 
 <!-- 当前页面js -->
-{js href="/static/admin/hm_min_xian/js/index.js" /}
+{js href="/static/admin/hm_ancillary_facility/js/index.js" /}

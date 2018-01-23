@@ -5,31 +5,31 @@
 <!-- Page -->
 <div class="page animsition">
   <div class="page-header">
-    <h1 class="page-title"># 用户管理</h1>
+    <h1 class="page-title"># 置顶管理</h1>
   </div>
   <div class="page-content">
     <div class="panel">
       <div class="panel-heading">
-        <h3 class="panel-title">@ 添加管理员</h3>
+        <h3 class="panel-title">@ 置顶配置</h3>
       </div>
       <div class="panel-body">
-        <form class="form-horizontal" action="/admin/AdminUser/add?id={$id}" method="post" id="AdminUserForm">
+        <form class="form-horizontal" action="/admin/HmPromotionCost/add?id={$id}" method="post" id="HmPromotionCostForm">
           <div class="form-group">
-            <label class="col-sm-2 control-label">用户名</label>
+            <label class="col-sm-2 control-label">天数</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" name="username" placeholder="请输入用户名" {if condition="($id)"}value="{$data.username}"{/if}>
+              <input type="text" class="form-control" name="day" placeholder="请输入推广天数" {if condition="($id)"}value="{$data.day}"{/if} >
             </div>
           </div>
           <div class="form-group">
-            <label for="inputPassword3" class="col-sm-2 control-label">密码</label>
+            <label class="col-sm-2 control-label">费用</label>
             <div class="col-sm-10">
-              <input type="password" class="form-control" name="password" placeholder="请输入密码">
+              <input type="text" class="form-control" name="cost" placeholder="请输入对应费用" {if condition="($id)"}value="{$data.cost}"{/if} >
             </div>
           </div>
           <div class="form-group">
-            <label for="inputPassword3" class="col-sm-2 control-label">重复密码</label>
+            <label class="col-sm-2 control-label">排序</label>
             <div class="col-sm-10">
-              <input type="password" class="form-control" name="rePassword" placeholder="请输入重复密码">
+              <input type="text" class="form-control" name="sort" placeholder="排序？数字越小越靠前" {if condition="($id)"}value="{$data.sort}"{/if} >
             </div>
           </div>
           <div class="form-group">
@@ -47,4 +47,4 @@
 {include file="layouts/footer" /}
 
 <!-- 当前页面js -->
-{js href="/static/admin/admin_user/js/add.js" /}
+{js href="/static/admin/hm_promotion_cost/js/add.js" /}

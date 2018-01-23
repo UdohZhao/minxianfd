@@ -1,6 +1,6 @@
 $(function(){
 
-$('#HmMinXianForm').bootstrapValidator({
+$('#HmAncillaryFacilityForm').bootstrapValidator({
     message: 'This value is not valid',
     feedbackIcons: {
         valid: 'glyphicon glyphicon-ok',
@@ -8,7 +8,7 @@ $('#HmMinXianForm').bootstrapValidator({
         validating: 'glyphicon glyphicon-refresh'
     },
     fields: {
-        town_village: {
+        cname: {
             message: 'The username is not valid',
             validators: {
                 notEmpty: {
@@ -38,18 +38,27 @@ $('#HmMinXianForm').bootstrapValidator({
     var bv = $form.data('bootstrapValidator');
 
     // Use Ajax to submit form data
-    $.post($form.attr('action'), $form.serialize(), function(result) {
+    $.ajax({
+      type: 'POST',
+      url: $form.attr('action'),
+      data: $form.serialize(),
+      dataType: 'JSON',
+      success: function (result) {
         // if
         if (result.status == 0)
         {
             swal("成功提示", result.msg,"success");
-            setTimeout("window.location='/admin/HmMinXian/index'",2000);
+            setTimeout("window.location='/admin/HmAncillaryFacility/index'",2000);
         }
         else
         {
             swal("错误提示", result.msg,"error");
         }
-    }, 'json');
+      },
+      error: function (e) {
+        console.info(e);
+      }
+    });
 });
 
 

@@ -23,7 +23,7 @@
           <div class="row">
               <div class="col-sm-4 text-center">
                   <div class="kv-avatar">
-                      {if condition="($data.head_portrait)"}
+                      {if condition="($id && $data.head_portrait)"}
                         <input type="hidden" name="head_portrait" value="{$data.head_portrait}">
                         <img src="{$data.head_portrait}" class="img-circle" style="width: 150px; height: 150px;cursor: pointer;" title="点击头像删除" alt="点击头像删除" onclick="delAvatar({$id},'{$data.head_portrait}');">
                         <div class="kv-avatar-hint"><small>点击头像删除</small></div>
@@ -40,13 +40,13 @@
                   <div class="col-sm-6">
                     <div class="form-group">
                       <label>姓名<span class="kv-reqd">*</span></label>
-                      <input type="text" class="form-control" name="cname" value="{$data.cname}" required>
+                      <input type="text" class="form-control" name="cname" {if condition="($id)"}value="{$data.cname}"{/if} required>
                     </div>
                   </div>
                   <div class="col-sm-6">
                     <div class="form-group">
                       <label>电话号码<span class="kv-reqd">*</span></label>
-                      <input type="text" class="form-control" name="telephone" value="{$data.telephone}" required>
+                      <input type="text" class="form-control" name="telephone" {if condition="($id)"}value="{$data.telephone}"{/if} required>
                     </div>
                   </div>
                 </div>
