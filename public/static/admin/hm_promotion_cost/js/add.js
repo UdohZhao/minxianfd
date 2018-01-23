@@ -1,6 +1,6 @@
 $(function(){
 
-$('#HmPaymentMethodForm').bootstrapValidator({
+$('#HmPromotionCostForm').bootstrapValidator({
     message: 'This value is not valid',
     feedbackIcons: {
         valid: 'glyphicon glyphicon-ok',
@@ -8,11 +8,26 @@ $('#HmPaymentMethodForm').bootstrapValidator({
         validating: 'glyphicon glyphicon-refresh'
     },
     fields: {
-        cname: {
+        day: {
             message: 'The username is not valid',
             validators: {
                 notEmpty: {
-                    message: '名称不能为空！'
+                    message: '推广天数不能为空！'
+                },
+                digits: {
+                    message: '该值只能包含数字！'
+                }
+            }
+        },
+        cost: {
+            message: 'The username is not valid',
+            validators: {
+                notEmpty: {
+                    message: '对应费用不能为空！'
+                },
+                regexp: {
+                    regexp: /^\d+(\.\d+)?$/,
+                    message: '该值只能包含整数或者小数！'
                 }
             }
         },
@@ -48,7 +63,7 @@ $('#HmPaymentMethodForm').bootstrapValidator({
         if (result.status == 0)
         {
             swal("成功提示", result.msg,"success");
-            setTimeout("window.location='/admin/HmPaymentMethod/index'",2000);
+            setTimeout("window.location='/admin/HmPromotionCost/index'",2000);
         }
         else
         {

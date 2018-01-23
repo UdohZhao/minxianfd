@@ -301,7 +301,7 @@ COMMENT = '房源房东信息表';
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `minxianfd`.`hm_promotion_cost` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '\n主键id',
-  `day` TINYINT(3) UNSIGNED NOT NULL COMMENT '\n天数',
+  `day` INT UNSIGNED NOT NULL COMMENT '\n天数',
   `cost` DECIMAL(14,2) UNSIGNED NOT NULL COMMENT '\n费用',
   `sort` TINYINT(3) UNSIGNED NOT NULL COMMENT '\n排序？数字越小越靠前',
   PRIMARY KEY (`id`))

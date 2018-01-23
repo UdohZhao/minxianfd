@@ -5,7 +5,7 @@ $(function(){
 // 修改
 function modif(id)
 {
-    window.location.href = '/admin/HmPaymentMethod/add?id='+id;
+    window.location.href = '/admin/HmPromotionCost/add?id='+id;
 }
 
 // 删除
@@ -23,7 +23,7 @@ function del(id)
       // Ajax
       $.ajax({
         type: 'GET',
-        url: '/admin/HmPaymentMethod/del',
+        url: '/admin/HmPromotionCost/del',
         data: {id:id},
         dataType: 'json',
         success: function(res)

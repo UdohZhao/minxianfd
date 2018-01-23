@@ -71,8 +71,8 @@ class HmPromotionCost extends Base
     {
         // data
         $data['day'] = input('post.day');
+        $data['cost'] = input('post.cost');
         $data['sort'] = input('post.sort');
-        $data['ctime'] = time();
         return $data;
     }
 
