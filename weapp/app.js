@@ -8,7 +8,7 @@ App({
     // domain: "http://dev.minxianfd.vag",
     phone: "18883867534",
   },
-  
+
   // onLaunch
   onLaunch: function () {
     var that = this;
@@ -28,7 +28,16 @@ App({
             },
             method: 'GET',
             success: function(res) {
-              console.log(res.data)
+              console.log(res.data);
+              // if
+              // if (res.data.status == 0) 
+              // {
+
+              // }
+              // else
+              // {
+
+              // }
             },
             fail: function(e) {
               console.log(e);
@@ -48,7 +57,6 @@ App({
             success: res => {
               // 可以将 res 发送给后台解码出 unionId
               this.globalData.userInfo = res.userInfo
-
               // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
               // 所以此处加入 callback 以防止这种情况
               if (this.userInfoReadyCallback) {
