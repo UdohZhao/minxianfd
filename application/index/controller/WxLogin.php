@@ -2,21 +2,69 @@
 namespace app\index\controller;
 class WxLogin extends Base
 {
+    public $code;
     /**
      * 构造方法
      */
     public function _auto()
     {
-
+        $this->code = isset($_GET['code']) ? input('get.code') : '';
     }
 
-    // add
-    public function add()
+    // 登录
+    public function login()
     {
-        // Get
-        if ($this->request->isGet())
-        {
+       // code
+       if ($this->code)
+       {
+          // 登录凭证 code 获取 session_key 和 openid
+          $url = "https://api.weixin.qq.com/sns/jscode2session?appid=APPID&secret=SECRET&js_code=JSCODE&grant_type=authorization_code";
+          $urlArr = parse_url($url);
+          parse_str($urlArr['query'],$queryArr);
+          $queryArr['appid'] = config('appid');
+          $queryArr['secret'] = config('secret');
+          $queryArr['js_code'] = $this->code;
+          $queryStr = http_build_query($queryArr);
+          $urlArr['query'] = $queryStr;
+          $url = http_build_url($urlArr);
 
-        }
+          // 请求
+          $result = json_decode(httpRequest($url),true);
+          if (isset($result['errcode'])) {
+              return Rs(1,$result['errcode'],false);
+          }
+
+          // 生成3rd_session
+          $result['randomFromDev'] = randomFromDev(16);
+
+          // 写入数据表 data
+          $data = $this->getData($result['openid']);
+
+          // 读取数据表
+          if (!db('weapp_user')->where('openid',$result['openid'])->count())
+          {
+            if (!db('weapp_user')->insert($data))
+            {
+                return Rs(2,'写入数据表失败！',false);
+            }
+          }
+
+          // 存入session
+          session($result['randomFromDev'],$result['session_key'].$result['openid']);
+
+          // 返回3rd_session到小程序客户端
+          return ajaxReturn(Rs(0,'3rd_session',$result['randomFromDev']));
+
+       }
     }
+
+    // 初始化数据
+    private function getData($openid)
+    {
+        // data
+        $data['openid'] = $openid;
+        $data['ctime'] = time();
+        return $data;
+    }
+
 }

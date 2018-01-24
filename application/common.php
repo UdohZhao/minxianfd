@@ -724,3 +724,50 @@ function Rs($status = 0, $msg, $data)
   $res['data'] = $data;
   return $res;
 }
+
+/**
+ * 根据parse_url格式的数组生成完整的url
+ * @param array $arr 接受parse_url解析出来的所有参数,完整参数实例如下：
+ *        Array
+ *        (
+ *            [scheme] => http            // 协议
+ *            [host] => www.baidu.com     // 主机
+ *            [port] => 80                // 端口，可选
+ *            [path] => /path/file.php    // 路径(文件名)，可选
+ *            [query] => a=aaa&b=aaabbb    // 参数(query string)，可选
+ *            [fragment] => 123            // 附加部分或者叫做锚点(#后面的)，可选
+ *        )
+*/
+function http_build_url($url_arr){
+    $new_url = $url_arr['scheme'] . "://".$url_arr['host'];
+    if(!empty($url_arr['port']))
+        $new_url = $new_url.":".$url_arr['port'];
+    $new_url = $new_url . $url_arr['path'];
+    if(!empty($url_arr['query']))
+        $new_url = $new_url . "?" . $url_arr['query'];
+    if(!empty($url_arr['fragment']))
+        $new_url = $new_url . "#" . $url_arr['fragment'];
+    return $new_url;
+}
+
+// 读取/dev/urandom生成随机数
+function randomFromDev($len)
+{
+    $fp = @fopen('/dev/urandom','rb');
+    $result = '';
+    if ($fp !== FALSE) {
+        $result .= @fread($fp, $len);
+        @fclose($fp);
+    }
+    else
+    {
+        trigger_error('Can not open /dev/urandom.');
+    }
+    // convert from binary to string
+    $result = base64_encode($result);
+    // remove none url chars
+    $result = strtr($result, '+/', '-_');
+    // Remove = from the end
+    $result = str_replace('=', ' ', $result);
+    return $result;
+}

@@ -249,4 +249,8 @@ return [
     // 后台标题
     'admin_title'   =>  '岷县房东',
 
+    // 小程序配置
+    'appid'         =>  'wxd339d7d69ccc1651',
+    'secret'        =>  '4b2d7be54ec5c99a2da413e4f8dde2e0'
+
 ];
