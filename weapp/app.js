@@ -8,11 +8,10 @@ App({
     // domain: "http://dev.minxianfd.vag",
     phone: "18883867534",
   },
+  
   // onLaunch
   onLaunch: function () {
-
     var that = this;
-
     // 登录
     wx.login({
       success: res => {
@@ -40,7 +39,6 @@ App({
         }
       }
     })
-    
     // 获取用户信息
     wx.getSetting({
       success: res => {
@@ -49,12 +47,12 @@ App({
           wx.getUserInfo({
             success: res => {
               // 可以将 res 发送给后台解码出 unionId
-              that.globalData.userInfo = res.userInfo
+              this.globalData.userInfo = res.userInfo
 
               // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
               // 所以此处加入 callback 以防止这种情况
-              if (that.userInfoReadyCallback) {
-                that.userInfoReadyCallback(res)
+              if (this.userInfoReadyCallback) {
+                this.userInfoReadyCallback(res)
               }
             }
           })
@@ -66,21 +64,5 @@ App({
     userInfo: null
   },
   //创建表单验证
-  wxValidate: (rules, messages) => new wxValidate(rules, messages),
-  // 获取用户信息
-  getUserInfo: function (cb) {
-    var that = this
-    if (this.globalData.userInfo) {
-      typeof cb == "function" && cb(this.globalData.userInfo)
-    } else {
-      //调用登录接口
-      wx.getUserInfo({
-        withCredentials: false,
-        success: function (res) {
-          that.globalData.userInfo = res.userInfo
-          typeof cb == "function" && cb(that.globalData.userInfo)
-        }
-      })
-    }
-  },
+  wxValidate: (rules, messages) => new wxValidate(rules, messages)
 })
