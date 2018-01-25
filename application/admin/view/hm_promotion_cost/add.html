@@ -1,0 +1,50 @@
+{include file="layouts/header" /}
+{include file="layouts/nav" /}
+{include file="layouts/menu" /}
+
+<!-- Page -->
+<div class="page animsition">
+  <div class="page-header">
+    <h1 class="page-title"># 置顶管理</h1>
+  </div>
+  <div class="page-content">
+    <div class="panel">
+      <div class="panel-heading">
+        <h3 class="panel-title">@ 置顶配置</h3>
+      </div>
+      <div class="panel-body">
+        <form class="form-horizontal" action="/admin/HmPromotionCost/add?id={$id}" method="post" id="HmPromotionCostForm">
+          <div class="form-group">
+            <label class="col-sm-2 control-label">天数</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" name="day" placeholder="请输入推广天数" {if condition="($id)"}value="{$data.day}"{/if} >
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">费用</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" name="cost" placeholder="请输入对应费用" {if condition="($id)"}value="{$data.cost}"{/if} >
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">排序</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" name="sort" placeholder="排序？数字越小越靠前" {if condition="($id)"}value="{$data.sort}"{/if} >
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+              <button type="submit" class="btn btn-default">添 加</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Page -->
+
+{include file="layouts/footer" /}
+
+<!-- 当前页面js -->
+{js href="/static/admin/hm_promotion_cost/js/add.js" /}

@@ -12,7 +12,7 @@
       </button>
       <div class="navbar-brand navbar-brand-center site-gridmenu-toggle" data-toggle="gridmenu">
         <img class="navbar-brand-logo" src="/static/assets/images/logo.png" title="Remark">
-        <span class="navbar-brand-text"> Remark</span>
+        <span class="navbar-brand-text"> {$Think.config.admin_title}后台管理</span>
       </div>
       <button type="button" class="navbar-toggle collapsed" data-target="#site-navbar-search"
       data-toggle="collapse">
@@ -47,18 +47,19 @@
           <li class="dropdown">
             <a class="navbar-avatar dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false"
             data-animation="scale-up" role="button">
-              <span class="avatar avatar-online">
+              <!-- <span class="avatar avatar-online">
                 <img src="/static/assets/portraits/5.jpg" alt="...">
                 <i></i>
-              </span>
+              </span> -->
+              <h4>欢迎回来：{$Think.session.au.username}</h4>
             </a>
             <ul class="dropdown-menu" role="menu">
-              <li role="presentation">
+              <!-- <li role="presentation">
                 <a href="javascript:void(0)" role="menuitem"><i class="icon wb-user" aria-hidden="true"></i> 个人资料</a>
-              </li>
-              <li class="divider" role="presentation"></li>
+              </li> -->
+              <!-- <li class="divider" role="presentation"></li> -->
               <li role="presentation">
-                <a href="javascript:void(0)" role="menuitem"><i class="icon wb-power" aria-hidden="true"></i> 退出</a>
+                <a href="/admin/Index/logout" role="menuitem"><i class="icon wb-power" aria-hidden="true"></i> 退出</a>
               </li>
             </ul>
           </li>

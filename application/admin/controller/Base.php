@@ -18,7 +18,7 @@ class Base extends Controller
       }
 
       // 请登录
-      if (!isset($_SESSION['au']))
+      if (!session('?au'))
       {
         header('Location:/admin/Login/index');
         die;

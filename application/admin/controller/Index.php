@@ -22,4 +22,16 @@ class Index extends Base
             return $this->fetch('index');
         }
     }
+
+    // 退出
+    public function logout()
+    {
+        // Get
+        if ($this->request->isGet())
+        {
+            session(null);
+            header("Location:/admin/Login/index");
+            die;
+        }
+    }
 }

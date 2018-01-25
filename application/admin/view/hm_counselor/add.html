@@ -1,0 +1,73 @@
+{include file="layouts/header" /}
+{include file="layouts/nav" /}
+{include file="layouts/menu" /}
+
+<!-- 引入当前页面css -->
+{css href="/static/admin/hm_counselor/css/add.css" /}
+
+<!-- Page -->
+<div class="page animsition">
+  <div class="page-header">
+    <h1 class="page-title"># 租房顾问管理</h1>
+  </div>
+  <div class="page-content">
+    <div class="panel">
+      <div class="panel-heading">
+        <h3 class="panel-title">@ 添加顾问</h3>
+      </div>
+      <div class="panel-body">
+      <!-- markup -->
+      <!-- note: your server code `avatar_upload.php` will receive `$_FILES['avatar']` on form submission -->
+      <!-- the avatar markup -->
+      <form class="form form-vertical" action="/admin/HmCounselor/add?id={$id}" method="post" enctype="multipart/form-data" id="HmCounselorForm">
+          <div class="row">
+              <div class="col-sm-4 text-center">
+                  <div class="kv-avatar">
+                      {if condition="($id && $data.head_portrait)"}
+                        <input type="hidden" name="head_portrait" value="{$data.head_portrait}">
+                        <img src="{$data.head_portrait}" class="img-circle" style="width: 150px; height: 150px;cursor: pointer;" title="点击头像删除" alt="点击头像删除" onclick="delAvatar({$id},'{$data.head_portrait}');">
+                        <div class="kv-avatar-hint"><small>点击头像删除</small></div>
+                      {else /}
+                        <div class="file-loading">
+                            <input id="avatar-1" name="head_portrait" type="file" required>
+                        </div>
+                        <div class="kv-avatar-hint"><small>选择文件 < 1.4 MB</small></div>
+                      {/if}
+                  </div>
+              </div>
+              <div class="col-sm-8">
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label>姓名<span class="kv-reqd">*</span></label>
+                      <input type="text" class="form-control" name="cname" {if condition="($id)"}value="{$data.cname}"{/if} required>
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label>电话号码<span class="kv-reqd">*</span></label>
+                      <input type="text" class="form-control" name="telephone" {if condition="($id)"}value="{$data.telephone}"{/if} required>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <hr>
+                  <div class="text-right">
+                    <button type="submit" class="btn btn-primary">添 加</button>
+                  </div>
+                </div>
+              </div>
+          </div>
+      </form>
+      <div id="kv-avatar-errors-1" class="center-block" style="width:800px;display:none"></div>
+
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Page -->
+
+{include file="layouts/footer" /}
+
+<!-- 当前页面js -->
+{js href="/static/admin/hm_counselor/js/add.js" /}

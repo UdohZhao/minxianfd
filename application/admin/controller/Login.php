@@ -21,7 +21,7 @@ class Login extends Controller
       // 实例化验证码类
       $this->cdb = new Captcha();
       // 已登录
-      if (isset($_SESSION['au']))
+      if (session('?au'))
       {
         header('Location:/admin/Index/index');
         die;
@@ -42,8 +42,33 @@ class Login extends Controller
       // Ajax
       if ($this->request->isAjax())
       {
-        return input('post.');
+        // data
+        $data = $this->getData();
+        $result = db('admin_user')->where('username',$data['username'])->where('password',$data['password'])->find();
+        if ($result)
+        {
+            if ($result['status'] == 1)
+            {
+                return Rs(3,'该账号已被冻结，请自行联系管理员！',false);
+            }
+            // 用户信息存入session
+            session('au',$result);
+            return Rs(0,'用户信息存入session成功！',session('au'));
+        }
+        else
+        {
+            return Rs(2,'账号或者密码错误！',false);
+        }
       }
+    }
+
+    // 初始化数据
+    private function getData()
+    {
+        // data
+        $data['username'] = input('post.username');
+        $data['password'] = enPassword(input('post.password'));
+        return $data;
     }
 
     /**

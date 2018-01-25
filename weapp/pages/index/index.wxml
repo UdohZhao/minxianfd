@@ -16,8 +16,6 @@
       </view>
     </view>
   </view>
-   
-
   <!--搜索条件  -->
   <view class="page__bd">
         <view class="weui-tab">
