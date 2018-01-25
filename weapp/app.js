@@ -1,5 +1,13 @@
 //app.js
+// 引入表单验证
+import wxValidate from 'utils/wxValidate'
 App({
+  data:{
+    //域名
+    //domain: "https://weapp.icunji.com",
+    domain: "http://dev.minxianfd.vag",
+    phone: "18883867534",
+  },
   onLaunch: function () {
     // 展示本地存储能力
     var logs = wx.getStorageSync('logs') || []
@@ -35,5 +43,23 @@ App({
   },
   globalData: {
     userInfo: null
-  }
+  },
+  //创建表单验证
+  wxValidate: (rules, messages) => new wxValidate(rules, messages),
+  // 获取用户信息
+  getUserInfo: function (cb) {
+    var that = this
+    if (this.globalData.userInfo) {
+      typeof cb == "function" && cb(this.globalData.userInfo)
+    } else {
+      //调用登录接口
+      wx.getUserInfo({
+        withCredentials: false,
+        success: function (res) {
+          that.globalData.userInfo = res.userInfo
+          typeof cb == "function" && cb(that.globalData.userInfo)
+        }
+      })
+    }
+  },
 })

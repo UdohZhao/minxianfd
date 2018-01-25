@@ -1,12 +1,53 @@
 {
   "pages":[
     "pages/index/index",
-    "pages/logs/logs"
+    "pages/landlord/landlord",
+    "pages/me/me",
+    "pages/detail/detail",
+    "pages/services/services",
+    "pages/myRelease/myRelease",
+    "pages/myCollect/myCollect",
+    "pages/search/search",
+    "pages/Cookies/Cookies",
+    "pages/evaluate/evaluate",
+    "pages/hmDoorplate/hmDoorplate",
+    "pages/hmBasics/hmBasics",
+    "pages/hmLease/hmLease",
+    "pages/hmArea/hmArea",
+    "pages/hmOwner/hmOwner",
+    "pages/hmLandlord/hmLandlord",
+    "pages/pay/pay"
   ],
   "window":{
     "backgroundTextStyle":"light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "WeChat",
+    "navigationBarTitleText": "岷县房东",
     "navigationBarTextStyle":"black"
+  },
+  "tabBar": {
+    "color": "#999",
+    "selectedColor": "#04BE02",
+    "backgroundColor": "#f7f7fa",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "求租",
+        "iconPath": "dist/images/icon/landlord.png",
+        "selectedIconPath": "dist/images/icon/landlord_hover.png"
+      },
+      {
+        "pagePath": "pages/landlord/landlord",
+        "text": "出租",
+        "iconPath": "dist/images/icon/house.png",
+        "selectedIconPath": "dist/images/icon/house_hover.png"
+      },
+      {
+        "pagePath": "pages/me/me",
+        "text": "我的",
+        "iconPath": "dist/images/icon/me.png",
+        "selectedIconPath": "dist/images/icon/me_hover.png"
+      }
+    ]
   }
 }

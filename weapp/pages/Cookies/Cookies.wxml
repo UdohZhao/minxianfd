@@ -1,0 +1,102 @@
+<view class="page">
+  <view class="page_weui_hd">看房记录</view>
+    <view class="page__bd marTop30">
+      <block wx:if="{{cookiesStatus}}">
+        <!-- 便遍历体 包括时间-->
+        <view class="weui-panel__bd">
+          <view class="page_bd_box_tiitle">
+            <view class="titleTime">2018-01-16</view>
+            <view class="close" bindtap='close'>x</view>
+          </view>
+          <view bindtap='gotoDetail' class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
+            <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+                            <image class="weui-media-box__thumb" src="../../dist/images/1.jpg" />
+            </view>
+            <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+                            <view class="weui-media-box__desc">果园习总屯精品次卧</view>
+                            <view class="weui-media-box__desc">
+                              <view class="weui-media-box__desc_left">2室1厅 86㎡</view>
+                              <view class="weui-media-box__desc_right">3500元/月</view>  
+                            </view>
+                            <view class="weui-media-box__desc">乔庄东区</view>
+            </view>
+          </view>
+          <view bindtap='gotoDetail' class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
+            <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+                            <image class="weui-media-box__thumb" src="../../dist/images/1.jpg" />
+            </view>
+            <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+                            <view class="weui-media-box__desc">果园习总屯精品次卧</view>
+                            <view class="weui-media-box__desc">
+                              <view class="weui-media-box__desc_left">2室1厅 86㎡</view>
+                              <view class="weui-media-box__desc_right">3500元/月</view>  
+                            </view>
+                            <view class="weui-media-box__desc">乔庄东区</view>
+            </view>
+          </view>
+          <view bindtap='gotoDetail' class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
+            <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+                            <image class="weui-media-box__thumb" src="../../dist/images/1.jpg" />
+            </view>
+            <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+                            <view class="weui-media-box__desc">果园习总屯精品次卧</view>
+                            <view class="weui-media-box__desc">
+                              <view class="weui-media-box__desc_left">2室1厅 86㎡</view>
+                              <view class="weui-media-box__desc_right">3500元/月</view>  
+                            </view>
+                            <view class="weui-media-box__desc">乔庄东区</view>
+            </view>
+          </view>
+        </view>
+        <!-- 便遍历体 包括时间-->
+        <view class="weui-panel__bd">
+          <view class="page_bd_box_tiitle">
+            <view class="titleTime">2018-01-16</view>
+            <view class="close" bindtap='close'>x</view>
+          </view>
+          <view bindtap='gotoDetail' class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
+            <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+                            <image class="weui-media-box__thumb" src="../../dist/images/1.jpg" />
+            </view>
+            <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+                            <view class="weui-media-box__desc">果园习总屯精品次卧</view>
+                            <view class="weui-media-box__desc">
+                              <view class="weui-media-box__desc_left">2室1厅 86㎡</view>
+                              <view class="weui-media-box__desc_right">3500元/月</view>  
+                            </view>
+                            <view class="weui-media-box__desc">乔庄东区</view>
+            </view>
+          </view>
+          <view bindtap='gotoDetail' class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
+            <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+                            <image class="weui-media-box__thumb" src="../../dist/images/1.jpg" />
+            </view>
+            <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+                            <view class="weui-media-box__desc">果园习总屯精品次卧</view>
+                            <view class="weui-media-box__desc">
+                              <view class="weui-media-box__desc_left">2室1厅 86㎡</view>
+                              <view class="weui-media-box__desc_right">3500元/月</view>  
+                            </view>
+                            <view class="weui-media-box__desc">乔庄东区</view>
+            </view>
+          </view>
+          <view bindtap='gotoDetail' class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
+            <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+                            <image class="weui-media-box__thumb" src="../../dist/images/1.jpg" />
+            </view>
+            <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+                            <view class="weui-media-box__desc">果园习总屯精品次卧</view>
+                            <view class="weui-media-box__desc">
+                              <view class="weui-media-box__desc_left">2室1厅 86㎡</view>
+                              <view class="weui-media-box__desc_right">3500元/月</view>  
+                            </view>
+                            <view class="weui-media-box__desc">乔庄东区</view>
+            </view>
+          </view>
+        </view>
+      </block>
+      <block wx:else>
+        <view class="errorMsg">暂无记录~~~~</view>
+      </block>
+    </view>
+</view>
