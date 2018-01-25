@@ -38,12 +38,6 @@ COMMENT = '后台用户表';
 CREATE TABLE IF NOT EXISTS `minxianfd`.`weapp_user` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '\n主键id',
   `openid` VARCHAR(45) NOT NULL COMMENT '\n绑定用户openid',
-  `nick_name` VARCHAR(255) NOT NULL COMMENT '\n用户昵称',
-  `avatar_url` VARCHAR(255) NOT NULL COMMENT '\n用户头像',
-  `gender` TINYINT(1) UNSIGNED NOT NULL COMMENT '\n用户的性别，值为1时是男性，值为2时是女性，值为0时是未知',
-  `city` VARCHAR(255) NOT NULL COMMENT '\n用户所在城市',
-  `province` VARCHAR(255) NOT NULL COMMENT '\n用户所在省份',
-  `country` VARCHAR(255) NOT NULL COMMENT '\n用户所在国家',
   `ctime` INT(10) UNSIGNED NOT NULL COMMENT '\n时间',
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
