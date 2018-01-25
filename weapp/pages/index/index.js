@@ -267,37 +267,37 @@ Page({
   },
   //去房屋详情
   gotoDetail:function(e){
-
     // test 3rd_session
-    wx.request({
-      url: app.data.domain + '/WxLogin/checkRedis', 
-      data: {
-        threerd_session: wx.getStorageSync('3rd_session')
-      },
-      header: {
-          'content-type': 'application/json'
-      },
-      success: function(res) {
-        console.log(res.data);
-        // 3rd_session
-        if (res.data.status == 1) 
-        {
-          app.threerdLogin();
-        }
-        else
-        {
-          // request
-          console.log('request');
-        }
-      },
-      fail: function(e) {
-        console.log(e);
-      }
-    })
-
-    // wx.navigateTo({
-    //   url: '/pages/detail/detail',
+    // wx.request({
+    //   url: app.data.domain + '/WxLogin/checkRedis', 
+    //   data: {
+    //     threerd_session: wx.getStorageSync('3rd_session')
+    //   },
+    //   header: {
+    //       'content-type': 'application/json'
+    //   },
+    //   success: function(res) {
+    //     console.log(res.data);
+    //     // 3rd_session
+    //     if (res.data.status == 1) 
+    //     {
+    //       app.threerdLogin();
+    //     }
+    //     else
+    //     {
+    //       // request
+    //       console.log('request');
+    //       // 用户信息
+    //       console.log(app.globalData.userInfo);
+    //     }
+    //   },
+    //   fail: function(e) {
+    //     console.log(e);
+    //   }
     // })
+    wx.navigateTo({
+      url: '/pages/detail/detail',
+    })
   },
   //左边列表选择
   selectNav(event){
