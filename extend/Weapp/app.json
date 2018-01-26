@@ -1,6 +1,8 @@
 {
   "pages": [
-    "pages/index/index"
+    "pages/redis/redis",
+    "pages/sms/sms",
+    "pages/wxpay/wxpay"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -9,6 +11,23 @@
     "navigationBarTextStyle": "black",
     "backgroundColor": "#eeeeee",
     "enablePullDownRefresh": true
+  },
+  "tabBar": {
+    "position": "top",
+    "list": [
+      {
+        "pagePath": "pages/redis/redis",
+        "text": "redis"
+      }, 
+      {
+        "pagePath": "pages/sms/sms",
+        "text": "sms"
+      }, 
+      {
+        "pagePath": "pages/wxpay/wxpay",
+        "text": "wxpay"
+      }
+    ]
   },
   "debug": true
 }

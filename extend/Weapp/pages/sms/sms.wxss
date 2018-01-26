@@ -1,0 +1,4 @@
+/* pages/sms/sms.wxss */
+.sms-label{
+    width: 70px;
+}
