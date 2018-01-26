@@ -264,6 +264,13 @@ return [
 
     // 小程序配置
     'appid'         =>  'wxd339d7d69ccc1651',
-    'secret'        =>  '4b2d7be54ec5c99a2da413e4f8dde2e0'
+    'secret'        =>  '4b2d7be54ec5c99a2da413e4f8dde2e0',
+
+    // 商户
+    'mch_id'        =>  '1493333442',
+    'key'           =>  'WaUM7PuMicM3UFKtZIKrc9GrJNORkXCZ',
+
+    // 云片网
+    'apikey'        =>  '407405cb91501f840ca121ea0d65d457'
 
 ];
