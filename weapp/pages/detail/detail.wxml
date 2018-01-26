@@ -8,44 +8,41 @@
       </block>    
     </swiper> 
     <!-- 小区名称 -->
-    <view class="weui-cells__title">乔庄北区精品两房</view>
+    <view class="weui-cells__title">
+      <view class="weui-cells__title_txt">乔庄北区精品两房</view>
+      <view class="weui-panel_header">3500元/月</view>
+    </view>
+    
+    
     <!-- 房屋详情 -->
     <view class="weui-panel weui-panel_access">
-      <view class="weui-panel_header">租金:3500元/月</view>
       <view class="weui-panel__bd">
       <!-- 循坏数据 -->
         <view class="weui-panel_list">
-          <view class="weui-panel_list_key">方式:</view>
-          <view class="weui-panel_list_val">整租</view>
+          <view class="weui-panel_list_key">户型:</view>
+          <view class="weui-panel_list_val">2室1厅</view>
         </view>
         <view class="weui-panel_list">
           <view class="weui-panel_list_key">面积:</view>
           <view class="weui-panel_list_val">86㎡</view>
         </view>
         <view class="weui-panel_list">
-          <view class="weui-panel_list_key">户型:</view>
-          <view class="weui-panel_list_val">2室1厅1卫</view>
-        </view>
-        <view class="weui-panel_list">
           <view class="weui-panel_list_key">楼层:</view>
           <view class="weui-panel_list_val">中层/6楼</view>
+        </view>
+        <view class="weui-panel_list">
+          <view class="weui-panel_list_key">朝向:</view>
+          <view class="weui-panel_list_val">东南</view>
         </view>
         <view class="weui-panel_list">
           <view class="weui-panel_list_key">装修:</view>
           <view class="weui-panel_list_val">简装</view>
         </view>
         <view class="weui-panel_list">
-          <view class="weui-panel_list_key">朝向：</view>
-          <view class="weui-panel_list_val">南北</view>
+          <view class="weui-panel_list_key">供暖:</view>
+          <view class="weui-panel_list_val">自供暖</view>
         </view>
-        <view class="weui-panel_list">
-          <view class="weui-panel_list_key">入住时间:</view>
-          <view class="weui-panel_list_val">随时入住</view>
-        </view>
-        <view class="weui-panel_list">
-          <view class="weui-panel_list_key">付款方式：</view>
-          <view class="weui-panel_list_val">押一付三</view>
-        </view>
+       
       </view>
     </view>
     <!--房屋的配置  -->
@@ -157,18 +154,17 @@
     </view>
     <view class="h60"></view>
     <view class="footerModel">
-      <view class="modelImg" bindtap='onColletionTap'>
+       <view class="modelImg" bindtap='onColletionTap'>
         <image wx:if="{{collectionStatus}}" src='../../dist/images/collect.png'></image>
         <image wx:else="{{collectionStatus}}" src='../../dist/images/collect_hover.png'></image>
-        
-      </view>
+      </view> 
       <view class="modelCenter">
-        <view>15730179295</view>
-        <view>租房顾问:刘健</view>
+        <image class="Img" src='../../dist/images/header.png'></image>
+        <view class="guWenName">刘健</view>
       </view>
       <view class="modelPhone" bindtap='Callphone'>
         <image src='../../dist/images/phone.png'></image>
-        电话
+        咨询
       </view>
     </view> 
 </view>

@@ -163,7 +163,7 @@ Page({
   //下一页
   gotoNext: function () {
     wx.redirectTo({
-      url: '/pages/hmOwner/hmOwner',
+      url: '/pages/services/services',
     })
   }
 })

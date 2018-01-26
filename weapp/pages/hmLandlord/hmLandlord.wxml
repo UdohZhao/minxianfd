@@ -8,7 +8,7 @@
               <view class="weui-label">联系人</view>
             </view>
             <view class="weui-cell__bd">
-              <input class="weui-input" name="userName" placeholder="请输入联系人" confirm-type="next" 
+              <input class="weui-input" name="cname" placeholder="请输入联系人" confirm-type="next" 
               focus="{{whoFocus=='name'?true:false}}" bindblur="nameBlurFocus"/>
             </view>
           </view>
@@ -25,7 +25,7 @@
                 <view class="weui-label">验证码</view>
             </view>
             <view class="weui-cell__bd">
-               <input class="weui-input" placeholder="请输入验证码" />
+               <input class="weui-input textAlignLeft" placeholder="请输入验证码" />
             </view>
             <button class="weui-cell__ft" bindtap="verifyCodeEvent" size="mini" type="default" disabled="{{buttonDisable}}">
             {{verifyCodeTime}}</button>
@@ -37,5 +37,8 @@
     <view class="page__bd page__bd_spacing">
         <button class="weui-btn mini-btn" type="primary" bindtap='gotoNext'>下一页</button>
     </view>
+    <view class="page__bd page__bd_spacing">
+          <image src='../../dist/images/hmIcon.png'></image>
+        </view>
   </form>
 </view>

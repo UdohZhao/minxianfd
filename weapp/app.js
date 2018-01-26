@@ -52,6 +52,7 @@ App({
   },
   //创建表单验证
   wxValidate: (rules, messages) => new wxValidate(rules, messages),
+
   // threerdLogin
   threerdLogin : function () {
     var that = this;

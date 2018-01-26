@@ -1,3 +1,4 @@
+var appInstance = getApp();
 Page({
 
   /**
@@ -61,6 +62,49 @@ Page({
    */
   onShareAppMessage: function () {
     
+  },
+  formSubmit: function (e) {
+    //提交错误描述
+    if (!this.WxValidate.checkForm(e)) {
+      console.log(e.detail)
+      const error = this.WxValidate.errorList[0]
+      // `${error.param} : ${error.msg} `
+      wx.showToast({
+        title: `${error.msg} `,
+        image: '../../dist/images/error.png',
+        duration: 2000
+      })
+      return false
+    }
+    this.setData({ submitHidden: false })
+    var that = this
+    //提交
+    /**
+     * 查看获取到的数据
+     */
+    console.log(that.data.id1)
+    console.log(that.data.id2)
+    console.log(e.detail.value.rent)
+    console.log(that.data.hm_ancillary_facility)
+    wx.request({
+      url: '',
+      data: {
+        rent: e.detail.value.rent,
+      },
+      method: 'POST',
+      success: function (requestRes) {
+        that.setData({ submitHidden: true })
+        appInstance.userState.status = 0
+        wx.navigateBack({
+          delta: 1
+        })
+      },
+      fail: function () {
+      },
+      complete: function () {
+      }
+    })
+
   },
   //下一页
   gotoNext: function () {

@@ -67,3 +67,11 @@ page,
 .pay button {
   border-radius: 0;
 }
+.h15{
+  height: 15px;
+  width: 100%;
+  clear: both;
+  content: '';
+  font-size: 0;
+  display: block;
+}

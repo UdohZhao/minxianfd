@@ -15,16 +15,23 @@ Page({
   onLoad: function (options) {
     this.WxValidate = appInstance.wxValidate(
       {
-        title: {
+        cname: {
           required: true,
           minlength: 2,
-          maxlength: 20,
+          maxlength: 10,
         },
+        phone:{
+          required: true,
+          tel:true
+        }
       }
       , {
         cname: {
-          required: '请输入房源标题',
+          required: '请输入姓名',
         },
+        phone:{
+          required: '请输入移动电话',
+        }
       }
     )
   },
@@ -110,6 +117,67 @@ Page({
       return false;
     }
     app.sendVerifyCode(function () { }, mobile);//获取短信验证码接口
+  },
+
+  formSubmit: function (e) {
+    //提交错误描述
+    if (!this.WxValidate.checkForm(e)) {
+      console.log(e.detail)
+      const error = this.WxValidate.errorList[0]
+      // `${error.param} : ${error.msg} `
+      wx.showToast({
+        title: `${error.msg} `,
+        image: '../../dist/images/error.png',
+        duration: 2000
+      })
+      return false
+    }
+    this.setData({ submitHidden: false })
+    var that = this
+    /*
+    *  提交
+    *  查看提交内容
+    */
+    console.log(e.detail.value.describe)
+    console.log(e.detail.value.title)
+    console.log(e.detail.value.trait)
+    console.log(that.data.files)
+    // picker的值
+    console.log(this.data.date)
+    
+    /*
+     * 发起请求
+     * 
+     */
+    wx.request({
+      url: 'https://127.0.0.1',
+      data: {
+        describe: e.detail.value.describe,
+        title: e.detail.value.title,
+        trait: e.detail.value.trait,
+        hm_view_images_id: that.data.files,
+        in_time: this.data.date,
+      },
+      method: 'POST',
+      success: function (requestRes) {
+         // 提示是否推广
+          wx.showModal({
+            title: '是否置顶推广',
+            success: function (res) {
+              if (res.confirm) {
+                wx.navigateTo({
+                  url: '/pages/pay/pay',
+                })
+              }
+            }
+          })
+      },
+      fail: function (res) {
+    
+      },
+
+    })
+
   },
   //跳转到支付页面
   gotoNext:function(){

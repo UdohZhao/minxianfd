@@ -198,9 +198,8 @@ Page({
   },
   //下一页
   gotoNext: function () {
-    console.log('是否点击有效')
     wx.redirectTo({
-      url: '/pages/hmLease/hmLease',
+      url: '/pages/hmArea/hmArea',
     })
   }
 })

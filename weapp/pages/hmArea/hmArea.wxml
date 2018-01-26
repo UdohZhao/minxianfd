@@ -4,14 +4,12 @@
         <view class="page_bd">
           <view class="body_title">区域信息</view>
           <!-- 获取地址 -->
-          <view class="weui-cell_input huxing">
-            <view class="weui_cell_box">
+          <view class="weui_cell_box">
               <view class="weui_cell_box_key">地址: </view>
               <view class="weui_cell_box_key" style='border:0.5px solid #ddd;margin-right:20px;'>岷县</view>
               <view class="weui_cell_box_key" style='border:0.5px solid #ddd;'>
               <picker bindchange="bindPickerChange3" value="{{index}}" range="{{array}}">{{array[index]}}</picker>
               </view>
-            </view>
           </view>
           <view class="weui-cell weui-cell_input">
             <view class="weui-cell__hd">
@@ -28,6 +26,9 @@
         </view>
         <view class="page__bd page__bd_spacing">
             <button class="weui-btn mini-btn" type="primary" bindtap='gotoNext'>下一页</button>
+        </view>
+        <view class="page__bd page__bd_spacing">
+          <image src='../../dist/images/hmIcon.png'></image>
         </view>
   </form>
 </view>

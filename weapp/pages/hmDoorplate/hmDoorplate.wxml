@@ -34,7 +34,7 @@
                 <input class="input" type='number' name="present_floor"></input>
                 当前
               </view>
-              <view class="weui_cell_box_input">
+              <view class="weui_cell_box_input w31">
                 <input class="input" type='number' name="total_floor"></input>
                 总楼层
               </view>
@@ -48,6 +48,9 @@
     </view>
     <view class="page__bd page__bd_spacing">
         <button class="weui-btn mini-btn" type="primary" bindtap='gotoNext'>下一页</button>
+    </view>
+    <view class="page__bd page__bd_spacing">
+        <image src='../../dist/images/hmIcon.png'></image>
     </view>
   </form>
 </view>

@@ -74,9 +74,32 @@ Page({
       phoneNumber: '15730179295',
     })
   },
+
   //点击收藏
   onColletionTap: function (event) {
-    
- 
+
+    var collectionStatus = this.data.collectionStatus
+    if (collectionStatus == true){
+      wx.showToast({
+        icon:'success',
+        title: '收藏成功',
+        duration:3000,
+        mask:true,
+        
+      })
+      this.setData({
+        collectionStatus:false
+      })
+    }else{
+      wx.showToast({
+        icon: 'success',
+        title: '取消成功',
+        duration: 3000,
+        mask: true
+      })
+      this.setData({
+        collectionStatus: true
+      })
+    }
   }
 })

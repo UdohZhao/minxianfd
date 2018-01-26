@@ -152,7 +152,8 @@ Page({
         },
       ],
     ],
-    tabs: ["区域", "租金","类型", "更多"],
+    tabs: ["区域", "租金","房型", "更多"],
+
     activeIndex: 1,
     sliderOffset: 0,
     sliderLeft: 0,
@@ -160,37 +161,236 @@ Page({
     inputShowed: false,
     inputVal: "",
     yd:'yd',
-    objArray:[
-        {
-          array: ['不限', '东', '西', '南', '北', '东南', '东北', '东西', '西南', '西北', '南北'],
-          index:0,
-          name: '朝向'
-        },  
-        {
-          array: ['不限', '低', '中', '高'],
-          index: 0,
-          name:'楼层'
-        },
-        {
-          array: ['不限', '毛坯', '简单装修', '中等装修', '精装修', '豪华装修',],
-          index: 0,
-          name:'装修'
-        },
-        {
-          array: ['不限', '一室', '二室', '三室', '四室', '五室', '五室以上'],
-          index: 0,
-          name:'居室'
-        },
-        {
-          array: ['不限', '整租', '合租', '短租'],
-          index: 0,
-          name:'方式'
-        },
-        {
-          array: ['不限', '60㎡以下', '60~70㎡', '70~80㎡', '70~80㎡', '80~90㎡', '90~100㎡', '100~120㎡', '120㎡以上'],
-          index: 0,
-          name:'面积'
-        },
+
+    items: [
+      {
+        value:'一室',
+        name:0,
+        checked: false,
+      },
+      {
+        value: '二室',
+        name: 1,
+        checked: false,
+      },
+      {
+        value: '三室',
+        name: 2,
+        checked: false,
+      },
+      {
+        value: '四室',
+        name: 3,
+        checked: false,
+      },
+      {
+        value: '五室',
+        name: 4,
+        checked: false,
+      },
+      {
+        value: '五室以上',
+        name: 5,
+        checked: false,
+      }
+    ],
+    items1: [
+      {
+        value: '独卫',
+        name: 0,
+        checked: false,
+      },
+      {
+        value: '二卫',
+        name: 1,
+        checked: false,
+      },
+      {
+        value: '三卫',
+        name: 2,
+        checked: false,
+      },
+      {
+        value: '三卫以上',
+        name: 3,
+        checked: false,
+      }
+    ],
+    items2: [
+      {
+        value: '朝东',
+        name: 0,
+        checked: false,
+      },
+      {
+        value: '朝西',
+        name: 1,
+        checked: false,
+      },
+      {
+        value: '朝南',
+        name: 2,
+        checked: false,
+      },
+      {
+        value: '朝北',
+        name: 3,
+        checked: false,
+      },
+      {
+        value: '朝南北',
+        name: 4,
+        checked: false,
+      }
+    ],
+    items3: [
+      {
+        value: '30平以下',
+        name: 0,
+        checked: false,
+      },
+      {
+        value: '30-50平',
+        name: 1,
+        checked: false,
+      },
+      {
+        value: '50-70平',
+        name: 2,
+        checked: false,
+      },
+      {
+        value: '70-90平',
+        name: 3,
+        checked: false,
+      },
+      {
+        value: '90-120平',
+        name: 4,
+        checked: false,
+      },
+      {
+        value: '120-150平',
+        name: 5,
+        checked: false,
+      },
+      {
+        value: '150-200平',
+        name: 6,
+        checked: false,
+      },
+      {
+        value: '200-300平',
+        name: 7,
+        checked: false,
+      },
+      {
+        value: '300平以上',
+        name: 8,
+        checked: false,
+      }
+    ],
+    items4: [
+      {
+        value: '近地铁',
+        name: 0,
+        checked: false,
+      },
+      {
+        value: '精装修',
+        name: 1,
+        checked: false,
+      },
+      {
+        value: '新上房源',
+        name: 2,
+        checked: false,
+      },
+      {
+        value: '随时看房',
+        name: 3,
+        checked: false,
+      },
+      {
+        value: '有车位',
+        name: 4,
+        checked: false,
+      }
+    ],
+    items5: [
+      {
+        value: '低楼层',
+        name: 0,
+        checked: false,
+      },
+      {
+        value: '中楼层',
+        name: 1,
+        checked: false,
+      },
+      {
+        value: '高楼层',
+        name: 2,
+        checked: false,
+      }
+    ],
+    items6: [
+      {
+        value: '精装修',
+        name: 0,
+        checked: false,
+      },
+      {
+        value: '普通装修',
+        name: 1,
+        checked: false,
+      },
+      {
+        value: '毛坯房  ',
+        name: 2,
+        checked: false,
+      }
+    ],
+    items7: [
+      {
+        value: '市政供暖',
+        name: 0,
+        checked: false,
+      },
+      {
+        value: '自供暖',
+        name: 1,
+        checked: false,
+      }
+    ],
+    items8: [
+      {
+        value: '有电梯',
+        name: 0,
+        checked: false,
+      },
+      {
+        value: '无电梯',
+        name: 1,
+        checked: false,
+      }
+    ],
+    items9: [
+      {
+        value: '不限',
+        name: 0,
+        checked: false,
+      },
+      {
+        value: '整租',
+        name: 1,
+        checked: false,
+      },
+      {
+        value: '合租',
+        name: 2,
+        checked: false,
+      }
     ],
   },
   //事件处理函数
@@ -267,6 +467,7 @@ Page({
   },
   //去房屋详情
   gotoDetail:function(e){
+
     // test 3rd_session
     // wx.request({
     //   url: app.data.domain + '/WxLogin/checkRedis', 
@@ -333,5 +534,299 @@ Page({
       objArray: this.data.objArray
     })
   },
+
+  //选取搜索条件
+  checkChange:function(e){
+    console.log('radio发生change事件，携带value值为：', e)
+    var that = this
+    that.setData({
+      value: e.detail.value
+    })
+    //console.log(this.data.value)
+    var items = this.data.items;
+    //console.log(this.data.items)
+    var checkArr = e.detail.value;
+    //console.log(e.detail.value)
+    for (var i = 0; i < items.length; i++) {
+      if (checkArr.indexOf(i + "") != -1) {
+        items[i].checked = true;
+      } else {
+        items[i].checked = false;
+      }
+    }
+    this.setData({
+      items: items,
+    }) 
+  },
+  //卫
+  checkChangeToilet:function(e){
+    console.log('radio发生change事件，携带value值为：', e)
+    var that = this
+    that.setData({
+      value1: e.detail.value
+    })
+    var items1 = this.data.items1;
+    console.log(items1)
+    var checkArr = e.detail.value;
+    console.log(checkArr)
+    for (var i = 0; i < items1.length; i++) {
+      if (checkArr.indexOf(i + "") != -1) {
+        items1[i].checked = true;
+      } else {
+        items1[i].checked = false;
+      }
+    }
+    this.setData({
+      items1: items1, 
+    }) 
+  },
+  //朝向
+  checkChangeDirection: function (e) {
+    console.log('radio发生change事件，携带value值为：', e)
+    var that = this
+    that.setData({
+      value1: e.detail.value
+    })
+    var items2 = this.data.items2;
+    console.log(items2)
+    var checkArr = e.detail.value;
+    console.log(checkArr)
+    for (var i = 0; i < items2.length; i++) {
+      if (checkArr.indexOf(i + "") != -1) {
+        items2[i].checked = true;
+      } else {
+        items2[i].checked = false;
+      }
+    }
+    this.setData({
+      items2: items2,
+    })
+  },
+  //面积
+  checkChangeArea:function(e) {
+    console.log('radio发生change事件，携带value值为：', e)
+    var that = this
+    that.setData({
+      value1: e.detail.value
+    })
+    var items3 = this.data.items3;
+    console.log(items3)
+    var checkArr = e.detail.value;
+    console.log(checkArr)
+    for (var i = 0; i < items3.length; i++) {
+      if (checkArr.indexOf(i + "") != -1) {
+        items3[i].checked = true;
+      } else {
+        items3[i].checked = false;
+      }
+    }
+    this.setData({
+      items3: items3,
+    })
+  },
+  //标签
+  checkChangeLebal: function (e) {
+    console.log('radio发生change事件，携带value值为：', e)
+    var that = this
+    that.setData({
+      value1: e.detail.value
+    })
+    var items4 = this.data.items4;
+    console.log(items4)
+    var checkArr = e.detail.value;
+    console.log(checkArr)
+    for (var i = 0; i < items4.length; i++) {
+      if (checkArr.indexOf(i + "") != -1) {
+        items4[i].checked = true;
+      } else {
+        items4[i].checked = false;
+      }
+    }
+    this.setData({
+      items4: items4,
+    })
+  },
+  //楼层
+  checkChangeFloor:function(e) {
+    console.log('radio发生change事件，携带value值为：', e)
+    var that = this
+    that.setData({
+      value1: e.detail.value
+    })
+    var items5 = this.data.items5;
+    console.log(items5)
+    var checkArr = e.detail.value;
+    console.log(checkArr)
+    for (var i = 0; i < items5.length; i++) {
+      if (checkArr.indexOf(i + "") != -1) {
+        items5[i].checked = true;
+      } else {
+        items5[i].checked = false;
+      }
+    }
+    this.setData({
+      items5: items5,
+    })
+  },
+  //装修
+  checkChangeFitment: function (e) {
+    console.log('radio发生change事件，携带value值为：', e)
+    var that = this
+    that.setData({
+      value1: e.detail.value
+    })
+    var items6 = this.data.items6;
+    console.log(items6)
+    var checkArr = e.detail.value;
+    console.log(checkArr)
+    for (var i = 0; i < items6.length; i++) {
+      if (checkArr.indexOf(i + "") != -1) {
+        items6[i].checked = true;
+      } else {
+        items6[i].checked = false;
+      }
+    }
+    this.setData({
+      items6: items6,
+    })
+  },
+  //供暖 --单选
+  checkChangeHeating: function (e) {
+    console.log('radio发生change事件，携带value值为：', e)
+    var that = this
+    that.setData({
+      value1: e.detail.value
+    })
+    var items7 = this.data.items7;
+    console.log(items7)
+    var checkArr = e.detail.value;
+    console.log(checkArr)
+    for (var i = 0; i < items7.length; i++) {
+      if (checkArr.indexOf(i + "") != -1) {
+        items7[i].checked = true;
+      } else {
+        items7[i].checked = false;
+      }
+    }
+    this.setData({
+      items7: items7,
+    })
+  },
+  //电梯 --单选
+  checkChangeElevator: function (e) {
+    console.log('radio发生change事件，携带value值为：', e)
+    var that = this
+    that.setData({
+      value1: e.detail.value
+    })
+    var items8 = this.data.items8;
+    console.log(items8)
+    var checkArr = e.detail.value;
+    console.log(checkArr)
+    for (var i = 0; i < items8.length; i++) {
+      if (checkArr.indexOf(i + "") != -1) {
+        items8[i].checked = true;
+      } else {
+        items8[i].checked = false;
+      }
+    }
+    this.setData({
+      items8: items8,
+    })
+  },
+  //方式 --单选
+  checkChangeWay: function (e) {
+    console.log('radio发生change事件，携带value值为：', e)
+    var that = this
+    that.setData({
+      value1: e.detail.value
+    })
+    var items9 = this.data.items9;
+    console.log(items9)
+    var checkArr = e.detail.value;
+    console.log(checkArr)
+    for (var i = 0; i < items9.length; i++) {
+      if (checkArr.indexOf(i + "") != -1) {
+        items9[i].checked = true;
+      } else {
+        items9[i].checked = false;
+      }
+    }
+    this.setData({
+      items9: items9,
+    })
+  },
+  //重置 房型
+  reset:function(e){
+    var style = this.data.items
+    for (var i = 0; i < style.length; i++){
+      style[i].checked = false;
+    }
+    this.setData({
+      items: style,
+    })
+    var style2 = this.data.items1
+    for (var i = 0; i < style2.length; i++) {
+      style2[i].checked = false;
+    }
+    this.setData({
+      items1: style2,
+    })
+  },
+  //重置 更多
+  resetMore:function(e){
+    //朝向
+    var resetMore2 = this.data.items2
+    for (var i = 0; i < resetMore2.length; i++) {
+      resetMore2[i].checked = false;
+    }
+    //建筑面积
+    var resetMore3 = this.data.items3
+    for (var i = 0; i < resetMore3.length; i++) {
+      resetMore3[i].checked = false;
+    }
+    //标签
+    var resetMore4 = this.data.items4
+    for (var i = 0; i < resetMore4.length; i++) {
+      resetMore4[i].checked = false;
+    }
+    //楼层
+    var resetMore5 = this.data.items5
+    for (var i = 0; i < resetMore5.length; i++) {
+      resetMore5[i].checked = false;
+    }
+    //装修
+    var resetMore6 = this.data.items6
+    for (var i = 0; i < resetMore6.length; i++) {
+      resetMore6[i].checked = false;
+    }
+    //供暖
+    var resetMore7 = this.data.items7
+    for (var i = 0; i < resetMore7.length; i++) {
+      resetMore7[i].checked = false;
+    }
+    //电梯
+    var resetMore8 = this.data.items8
+    for (var i = 0; i < resetMore8.length; i++) {
+      resetMore8[i].checked = false;
+    }
+    //方式
+    var resetMore9 = this.data.items9
+    for (var i = 0; i < resetMore9.length; i++) {
+      resetMore9[i].checked = false;
+    }
+    this.setData({
+      items2: resetMore2,
+      items3: resetMore3,
+      items4: resetMore4,
+      items5: resetMore5,
+      items6: resetMore6,
+      items7: resetMore7,
+      items8: resetMore8,
+      items9: resetMore9,
+      
+    })
+
+  }
 
 })

@@ -7,22 +7,13 @@
           {{item.num}}
         </view>
       </block>
-    <view class="page_list">
-      <picker bindchange="bindPickerCustom" value="{{index}}" range="{{customArray}}">
-    <view class="picker">
-    {{customArray[index]}}
-    </view>
-  </picker>
-    </view> 
+    <view class="h15"></view>
     <view class="weui-cell weui-cell_input">
       <view class="weui-cell__bd textAlignLeft">{{cost}}元</view>
       <view class="weui-cell__hd">
         <view class="weui-label">实付金额</view>
       </view>
     </view>
-    <view class="page__bd page__bd_spacing">
-            <button class="weui-btn mini-btn" type="primary" >下一页</button>
-        </view>
   </view>
   <!-- 固定底部 支付链接 -->
   <view class="pay">

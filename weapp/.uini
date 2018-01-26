@@ -1,0 +1,1 @@
+open_basedir="E:\vagrant\wwwroot\dev.zufang.vag\;E:\UPUPW_NP7.0\Guard\;E:\UPUPW_NP7.0\phpmyadmin\;E:\UPUPW_NP7.0\temp\;C:\Windows\Temp\"

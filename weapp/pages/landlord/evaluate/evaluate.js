@@ -4,12 +4,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    movies: [
-      { url: '../../dist/images/1.jpg' },
-      { url: '../../dist/images/2.jpg' },
-      { url: '../../dist/images/3.jpg' },
-    ],
-    // gcData:true
+    
   },
 
   /**
@@ -67,10 +62,10 @@ Page({
   onShareAppMessage: function () {
     
   },
-  //发布房源
-  ListingServices:function(e){
+  //去详情列表
+  gotoDetail:function(){
     wx.navigateTo({
-      url: '/pages/hmBasics/hmBasics',
+      url: '/pages/detail/detail',
     })
   }
 })

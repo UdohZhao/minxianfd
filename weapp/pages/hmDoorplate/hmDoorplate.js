@@ -178,7 +178,7 @@ Page({
   //下一页
   gotoNext:function(){
     wx.redirectTo({
-      url: '/pages/hmBasics/hmBasics',
+      url: '/pages/hmLease/hmLease',
     })
   }
 })
