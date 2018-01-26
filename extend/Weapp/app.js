@@ -1,4 +1,6 @@
 //app.js
+// 引入表单验证
+import wxValidate from 'utils/wxValidate'
 App({
   data: {
       domain: 'https://ngrok.getcunji.com'
@@ -46,7 +48,8 @@ App({
   onError: function (e) {
     console.log(e);
   },
-
+  //创建表单验证
+  wxValidate: (rules, messages) => new wxValidate(rules, messages),
   // threerdLogin
   threerdLogin : function () {
     // 登录

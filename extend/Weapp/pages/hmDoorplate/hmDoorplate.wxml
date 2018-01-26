@@ -1,0 +1,56 @@
+<view class="page">
+  <form bindsubmit="formSubmit" bindreset="formReset">
+      <!-- 小区信息  开始 -->
+        <view class="page_bd">
+          <view class="body_title ">小区信息</view>
+          <!--输入户型和小区地址  -->
+          <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd ">
+              <view class="weui-label ">小区名称</view>
+            </view>
+            <view class="weui-cell__bd">
+              <input class="weui-input " name="cname" placeholder="请输入小区名称"/>
+            </view>
+          </view>
+          <view class="weui-cell_input huxing">
+            <view class="weui_cell_box">
+              <view class="weui_cell_box_key">门牌:</view>
+              <view class="weui_cell_box_input">
+                <input class="input"  name="building"></input>
+                号楼
+              </view>
+              <view class="weui_cell_box_input">
+                <input class="input"  name="unit"></input>
+                单元
+              </view>
+              <view class="weui_cell_box_input">
+                <input class="input"  name="household"></input>
+                户
+              </view>
+            </view>
+            <view class="weui_cell_box">
+              <view class="weui_cell_box_key">楼层:</view>
+              <view class="weui_cell_box_input">
+                <input class="input" type='number' name="present_floor"></input>
+                当前
+              </view>
+              <view class="weui_cell_box_input w31">
+                <input class="input" type='number' name="total_floor"></input>
+                总楼层
+              </view>
+              
+            </view>
+          </view>
+        </view>
+        <!-- 小区信息 结束 -->
+        <view class="page__bd page__bd_spacing">
+        <button class="weui-btn mini-btn" type="primary"   formType="submit">发布房源信息</button>
+    </view>
+    <view class="page__bd page__bd_spacing">
+        <button class="weui-btn mini-btn" type="primary" bindtap='gotoNext'>下一页</button>
+    </view>
+    <view class="page__bd page__bd_spacing">
+        <image src='../../dist/images/hmIcon.png'></image>
+    </view>
+  </form>
+</view>

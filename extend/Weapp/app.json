@@ -2,7 +2,24 @@
   "pages": [
     "pages/redis/redis",
     "pages/sms/sms",
-    "pages/wxpay/wxpay"
+    "pages/wxpay/wxpay",
+    "pages/index/index",
+    "pages/landlord/landlord",
+    "pages/me/me",
+    "pages/detail/detail",
+    "pages/services/services",
+    "pages/myRelease/myRelease",
+    "pages/myCollect/myCollect",
+    "pages/search/search",
+    "pages/Cookies/Cookies",
+    "pages/evaluate/evaluate",
+    "pages/hmDoorplate/hmDoorplate",
+    "pages/hmBasics/hmBasics",
+    "pages/hmLease/hmLease",
+    "pages/hmArea/hmArea",
+    "pages/hmOwner/hmOwner",
+    "pages/hmLandlord/hmLandlord",
+    "pages/pay/pay"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -29,5 +46,6 @@
       }
     ]
   },
+  
   "debug": true
 }

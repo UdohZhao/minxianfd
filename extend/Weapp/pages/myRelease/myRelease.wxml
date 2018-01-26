@@ -1,0 +1,20 @@
+<view class="page">
+  <view class="page_weui_hd">我的发布</view>
+  <view class="page__bd marTop30">
+    <!-- 判断是否有发布 -->
+    <view wx:if="{{releaseStatus}}">
+      <view class="weui-media-box">
+        <view class="weui-media-box__desc color333">乔庄东区精品两房</view>
+        <view class="weui-media-box__desc">
+          <text class="'red'">3500元/月</text>
+          <!--状态  -->
+          <view class="rt green">未出租</view>
+        </view>
+        <view class="weui-media-box__desc">2018-01-13 04:27:42</view>
+      </view>
+    </view>
+    <view wx:else>
+      <view class="errorMsg">暂无发布~~</view>
+    </view>
+  </view>
+</view>

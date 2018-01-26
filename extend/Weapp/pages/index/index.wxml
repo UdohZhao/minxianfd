@@ -1,0 +1,280 @@
+<view class="page">
+  <!--轮播图  -->
+  <view class="posR">
+    <swiper class="swiper"  autoplay="true" interval="5000" duration="1000">    
+      <block wx:for="{{movies}}" wx:for-index="index" wx:key="k">    
+          <swiper-item>    
+            <image src="{{item.url}}" class="slide-image" mode="aspectFill"/>    
+          </swiper-item>    
+      </block>    
+    </swiper>
+     <!-- 固定头部定位 -->
+    <view class="search" >
+      <view class="weui-search-bar__form" bindtap='gotoLocation'>
+        <image src='../../dist/images/location.png'></image>
+        <view class="locationMsg">果园西总屯精品次卧</view>
+      </view>
+    </view>
+  </view>
+  <!--搜索条件  -->
+  <view class="page__bd">
+        <view class="weui-tab">
+            <view class="weui-navbar">
+                <block wx:for="{{tabs}}" wx:key="*this">
+                    <view id="{{index}}" class="weui-navbar__item {{activeIndex == index ? 'weui-bar__item_on' : ''}}" bindtap="tabClick">
+                        <view class="weui-navbar__title">{{item}}  <text class="label"></text></view>
+                    </view>
+                </block>
+            </view>
+            <!-- 背景层 -->
+            <view class="commodity_screen" bindtap='hideModal' wx:if="{{showModalStatus}}"></view>
+            <view class="weui-tab__panel" wx:if="{{showModalStatus}}">
+                <view class="weui-tab__content" hidden="{{activeIndex != 0}}">
+                  <!--主体盒子  -->
+                   <view class="containerBox">
+                   <!--左边内容区域  -->
+                    <view class="nav_left">
+                      <block wx:for="{{navList}}">
+                        <view class="nav_list_items {{curNav == item.id ? 'active' : ''}}" bindtap='selectNav' data-index="{{index}}" data-id="{{item.id}}">{{item.name}}</view>
+                      </block>
+                    </view>
+                      <!-- 右边显示区域 -->
+                      <view class="nav_right">
+                      <!-- 需要先判断 是否为空 -->
+                      <block wx:for="{{dishesList[curIndex]}}">
+                        <scroll-view class="nav_right_items" data-id="{{item.id}}" bindtap='searchTap'>{{item.name}}</scroll-view>
+                      </block>  
+                      </view>
+                   </view>
+                </view>
+                <view class="weui-tab__content" hidden="{{activeIndex != 1}}">
+                  <!-- 租金 -->
+                  <view class="list">不限</view>
+                  <view class="list">1000以下</view>
+                  <view class="list">1000~2000元</view>
+                  <view class="list">2000~3000元</view>
+                  <view class="list">3000~4000元</view>
+                  <view class="list">4000~5000元</view>
+                  <view class="list">5000元以上</view>
+                  
+                </view>
+                <view class="weui-tab__content" hidden="{{activeIndex != 2}}">
+                    <!-- 房型 -->
+                  <view class="fxBox">
+                    <view class="fxBox_title">卧室</view>
+                      <checkbox-group class='fxBox_bd' bindchange="checkChange">
+                        <label bindtap="click"  wx:for="{{items}}" wx:key="{{items}}"
+                        class="fxBox_bd_list {{item.checked?'listCctive':''}}">
+                          <checkbox value="{{item.name}}" name="{{item.value}}" 
+                          checked="{{item.checked}}" hidden='true'></checkbox>
+                          <label class="fxBox_title">{{item.value}}</label>
+                        </label>
+                      </checkbox-group>
+                  </view>
+                  <view class="fxBox">
+                    <view class="fxBox_title">卫生间</view>
+                    <checkbox-group class='fxBox_bd' bindchange="checkChangeToilet">
+                        <label bindtap="click"  wx:for="{{items1}}" wx:key="{{k}}"
+                        class="fxBox_bd_list {{item.checked?'listCctive':''}}">
+                          <checkbox value="{{item.name}}" name="{{item.value}}" 
+                          checked="{{item.checked}}" hidden='true'></checkbox>
+                          <label class="fxBox_title">{{item.value}}</label>
+                        </label>
+                    </checkbox-group>
+                  </view>
+                  <view class="fxBox">
+                    <button class="weui-btn mini-btn marginRight20"  size="mini" bindtap='reset'>重置</button>
+                    <button class="weui-btn mini-btn" type="primary" size="mini">确定</button> 
+                  </view>
+                </view>
+                
+                <view class="weui-tab__content" hidden="{{activeIndex != 3}}">
+                  <!--朝向，楼层 装修 居室 方式 面积等 -->
+                  <view class="fxBox">
+                    <view class="fxBox_title">朝向</view>
+                    <view class="fxBox_bd">
+                      <checkbox-group class='fxBox_bd' bindchange="checkChangeDirection">
+                        <label bindtap="click"  wx:for="{{items2}}" wx:key="{{items2}}"
+                        class="fxBox_bd_list {{item.checked?'listCctive':''}}">
+                          <checkbox value="{{item.name}}" name="{{item.value}}" 
+                          checked="{{item.checked}}" hidden='true'></checkbox>
+                          <label class="fxBox_title">{{item.value}}</label>
+                        </label>
+                    </checkbox-group>
+                    </view>
+                  </view>
+                  <view class="fxBox">
+                    <view class="fxBox_title">建筑面积(平)</view>
+                    <view class="fxBox_bd">
+                      <checkbox-group class='fxBox_bd' bindchange="checkChangeArea">
+                        <label bindtap="click"  wx:for="{{items3}}" wx:key="{{items3}}"
+                        class="fxBox_bd_list {{item.checked?'listCctive':''}}">
+                          <checkbox value="{{item.name}}" name="{{item.value}}" 
+                          checked="{{item.checked}}" hidden='true'></checkbox>
+                          <label class="fxBox_title">{{item.value}}</label>
+                        </label>
+                    </checkbox-group>
+                    </view>
+                  </view>
+                  <view class="fxBox">
+                    <view class="fxBox_title">标签</view>
+                    <view class="fxBox_bd">
+                      <checkbox-group class='fxBox_bd' bindchange="checkChangeLebal">
+                        <label bindtap="click"  wx:for="{{items4}}" wx:key="{{items4}}"
+                        class="fxBox_bd_list {{item.checked?'listCctive':''}}">
+                          <checkbox value="{{item.name}}" name="{{item.value}}" 
+                          checked="{{item.checked}}" hidden='true'></checkbox>
+                          <label class="fxBox_title">{{item.value}}</label>
+                        </label>
+                    </checkbox-group>
+                    </view>
+                  </view>
+                  <view class="fxBox">
+                    <view class="fxBox_title">楼层</view>
+                    <view class="fxBox_bd">
+                      <checkbox-group class='fxBox_bd' bindchange="checkChangeFloor">
+                        <label bindtap="click"  wx:for="{{items5}}" wx:key="{{items5}}"
+                        class="fxBox_bd_list {{item.checked?'listCctive':''}}">
+                          <checkbox value="{{item.name}}" name="{{item.value}}" 
+                          checked="{{item.checked}}" hidden='true'></checkbox>
+                          <label class="fxBox_title">{{item.value}}</label>
+                        </label>
+                    </checkbox-group>
+                    </view>
+                  </view>
+                  <view class="fxBox">
+                    <view class="fxBox_title">装修</view>
+                    <view class="fxBox_bd">
+                      <checkbox-group class='fxBox_bd' bindchange="checkChangeFitment">
+                        <label bindtap="click"  wx:for="{{items6}}" wx:key="{{items6}}"
+                        class="fxBox_bd_list {{item.checked?'listCctive':''}}">
+                          <checkbox value="{{item.name}}" name="{{item.value}}" 
+                          checked="{{item.checked}}" hidden='true'></checkbox>
+                          <label class="fxBox_title">{{item.value}}</label>
+                        </label>
+                    </checkbox-group>
+                    </view>
+                  </view>
+                  <view class="fxBox">
+                    <view class="fxBox_title">供暖</view>
+                    <view class="fxBox_bd">
+                      <radio-group class='fxBox_bd' bindchange="checkChangeHeating">
+                        <label bindtap="click"  wx:for="{{items7}}" wx:key="{{items7}}"
+                        class="fxBox_bd_list {{item.checked?'listCctive':''}}">
+                          <checkbox value="{{item.name}}" name="{{item.value}}" 
+                          checked="{{item.checked}}" hidden='true'></checkbox>
+                          <label class="fxBox_title">{{item.value}}</label>
+                        </label>
+                    </radio-group>
+                    </view>
+                  </view>
+                  <view class="fxBox">
+                    <view class="fxBox_title">电梯</view>
+                    <view class="fxBox_bd">
+                      <radio-group class='fxBox_bd' bindchange="checkChangeElevator">
+                        <label bindtap="click"  wx:for="{{items8}}" wx:key="{{items8}}"
+                        class="fxBox_bd_list {{item.checked?'listCctive':''}}">
+                          <checkbox value="{{item.name}}" name="{{item.value}}" 
+                          checked="{{item.checked}}" hidden='true'></checkbox>
+                          <label class="fxBox_title">{{item.value}}</label>
+                        </label>
+                    </radio-group>
+                    </view>
+                  </view>
+                  <view class="fxBox">
+                    <view class="fxBox_title">方式</view>
+                    <view class="fxBox_bd">
+                      <radio-group class='fxBox_bd' bindchange="checkChangeWay">
+                        <label bindtap="click"  wx:for="{{items9}}" wx:key="{{items9}}"
+                        class="fxBox_bd_list {{item.checked?'listCctive':''}}">
+                          <checkbox value="{{item.name}}" name="{{item.value}}" 
+                          checked="{{item.checked}}" hidden='true'></checkbox>
+                          <label class="fxBox_title">{{item.value}}</label>
+                        </label>
+                    </radio-group>
+                    </view>
+                  </view>
+                  <view class="fxBox">
+                    <button class="weui-btn mini-btn marginRight20"  size="mini" bindtap='resetMore'>重置</button>
+                    <button class="weui-btn mini-btn" type="primary" size="mini">确定</button> 
+                  </view>
+                </view>
+            </view>
+        </view>
+  </view>
+  <!-- 详情列表 -->
+  <view class="page__bd marginTop50">
+        <view class="weui-panel weui-panel_access">
+            <view class="weui-panel__bd">
+                <view bindtap='gotoDetail' class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
+                    <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+                        <image class="weui-media-box__thumb" src="../../dist/images/1.jpg" />
+                    </view>
+                    <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+                        <view class="weui-media-box__title">果园习总屯精品次卧</view>
+                        <view class="weui-media-box__desc">2室1厅/86㎡/南/金科时代中心</view>
+                        <view class="weui-media-box__desc">
+                          <!-- 判断标签 -->
+                         <text class="lebalStyleDT lebalSty">地铁</text>
+                         <text class="lebalStyleSSKF lebalSty">随时看房</text>
+                         <text class="lebalStyleXSFY lebalSty">新上房源</text>
+                         <text class="lebalStyleJZX lebalSty">精装修</text>
+                         <!-- <text class="lebalStyleYCW lebalSty">有车位</text> -->
+                         
+                        </view>
+                        <view class="weui-media-box__desc red">
+                            2700元/月
+                        </view>
+                    </view>
+                </view>
+                <view bindtap='gotoDetail' class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
+                    <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+                        <image class="weui-media-box__thumb" src="../../dist/images/1.jpg" />
+                    </view>
+                    <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+                        <view class="weui-media-box__title">果园习总屯精品次卧</view>
+                        <view class="weui-media-box__desc">2室1厅/86㎡/南/金科时代中心</view>
+                        <view class="weui-media-box__desc">
+                          <!-- 判断标签 -->
+                         <text class="lebalStyleDT lebalSty">地铁</text>
+                         <text class="lebalStyleSSKF lebalSty">随时看房</text>
+                         <text class="lebalStyleXSFY lebalSty">新上房源</text>
+                         <text class="lebalStyleJZX lebalSty">精装修</text>
+                         <!-- <text class="lebalStyleYCW lebalSty">有车位</text> -->
+                         
+                        </view>
+                        <view class="weui-media-box__desc red">
+                            2700元/月
+                        </view>
+                    </view>
+                </view>
+                <view bindtap='gotoDetail' class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
+                    <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+                        <image class="weui-media-box__thumb" src="../../dist/images/1.jpg" />
+                    </view>
+                    <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+                        <view class="weui-media-box__title">果园习总屯精品次卧</view>
+                        <view class="weui-media-box__desc">2室1厅/86㎡/南/金科时代中心</view>
+                        <view class="weui-media-box__desc">
+                          <!-- 判断标签 -->
+                         <text class="lebalStyleDT lebalSty">地铁</text>
+                         <text class="lebalStyleSSKF lebalSty">随时看房</text>
+                         <text class="lebalStyleXSFY lebalSty">新上房源</text>
+                         <text class="lebalStyleJZX lebalSty">精装修</text>
+                         <!-- <text class="lebalStyleYCW lebalSty">有车位</text> -->     
+                         
+                        </view>
+                        <view class="weui-media-box__desc red">
+                            2700元/月
+                        </view>
+                    </view>
+                </view>
+                
+            </view>
+        </view>
+  </view>
+
+
+ 
+
+</view>

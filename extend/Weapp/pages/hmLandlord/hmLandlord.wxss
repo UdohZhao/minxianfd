@@ -1,0 +1,31 @@
+.body_title{
+  width: 100%;
+  height: 30px;
+  line-height: 30px;
+  font-size: 16px;
+  padding-left:20px; 
+  color: #1AAD19;
+}
+.page__bd_spacing{
+  margin-top: 30px;
+  padding:0 20px;
+}
+.weui-cell__ft{
+  text-align: center;
+  margin-right: 15px;
+  margin-left: 5px;
+  border: 0;
+}
+.borderBom{
+  border-bottom: 0.5px solid #ddd; 
+}
+.weui-input{
+  text-align: right;
+}
+.textAlignLeft{
+  text-align: left;
+}
+.page__bd_spacing image{
+  width: 100%;
+  height: 80px;
+}

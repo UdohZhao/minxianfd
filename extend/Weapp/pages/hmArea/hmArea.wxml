@@ -1,0 +1,34 @@
+<view class="page">
+  <form bindsubmit="formSubmit" bindreset="formReset">
+    <!-- 区域信息 开始 -->
+        <view class="page_bd">
+          <view class="body_title">区域信息</view>
+          <!-- 获取地址 -->
+          <view class="weui_cell_box">
+              <view class="weui_cell_box_key">地址: </view>
+              <view class="weui_cell_box_key" style='border:0.5px solid #ddd;margin-right:20px;'>岷县</view>
+              <view class="weui_cell_box_key" style='border:0.5px solid #ddd;'>
+              <picker bindchange="bindPickerChange3" value="{{index}}" range="{{array}}">{{array[index]}}</picker>
+              </view>
+          </view>
+          <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+                    <view class="weui-label">街道及小区</view>
+            </view>
+            <view class="weui-cell__bd">
+                    <input class="weui-input" name="address" placeholder="请输入街道及小区"/>
+            </view>
+          </view>
+        </view>
+        <!-- 区域信息 结束 -->
+        <view class="page__bd page__bd_spacing">
+            <button class="weui-btn mini-btn" type="primary"   formType="submit">发布房源信息</button>
+        </view>
+        <view class="page__bd page__bd_spacing">
+            <button class="weui-btn mini-btn" type="primary" bindtap='gotoNext'>下一页</button>
+        </view>
+        <view class="page__bd page__bd_spacing">
+          <image src='../../dist/images/hmIcon.png'></image>
+        </view>
+  </form>
+</view>
