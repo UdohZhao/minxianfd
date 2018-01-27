@@ -2,12 +2,15 @@
 namespace app\index\controller;
 class WxPay extends Base
 {
+    public $wuid;
+    public $total_fee;
     /**
      * 构造方法
      */
     public function _auto()
     {
-
+        $this->wuid = isset($_GET['wuid']) ? input('get.wuid') : 0;
+        $this->total_fee = isset($_GET['total_fee']) ? input('get.total_fee') : 0;
     }
 
     // 微信支付
@@ -21,22 +24,40 @@ class WxPay extends Base
         $param['nonce_str'] = get_rand_str();
         $param['body'] = '岷县房东置顶推广充值';
         $param['out_trade_no'] = get_rand_str();
-        $param['total_fee'] = 1;
+        $param['total_fee'] = bcmul($this->total_fee, 100, 0);
         $param['spbill_create_ip'] = $_SERVER['REMOTE_ADDR'];
         $param['notify_url'] = 'https://ngrok.getcunji.com/WxPay/notify';
         $param['trade_type'] = 'JSAPI';
+        $param['openid'] = db('weapp_user')->where('id',$this->wuid)->value('openid');
+        $param['sign_type'] = 'MD5';
+        $param['sign'] = ToUrlParams($param);
+        $xmlParam = ToXml($param);
+        $arrParam = FromXml(httpRequest($url,'POST',$xmlParam));
 
-        $param['sign'] = '';
+        slog($arrParam);
 
-        dump($param);
-        die;
+        // wx20180127120403b717bdb7450617460919
+        // wx201801271207124452c7a0120194614820
+
+        // 小程序调起支付数据签名字段
+        $weappParam['appId'] = config('appid');
+        $weappParam['timeStamp'] = (string) time();
+        $weappParam['nonceStr'] = get_rand_str();
+        $weappParam['package'] = 'prepay_id='.$arrParam['prepay_id'];
+        $weappParam['signType'] = 'MD5';
+        $weappParam['paySign'] = ToUrlParams($weappParam);
+
+        slog($weappParam);
+
+        return ajaxReturn(Rs(0,'',$weappParam));
 
     }
 
     // 异步通知
     public function notify()
     {
-
+        slog($_GET);
+        slog($_POST);
     }
 
 }
