@@ -1,8 +1,5 @@
 {
   "pages": [
-    "pages/redis/redis",
-    "pages/sms/sms",
-    "pages/wxpay/wxpay",
     "pages/index/index",
     "pages/landlord/landlord",
     "pages/me/me",
@@ -19,7 +16,10 @@
     "pages/hmArea/hmArea",
     "pages/hmOwner/hmOwner",
     "pages/hmLandlord/hmLandlord",
-    "pages/pay/pay"
+    "pages/pay/pay",
+    "pages/redis/redis",
+    "pages/sms/sms",
+    "pages/wxpay/wxpay"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -30,19 +30,27 @@
     "enablePullDownRefresh": true
   },
   "tabBar": {
-    "position": "top",
+    "color": "#000000",
+    "selectedColor": "#00FF00",
+    "backgroundColor": "#F8F8F8",
     "list": [
       {
-        "pagePath": "pages/redis/redis",
-        "text": "redis"
+        "pagePath": "pages/index/index",
+        "text": "index",
+        "iconPath": "dist/images/icon/emoji-1.png",
+        "selectedIconPath": "dist/images/icon/emoji-1.png"
       }, 
       {
-        "pagePath": "pages/sms/sms",
-        "text": "sms"
+        "pagePath": "pages/landlord/landlord",
+        "text": "landlord",
+        "iconPath": "dist/images/icon/emoji-2.png",
+        "selectedIconPath": "dist/images/icon/emoji-2.png"
       }, 
       {
-        "pagePath": "pages/wxpay/wxpay",
-        "text": "wxpay"
+        "pagePath": "pages/me/me",
+        "text": "me",
+        "iconPath": "dist/images/icon/emoji-3.png",
+        "selectedIconPath": "dist/images/icon/emoji-3.png"
       }
     ]
   },
