@@ -2,7 +2,7 @@
   <form bindsubmit="formSubmit" bindreset="formReset">
       <view class="page_bd">
         <!-- 房源信息 开始-->
-        <view class="margBom20">
+        <view>
           <view class="body_title border0">房源信息</view>
           <!-- 上传图片 -->
           <view class="weui-cells">

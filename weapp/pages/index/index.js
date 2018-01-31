@@ -31,7 +31,7 @@ Page({
         {
           name:'岷阳镇',
           id:1,
-          num:1
+          num:1,
         },
         {
           name: '蒲麻镇',

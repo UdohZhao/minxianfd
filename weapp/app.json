@@ -15,12 +15,13 @@
     "pages/hmLease/hmLease",
     "pages/hmArea/hmArea",
     "pages/hmOwner/hmOwner",
-    "pages/hmLandlord/hmLandlord"
+    "pages/hmLandlord/hmLandlord",
+    "pages/pay/pay"
   ],
   "window":{
     "backgroundTextStyle":"light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "租房网",
+    "navigationBarTitleText": "岷县房东",
     "navigationBarTextStyle":"black"
   },
   "tabBar": {

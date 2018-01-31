@@ -1,0 +1,69 @@
+
+page,
+.page{
+  background-color: #f5f5f5;
+}
+.page_weui_hd{
+  position: fixed;
+  top:0;
+  left: 0;
+  width: 100%;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  background-color: #fff;
+  color: #ff8900;
+}
+.page_bd{
+  padding: 15px;
+  flex: 1;
+  margin: 40px 0; 
+}
+.page_list{
+  width: 29%;
+  margin-right: 5%;
+  border: 0.5px solid #EBEBEB;
+  text-align: center;
+  height: 30px;
+  line-height: 30px;
+  float: left;
+  margin-bottom: 10PX;
+  background-color: #EBEBEB;
+  border-radius:5px; 
+}
+.active{
+  color: #fff;
+  background-color: #FE7079;
+  border: 0.5px solid #FE7079;
+}
+.page_list:nth-child(3),
+.page_list:nth-child(6){
+  margin-right: 0;
+}
+.page__bd_spacing{
+  margin-top: 30px;
+  padding:0 20px;
+}
+.weui-cell{
+  height: 40px;
+  line-height: 40px;
+  text-align: right;
+  background-color: #fff;
+}
+.textAlignLeft{
+  text-align: left;
+}
+.weui-cell::before{
+  border: 0;
+}
+.pay{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 40px;
+  line-height: 40px;
+}
+.pay button {
+  border-radius: 0;
+}
