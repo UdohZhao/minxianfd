@@ -3,13 +3,16 @@ namespace app\admin\controller;
 class HmMinXian extends Base
 {
     public $id;
+    public $type;
     /**
      * 构造方法
      */
     public function _auto()
     {
         $this->id = isset($_GET['id']) ? intval($_GET['id']) : 0;
+        $this->type = isset($_GET['type']) ? intval($_GET['type']) : 0;
         $this->assign('id',$this->id);
+        $this->assign('type',$this->type);
     }
 
     // 添加用户页面
@@ -39,9 +42,9 @@ class HmMinXian extends Base
             // data
             $data = $this->getData();
             // 防止重复添加
-            if (db('hm_min_xian')->where('username',$data['username'])->count() && $this->id == 0)
+            if (db('hm_min_xian')->where('town_village',$data['town_village'])->count() && $this->id == 0)
             {
-                return Rs(2,'请勿重复添加管理员！',false);
+                return Rs(2,'请勿重复添加城镇或者乡村！',false);
             }
             // id
             if ($this->id)
@@ -69,11 +72,9 @@ class HmMinXian extends Base
     private function getData()
     {
         // data
-        $data['username'] = input('post.username');
-        $data['password'] = enPassword(input('post.password'));
-        $data['type'] = 1;
-        $data['status'] = 0;
-        $data['ctime'] = time();
+        $data['town_village'] = input('post.town_village');
+        $data['sort'] = input('post.sort');
+        $data['type'] = input('post.type');
         return $data;
     }
 
@@ -84,7 +85,7 @@ class HmMinXian extends Base
         $search = "%%";
         if (input('?post.search')) $search = "%".input('post.search')."%";
         // 读取数据表
-        $data = db('hm_min_xian')->where('username','like',$search)->paginate(config('pages'),false,['query' => request()->param()]);
+        $data = db('hm_min_xian')->where('town_village','like',$search)->where('type',$this->type)->order('sort asc')->paginate(config('pages'),false,['query' => request()->param()]);
         // assign
         $this->assign('data',$data);
         // 渲染模板输出

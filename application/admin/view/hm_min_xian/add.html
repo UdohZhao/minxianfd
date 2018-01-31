@@ -5,31 +5,40 @@
 <!-- Page -->
 <div class="page animsition">
   <div class="page-header">
-    <h1 class="page-title"># 用户管理</h1>
+    <h1 class="page-title"># 区域管理</h1>
   </div>
   <div class="page-content">
     <div class="panel">
       <div class="panel-heading">
-        <h3 class="panel-title">@ 添加管理员</h3>
+        <h3 class="panel-title">@ 配置岷县</h3>
       </div>
       <div class="panel-body">
-        <form class="form-horizontal" action="/admin/AdminUser/add?id={$id}" method="post" id="AdminUserForm">
+        <form class="form-horizontal" action="/admin/HmMinXian/add?id={$id}&type={$type}" method="post" id="HmMinXianForm">
           <div class="form-group">
-            <label class="col-sm-2 control-label">用户名</label>
+            <label class="col-sm-2 control-label">名称</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" name="username" placeholder="请输入用户名" value="{$data.username}">
+              <input type="text" class="form-control" name="town_village" placeholder="请输入城镇或者乡村名称" {if condition="($id)"}value="{$data.town_village}"{/if} >
             </div>
           </div>
           <div class="form-group">
-            <label for="inputPassword3" class="col-sm-2 control-label">密码</label>
+            <label class="col-sm-2 control-label">排序</label>
             <div class="col-sm-10">
-              <input type="password" class="form-control" name="password" placeholder="请输入密码">
+              <input type="text" class="form-control" name="sort" placeholder="排序？数字越小越靠前" {if condition="($id)"}value="{$data.sort}"{/if} >
             </div>
           </div>
           <div class="form-group">
-            <label for="inputPassword3" class="col-sm-2 control-label">重复密码</label>
+            <label class="col-sm-2 control-label">类别</label>
             <div class="col-sm-10">
-              <input type="password" class="form-control" name="rePassword" placeholder="请输入重复密码">
+              <label class="radio-inline">
+                {if condition="($id)"}
+                <input type="radio" name="type" value="0" {eq name="data.type" value="0"}checked="checked"{/eq}> 城镇
+                {else /}
+                <input type="radio" name="type" value="0" checked="checked"> 城镇
+                {/if}
+              </label>
+              <label class="radio-inline">
+                <input type="radio" name="type" value="1" {if condition="($id)"}{eq name="data.type" value="1"}checked="checked"{/eq}{/if} > 乡村
+              </label>
             </div>
           </div>
           <div class="form-group">
@@ -47,4 +56,4 @@
 {include file="layouts/footer" /}
 
 <!-- 当前页面js -->
-{js href="/static/admin/admin_user/js/add.js" /}
+{js href="/static/admin/hm_min_xian/js/add.js" /}

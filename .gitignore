@@ -4,3 +4,8 @@ composer.lock
 runtime
 .DS_Store
 .travis.yml
+ErrorFiles
+.uini
+project.config.json
+u.php
+up-rewrite.conf

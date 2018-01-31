@@ -66,4 +66,15 @@ page,
 }
 .pay button {
   border-radius: 0;
+<<<<<<< HEAD
+=======
+}
+.h15{
+  height: 15px;
+  width: 100%;
+  clear: both;
+  content: '';
+  font-size: 0;
+  display: block;
+>>>>>>> 4ef7350f8da7e4516c3ab03258728095e5f5b5ab
 }

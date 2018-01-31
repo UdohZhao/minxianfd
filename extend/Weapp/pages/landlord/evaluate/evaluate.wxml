@@ -1,0 +1,40 @@
+<view class="page">
+  <view class="page_weui_hd">我的评价</view>
+    <view class="page__bd marTop30">
+      <!-- 主体内容 -->
+      <view class="weui-panel__bd ">
+        <!-- 租房信息 -->
+        <view class="weui-panel__bd_box" bindtap='gotoDetail'>
+          <view class="detailName lt">果园习总屯精品次卧</view>
+          <view class="detailRoom detailName lt">3室</view>
+          <view class="detailMoney detailName lt">3500元/月</view>
+        </view>
+        <!-- 用户信息 -->
+        <view class="weui-media-box__desc">环境温馨，干净。家电齐全。就是距离轻轨站和公交有点远。</view>
+        <view class="weui-panel__bd_body">
+          <view class="userIcon lt">
+            <image src='../../dist/images/header.png'></image>
+            <view class="userName">用户昵称</view>
+          </view>
+          <view class="userTime rt">01-16</view>
+        </view>
+      </view>
+      <view class="weui-panel__bd ">
+        <!-- 租房信息 -->
+        <view class="weui-panel__bd_box" bindtap='gotoDetail'>
+          <view class="detailName lt">果园习总屯精品次卧</view>
+          <view class="detailRoom detailName lt">3室</view>
+          <view class="detailMoney detailName lt">3500元/月</view>
+        </view>
+        <!-- 用户信息 -->
+        <view class="weui-media-box__desc">环境温馨，干净。家电齐全。就是距离轻轨站和公交有点远。</view>
+        <view class="weui-panel__bd_body">
+          <view class="userIcon lt">
+            <image src='../../dist/images/header.png'></image>
+            <view class="userName">用户昵称</view>
+          </view>
+          <view class="userTime rt">01-16</view>
+        </view>
+      </view>
+    </view>
+</view>

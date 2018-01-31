@@ -1,9 +1,21 @@
+<<<<<<< HEAD
+=======
+//获取应用实例
+const app = getApp()
+>>>>>>> 4ef7350f8da7e4516c3ab03258728095e5f5b5ab
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+<<<<<<< HEAD
+=======
+    //获取用户登录信息
+    userInfo: {},
+    hasUserInfo: false,
+    canIUse: wx.canIUse('button.open-type.getUserInfo'),
+>>>>>>> 4ef7350f8da7e4516c3ab03258728095e5f5b5ab
     payList:[
       {
         id:1,
@@ -41,8 +53,39 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
+<<<<<<< HEAD
   onLoad: function (options) {
     
+=======
+  onLoad: function () {
+    if (app.globalData.userInfo) {
+      this.setData({
+        userInfo: app.globalData.userInfo,
+        hasUserInfo: true
+      })
+    } else if (this.data.canIUse) {
+      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
+      // 所以此处加入 callback 以防止这种情况
+      app.userInfoReadyCallback = res => {
+        this.setData({
+          userInfo: res.userInfo,
+          hasUserInfo: true
+        })
+      }
+    } else {
+      // 在没有 open-type=getUserInfo 版本的兼容处理
+      wx.getUserInfo({
+        success: res => {
+          app.globalData.userInfo = res.userInfo
+          this.setData({
+            userInfo: res.userInfo,
+            hasUserInfo: true
+          })
+        }
+
+      })
+    }
+>>>>>>> 4ef7350f8da7e4516c3ab03258728095e5f5b5ab
   },
 
   /**
@@ -117,7 +160,14 @@ Page({
   //调用支付接口
   gotoPay:function(e){
     var that = this;
+<<<<<<< HEAD
     sthat.setData({
+=======
+    //查看获取用户登录信息
+    console.log(that.data.userInfo)
+    var cost = e.target.dataset.cost
+    that.setData({
+>>>>>>> 4ef7350f8da7e4516c3ab03258728095e5f5b5ab
       loading:true
     })
   }

@@ -1,0 +1,51 @@
+{
+  "pages": [
+    "pages/redis/redis",
+    "pages/sms/sms",
+    "pages/wxpay/wxpay",
+    "pages/index/index",
+    "pages/landlord/landlord",
+    "pages/me/me",
+    "pages/detail/detail",
+    "pages/services/services",
+    "pages/myRelease/myRelease",
+    "pages/myCollect/myCollect",
+    "pages/search/search",
+    "pages/Cookies/Cookies",
+    "pages/evaluate/evaluate",
+    "pages/hmDoorplate/hmDoorplate",
+    "pages/hmBasics/hmBasics",
+    "pages/hmLease/hmLease",
+    "pages/hmArea/hmArea",
+    "pages/hmOwner/hmOwner",
+    "pages/hmLandlord/hmLandlord",
+    "pages/pay/pay"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "岷县房东",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#eeeeee",
+    "enablePullDownRefresh": true
+  },
+  "tabBar": {
+    "position": "top",
+    "list": [
+      {
+        "pagePath": "pages/redis/redis",
+        "text": "redis"
+      }, 
+      {
+        "pagePath": "pages/sms/sms",
+        "text": "sms"
+      }, 
+      {
+        "pagePath": "pages/wxpay/wxpay",
+        "text": "wxpay"
+      }
+    ]
+  },
+  
+  "debug": true
+}

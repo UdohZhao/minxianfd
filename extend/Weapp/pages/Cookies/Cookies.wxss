@@ -1,0 +1,67 @@
+.page_weui_hd{
+  position: fixed;
+  top:0;
+  left: 0;
+  width: 100%;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  color: #ff8900;
+  border-bottom: 1px solid #ddd;
+  background-color: #fff;
+  z-index: 2;
+}
+.marTop30{
+  margin-top: 30px;
+}
+.page_bd_box_tiitle{
+  padding:0 15px;
+  height: 40px;
+  line-height: 40px;
+}
+.titleTime{
+  color: #333;
+  vertical-align: middle;
+  display: inline-block;
+}
+.close{
+  float: right;
+  font-size: 20px;
+  color: #999;
+  vertical-align: middle;
+}
+.weui-media-box__desc{
+  width: 100%;
+  height: 20px;
+  line-height: 20px;
+  color: #333;
+  font-weight: 600;
+}
+.weui-media-box__desc_left{
+  display: inline-block;
+  text-align: left;
+}
+.weui-media-box__desc_right{
+  float: right;
+  font-size: 16px;
+  color: #f00;
+}
+.page_bd_box_tiitle::after{
+  border-bottom: 0.5px solid #e5e5e5;
+  content: '';
+  height: 1px;
+  display: block; 
+}
+.weui-media-box::before{
+  border: 0;
+}
+.weui-media-box{
+  border-bottom:0.5px solid #e5e5e5; 
+}
+.errorMsg{
+  width: 100%;
+  height: 200px;
+  line-height: 200px;
+  text-align: center;
+  font-size: 16px;
+}

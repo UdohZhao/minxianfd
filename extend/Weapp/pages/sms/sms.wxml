@@ -1,0 +1,19 @@
+<view class="page" xmlns:wx="http://www.w3.org/1999/xhtml">
+    <view class="page__bd">
+        <view class="weui-cells__title">测试短信通道</view>
+        <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell weui-cell_input weui-cell_vcode">
+                <view class="weui-cell__hd">
+                    <view class="weui-label sms-label">手机号</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input class="weui-input" placeholder="请输入手机号码" bindinput="getPhone" />
+                </view>
+                <view class="weui-cell__ft">
+                    <view wx:if="{{disabled == false}}" class="weui-vcode-btn" bindtap="getVerificationCode">{{time}}</view>
+                    <view wx:else class="weui-vcode-btn sms-btn">{{time}}</view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
