@@ -771,3 +771,70 @@ function randomFromDev($len)
     $result = str_replace('=', ' ', $result);
     return $result;
 }
+
+  /**
+   *
+   * 拼接签名字符串
+   * @param array $urlObj
+   *
+   * @return 返回已经拼接好的字符串
+   */
+function ToUrlParams($urlObj)
+{
+  ksort($urlObj);
+  $buff = "";
+  foreach ($urlObj as $k => $v)
+  {
+    if($k != "sign"){
+      $buff .= $k . "=" . $v . "&";
+    }
+  }
+
+  $buff = trim($buff, "&");
+  $buff = $buff . "&key=".config('key');
+  $buff = md5($buff);
+  $buff = strtoupper($buff);
+  return $buff;
+}
+
+/**
+ * 输出xml字符
+ * @throws WxPayException
+**/
+function ToXml($values)
+{
+  if(!is_array($values)
+    || count($values) <= 0)
+  {
+      throw new WxPayException("数组数据异常！");
+    }
+
+    $xml = "<xml>";
+    foreach ($values as $key=>$val)
+    {
+      if (is_numeric($val)){
+        $xml.="<".$key.">".$val."</".$key.">";
+      }else{
+        $xml.="<".$key."><![CDATA[".$val."]]></".$key.">";
+      }
+      }
+      $xml.="</xml>";
+      return $xml;
+}
+
+  /**
+   * 将xml转为array
+   * @param string $xml
+   * @throws WxPayException
+   */
+function FromXml($xml)
+{
+  if(!$xml){
+    throw new WxPayException("xml数据异常！");
+  }
+      //将XML转为array
+      //禁止引用外部xml实体
+      libxml_disable_entity_loader(true);
+      $values = json_decode(json_encode(simplexml_load_string($xml, 'SimpleXMLElement', LIBXML_NOCDATA)), true);
+  return $values;
+}

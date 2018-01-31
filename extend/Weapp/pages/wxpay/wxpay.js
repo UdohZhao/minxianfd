@@ -1,4 +1,6 @@
 // pages/wxpay/wxpay.js
+//获取应用实例
+const app = getApp()
 Page({
 
   /**
@@ -67,8 +69,57 @@ Page({
   /**
    * 微信支付
    */
-  wxpay: function (e) 
-  {
-      console.log(e);
+  wxpay: function (e) {
+    var that = this
+    // 金额
+    var total_fee = e.target.dataset.fee;
+    // 3rd_session
+    wx.request({
+      url: app.data.domain + '/WxLogin/checkRedis', 
+      data: {
+        threerd_session: wx.getStorageSync('3rd_session')
+      },
+      header: {
+          'content-type': 'application/json'
+      },
+      success: function(res) {
+        // 3rd_session
+        if (res.data.status == 1) 
+        {
+          app.threerdLogin();
+        }
+        else
+        {
+          // 小程序用户id
+          var wuid = res.data.data;
+          wx.request({
+            url: app.data.domain + '/WxPay/pay',
+            data: {
+              wuid: wuid,
+              total_fee: total_fee
+            },
+            header: {
+                'content-type': 'application/json'
+            },
+            success: function(res) {
+              var payment = res.data.data;
+              wx.requestPayment({
+                'timeStamp': payment.timeStamp,
+                'nonceStr': payment.nonceStr,
+                'package': payment.package,
+                'signType': payment.signType,
+                'paySign': payment.paySign,
+                'success':function(res){
+                  console.log(res);
+                },
+                'fail':function(e){
+                  console.log(e);
+                }
+              })
+            }
+          })
+        }
+      }
+    })
   }
 })

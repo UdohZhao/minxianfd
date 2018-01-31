@@ -6,6 +6,8 @@ use think\Controller;
  */
 class Base extends Controller
 {
+    public $wuid;
+    public $hmlrid;
     /**
      * 构造方法
      */
@@ -16,5 +18,8 @@ class Base extends Controller
       {
         $this->_auto();
       }
+      // 小程序用户id
+      $this->wuid = isset($_GET['wuid']) ? input('get.wuid') : 0;
+      $this->hmlrid = isset($_GET['hmlrid']) ? input('get.hmlrid') : 0;
     }
 }

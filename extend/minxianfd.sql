@@ -66,7 +66,7 @@ CREATE TABLE IF NOT EXISTS `minxianfd`.`hm_basics` (
   `decorate_degree` VARCHAR(25) NOT NULL COMMENT '\n装修程度？0‘其它，1‘豪华装修，2’精装修，3‘中等装修，4’简装修，5‘毛坯',
   `orientation` VARCHAR(25) NOT NULL COMMENT '\n朝向？0’南北，1‘南，2’东南，3‘东，4’西南，5’北，6‘西，7’东西，8’东北，9‘西北',
   `hm_house_type_id` INT UNSIGNED NOT NULL COMMENT '\n关联户型主键id',
-  `area` DECIMAL(5,2) UNSIGNED NOT NULL COMMENT '\nX平方米？',
+  `area` INT(5) UNSIGNED NOT NULL COMMENT '\nX平方米？',
   `ctime` INT(10) UNSIGNED NOT NULL COMMENT '\n时间',
   PRIMARY KEY (`id`),
   INDEX `fk_basics_house_type1_idx` (`hm_house_type_id` ASC),

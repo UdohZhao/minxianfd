@@ -6,8 +6,8 @@
           <!-- 遍历朝向，楼层等信息 -->
             <view class="weui-cell_input weui-cell">
               <view class="weui-btn-area">
-                <picker bindchange="bindPickerChange1" value="{{index1}}"  range="{{array1}}">
-                    <view class="labelStyle">房源类型: {{array1[index1]}}</view>
+                <picker bindchange="bindPickerChange1" value="{{housing_resource_genre_index}}"  range="{{housing_resource_genre}}">
+                    <view class="labelStyle">房源类型: {{housing_resource_genre[housing_resource_genre_index]}}</view>
                     <view class="labelRightStyle">
                       <image src='../../dist/images/down.png'></image>
                     </view>
@@ -16,8 +16,8 @@
             </view>
             <view class="weui-cell_input weui-cell">
               <view class="weui-btn-area">
-                <picker bindchange="bindPickerChange2" value="{{index2}}"  range="{{array2}}">
-                    <view class="labelStyle">装修: {{array2[index2]}}</view>
+                <picker bindchange="bindPickerChange2" value="{{decorate_degree_index}}"  range="{{decorate_degree}}">
+                    <view class="labelStyle">装修: {{decorate_degree[decorate_degree_index]}}</view>
                     <view class="labelRightStyle">
                       <image src='../../dist/images/down.png'></image>
                     </view>
@@ -26,8 +26,8 @@
             </view>
             <view class="weui-cell_input weui-cell">
               <view class="weui-btn-area">
-                <picker bindchange="bindPickerChange3" value="{{index3}}"  range="{{array3}}">
-                    <view class="labelStyle">朝向: {{array3[index3]}}</view>
+                <picker bindchange="bindPickerChange3" value="{{orientation_index}}"  range="{{orientation}}">
+                    <view class="labelStyle">朝向: {{orientation[orientation_index]}}</view>
                     <view class="labelRightStyle">
                       <image src='../../dist/images/down.png'></image>
                     </view>
@@ -61,7 +61,7 @@
         </view>
         <!-- 基础信息 结束 -->
         <view class="page__bd page__bd_spacing">
-            <button class="weui-btn mini-btn" type="primary"   formType="submit">发布房源信息</button>
+            <button class="weui-btn mini-btn" type="primary"   formType="submit">下一步</button>
         </view>
         <view class="page__bd page__bd_spacing">
             <button class="weui-btn mini-btn" type="primary" bindtap='gotoNext'>下一页</button>
