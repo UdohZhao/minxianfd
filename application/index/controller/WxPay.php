@@ -2,14 +2,12 @@
 namespace app\index\controller;
 class WxPay extends Base
 {
-    public $wuid;
     public $total_fee;
     /**
      * 构造方法
      */
     public function _auto()
     {
-        $this->wuid = isset($_GET['wuid']) ? input('get.wuid') : 0;
         $this->total_fee = isset($_GET['total_fee']) ? input('get.total_fee') : 0;
     }
 

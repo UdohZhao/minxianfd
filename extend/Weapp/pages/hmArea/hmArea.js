@@ -1,19 +1,87 @@
-var appInstance = getApp();
+var app = getApp();
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    array: ['岷阳镇', '蒲麻镇', '西寨镇', '清水乡', '梅川镇', '西江镇', '闾静镇', '十里镇', '茶埠镇', '中寨镇', '清水乡', '马坞乡', '寺沟乡', '麻子川', '秦许乡', '禾驮乡', '维新乡', '申都乡', '锁龙乡'],
-    index: 0,
+      town_village_index: 0
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.WxValidate = appInstance.wxValidate(
+    var that = this;
+
+    // 房源模块房东出租表主键id
+    that.setData({
+      hmlrid: options.hmlrid
+    })
+
+    // 请求岷县数据
+    wx.request({
+      url: app.data.domain + '/WxLogin/checkRedis', 
+      data: {
+        threerd_session: wx.getStorageSync('3rd_session')
+      },
+      header: {
+          'content-type': 'application/json'
+      },
+      success: function(res) {
+        // 3rd_session
+        if (res.data.status == 1) 
+        {
+          app.threerdLogin();
+        }
+        else
+        {
+          // 小程序用户id
+          var wuid = res.data.data;
+          //提交
+          wx.request({
+            url: app.data.domain + '/HmArea/index?wuid='+wuid,
+            data: {},
+            method: 'GET',
+            header: {
+                'content-type': 'application/json'
+            },
+            success: function (res) {
+              console.log(res);
+              // if 
+              if (res.data.status == 0) 
+              {
+                  that.setData({
+                    town_village: res.data.data.town_village,
+                    hm_min_xian_id_arr: res.data.data.hm_min_xian_id_arr
+                  })
+              }
+              else
+              {
+                  wx.showModal({
+                    title: '提示',
+                    content: '请点击确定重新载入！',
+                    showCancel: false,
+                    success: function(res) {
+                      if (res.confirm) {
+                        wx.reLaunch({
+                          url: 'pages/index/index'
+                        })
+                      }
+                    }
+                  })
+              }
+            },
+            fail: function (e) {
+              console.log(e);
+            }
+          })
+        }
+      }
+    })
+
+    // 初始化表单验证
+    that.WxValidate = app.wxValidate(
       {
         address: {
           required: true,
@@ -78,57 +146,94 @@ Page({
     
   },
   bindPickerChange3: function (e) {
+    var that = this;
     console.log('picker发送选择改变，携带值为', e.detail.value)
-    this.setData({
-      index: e.detail.value,
-      town_village: this.data.array[e.detail.value]
+    that.setData({
+      town_village_index: e.detail.value
     })
-    //获取picker的值
-    var ins = this.data.array[e.detail.value]
-    console.log('输出的是' + ins)
+    console.log(that.data.town_village_index);
+    console.log(that.data.hm_min_xian_id_arr[e.detail.value]);
   },
+  /**
+   * 表单验证
+   */
   formSubmit: function (e) {
+    var that = this;
     //提交错误描述
-    if (!this.WxValidate.checkForm(e)) {
+    if (!that.WxValidate.checkForm(e)) {
       console.log(e.detail)
-      const error = this.WxValidate.errorList[0]
+      const error = that.WxValidate.errorList[0]
       // `${error.param} : ${error.msg} `
-      wx.showToast({
-        title: `${error.msg} `,
-        image: '../../dist/images/error.png',
-        duration: 2000
+      wx.showModal({
+        title: '错误提示',
+        content: `${error.msg} `,
+        showCancel: false
       })
       return false
-    }
-    this.setData({ submitHidden: false })
-    var that = this
 
-    /*
-    * 查看获取的值
-     */
-    console.log(that.data.town_village)
-    console.log(e.detail.value.address)
-  
-    //提交
-    wx.request({
-      url: '',
-      data: {
-        town_village: that.data.town_village,
-        address: e.detail.value.address,
-      },
-      method: 'POST',
-      success: function (requestRes) {
-        that.setData({ submitHidden: true })
-        appInstance.userState.status = 0
-        wx.navigateBack({
-          delta: 1
+    } else {
+
+        // 3rd_session
+        wx.request({
+          url: app.data.domain + '/WxLogin/checkRedis', 
+          data: {
+            threerd_session: wx.getStorageSync('3rd_session')
+          },
+          header: {
+              'content-type': 'application/json'
+          },
+          success: function(res) {
+            // 3rd_session
+            if (res.data.status == 1) 
+            {
+              app.threerdLogin();
+            }
+            else
+            {
+              // 小程序用户id
+              var wuid = res.data.data;
+
+              console.log('小程序用户id：' + wuid);
+              console.log('hmlrid：' + that.data.hmlrid);
+              console.log('hm_min_xian_id：' + that.data.hm_min_xian_id_arr[that.data.town_village_index]);
+              console.log('address：' + e.detail.value.address);
+
+              //提交
+              wx.request({
+                url: app.data.domain + '/HmArea/add?wuid='+wuid+'&hmlrid='+that.data.hmlrid,
+                data: {
+                  hm_min_xian_id: that.data.hm_min_xian_id_arr[that.data.town_village_index],
+                  address: e.detail.value.address
+                },
+                method: 'POST',
+                header: {
+                    'content-type': 'application/json'
+                },
+                success: function (res) {
+                  console.log(res);
+                  // if
+                  if (res.data.data.status == 0) 
+                  {
+                      
+                  } 
+                  else
+                  {
+                      wx.showModal({
+                        title: '错误提示',
+                        content: res.data.data.msg,
+                        showCancel: false
+                      })
+                  }
+                },
+                fail: function (e) {
+                  console.log(e);
+                }
+              })
+            }
+          }
         })
-      },
-      fail: function () {
-      },
-      complete: function () {
-      }
-    })
+
+    }
 
   },
   //下一页

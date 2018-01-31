@@ -1,23 +1,25 @@
-var appInstance = getApp();
+var app = getApp();
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-        array1: ['住宅', '别墅', '写字楼', '商铺'],
-        index1: 0,
-        array2: ['毛坯', '简单装修', '中等装修', '精装修', '豪华装修',],
-        index2: 0,
-        array3: ['东', '西', '南', '北', '东南', '东北', '东西', '西南', '西北', '南北'],
-        index3: 0,
+      housing_resource_genre: ['其它', '住宅', '别墅', '写字楼', '商铺'],
+      housing_resource_genre_index: 0,
+      decorate_degree: ['其它', '豪华装修', '精装修', '中等装修', '简装修', '毛坯',],
+      decorate_degree_index: 0,
+      orientation: ['南北', '南', '东南', '东', '西南', '北', '西', '东西', '东北', '西北'],
+      orientation_index: 0
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.WxValidate = appInstance.wxValidate(
+    var that = this;
+    // 初始化表单验证
+    that.WxValidate = app.wxValidate(
       {
         habitable_room: {
           required: true,
@@ -46,7 +48,6 @@ Page({
         },
       }
       , {
-
         habitable_room: {
           required: '请输入几室',
         },
@@ -116,90 +117,115 @@ Page({
   },
   // 房源类型
   bindPickerChange1: function (e) {
+    var that = this;
     console.log('picker发送选择改变，携带值为', e.detail.value)
-    this.setData({
-      index1: e.detail.value,
-      housing_resource_genre: this.data.array1[e.detail.value]
+    that.setData({
+      housing_resource_genre_index: e.detail.value,
     })
-    //获取picker的值
-    var ins = this.data.array1[e.detail.value]
-    console.log('输出的是' + ins)
   },
   //装修
   bindPickerChange2: function (e) {
+    var that = this;
     console.log('picker发送选择改变，携带值为', e.detail.value)
-    this.setData({
-      index2: e.detail.value,
-      decorate_degree: this.data.array2[e.detail.value]
+    that.setData({
+      decorate_degree_index: e.detail.value
     })
-    //获取picker的值
-    var ins = this.data.array2[e.detail.value]
-    console.log('输出的是' + ins)
   },
   //朝向
   bindPickerChange3: function (e) {
+    var that = this;
     console.log('picker发送选择改变，携带值为', e.detail.value)
-    this.setData({
-      index3: e.detail.value,
-      orientation: this.data.array3[e.detail.value]
+    that.setData({
+      orientation_index: e.detail.value
     })
-    //获取picker的值
-    var ins = this.data.array3[e.detail.value]
-    console.log('输出的是' + ins)
   },
 
+  // 表单提交
   formSubmit: function (e) {
-    //提交错误描述
-    if (!this.WxValidate.checkForm(e)) {
+    var that = this;
+
+    // 提交错误描述
+    if (!that.WxValidate.checkForm(e)) {
       console.log(e.detail)
-      const error = this.WxValidate.errorList[0]
+      const error = that.WxValidate.errorList[0]
       // `${error.param} : ${error.msg} `
-      wx.showToast({
-        title: `${error.msg} `,
-        image: '../../dist/images/error.png',
-        duration: 2000
+      // wx.showToast({
+      //   title: `${error.msg} `,
+      //   image: '../../dist/images/error.png',
+      //   duration: 2000
+      // })
+      wx.showModal({
+        title: '错误提示',
+        content: `${error.msg} `,
+        showCancel: false
       })
       return false
+    } else {
+        // 3rd_session
+        wx.request({
+          url: app.data.domain + '/WxLogin/checkRedis', 
+          data: {
+            threerd_session: wx.getStorageSync('3rd_session')
+          },
+          header: {
+              'content-type': 'application/json'
+          },
+          success: function(res) {
+            // 3rd_session
+            if (res.data.status == 1) 
+            {
+              app.threerdLogin();
+            }
+            else
+            {
+              // 小程序用户id
+              var wuid = res.data.data;
+              //提交
+              wx.request({
+                url: app.data.domain + '/HmBasics/add?wuid='+wuid,
+                data: {
+                  housing_resource_genre: that.data.housing_resource_genre_index,
+                  decorate_degree: that.data.decorate_degree_index,
+                  orientation: that.data.orientation_index,
+                  area: e.detail.value.area,
+                  habitable_room: e.detail.value.habitable_room,
+                  living_room: e.detail.value.living_room,
+                  shower_room: e.detail.value.shower_room
+                },
+                method: 'POST',
+                header: {
+                    'content-type': 'application/json'
+                },
+                success: function (res) {
+                  console.log(res);
+                },
+                fail: function (e) {
+                  console.log(e);
+                }
+              })
+            }
+          }
+        })
     }
-    this.setData({ submitHidden: false })
-    var that = this
+
+    // that.setData({ submitHidden: false })
 
     /**
      *查看获取到的数据
      */
-    console.log(that.data.housing_resource_genre)
-    console.log(that.data.decorate_degree)
-    console.log(that.data.orientation)    
-    console.log(e.detail.value.area)
-    
-    //提交
-    wx.request({
-      url: '',
-      data: {
-        area: e.detail.value.area,
-        habitable_room: e.detail.value.habitable_room,
-        living_room: e.detail.value.living_room,
-        shower_room: e.detail.value.shower_room,
-      },
-      method: 'POST',
-      success: function (requestRes) {
-        that.setData({ submitHidden: true })
-        appInstance.userState.status = 0
-        wx.navigateBack({
-          delta: 1
-        })
-      },
-      fail: function () {
-      },
-      complete: function () {
-      }
-    })
+    // console.log(that.data.housing_resource_genre_index)
+    // console.log(that.data.decorate_degree_index)
+    // console.log(that.data.orientation_index)
+    // console.log(e.detail.value.habitable_room)
+    // console.log(e.detail.value.living_room)
+    // console.log(e.detail.value.shower_room)    
+    // console.log(e.detail.value.area)
 
   },
   //下一页
   gotoNext: function () {
     wx.redirectTo({
-      url: '/pages/hmArea/hmArea',
+      url: '/pages/hmArea/hmArea?hmlrid=1'
     })
   }
 })

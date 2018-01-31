@@ -8,7 +8,7 @@
               <view class="weui_cell_box_key">地址: </view>
               <view class="weui_cell_box_key" style='border:0.5px solid #ddd;margin-right:20px;'>岷县</view>
               <view class="weui_cell_box_key" style='border:0.5px solid #ddd;'>
-              <picker bindchange="bindPickerChange3" value="{{index}}" range="{{array}}">{{array[index]}}</picker>
+              <picker bindchange="bindPickerChange3" value="{{town_village_index}}" range="{{town_village}}">{{town_village[town_village_index]}}</picker>
               </view>
           </view>
           <view class="weui-cell weui-cell_input">
