@@ -10,7 +10,7 @@
               <view class="weui-cell__bd">
                 <view class="weui-uploader">
                   <view class="weui-uploader__hd">
-                                  <view class="weui-uploader__title">环境照片最多上传5张</view>
+                                  <view class="weui-uploader__title">环景图片最多上传5张</view>
                                   <view class="weui-uploader__info">{{files.length}}/5</view>
                   </view>
                   <view class="weui-uploader__bd">
@@ -44,7 +44,7 @@
           <!--入住时间  -->
           <view class="weui-cell_input weui-cell">
             <view class="weui-btn-area">
-              <picker bindchange="bindDateChange" value="{{date}}"  mode="date" start="2018-01-01" end="2020-09-01">
+              <picker bindchange="bindDateChange" value="{{date}}"  mode="date" start="2018-01-01" end="2020-09-01" name="in_time">
                   <view class="labelStyle">入住时间 : {{date}}</view>
                   <view class="labelRightStyle">
                     <image src='../../dist/images/down.png'></image>
