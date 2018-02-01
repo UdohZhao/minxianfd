@@ -15,7 +15,7 @@
   height:40px;
   line-height: 40px;
   text-align: center;
-  padding: 5px 0;
+  padding: 5px;
   border-bottom: 0.5px solid #ddd;
 }
 .weui_cell_box_key{

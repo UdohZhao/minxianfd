@@ -6,6 +6,10 @@
   font-size: 16px;
   padding-left:20px; 
   color: #1AAD19;
+  border-bottom: 0.5px solid #ddd;
+}
+.weui-cell::before {
+  border: 0;
 }
 .weui-input{
   text-align: right;
@@ -20,7 +24,7 @@
   float: left;
   width: 19%;
   height: 100%;
-  letter-spacing:5px;
+  letter-spacing:7px;
 }
 .weui-cell_input{
   border-bottom: 0.5px solid #ddd;
@@ -57,7 +61,7 @@
   padding:0 20px;
 }
 .huxing{
-  padding: 10px 0;
+  padding: 10px;
 }
 .w31{
   width: 31%;

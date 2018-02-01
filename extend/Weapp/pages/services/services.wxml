@@ -3,7 +3,7 @@
       <view class="page_bd">
         <!-- 房源信息 开始-->
         <view>
-          <view class="body_title border0">房源信息</view>
+          <view class="body_title ">房源信息</view>
           <!-- 上传图片 -->
           <view class="weui-cells">
             <view class="weui-cell">
@@ -55,7 +55,7 @@
           <!-- 特点 -->
           <view class="weui-cells__title">房屋特点</view>
           <view class="weui-cells weui-cells_after-title">
-              <view class="weui-cell">
+              <view class="weui-cell border0">
                 <view class="weui-cell__bd">
                     <textarea class="weui-textarea" name="trait" placeholder="请输入房屋特点" style="height: 5em" />
                 </view>
@@ -64,7 +64,7 @@
           <!-- 周边环境 -->
           <view class="weui-cells weui-cells_after-title">
           <view class="weui-cells__title">周边环境</view>
-              <view class="weui-cell">
+              <view class="weui-cell border0">
                 <view class="weui-cell__bd">
                     <textarea class="weui-textarea" name="describe" placeholder="请输入房屋周边环境" style="height: 5em" />
                 </view>

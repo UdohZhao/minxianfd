@@ -2,7 +2,6 @@ page,
 .page{
   background-color: #f1f1f1;
   width: 100%;
-  font-size: 14px;
 }
 .page_bd{
   background-color: #fff;

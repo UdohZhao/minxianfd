@@ -2,19 +2,24 @@
   <view class="page_weui_hd">我的发布</view>
   <view class="page__bd marTop30">
     <!-- 判断是否有发布 -->
-    <view wx:if="{{releaseStatus}}">
-      <view class="weui-media-box">
-        <view class="weui-media-box__desc color333">乔庄东区精品两房</view>
-        <view class="weui-media-box__desc">
-          <text class="'red'">3500元/月</text>
-          <!--状态  -->
-          <view class="rt green">未出租</view>
-        </view>
-        <view class="weui-media-box__desc">2018-01-13 04:27:42</view>
-      </view>
-    </view>
-    <view wx:else>
-      <view class="errorMsg">暂无发布~~</view>
+    <view bindtap='gotoDetail' class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
+       <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+                        <image class="weui-media-box__thumb" src="../../dist/images/1.jpg" />
+       </view>
+       <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+                        <view class="weui-media-box__title">果园习总屯精品次卧</view>
+                        <view class="weui-media-box__desc">2室1厅/86㎡/南/金科时代中心</view>
+                        <view class="weui-media-box__desc">
+                            <!-- 判断标签 -->
+                          <text class="lebalStyleDT lebalSty">地铁</text>
+                          <text class="lebalStyleSSKF lebalSty">随时看房</text>
+                          <text class="lebalStyleXSFY lebalSty">新上房源</text>
+                          <text class="lebalStyleJZX lebalSty">精装修</text>
+                          <!-- <text class="lebalStyleYCW lebalSty">有车位</text> -->
+                         
+                        </view>
+                        <view class="weui-media-box__desc red"> 2700元/月</view>
+       </view>
     </view>
   </view>
 </view>

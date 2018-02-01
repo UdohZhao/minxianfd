@@ -153,8 +153,6 @@ Page({
       ],
     ],
     tabs: ["区域", "租金","房型", "更多"],
-
-    activeIndex: 1,
     sliderOffset: 0,
     sliderLeft: 0,
     autoplay: false,
@@ -456,6 +454,7 @@ Page({
     animation.translateY(300).step()
     this.setData({
       animationData: animation.export(),
+      activeIndex:'-1'
     })
     setTimeout(function () {
       animation.translateY(0).step()
