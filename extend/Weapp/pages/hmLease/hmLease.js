@@ -1,4 +1,4 @@
-var appInstance = getApp();
+var app = getApp();
 Page({
 
   /**
@@ -32,7 +32,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.WxValidate = appInstance.wxValidate(
+    this.WxValidate = app.wxValidate(
       {
         rent: {
           required: true,
@@ -148,7 +148,7 @@ Page({
       method: 'POST',
       success: function (requestRes) {
         that.setData({ submitHidden: true })
-        appInstance.userState.status = 0
+        app.userState.status = 0
         wx.navigateBack({
           delta: 1
         })
@@ -163,7 +163,7 @@ Page({
   //下一页
   gotoNext: function () {
     wx.redirectTo({
-      url: '/pages/services/services',
+      url: '/pages/services/services?hmlrid=1',
     })
   }
 })

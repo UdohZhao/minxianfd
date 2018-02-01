@@ -210,17 +210,16 @@ Page({
                     'content-type': 'application/json'
                 },
                 success: function (res) {
-                  console.log(res);
                   // if
-                  if (res.data.data.status == 0) 
+                  if (res.data.status == 0) 
                   {
-                      console.log(res.data.data);
+                      console.log(res.data);
                   } 
                   else
                   {
                       wx.showModal({
                         title: '错误提示',
-                        content: res.data.data.msg,
+                        content: res.data.msg,
                         showCancel: false
                       })
                   }
@@ -239,7 +238,7 @@ Page({
   //下一页
   gotoNext: function () {
     wx.redirectTo({
-      url: '/pages/hmDoorplate/hmDoorplate',
+      url: '/pages/hmDoorplate/hmDoorplate?hmlrid=1',
     })
   }
 })

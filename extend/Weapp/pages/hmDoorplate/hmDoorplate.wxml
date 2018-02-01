@@ -38,7 +38,6 @@
                 <input class="input" type='number' name="total_floor"></input>
                 总楼层
               </view>
-              
             </view>
           </view>
         </view>
