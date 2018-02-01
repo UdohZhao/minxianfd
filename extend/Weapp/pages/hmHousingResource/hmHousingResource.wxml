@@ -10,7 +10,7 @@
               <view class="weui-cell__bd">
                 <view class="weui-uploader">
                   <view class="weui-uploader__hd">
-                                  <view class="weui-uploader__title">环境照片最多填5张</view>
+                                  <view class="weui-uploader__title">环境照片最多上传5张</view>
                                   <view class="weui-uploader__info">{{files.length}}/5</view>
                   </view>
                   <view class="weui-uploader__bd">

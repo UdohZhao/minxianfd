@@ -1,5 +1,5 @@
 //获取应用实例
-var appInstance = getApp();
+var app = getApp();
 Page({
   /**
    * 页面的初始数据
@@ -17,7 +17,15 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.WxValidate = appInstance.wxValidate(
+    var that = this;
+
+    // 房源模块房东出租表主键id
+    that.setData({
+      hmlrid: options.hmlrid
+    })
+
+    // 验证表单
+    that.WxValidate = app.wxValidate(
       {
         title: {
           required: true,
@@ -180,10 +188,11 @@ Page({
     })
     
   },
+
   //下一页
   gotoNext:function(){
     wx.navigateTo({
-      url: '/pages/hmOwner/hmOwner',
+      url: '/pages/hmOwner/hmOwner?hmlrid=1',
     })
   },
 

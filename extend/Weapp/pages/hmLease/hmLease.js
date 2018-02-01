@@ -285,7 +285,7 @@ Page({
   //下一页
   gotoNext: function () {
     wx.redirectTo({
-      url: '/pages/services/services?hmlrid=1',
+      url: '/pages/hmHousingResource/hmHousingResource?hmlrid=1',
     })
   }
 })
