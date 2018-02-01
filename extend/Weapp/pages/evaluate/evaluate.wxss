@@ -31,8 +31,13 @@
 }
 .detailName{
   margin-right: 20px;
+  width: 32%;
+  height: 30px;
+  overflow: hidden;
 }
-
+.detailRoom{
+  width: 15%;
+}
 .weui-panel__bd_body{
   height: 30px;
   line-height: 30px;

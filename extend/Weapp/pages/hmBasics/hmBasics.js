@@ -162,6 +162,8 @@ Page({
       return false
     } else {
         // 3rd_session
+        console.log(wx.getStorageSync('3rd_session'))
+        
         wx.request({
           url: app.data.domain + '/WxLogin/checkRedis', 
           data: {

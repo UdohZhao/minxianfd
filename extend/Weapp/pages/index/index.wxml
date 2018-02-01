@@ -17,6 +17,7 @@
     </view>
   </view>
   <!--搜索条件  -->
+
   <view class="page__bd">
         <view class="weui-tab">
             <view class="weui-navbar">
@@ -34,14 +35,14 @@
                    <view class="containerBox">
                    <!--左边内容区域  -->
                     <view class="nav_left">
-                      <block wx:for="{{navList}}">
+                      <block wx:for="{{navList}}" wx:key="k">
                         <view class="nav_list_items {{curNav == item.id ? 'active' : ''}}" bindtap='selectNav' data-index="{{index}}" data-id="{{item.id}}">{{item.name}}</view>
                       </block>
                     </view>
                       <!-- 右边显示区域 -->
                       <view class="nav_right">
                       <!-- 需要先判断 是否为空 -->
-                      <block wx:for="{{dishesList[curIndex]}}">
+                      <block wx:for="{{dishesList[curIndex]}}" wx:key="k">
                         <scroll-view class="nav_right_items" data-id="{{item.id}}" bindtap='searchTap'>{{item.name}}</scroll-view>
                       </block>  
                       </view>
