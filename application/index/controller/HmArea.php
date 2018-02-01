@@ -18,6 +18,7 @@ class HmArea extends Base
         $hm_area_id = db('hm_area')->insertGetId($dataHmarea);
         // dataHmlr
         $dataHmlr = $this->getHmlrData($hm_area_id);
+        slog($dataHmlr);
         $result = db('hm_landlord_rent')->where('id',$this->hmlrid)->update($dataHmlr);
         // if
         if ($result)
@@ -60,7 +61,6 @@ class HmArea extends Base
               $dataHmmx['town_village'][] = $v['town_village'];
               $dataHmmx['hm_min_xian_id_arr'][] = $v['id'];
           }
-          slog(Rs(0,'受影响的操作！',$dataHmmx));
           return ajaxReturn(Rs(0,'受影响的操作！',$dataHmmx));
         }
         else
