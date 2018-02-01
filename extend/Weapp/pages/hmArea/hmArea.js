@@ -214,7 +214,7 @@ Page({
                   // if
                   if (res.data.data.status == 0) 
                   {
-                      
+                      console.log(res.data.data);
                   } 
                   else
                   {
