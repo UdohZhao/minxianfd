@@ -32,18 +32,96 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.WxValidate = app.wxValidate(
+    var that = this;
+
+    // 房源模块房东出租表主键id
+    that.setData({
+      hmlrid: options.hmlrid
+    })
+
+    // 请求租赁数据
+    wx.request({
+      url: app.data.domain + '/WxLogin/checkRedis', 
+      data: {
+        threerd_session: wx.getStorageSync('3rd_session')
+      },
+      header: {
+          'content-type': 'application/json'
+      },
+      success: function(res) {
+        // 3rd_session
+        if (res.data.status == 1) 
+        {
+          app.threerdLogin();
+        }
+        else
+        {
+          // 小程序用户id
+          var wuid = res.data.data;
+          //提交
+          wx.request({
+            url: app.data.domain + '/HmLease/index?wuid='+wuid,
+            data: {},
+            method: 'GET',
+            header: {
+                'content-type': 'application/json'
+            },
+            success: function (res) {
+              // if 
+              if (res.data.status == 0) 
+              {
+                  that.setData({
+                    hm_lease_manner_cname: res.data.data.hm_lease_manner.cname,
+                    hm_lease_manner_id: res.data.data.hm_lease_manner.id,
+                    hm_lease_manner_index: 0,
+                    hm_payment_method_cname: res.data.data.hm_payment_method.cname,
+                    hm_payment_method_id: res.data.data.hm_payment_method.id,
+                    hm_payment_method_index: 0,
+                    hm_ancillary_facility: res.data.data.hm_ancillary_facility
+                  })
+              }
+              else
+              {
+                  wx.showModal({
+                    title: '提示',
+                    content: '请点击确定重新载入！',
+                    showCancel: false,
+                    success: function(res) {
+                      if (res.confirm) {
+                        wx.reLaunch({
+                          url: 'pages/index/index'
+                        })
+                      }
+                    }
+                  })
+              }
+            },
+            fail: function (e) {
+              console.log(e);
+            }
+          })
+        }
+      }
+    })
+
+    // 表单验证
+    that.WxValidate = app.wxValidate(
       {
         rent: {
           required: true,
           digits: true,
-          number: true,
-          min: 0,
+          min: 1,
         },
+        hm_ancillary_facility: {
+          required: true
+        }
       }
       , {
         rent: {
           required: '请输入期望租金',
+        },
+        hm_ancillary_facility: {
+          required: '请选择配套设施',
         },
       }
     )
@@ -97,68 +175,112 @@ Page({
   onShareAppMessage: function () {
     
   },
+
   //出租方式
   bindPickerChange1: function (e) {
-    this.setData({
-      index1: e.detail.value,
-      id1:1
+    var that = this;
+    that.setData({
+      hm_lease_manner_index: e.detail.value
     })
   },
+
   //付款方式
   bindPickerChange2: function (e) {
-    this.setData({
-      index2: e.detail.value,
-      id2: 2
+    var that = this;
+    that.setData({
+      hm_payment_method_index: e.detail.value
     })
   },
+
+  /** 
+   * 房屋配套
+   */
   checkboxChange:function(e){
     console.log('checkbox发生change事件，携带value值为：', e.detail.value)
-    this.setData({
-      hm_ancillary_facility:e.detail.value
-    })
   },
+
+  /**
+   * 验证表单
+   */
   formSubmit: function (e) {
+    var that = this;
+
     //提交错误描述
-    if (!this.WxValidate.checkForm(e)) {
+    if (!that.WxValidate.checkForm(e)) {
       console.log(e.detail)
-      const error = this.WxValidate.errorList[0]
+      const error = that.WxValidate.errorList[0]
       // `${error.param} : ${error.msg} `
-      wx.showToast({
-        title: `${error.msg} `,
-        image: '../../dist/images/error.png',
-        duration: 2000
+      wx.showModal({
+        title: '错误提示',
+        content: `${error.msg} `,
+        showCancel: false
       })
       return false
-    }
-    this.setData({ submitHidden: false })
-    var that = this
-    //提交
-    /**
-     * 查看获取到的数据
-     */
-    console.log(that.data.id1)
-    console.log(that.data.id2)
-    console.log(e.detail.value.rent)
-    console.log(that.data.hm_ancillary_facility)
-    wx.request({
-      url: '',
-      data: {
-        rent: e.detail.value.rent,
-      },
-      method: 'POST',
-      success: function (requestRes) {
-        that.setData({ submitHidden: true })
-        app.userState.status = 0
-        wx.navigateBack({
-          delta: 1
-        })
-      },
-      fail: function () {
-      },
-      complete: function () {
-      }
-    })
+    } else {
+        // 3rd_session
+        wx.request({
+          url: app.data.domain + '/WxLogin/checkRedis', 
+          data: {
+            threerd_session: wx.getStorageSync('3rd_session')
+          },
+          header: {
+              'content-type': 'application/json'
+          },
+          success: function(res) {
+            // 3rd_session
+            if (res.data.status == 1) 
+            {
+              app.threerdLogin();
+            }
+            else
+            {
+              // 小程序用户id
+              var wuid = res.data.data;
 
+              console.log('小程序用户id：' + wuid);
+              console.log('hmlrid：' + that.data.hmlrid);
+              console.log('hm_lease_manner_id：' + that.data.hm_lease_manner_id[e.detail.value.hm_lease_manner_index]);
+              console.log('hm_payment_method_id：' + that.data.hm_payment_method_id[e.detail.value.hm_payment_method_index]);
+              console.log('hm_ancillary_facility：' + e.detail.value.hm_ancillary_facility.toString());
+              console.log('rent：' + e.detail.value.rent);
+
+              //提交
+              wx.request({
+                url: app.data.domain + '/HmLease/add?wuid='+wuid+'&hmlrid='+that.data.hmlrid,
+                data: {
+                  hm_lease_manner_id: that.data.hm_lease_manner_id[e.detail.value.hm_lease_manner_index],
+                  hm_payment_method_id: that.data.hm_payment_method_id[e.detail.value.hm_payment_method_index],
+                  hm_ancillary_facility: e.detail.value.hm_ancillary_facility.toString(),
+                  rent: e.detail.value.rent
+                },
+                method: 'POST',
+                header: {
+                    'content-type': 'application/json'
+                },
+                success: function (res) {
+                  // if
+                  if (res.data.status == 0) 
+                  {
+                      console.log(res.data);
+                  } 
+                  else
+                  {
+                      wx.showModal({
+                        title: '错误提示',
+                        content: res.data.msg,
+                        showCancel: false
+                      })
+                  }
+                },
+                fail: function (e) {
+                  console.log(e);
+                }
+              })
+            }
+          }
+        })
+
+    }
   },
   //下一页
   gotoNext: function () {

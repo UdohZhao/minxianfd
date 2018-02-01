@@ -6,8 +6,8 @@
           <!-- 需要单独设定租出方式 付款方式 配套设施等 -->
             <view class="weui-cell_input weui-cell">
               <view class="weui-btn-area">
-                <picker bindchange="bindPickerChange1" value="{{index1}}"  range="{{array1}}">
-                    <view class="labelStyle">出租方式 : {{array1[index1]}}</view>
+                <picker bindchange="bindPickerChange1" value="{{hm_lease_manner_index}}"  range="{{hm_lease_manner_cname}}" name="hm_lease_manner_index">
+                    <view class="labelStyle">出租方式 : {{hm_lease_manner_cname[hm_lease_manner_index]}}</view>
                     <view class="labelRightStyle">
                       <image src='../../dist/images/down.png'></image>
                     </view>
@@ -16,8 +16,8 @@
             </view>
             <view class="weui-cell_input weui-cell">
               <view class="weui-btn-area">
-                <picker bindchange="bindPickerChange2" value="{{index2}}"  range="{{array2}}">
-                    <view class="labelStyle">付款方式 : {{array2[index2]}}</view>
+                <picker bindchange="bindPickerChange2" value="{{hm_payment_method_index}}"  range="{{hm_payment_method_cname}}" name="hm_payment_method_index">
+                    <view class="labelStyle">付款方式 : {{hm_payment_method_cname[hm_payment_method_index]}}</view>
                     <view class="labelRightStyle">
                       <image src='../../dist/images/down.png'></image>
                     </view>
@@ -26,7 +26,7 @@
             </view>
           <view class="weui-cell weui-cell_input">
             <view class="weui-cell__hd">
-              <view class="weui-label">期望价格</view>
+              <view class="weui-label">期望价格：</view>
             </view>
             <view class="weui-cell__bd posR">
               <input class="weui-input picStyle" name="rent"  placeholder="请输入价格"/>
@@ -35,9 +35,9 @@
           </view>
           <view class="weui_cell pad15">
             <view class="weui-btn-area">配套设施</view>
-            <checkbox-group bindchange="checkboxChange">
-              <label class="checkbox" wx:for="{{items}}">
-                <checkbox value="{{item.name}}" checked="{{item.checked}}"  />{{item.value}}
+            <checkbox-group bindchange="checkboxChange" name="hm_ancillary_facility">
+              <label class="checkbox" wx:for="{{hm_ancillary_facility}}" wx:key="index">
+                <checkbox value="{{item.cname}}" checked="{{item.checked}}"  />{{item.cname}}
               </label>
             </checkbox-group>
           </view>
