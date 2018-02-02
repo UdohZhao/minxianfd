@@ -39,13 +39,13 @@
         "text": "index",
         "iconPath": "dist/images/icon/emoji-1.png",
         "selectedIconPath": "dist/images/icon/emoji-1.png"
-      }, 
+      },
       {
         "pagePath": "pages/landlord/landlord",
         "text": "landlord",
         "iconPath": "dist/images/icon/emoji-2.png",
         "selectedIconPath": "dist/images/icon/emoji-2.png"
-      }, 
+      },
       {
         "pagePath": "pages/me/me",
         "text": "me",
@@ -54,6 +54,5 @@
       }
     ]
   },
-  
   "debug": true
 }

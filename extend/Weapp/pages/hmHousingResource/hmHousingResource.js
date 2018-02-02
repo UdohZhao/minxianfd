@@ -5,12 +5,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-    
-    //验证码倒计时
-    verifyCodeTime:'获取验证码',
     //上传图片信息
     files: [],
-    formdata: '',  
+    upFliles: []
   },
 
   /**
@@ -120,14 +117,77 @@ Page({
     if (that.data.files.length < 5) {  
 
       wx.chooseImage({
+        count: 1, // 默认9
         sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
         sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
         success: function (res) {
-          // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
-          that.setData({
-            files: that.data.files.concat(res.tempFilePaths)
-          });
-          console.log(that.data.files.concat(res.tempFilePaths))
+          var tempFilePaths = res.tempFilePaths
+            
+          // 3rd_session
+          wx.request({
+            url: app.data.domain + '/WxLogin/checkRedis', 
+            data: {
+              threerd_session: wx.getStorageSync('3rd_session')
+            },
+            header: {
+                'content-type': 'application/json'
+            },
+            success: function(res) {
+
+              // 3rd_session
+              if (res.data.status == 1) {
+
+                app.threerdLogin();
+
+              } else {
+
+                // 小程序用户id
+                var wuid = res.data.data;
+
+                // 友好提示
+                wx.showToast({
+                  icon: "loading",
+                  title: "正在上传"
+                });
+
+                // 上传
+                wx.uploadFile({
+                  url: app.data.domain + '/HmHousingResource/upFliles',
+                  filePath: tempFilePaths[0],
+                  name: 'file',
+                  success: function(res){
+                    var data = JSON.parse(res.data);
+                    // if 
+                    if (data.status == 0) {
+                      that.setData({
+                        files: that.data.files.concat(tempFilePaths),
+                        upFliles: that.data.upFliles.concat(data.data)
+                      });
+                    } else {
+                      wx.showModal({
+                        title: '错误提示',
+                        content: data.msg,
+                        showCancel: false
+                      })
+                    }
+                  },
+                  fail: function (e) {
+                    console.log(e);
+                    wx.showModal({
+                      title: '提示',
+                      content: '上传失败',
+                      showCancel: false
+                    })
+                  },
+                  complete: function () {
+                    wx.hideToast();  //隐藏Toast
+                  }
+                })
+
+              }
+            }
+          })
+
         }
       })
 
@@ -140,6 +200,7 @@ Page({
       })
 
     }  
+
   },
   
   /**
@@ -179,7 +240,7 @@ Page({
 
       return false;
 
-    } else if (that.data.files.toString() == '') {
+    } else if (that.data.upFliles.toString() == '') {
 
       wx.showModal({
         title: '错误提示',
@@ -191,8 +252,8 @@ Page({
 
     } else {
 
-      console.log(that.data.files.toString());
       console.log(e.detail);
+      console.log(that.data.upFliles);
 
       // 3rd_session
       wx.request({
@@ -222,7 +283,8 @@ Page({
                 title: e.detail.value.title,
                 describe: e.detail.value.describe,
                 trait: e.detail.value.trait,
-                in_time: e.detail.value.in_time
+                in_time: e.detail.value.in_time,
+                path: that.data.upFliles.toString()
               },
               method: 'POST',
               header: {

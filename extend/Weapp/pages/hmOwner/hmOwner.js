@@ -1,4 +1,4 @@
-var appInstance = getApp();
+var app = getApp();
 Page({
 
   /**
@@ -12,7 +12,35 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+    var that = this;
+
+    // 房源模块房东出租表主键id
+    that.setData({
+      hmlrid: options.hmlrid
+    })
+
+    // 初始化表单验证
+    that.WxValidate = app.wxValidate(
+      {
+        demand: {
+          required: true,
+          minlength: 2
+        },
+        description: {
+          required: true,
+          minlength: 2
+        }
+      }
+      , {
+        demand: {
+          required: '请输入对业主的要求',
+        },
+        description: {
+          required: '请输入对业主的描述',
+        }
+      }
+    )
+
   },
 
   /**
@@ -63,53 +91,98 @@ Page({
   onShareAppMessage: function () {
     
   },
+
+  /**
+   * 提交表单
+   */
   formSubmit: function (e) {
+    var that = this;
     //提交错误描述
-    if (!this.WxValidate.checkForm(e)) {
+    if (!that.WxValidate.checkForm(e)) {
+
       console.log(e.detail)
-      const error = this.WxValidate.errorList[0]
+      const error = that.WxValidate.errorList[0]
       // `${error.param} : ${error.msg} `
-      wx.showToast({
-        title: `${error.msg} `,
-        image: '../../dist/images/error.png',
-        duration: 2000
+      wx.showModal({
+        title: '错误提示',
+        content: `${error.msg} `,
+        showCancel: false
       })
+
       return false
+
+    } else {
+
+      console.log(that.data.hmlrid);
+      console.log(e.detail.value);
+
+      // 3rd_session
+      wx.request({
+        url: app.data.domain + '/WxLogin/checkRedis', 
+        data: {
+          threerd_session: wx.getStorageSync('3rd_session')
+        },
+        header: {
+            'content-type': 'application/json'
+        },
+        success: function(res) {
+          // 3rd_session
+          if (res.data.status == 1) 
+          {
+            app.threerdLogin();
+          }
+          else
+          {
+
+            // 小程序用户id
+            var wuid = res.data.data;
+
+            console.log('小程序用户id：' + wuid);
+            console.log('hmlrid：' + that.data.hmlrid);
+            console.log('demand：' + e.detail.value.demand);
+            console.log('description：' + e.detail.value.description);
+
+            //提交
+            wx.request({
+              url: app.data.domain + '/HmOwner/add?wuid='+wuid+'&hmlrid='+that.data.hmlrid,
+              data: {
+                demand: e.detail.value.demand,
+                description: e.detail.value.description
+              },
+              method: 'POST',
+              header: {
+                  'content-type': 'application/json'
+              },
+              success: function (res) {
+                // if
+                if (res.data.status == 0) 
+                {
+                    console.log(res.data);
+                } 
+                else
+                {
+                    wx.showModal({
+                      title: '错误提示',
+                      content: res.data.msg,
+                      showCancel: false
+                    })
+                }
+              },
+              fail: function (e) {
+                console.log(e);
+              }
+            })
+          }
+        }
+      })
+
     }
-    this.setData({ submitHidden: false })
-    var that = this
-    //提交
-    /**
-     * 查看获取到的数据
-     */
-    console.log(that.data.id1)
-    console.log(that.data.id2)
-    console.log(e.detail.value.rent)
-    console.log(that.data.hm_ancillary_facility)
-    wx.request({
-      url: '',
-      data: {
-        rent: e.detail.value.rent,
-      },
-      method: 'POST',
-      success: function (requestRes) {
-        that.setData({ submitHidden: true })
-        appInstance.userState.status = 0
-        wx.navigateBack({
-          delta: 1
-        })
-      },
-      fail: function () {
-      },
-      complete: function () {
-      }
-    })
 
   },
   //下一页
   gotoNext: function () {
     wx.redirectTo({
-      url: '/pages/hmLandlord/hmLandlord',
+      url: '/pages/hmLandlord/hmLandlord?hmlrid=1',
     })
   }
 })

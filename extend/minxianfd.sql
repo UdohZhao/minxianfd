@@ -235,35 +235,27 @@ COMMENT = '房源租赁信息表';
 -- -----------------------------------------------------
 -- Table `minxianfd`.`hm_view_images`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `minxianfd`.`hm_view_images` (
-  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '\n主键id',
-  `path` VARCHAR(255) NULL COMMENT '\n路径',
-  `sort` TINYINT(3) UNSIGNED NOT NULL COMMENT '\n排序？数字越小越靠前',
-  `ctime` INT(10) UNSIGNED NOT NULL COMMENT '\n时间',
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB
-COMMENT = '房源环景图片表';
+CREATE TABLE `hm_view_images` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '\n主键id',
+  `path` varchar(255) CHARACTER SET utf8mb4 DEFAULT NULL COMMENT '\n路径',
+  `ctime` int(10) unsigned NOT NULL COMMENT '\n时间',
+  `hm_housing_resource_id` int(10) unsigned NOT NULL COMMENT '关联房源信息表主键id',
+  PRIMARY KEY (`id`),
+  KEY `fk_hm_view_images_hm_housing_resource1_idx` (`hm_housing_resource_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='房源环景图片表'
 
 
 -- -----------------------------------------------------
 -- Table `minxianfd`.`hm_housing_resource`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `minxianfd`.`hm_housing_resource` (
-  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '\n主键id',
-  `title` VARCHAR(255) NOT NULL COMMENT '\n标题',
-  `describe` TEXT(20000) NOT NULL COMMENT '\n描述',
-  `trait` VARCHAR(255) NOT NULL COMMENT '\n特点',
-  `hm_view_images_id` INT UNSIGNED NOT NULL COMMENT '\n关联房源环景图片表主键id',
-  `in_time` VARCHAR(45) NOT NULL COMMENT '\n入住时间',
-  PRIMARY KEY (`id`),
-  INDEX `fk_hm_housing_resource_hm_view_images1_idx` (`hm_view_images_id` ASC),
-  CONSTRAINT `fk_hm_housing_resource_hm_view_images1`
-    FOREIGN KEY (`hm_view_images_id`)
-    REFERENCES `minxianfd`.`hm_view_images` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB
-COMMENT = '房源信息表';
+CREATE TABLE `hm_housing_resource` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '\n主键id',
+  `title` varchar(255) CHARACTER SET utf8mb4 NOT NULL COMMENT '\n标题',
+  `describe` mediumtext CHARACTER SET utf8mb4 NOT NULL COMMENT '\n描述',
+  `trait` varchar(255) CHARACTER SET utf8mb4 NOT NULL COMMENT '\n特点',
+  `in_time` varchar(45) CHARACTER SET utf8mb4 NOT NULL COMMENT '\n入住时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='房源信息表'
 
 
 -- -----------------------------------------------------

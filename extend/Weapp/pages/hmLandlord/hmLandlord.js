@@ -1,24 +1,35 @@
-var appInstance = getApp();
+const app = getApp();
+var interval = null //倒计时函数
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    //验证码倒计时
-    verifyCodeTime: '获取验证码',
+    disabled: false,
+    time: '获取验证码', //倒计时  
+    currentTime:61,
+    phone: false
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.WxValidate = appInstance.wxValidate(
+    var that = this;
+
+    // 房源模块房东出租表主键id
+    that.setData({
+      hmlrid: options.hmlrid
+    })
+
+    // 初始化表单
+    that.WxValidate = app.wxValidate(
       {
         cname: {
           required: true,
           minlength: 2,
-          maxlength: 10,
+          maxlength: 10
         },
         phone:{
           required: true,
@@ -27,10 +38,10 @@ Page({
       }
       , {
         cname: {
-          required: '请输入姓名',
+          required: '请输入姓名！',
         },
         phone:{
-          required: '请输入移动电话',
+          required: '请输入有效的手机号码！',
         }
       }
     )
@@ -83,41 +94,128 @@ Page({
    */
   onShareAppMessage: function () {
     
-  },
-  //获取短信验证码
-  mobileInputEvent: function (e) {
-    this.setData({
-      mobile: e.detail.value
+  }, 
+
+  // 获取用户输入的手机号码
+  getInputPhone: function(e){
+    var that = this;
+    that.setData({
+      phone: e.detail.value
     })
   },
-  verifyCodeEvent: function (e) {
-    if (this.data.buttonDisable) return false;
+
+  // 获取用户输入的验证码
+  getInputCode: function(e){
     var that = this;
-    var c = 60;
-    var intervalId = setInterval(function () {
-      c = c - 1;
+    that.setData({
+      code: e.detail.value
+    })
+  },
+
+  // 获取短信验证码
+  getCode: function (options){
+    var that = this;
+    var currentTime = that.data.currentTime
+    interval = setInterval(function () {
+      currentTime--;
       that.setData({
-        verifyCodeTime: c + 's后重发',
-        buttonDisable: true
+        time: "剩余" + currentTime + '秒'
       })
-      if (c == 0) {
-        clearInterval(intervalId);
+      if (currentTime <= 0) {
+        clearInterval(interval)
         that.setData({
-          verifyCodeTime: '获取验证码',
-          buttonDisable: false
+          time: '重新发送',
+          currentTime:61,
+          disabled: false   
         })
       }
-    }, 1000)
-    var mobile = this.data.mobile;
-    var regMobile = /^1\d{10}$/;
-    if (!regMobile.test(mobile)) {
-      wx.showToast({
-        title: '手机号有误！'
-      })
-      return false;
-    }
-    app.sendVerifyCode(function () { }, mobile);//获取短信验证码接口
+    }, 1000)  
   },
+
+  /**
+   * 获取验证码
+   */
+  getVerificationCode: function (e) {
+    var that = this
+    // if
+    if (that.isPoneAvailable(that.data.phone)) 
+    {
+      that.getCode();
+      that.setData({
+        disabled:true
+      })
+      // 发送短信验证码
+      wx.request({
+        url: app.data.domain + '/Sms/send',
+        data: {
+          phone: that.data.phone
+        },
+        header: {
+            'content-type': 'application/json'
+        },
+        method: 'POST',
+        success: function (res) {
+          console.log(res.data)
+        },
+        fail: function (e) {
+          console.log(e);
+        }
+      })
+    }
+    else
+    {
+      wx.showModal({
+        title: '错误提示',
+        content: '请输入有效的手机号码！',
+        showCancel: false
+      })
+    }
+  },
+
+   // phone check
+  isPoneAvailable: function (pone) {  
+    var myreg = /^[1][3,4,5,7,8][0-9]{9}$/;  
+    if (!myreg.test(pone)) {  
+      return false;  
+    } else {  
+      return true;  
+    }  
+  },
+
+  // //获取短信验证码
+  // mobileInputEvent: function (e) {
+  //   this.setData({
+  //     mobile: e.detail.value
+  //   })
+  // },
+  // verifyCodeEvent: function (e) {
+  //   if (this.data.buttonDisable) return false;
+  //   var that = this;
+  //   var c = 60;
+  //   var intervalId = setInterval(function () {
+  //     c = c - 1;
+  //     that.setData({
+  //       verifyCodeTime: c + 's后重发',
+  //       buttonDisable: true
+  //     })
+  //     if (c == 0) {
+  //       clearInterval(intervalId);
+  //       that.setData({
+  //         verifyCodeTime: '获取验证码',
+  //         buttonDisable: false
+  //       })
+  //     }
+  //   }, 1000)
+  //   var mobile = this.data.mobile;
+  //   var regMobile = /^1\d{10}$/;
+  //   if (!regMobile.test(mobile)) {
+  //     wx.showToast({
+  //       title: '手机号有误！'
+  //     })
+  //     return false;
+  //   }
+  //   app.sendVerifyCode(function () { }, mobile);//获取短信验证码接口
+  // },
 
   formSubmit: function (e) {
     //提交错误描述

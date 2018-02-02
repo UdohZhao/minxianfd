@@ -18,7 +18,6 @@ class HmArea extends Base
         $hm_area_id = db('hm_area')->insertGetId($dataHmarea);
         // dataHmlr
         $dataHmlr = $this->getHmlrData($hm_area_id);
-        slog($dataHmlr);
         $result = db('hm_landlord_rent')->where('id',$this->hmlrid)->update($dataHmlr);
         // if
         if ($result)
