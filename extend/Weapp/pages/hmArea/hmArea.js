@@ -65,7 +65,7 @@ Page({
                     success: function(res) {
                       if (res.confirm) {
                         wx.reLaunch({
-                          url: 'pages/index/index'
+                          url: '/pages/index/index'
                         })
                       }
                     }
@@ -212,17 +212,16 @@ Page({
                 },
                 success: function (res) {
                   // if
-                  if (res.data.status == 0) 
-                  {
-                      console.log(res.data);
-                  } 
-                  else
-                  {
-                      wx.showModal({
-                        title: '错误提示',
-                        content: res.data.msg,
-                        showCancel: false
-                      })
+                  if (res.data.status == 0) {
+                    wx.redirectTo({
+                      url: '/pages/hmDoorplate/hmDoorplate?hmlrid=' + res.data.data
+                    })
+                  } else {
+                    wx.showModal({
+                      title: '错误提示',
+                      content: res.data.msg,
+                      showCancel: false
+                    })
                   }
                 },
                 fail: function (e) {

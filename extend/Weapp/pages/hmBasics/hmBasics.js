@@ -146,6 +146,7 @@ Page({
 
     // 提交错误描述
     if (!that.WxValidate.checkForm(e)) {
+
       console.log(e.detail)
       const error = that.WxValidate.errorList[0]
       // `${error.param} : ${error.msg} `
@@ -159,8 +160,11 @@ Page({
         content: `${error.msg} `,
         showCancel: false
       })
+
       return false
+
     } else {
+
         // 3rd_session
         console.log(wx.getStorageSync('3rd_session'))
         
@@ -199,7 +203,18 @@ Page({
                     'content-type': 'application/json'
                 },
                 success: function (res) {
-                  console.log(res);
+                  // if
+                  if (res.data.status == 0) {
+                    wx.redirectTo({
+                      url: '/pages/hmArea/hmArea?hmlrid=' + res.data.data
+                    })
+                  } else {
+                    wx.showModal({
+                      title: '错误提示',
+                      content: res.data.msg,
+                      showCancel: false
+                    })
+                  }
                 },
                 fail: function (e) {
                   console.log(e);
@@ -209,19 +224,6 @@ Page({
           }
         })
     }
-
-    // that.setData({ submitHidden: false })
-
-    /**
-     *查看获取到的数据
-     */
-    // console.log(that.data.housing_resource_genre_index)
-    // console.log(that.data.decorate_degree_index)
-    // console.log(that.data.orientation_index)
-    // console.log(e.detail.value.habitable_room)
-    // console.log(e.detail.value.living_room)
-    // console.log(e.detail.value.shower_room)    
-    // console.log(e.detail.value.area)
 
   },
   //下一页

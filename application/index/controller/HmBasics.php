@@ -24,6 +24,7 @@ class HmBasics extends Base
         // if
         if ($hm_landlord_rent_id)
         {
+            slog(Rs(0,'受影响的操作！',$hm_landlord_rent_id));
             return ajaxReturn(Rs(0,'受影响的操作！',$hm_landlord_rent_id));
         }
         else

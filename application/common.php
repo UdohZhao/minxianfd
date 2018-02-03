@@ -838,3 +838,11 @@ function FromXml($xml)
       $values = json_decode(json_encode(simplexml_load_string($xml, 'SimpleXMLElement', LIBXML_NOCDATA)), true);
   return $values;
 }
+
+/**
+* 生成唯一订单号
+*
+*/
+function build_order_no(){
+    return date('Ymd').substr(implode(NULL, array_map('ord', str_split(substr(uniqid(), 7, 13), 1))), 0, 8);
+}

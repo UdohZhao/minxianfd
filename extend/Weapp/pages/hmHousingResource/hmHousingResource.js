@@ -291,7 +291,21 @@ Page({
                   'content-type': 'application/json'
               },
               success: function (res) {
-                console.log(res);
+                // if
+                if (res.data.status == 0) 
+                {
+                    wx.redirectTo({
+                      url: '/pages/hmOwner/hmOwner?hmlrid=' + res.data.data
+                    })
+                } 
+                else
+                {
+                    wx.showModal({
+                      title: '错误提示',
+                      content: res.data.msg,
+                      showCancel: false
+                    })
+                }
               },
               fail: function (e) {
                 console.log(e);

@@ -239,8 +239,8 @@ Page({
 
               console.log('小程序用户id：' + wuid);
               console.log('hmlrid：' + that.data.hmlrid);
-              console.log('hm_lease_manner_id：' + that.data.hm_lease_manner_id[e.detail.value.hm_lease_manner_index]);
-              console.log('hm_payment_method_id：' + that.data.hm_payment_method_id[e.detail.value.hm_payment_method_index]);
+              console.log('hm_lease_manner：' + that.data.hm_lease_manner_cname[e.detail.value.hm_lease_manner_index]);
+              console.log('hm_payment_method：' + that.data.hm_payment_method_cname[e.detail.value.hm_payment_method_index]);
               console.log('hm_ancillary_facility：' + e.detail.value.hm_ancillary_facility.toString());
               console.log('rent：' + e.detail.value.rent);
 
@@ -248,8 +248,8 @@ Page({
               wx.request({
                 url: app.data.domain + '/HmLease/add?wuid='+wuid+'&hmlrid='+that.data.hmlrid,
                 data: {
-                  hm_lease_manner_id: that.data.hm_lease_manner_id[e.detail.value.hm_lease_manner_index],
-                  hm_payment_method_id: that.data.hm_payment_method_id[e.detail.value.hm_payment_method_index],
+                  hm_lease_manner: that.data.hm_lease_manner_cname[e.detail.value.hm_lease_manner_index],
+                  hm_payment_method: that.data.hm_payment_method_cname[e.detail.value.hm_payment_method_index],
                   hm_ancillary_facility: e.detail.value.hm_ancillary_facility.toString(),
                   rent: e.detail.value.rent
                 },
@@ -261,7 +261,9 @@ Page({
                   // if
                   if (res.data.status == 0) 
                   {
-                      console.log(res.data);
+                      wx.redirectTo({
+                        url: '/pages/hmHousingResource/hmHousingResource?hmlrid=' + res.data.data
+                      })
                   } 
                   else
                   {

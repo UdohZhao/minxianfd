@@ -51,6 +51,12 @@
         "text": "me",
         "iconPath": "dist/images/icon/emoji-3.png",
         "selectedIconPath": "dist/images/icon/emoji-3.png"
+      },
+      {
+        "pagePath": "pages/pay/pay",
+        "text": "pay",
+        "iconPath": "dist/images/icon/emoji-3.png",
+        "selectedIconPath": "dist/images/icon/emoji-3.png"
       }
     ]
   },
