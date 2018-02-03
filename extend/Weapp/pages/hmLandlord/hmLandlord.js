@@ -34,6 +34,9 @@ Page({
         phone:{
           required: true,
           tel:true
+        },
+        code:{
+          required: true
         }
       }
       , {
@@ -42,6 +45,9 @@ Page({
         },
         phone:{
           required: '请输入有效的手机号码！',
+        },
+        code:{
+          required: '验证码不能为空！',
         }
       }
     )
@@ -144,23 +150,66 @@ Page({
       that.setData({
         disabled:true
       })
-      // 发送短信验证码
+
+      // 3rd_session
       wx.request({
-        url: app.data.domain + '/Sms/send',
+        url: app.data.domain + '/WxLogin/checkRedis', 
         data: {
-          phone: that.data.phone
+          threerd_session: wx.getStorageSync('3rd_session')
         },
         header: {
             'content-type': 'application/json'
         },
-        method: 'POST',
-        success: function (res) {
-          console.log(res.data)
-        },
-        fail: function (e) {
-          console.log(e);
+        success: function(res) {
+          // 3rd_session
+          if (res.data.status == 1) 
+          {
+            app.threerdLogin();
+          }
+          else
+          {
+            // 小程序用户id
+            var wuid = res.data.data;
+
+            console.log('小程序用户id：' + wuid);
+            console.log('hmlrid：' + that.data.hmlrid);
+            console.log('phone：' + that.data.phone);
+
+            //提交
+            wx.request({
+              url: app.data.domain + '/Sms/send?wuid='+wuid+'&hmlrid='+that.data.hmlrid,
+              data: {
+                phone: that.data.phone
+              },
+              method: 'POST',
+              header: {
+                  'content-type': 'application/json'
+              },
+              success: function (res) {
+                // if
+                if (res.data.status == 0) 
+                {
+                    that.setData({
+                      smsCode: res.data.data
+                    })
+                } 
+                else
+                {
+                    wx.showModal({
+                      title: '错误提示',
+                      content: res.data.msg,
+                      showCancel: false
+                    })
+                }
+              },
+              fail: function (e) {
+                console.log(e);
+              }
+            })
+          }
         }
       })
+
     }
     else
     {
@@ -182,99 +231,94 @@ Page({
     }  
   },
 
-  // //获取短信验证码
-  // mobileInputEvent: function (e) {
-  //   this.setData({
-  //     mobile: e.detail.value
-  //   })
-  // },
-  // verifyCodeEvent: function (e) {
-  //   if (this.data.buttonDisable) return false;
-  //   var that = this;
-  //   var c = 60;
-  //   var intervalId = setInterval(function () {
-  //     c = c - 1;
-  //     that.setData({
-  //       verifyCodeTime: c + 's后重发',
-  //       buttonDisable: true
-  //     })
-  //     if (c == 0) {
-  //       clearInterval(intervalId);
-  //       that.setData({
-  //         verifyCodeTime: '获取验证码',
-  //         buttonDisable: false
-  //       })
-  //     }
-  //   }, 1000)
-  //   var mobile = this.data.mobile;
-  //   var regMobile = /^1\d{10}$/;
-  //   if (!regMobile.test(mobile)) {
-  //     wx.showToast({
-  //       title: '手机号有误！'
-  //     })
-  //     return false;
-  //   }
-  //   app.sendVerifyCode(function () { }, mobile);//获取短信验证码接口
-  // },
-
+  /**
+   * 表单验证
+   */
   formSubmit: function (e) {
+    var that = this;
     //提交错误描述
-    if (!this.WxValidate.checkForm(e)) {
+    if (!that.WxValidate.checkForm(e)) {
       console.log(e.detail)
-      const error = this.WxValidate.errorList[0]
+      const error = that.WxValidate.errorList[0]
       // `${error.param} : ${error.msg} `
-      wx.showToast({
-        title: `${error.msg} `,
-        image: '../../dist/images/error.png',
-        duration: 2000
+      wx.showModal({
+        title: '错误提示',
+        content: `${error.msg} `,
+        showCancel: false
       })
-      return false
-    }
-    this.setData({ submitHidden: false })
-    var that = this
-    /*
-    *  提交
-    *  查看提交内容
-    */
-    console.log(e.detail.value.describe)
-    console.log(e.detail.value.title)
-    console.log(e.detail.value.trait)
-    console.log(that.data.files)
-    // picker的值
-    console.log(this.data.date)
-    
-    /*
-     * 发起请求
-     * 
-     */
-    wx.request({
-      url: 'https://127.0.0.1',
-      data: {
-        describe: e.detail.value.describe,
-        title: e.detail.value.title,
-        trait: e.detail.value.trait,
-        hm_view_images_id: that.data.files,
-        in_time: this.data.date,
-      },
-      method: 'POST',
-      success: function (requestRes) {
-         // 提示是否推广
-          wx.showModal({
-            title: '是否置顶推广',
-            success: function (res) {
-              if (res.confirm) {
-                wx.navigateTo({
-                  url: '/pages/pay/pay',
-                })
-              }
-            }
-          })
-      },
-      fail: function (res) {
-    
-      },
 
-    })
+      return false
+
+    } else if (that.data.code != that.data.smsCode) {
+
+      wx.showModal({
+        title: '错误提示',
+        content: '验证码错误！',
+        showCancel: false
+      })
+
+    } else {
+
+      // 3rd_session
+      wx.request({
+        url: app.data.domain + '/WxLogin/checkRedis', 
+        data: {
+          threerd_session: wx.getStorageSync('3rd_session')
+        },
+        header: {
+            'content-type': 'application/json'
+        },
+        success: function(res) {
+          // 3rd_session
+          if (res.data.status == 1) 
+          {
+            app.threerdLogin();
+          }
+          else
+          {
+            // 小程序用户id
+            var wuid = res.data.data;
+
+            console.log('小程序用户id：' + wuid);
+            console.log('hmlrid：' + that.data.hmlrid);
+            console.log('cname：' + e.detail.value.cname);
+            console.log('phone：' + e.detail.value.phone);
+
+            //提交
+            wx.request({
+              url: app.data.domain + '/HmLandlord/add?wuid='+wuid+'&hmlrid='+that.data.hmlrid,
+              data: {
+                cname: e.detail.value.cname,
+                phone: e.detail.value.phone
+              },
+              method: 'POST',
+              header: {
+                  'content-type': 'application/json'
+              },
+              success: function (res) {
+                // if
+                if (res.data.status == 0) 
+                {
+                    console.log(res.data);
+                } 
+                else
+                {
+                    wx.showModal({
+                      title: '错误提示',
+                      content: res.data.msg,
+                      showCancel: false
+                    })
+                }
+              },
+              fail: function (e) {
+                console.log(e);
+              }
+            })
+          }
+        }
+      })
+
+    }
 
   },
   //跳转到支付页面

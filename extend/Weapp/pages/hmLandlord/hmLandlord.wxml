@@ -24,7 +24,7 @@
                 <view class="weui-label sms-label">验证码</view>
             </view>
             <view class="weui-cell__bd">
-                <input class="weui-input" placeholder="请输入验证码" bindinput="getInputCode"/>
+                <input class="weui-input" name="code" placeholder="请输入验证码" bindinput="getInputCode"/>
             </view>
             <view class="weui-cell__ft">
                 <view wx:if="{{disabled == false}}" class="weui-vcode-btn sms-btn" bindtap="getVerificationCode">{{time}}</view>
