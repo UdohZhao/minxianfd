@@ -17,8 +17,7 @@ Page({
 
     // 房源模块房东出租表主键id
     that.setData({
-      // hmlrid: options.hmlrid
-      hmlrid: 1
+      hmlrid: options.hmlrid
     })
 
     // 请求岷县数据
@@ -200,6 +199,40 @@ Page({
                   'paySign': payment.paySign,
                   'success':function(res){
                     console.log(res);
+                    // if 
+                    if (res.errMsg == 'requestPayment:ok') {
+                        wx.reLaunch({
+                          url: '/pages/success/success?hmlrid=' + that.data.hmlrid
+                        })
+                    } else if (res.errMsg == 'requestPayment:fail cancel') {                  
+                        wx.showModal({
+                          title: '提示',
+                          content: '您取消了支付，是否离开支付页面？',
+                          success: function(res) {
+                            if (res.confirm) {
+                              wx.reLaunch({
+                                url: '/pages/me/me?hmlrid=' + that.data.hmlrid
+                              })
+                            } else if (res.cancel) {
+                              console.log('用户点击了取消');
+                            }
+                          }
+                        })
+                    } else {                  
+                        wx.showModal({
+                          title: '提示',
+                          content: res.errMsg + '，是否离开支付页面？',
+                          success: function(res) {
+                            if (res.confirm) {
+                              wx.reLaunch({
+                                url: '/pages/me/me?hmlrid=' + that.data.hmlrid
+                              })
+                            } else if (res.cancel) {
+                              console.log('用户点击了取消');
+                            }
+                          }
+                        })
+                    }
                   },
                   'fail':function(e){
                     console.log(e);

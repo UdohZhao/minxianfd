@@ -22,13 +22,16 @@ class WxPay extends Base
         /*** 生成预付推广订单 ***/
         // dataHmp
         $dataHmp = $this->getHmpData();
-        slog($dataHmp);
-        die;
         // 写入房源置顶推广表
         $hm_promotion_id = db('hm_promotion')->insertGetId($dataHmp);
+        slog($hm_promotion_id);
         // if
         if ($hm_promotion_id)
         {
+            // dataHmlr
+            $dataHmlr = $this->getHmlrData($hm_promotion_id);
+            slog($dataHmlr);
+            db('hm_landlord_rent')->where('id',$this->hmlrid)->update($dataHmlr);
             // 统一下单请求地址
             $url = 'https://api.mch.weixin.qq.com/pay/unifiedorder';
             // 组装请求参数
@@ -36,7 +39,7 @@ class WxPay extends Base
             $param['mch_id'] = config('mch_id');
             $param['nonce_str'] = get_rand_str();
             $param['body'] = '岷县房东置顶推广充值';
-            $param['out_trade_no'] = get_rand_str();
+            $param['out_trade_no'] = $dataHmp['order_number'];
             $param['attach'] = $hm_promotion_id;
             $param['total_fee'] = bcmul($this->total_fee, 100, 0);
             $param['spbill_create_ip'] = $_SERVER['REMOTE_ADDR'];
@@ -87,6 +90,14 @@ class WxPay extends Base
         return $dataHmp;
     }
 
+    // 初始化房源模块房东出租数据
+    private function getHmlrData($hm_promotion_id)
+    {
+        $dataHmlr['hm_promotion_id'] = $hm_promotion_id;
+        $dataHmlr['ctime'] = time();
+        return $dataHmlr;
+    }
+
     // 异步通知
     public function notify()
     {
@@ -99,12 +110,50 @@ class WxPay extends Base
         // 效验
         if ($data['return_code'] == 'SUCCESS' && $data['result_code'] == 'SUCCESS' && $sign == $data['sign'])
         {
-            // 同步返回给微信
-            $reex['return_code'] = 'SUCCESS';
-            $reex['return_msg'] = '';
-            $reex = ToXml($reex);
-            slog($reex);
-            return $reex;
+            // 订单是否处理过
+            $hm_promotion_id = $data['attach'];
+            $dataHmp = db('hm_promotion')->where('id',$hm_promotion_id)->find();
+            slog($dataHmp);
+            if ($dataHmp && $dataHmp['type'] == 1)
+            {
+                // 同步返回给微信
+                $reex['return_code'] = 'SUCCESS';
+                $reex['return_msg'] = '';
+                $reex = ToXml($reex);
+                slog($reex);
+                return $reex;
+            }
+            else
+            {
+                /*** 效验金额是否一致 ***/
+                // 微信支付通知金额
+                $wx_total_fee = $data['total_fee'];
+                // 订单金额
+                $order_total_fee = bcmul($dataHmp['cost'], 100, 0);
+                // if
+                if ($wx_total_fee == $order_total_fee)
+                {
+                    // 更新房源置顶推广订单
+                    $upDataHmp['pay_time'] = time();
+                    $upDataHmp['type'] = 1;
+                    db('hm_promotion')->where('id',$hm_promotion_id)->update($upDataHmp);
+                    // 同步返回给微信
+                    $reex['return_code'] = 'SUCCESS';
+                    $reex['return_msg'] = '';
+                    $reex = ToXml($reex);
+                    slog($reex);
+                    return $reex;
+                }
+                else
+                {
+                    // 同步返回给微信
+                    $reex['return_code'] = 'FAIL';
+                    $reex['return_msg'] = '支付金额不一致';
+                    $reex = ToXml($reex);
+                    slog($reex);
+                    return $reex;
+                }
+            }
         }
         else
         {

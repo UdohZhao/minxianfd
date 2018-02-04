@@ -299,18 +299,19 @@ Page({
                 // if
                 if (res.data.status == 0) 
                 {
-                    console.log(res.data);
+                    var data = res.data;
+                    console.log(data);                  
                     wx.showModal({
                       title: '提示',
                       content: '是否需要置顶推广？',
                       success: function(res) {
                         if (res.confirm) {
-                          wx.redirectTo({
-                            url: '/pages/pay/pay?hmlrid=' + res.data.data
+                          wx.reLaunch({
+                            url: '/pages/pay/pay?hmlrid=' + data.data
                           })
                         } else if (res.cancel) {
                           wx.reLaunch({
-                            url: '/pages/me/me?hmlrid=' + res.data.data
+                            url: '/pages/me/me?hmlrid=' + data.data
                           })
                         }
                       }
