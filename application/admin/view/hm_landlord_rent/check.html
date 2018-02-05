@@ -66,6 +66,9 @@
                     {eq name="v.type" value="1"}
                     <button type="button" class="btn btn-primary btn-xs" onclick="flag({$v.id},0);">隐藏</button>
                     {/eq}
+                    {eq name="v.status" value="2"}
+                    <button type="button" class="btn btn-primary btn-xs" onclick="counselor({$v.id});">配置顾问</button>
+                    {/eq}
                     <button type="button" class="btn btn-default btn-xs" onclick="del({$v.id});">删除</button>
                 </td>
               </tr>
