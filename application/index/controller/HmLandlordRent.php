@@ -22,7 +22,7 @@ class HmLandlordRent extends Base
         if ($this->status == 2 && $this->type == 1)
         {
             // 读取房源模块房东出租表 -> 普通用户
-            $data['hm_landlord_rent'] = db('hm_landlord_rent')->where('status',$this->status)->where('type',$this->type)->order('ctime desc')->select();
+            $data['hm_landlord_rent'] = db('hm_landlord_rent')->where('status',$this->status)->where('type',$this->type)->where('hm_promotion_id',0)->order('ctime desc')->select();
             // 读取区域
             $data['hm_min_xian']['town'] = db('hm_min_xian')->where('type',0)->order('sort asc')->select();
             $data['hm_min_xian']['village'] = db('hm_min_xian')->where('type',1)->order('sort asc')->select();

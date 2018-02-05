@@ -37,19 +37,25 @@
     "list": [
       {
         "pagePath": "pages/index/index",
-        "text": "index",
+        "text": "出租房源",
+        "iconPath": "dist/images/icon/emoji-1.png",
+        "selectedIconPath": "dist/images/icon/emoji-1.png"
+      },
+      {
+        "pagePath": "pages/index/index",
+        "text": "推荐房源",
         "iconPath": "dist/images/icon/emoji-1.png",
         "selectedIconPath": "dist/images/icon/emoji-1.png"
       },
       {
         "pagePath": "pages/landlord/landlord",
-        "text": "landlord",
+        "text": "发布房源",
         "iconPath": "dist/images/icon/emoji-2.png",
         "selectedIconPath": "dist/images/icon/emoji-2.png"
       },
       {
         "pagePath": "pages/me/me",
-        "text": "me",
+        "text": "我",
         "iconPath": "dist/images/icon/emoji-3.png",
         "selectedIconPath": "dist/images/icon/emoji-3.png"
       }
