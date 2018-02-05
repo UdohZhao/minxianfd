@@ -27,6 +27,8 @@ class HmLandlordRent extends Base
             $data['hm_min_xian']['town'] = db('hm_min_xian')->where('type',0)->order('sort asc')->select();
             $data['hm_min_xian']['village'] = db('hm_min_xian')->where('type',1)->order('sort asc')->select();
             // 读取租金
+            $data['rent'] = config('rent');
+            // 读取卧室
         }
         else
         {
