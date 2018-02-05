@@ -31,8 +31,8 @@ class HmLease extends Base
     // 初始化房源租赁数据
     private function getHmlData()
     {
-        $dataHml['hm_lease_manner_id'] = input('post.hm_lease_manner_id');
-        $dataHml['hm_payment_method_id'] = input('post.hm_payment_method_id');
+        $dataHml['hm_lease_manner'] = input('post.hm_lease_manner');
+        $dataHml['hm_payment_method'] = input('post.hm_payment_method');
         $dataHml['hm_ancillary_facility'] = input('post.hm_ancillary_facility');
         $dataHml['rent'] = input('post.rent');
         return $dataHml;

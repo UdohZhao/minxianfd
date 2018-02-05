@@ -199,7 +199,9 @@ Page({
                 // if
                 if (res.data.status == 0) 
                 {
-                    console.log(res.data);
+                    wx.redirectTo({
+                      url: '/pages/hmLease/hmLease?hmlrid=' + res.data.data
+                    })
                 } 
                 else
                 {

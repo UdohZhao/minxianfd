@@ -19,7 +19,8 @@
     "pages/pay/pay",
     "pages/redis/redis",
     "pages/sms/sms",
-    "pages/wxpay/wxpay"
+    "pages/wxpay/wxpay",
+    "pages/success/success"
   ],
   "window": {
     "backgroundTextStyle": "light",

@@ -21,9 +21,11 @@ class Sms extends Base
         $data['mobile'] = input('post.phone');
         $data['text'] = '【岷县海晟商贸】您的验证码是'.$rand.'。如非本人操作，请忽略本短信 ';
         $result = json_decode(httpRequest($url,'POST',$data),true);
+        slog($result);
         // if
         if ($result['code'] == 0)
         {
+            slog($rand);
             return ajaxReturn(Rs(0,'短信验证码发送成功！',$rand));
         }
         else
