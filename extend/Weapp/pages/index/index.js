@@ -18,11 +18,11 @@ Page({
     curIndex: 0,
     navList:[
       {
-        id:0,
+        id:'town',
         name:'镇'
       },
       {
-        id: 1,
+        id: 'village',
         name: '乡'
       },
     ],
@@ -505,8 +505,8 @@ Page({
     console.log(index)
      self = this;
     this.setData({
-      curNav: id,
-      curIndex: index
+      curNav: index,
+      curIndex: id
     })
     console.log(this.data.curNav)
     console.log(this.data.curIndex)
