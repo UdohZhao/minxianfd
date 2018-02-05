@@ -50,8 +50,8 @@
                 </view>
                 <view class="weui-tab__content" hidden="{{activeIndex != 1}}">
                   <!-- 租金 -->
-                  <block wx:for="{{hm_landlord_rent.rent}}" wx:for-index="k" wx:for-item="v" wx:key="i">
-                    <view class="list" data-start="{{v.start}}" data-end="{{v.end}}" bindtap="tapRent">{{v.key}}</view>
+                  <block wx:for="{{rent}}" wx:for-index="k" wx:for-item="v" wx:key="i">
+                    <view class="list {{listActive == index ? 'listActive' : ''}} " data-index="{{k}}" data-start="{{v.start}}" data-end="{{v.end}}" bindtap="tapRent">{{v.key}}</view>
                   </block>
                 </view>
                 <view class="weui-tab__content" hidden="{{activeIndex != 2}}">
@@ -110,19 +110,7 @@
                     </checkbox-group>
                     </view>
                   </view>
-                  <!--<view class="fxBox">
-                    <view class="fxBox_title">标签</view>
-                    <view class="fxBox_bd">
-                      <checkbox-group class='fxBox_bd' bindchange="checkChangeLebal">
-                        <label bindtap="click"  wx:for="{{items4}}" wx:key="{{items4}}"
-                        class="fxBox_bd_list {{item.checked?'listCctive':''}}">
-                          <checkbox value="{{item.name}}" name="{{item.value}}" 
-                          checked="{{item.checked}}" hidden='true'></checkbox>
-                          <label class="fxBox_title">{{item.value}}</label>
-                        </label>
-                    </checkbox-group>
-                    </view>
-                  </view>-->
+             
                   <view class="fxBox">
                     <view class="fxBox_title">楼层</view>
                     <view class="fxBox_bd">
@@ -180,22 +168,18 @@
               <view wx:if="{{hm_landlord_rent}}">
                 <view bindtap='gotoDetail' class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active" wx:for="{{hm_landlord_rent}}" wx:key="k" wx:for-item="v" wx:for-index="i" data-id="{{v.hm_area_id}}">
                     <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
-                        <image class="weui-media-box__thumb" src="{{v.img}}" />
+                        <image class="weui-media-box__thumb" src="{{domain}}{{v.hm_housing_resource_id.hm_view_images.path}}" />
                     </view>
                     <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
-                        <view class="weui-media-box__title">{{v.title}}</view>
-                        <view class="weui-media-box__desc">{{v.habitable_room}}室{{v.living_room}}厅/{{v.area}}㎡/{{v.orientation}}/{{v.decorate_degree}}</view>
+                        <view class="weui-media-box__title">{{v.hm_housing_resource_id.title}}</view>
+                        <view class="weui-media-box__desc">{{v.hm_basics_id.hm_house_type_id.habitable_room}}室{{v.hm_basics_id.hm_house_type_id.living_room}}厅/{{v.hm_basics_id.area}}㎡/{{v.hm_lease_id.hm_lease_manner}}/{{v.hm_housing_resource_id.title}}</view>
                         <view class="weui-media-box__desc">
-                          <!-- 判断标签 -->
-                         <text class="lebalStyleDT lebalSty">地铁</text>
-                         <text class="lebalStyleSSKF lebalSty">随时看房</text>
-                         <text class="lebalStyleXSFY lebalSty">新上房源</text>
-                         <text class="lebalStyleJZX lebalSty">精装修</text>
-                         <!-- <text class="lebalStyleYCW lebalSty">有车位</text> -->
-                         
+                          <!-- 判断标签 --> 
+                         <text class="lebalStyleDT lebalSty" wx:for="{{v.hm_housing_resource_id.trait}}" wx:key="k" wx:for-index="i">{{item}}</text>
+
                         </view>
                         <view class="weui-media-box__desc red">
-                            {{v.rent}}元/月
+                            {{v.hm_lease_id.rent}}元/月
                         </view>
                     </view>
                 </view>
