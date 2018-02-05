@@ -429,6 +429,7 @@ Page({
                   that.setData({
                     hm_landlord_rent: res.data.data
                   })
+
               }
               else
               {
@@ -841,6 +842,11 @@ Page({
       
     })
 
+  },
+
+  // 租金tap事件
+  tapRent: function (e) {
+    console.log(e);
   }
 
 })

@@ -50,14 +50,9 @@
                 </view>
                 <view class="weui-tab__content" hidden="{{activeIndex != 1}}">
                   <!-- 租金 -->
-                  <view class="list">不限</view>
-                  <view class="list">1000以下</view>
-                  <view class="list">1000~2000元</view>
-                  <view class="list">2000~3000元</view>
-                  <view class="list">3000~4000元</view>
-                  <view class="list">4000~5000元</view>
-                  <view class="list">5000元以上</view>
-                  
+                  <block wx:for="{{hm_landlord_rent.rent}}" wx:for-index="k" wx:for-item="v" wx:key="i">
+                    <view class="list" data-start="{{v.start}}" data-end="{{v.end}}" bindtap="tapRent">{{v.key}}</view>
+                  </block>
                 </view>
                 <view class="weui-tab__content" hidden="{{activeIndex != 2}}">
                     <!-- 房型 -->
