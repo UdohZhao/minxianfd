@@ -206,14 +206,14 @@
   <!-- 详情列表 -->
   <view class="page__bd marginTop50">
         <view class="weui-panel weui-panel_access">
-            <view class="weui-panel__bd">
-                <view bindtap='gotoDetail' class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
+            <view class="weui-panel__bd" >
+                <view bindtap='gotoDetail' class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active" wx:for="{{gcData}}" wx:key="k" wx:for-item="v" wx:for-index="i">
                     <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
-                        <image class="weui-media-box__thumb" src="../../dist/images/1.jpg" />
+                        <image class="weui-media-box__thumb" src="{{v.img}}" />
                     </view>
                     <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
-                        <view class="weui-media-box__title">果园习总屯精品次卧</view>
-                        <view class="weui-media-box__desc">2室1厅/86㎡/南/金科时代中心</view>
+                        <view class="weui-media-box__title">{{v.title}}</view>
+                        <view class="weui-media-box__desc">{{v.habitable_room}}室{{v.living_room}}厅/{{v.area}}㎡/{{v.orientation}}/{{v.decorate_degree}}</view>
                         <view class="weui-media-box__desc">
                           <!-- 判断标签 -->
                          <text class="lebalStyleDT lebalSty">地铁</text>
@@ -224,7 +224,7 @@
                          
                         </view>
                         <view class="weui-media-box__desc red">
-                            2700元/月
+                            {{v.rent}}元/月
                         </view>
                     </view>
                 </view>
