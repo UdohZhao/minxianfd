@@ -3,38 +3,55 @@ namespace app\index\controller;
 class HmLandlordRent extends Base
 {
     public $id;
+    public $status;
+    public $type;
     /**
      * 构造方法
      */
     public function _auto()
     {
         $this->id = isset($_GET['id']) ? intval($_GET['id']) : 0;
+        $this->status = isset($_GET['status']) ? intval($_GET['status']) : 0;
+        $this->type = isset($_GET['type']) ? intval($_GET['type']) : 0;
     }
 
     // 请求房源发布数据
     public function index()
     {
-        // 读取房源模块房东出租表
-        $data = db('hm_landlord_rent')->where('weapp_user_id',$this->wuid)->order('ctime desc')->select();
-        // if
-        if ($data)
+        // status type 首页展示
+        if ($this->status == 2 && $this->type == 1)
         {
-            foreach ($data AS $k => $v)
+            // 读取房源模块房东出租表 -> 普通用户
+            $data['hm_landlord_rent'] = db('hm_landlord_rent')->where('status',$this->status)->where('type',$this->type)->order('ctime desc')->select();
+            // 读取区域
+            $data['hm_min_xian']['town'] = db('hm_min_xian')->where('type',0)->order('sort asc')->select();
+            $data['hm_min_xian']['village'] = db('hm_min_xian')->where('type',1)->order('sort asc')->select();
+            // 读取租金
+        }
+        else
+        {
+            // 读取房源模块房东出租表 -> 房东用户
+            $data['hm_landlord_rent'] = db('hm_landlord_rent')->where('weapp_user_id',$this->wuid)->order('ctime desc')->select();
+        }
+        // if
+        if ($data['hm_landlord_rent'])
+        {
+            foreach ($data['hm_landlord_rent'] AS $k => $v)
             {
                 // 读取房源基础数据
-                $data[$k]['hm_basics_id'] = db('hm_basics')->where('id',$v['hm_basics_id'])->find();
-                $data[$k]['hm_basics_id']['hm_house_type_id'] = db('hm_house_type')->where('id',$data[$k]['hm_basics_id']['hm_house_type_id'])->find();
+                $data['hm_landlord_rent'][$k]['hm_basics_id'] = db('hm_basics')->where('id',$v['hm_basics_id'])->find();
+                $data['hm_landlord_rent'][$k]['hm_basics_id']['hm_house_type_id'] = db('hm_house_type')->where('id',$data['hm_landlord_rent'][$k]['hm_basics_id']['hm_house_type_id'])->find();
                 // 读取房源小区数据
-                $data[$k]['hm_community_id'] = db('hm_community')->where('id',$v['hm_community_id'])->find();
+                $data['hm_landlord_rent'][$k]['hm_community_id'] = db('hm_community')->where('id',$v['hm_community_id'])->find();
                 // 读取房源租赁数据
-                $data[$k]['hm_lease_id'] = db('hm_lease')->where('id',$v['hm_lease_id'])->find();
+                $data['hm_landlord_rent'][$k]['hm_lease_id'] = db('hm_lease')->where('id',$v['hm_lease_id'])->find();
                 // 读取房源数据
-                $data[$k]['hm_housing_resource_id'] = db('hm_housing_resource')->where('id',$v['hm_housing_resource_id'])->find();
-                $data[$k]['hm_housing_resource_id']['trait'] = explode(',', $data[$k]['hm_housing_resource_id']['trait']);
+                $data['hm_landlord_rent'][$k]['hm_housing_resource_id'] = db('hm_housing_resource')->where('id',$v['hm_housing_resource_id'])->find();
+                $data['hm_landlord_rent'][$k]['hm_housing_resource_id']['trait'] = explode(',', $data['hm_landlord_rent'][$k]['hm_housing_resource_id']['trait']);
                 // 读取房源环景图片数据
-                $data[$k]['hm_housing_resource_id']['hm_view_images'] = db('hm_view_images')->where('hm_housing_resource_id',$v['hm_housing_resource_id'])->find();
+                $data['hm_landlord_rent'][$k]['hm_housing_resource_id']['hm_view_images'] = db('hm_view_images')->where('hm_housing_resource_id',$v['hm_housing_resource_id'])->find();
                 // 读取房源置顶推广数据
-                $data[$k]['hm_promotion_id'] = db('hm_promotion')->where('id',$v['hm_promotion_id'])->find();
+                $data['hm_landlord_rent'][$k]['hm_promotion_id'] = db('hm_promotion')->where('id',$v['hm_promotion_id'])->find();
             }
             slog($data);
             return ajaxReturn(Rs(0,'受影响的操作！',$data));
