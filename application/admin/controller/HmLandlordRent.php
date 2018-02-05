@@ -181,7 +181,70 @@ class HmLandlordRent extends Base
         // Ajax
         if ($this->request->isAjax())
         {
-            $type = input('post.type');
+            $data['type'] = input('post.type');
+            // 更新房源模块房东出租表
+            if (db('hm_landlord_rent')->where('id',$this->id)->update($data))
+            {
+                return ajaxReturn(Rs(0,'受影响的操作！',true));
+            }
+            else
+            {
+                return ajaxReturn(Rs(1,'不受影响的操作！',false));
+            }
+        }
+    }
+
+    // 删除
+    public function del()
+    {
+        // Ajax
+        if ($this->request->isAjax())
+        {
+            // 读取房源模块房东出租详细数据
+            $data = db('hm_landlord_rent')->where('id',$this->id)->find();
+            // 读取房源基础数据
+            $data['hm_basics_id'] = db('hm_basics')->where('id',$data['hm_basics_id'])->find();
+            db('hm_house_type')->where('id',$data['hm_basics_id']['hm_house_type_id'])->delete();
+            db('hm_basics')->where('id',$data['hm_basics_id']['id'])->delete();
+            // 读取房源区域数据
+            db('hm_area')->where('id',$data['hm_area_id'])->delete();
+            // 读取房源小区数据
+            $data['hm_community_id'] = db('hm_community')->where('id',$data['hm_community_id'])->find();
+            db('hm_floor')->where('id',$data['hm_community_id']['hm_floor_id'])->delete();
+            db('hm_doorplate')->where('id',$data['hm_community_id']['hm_doorplate_id'])->delete();
+            db('hm_community')->where('id',$data['hm_community_id']['id'])->delete();
+            // 读取房源租赁数据
+            db('hm_lease')->where('id',$data['hm_lease_id'])->delete();
+            // 读取房源数据
+            $data['hm_housing_resource_id'] = db('hm_housing_resource')->where('id',$data['hm_housing_resource_id'])->find();
+            // 读取房源环景图片数据
+            $data['hm_housing_resource_id']['hm_view_images'] = db('hm_view_images')->where('hm_housing_resource_id',$data['hm_housing_resource_id']['id'])->select();
+            if ($data['hm_housing_resource_id']['hm_view_images'])
+            {
+                foreach ($data['hm_housing_resource_id']['hm_view_images'] AS $k => $v)
+                {
+                    @unlink(ROOT_PATH . 'public' . $v['path']);
+                }
+            }
+            db('hm_view_images')->where('hm_housing_resource_id',$data['hm_housing_resource_id']['id'])->delete();
+            db('hm_housing_resource')->where('id',$data['hm_housing_resource_id']['id'])->delete();
+            // 读取房源业主数据
+            db('hm_owner')->where('id',$data['hm_owner_id'])->delete();
+            // 读取房源房东数据
+            db('hm_landlord')->where('id',$data['hm_landlord_id'])->delete();
+            // 读取房源置顶推广数据
+            db('hm_promotion')->where('id',$data['hm_promotion_id'])->delete();
+
+            /*** 结束 ***/
+            if (db('hm_landlord_rent')->where('id',$this->id)->delete())
+            {
+                return ajaxReturn(Rs(0,'受影响的操作！',true));
+            }
+            else
+            {
+                return ajaxReturn(Rs(1,'不受影响的操作！',false));
+            }
+
         }
     }
 
