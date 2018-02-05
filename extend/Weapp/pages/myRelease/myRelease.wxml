@@ -1,25 +1,34 @@
 <view class="page">
   <view class="page_weui_hd">我的发布</view>
   <view class="page__bd marTop30">
+
+
     <!-- 判断是否有发布 -->
-    <view bindtap='gotoDetail' class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
+    
+    <view wx:for="{{hm_landlord_rent}}" wx:for-index="k" wx:for-item="v" wx:key="*this" bindtap='gotoDetail' class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
        <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
-                        <image class="weui-media-box__thumb" src="../../dist/images/1.jpg" />
+                        <image class="weui-media-box__thumb" src="{{domain}}{{v.hm_housing_resource_id.hm_view_images.path}}" />
        </view>
        <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
-                        <view class="weui-media-box__title">果园习总屯精品次卧</view>
-                        <view class="weui-media-box__desc">2室1厅/86㎡/南/金科时代中心</view>
-                        <view class="weui-media-box__desc">
-                            <!-- 判断标签 -->
-                          <text class="lebalStyleDT lebalSty">地铁</text>
-                          <text class="lebalStyleSSKF lebalSty">随时看房</text>
-                          <text class="lebalStyleXSFY lebalSty">新上房源</text>
-                          <text class="lebalStyleJZX lebalSty">精装修</text>
-                          <!-- <text class="lebalStyleYCW lebalSty">有车位</text> -->
-                         
-                        </view>
-                        <view class="weui-media-box__desc red"> 2700元/月</view>
+          <view class="weui-media-box__title">{{v.hm_housing_resource_id.title}}</view>
+          <view class="weui-media-box__desc">{{v.hm_basics_id.hm_house_type_id.habitable_room}}室{{v.hm_basics_id.hm_house_type_id.living_room}}厅{{v.hm_basics_id.hm_house_type_id.shower_room}}卫/{{v.hm_basics_id.area}}㎡/{{v.hm_community_id.cname}}</view>
+          <view class="weui-media-box__desc">
+              <!-- 判断标签 -->
+            <view wx:for="{{v.hm_housing_resource_id.trait}}" wx:for-index="kk" wx:for-item="vv" wx:key="index">
+              <text class="lebalStyleDT lebalSty">{{vv}}</text>
+            </view>
+            <!--<text class="lebalStyleSSKF lebalSty">随时看房</text>
+            <text class="lebalStyleXSFY lebalSty">新上房源</text>
+            <text class="lebalStyleJZX lebalSty">精装修</text>-->
+            <!-- <text class="lebalStyleYCW lebalSty">有车位</text> -->
+          </view>
+          <view class="weui-media-box__desc red"> {{v.hm_lease_id.rent}}元/月</view>
+          <view wx:if="{{v.hm_promotion_id.type == 0}}" class="weui-media-box__desc">
+            [未付款]
+          </view>
        </view>
     </view>
+
+
   </view>
 </view>

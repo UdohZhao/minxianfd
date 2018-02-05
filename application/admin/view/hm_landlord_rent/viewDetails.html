@@ -87,7 +87,11 @@
               <tr>
                 <td colspan="2">
                   <blockquote>
-                    <p>特点：{$data.hm_housing_resource_id.trait}</p>
+                    <p>特点：
+                        {foreach name="data.hm_housing_resource_id.trait" item="v" key="k"}
+                          <span class="label label-primary">{$v}</span>
+                        {/foreach}
+                    </p>
                   </blockquote>
                 </td>
               </tr>
