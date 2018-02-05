@@ -20,7 +20,8 @@
     "pages/redis/redis",
     "pages/sms/sms",
     "pages/wxpay/wxpay",
-    "pages/success/success"
+    "pages/success/success",
+    "pages/recommend/recommend"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -42,7 +43,7 @@
         "selectedIconPath": "dist/images/icon/emoji-1.png"
       },
       {
-        "pagePath": "pages/index/index",
+        "pagePath": "pages/recommend/recommend",
         "text": "推荐房源",
         "iconPath": "dist/images/icon/emoji-1.png",
         "selectedIconPath": "dist/images/icon/emoji-1.png"

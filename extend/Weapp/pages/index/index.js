@@ -365,8 +365,10 @@ Page({
     ],
   },
 
-  onLoad: function (e) {
+  onLoad: function (options) {
     var that = this;
+
+    console.log(options);
     
     // 请求岷县数据
     wx.request({
