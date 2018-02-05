@@ -5,6 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    domain: app.data.domain,
     movies: [
       { url: '../../dist/images/1.jpg' },
       { url: '../../dist/images/2.jpg' },
@@ -60,6 +61,7 @@ Page({
                   that.setData({
                     hm_landlord_rent: res.data.data
                   })
+                  console.log(res.data.data)
               }
               else
               {
@@ -129,8 +131,10 @@ Page({
   
   //拨打电话
   Callphone:function(e){
+    var telephone = e.current.setData.telephone;
+    console.log(telephone)
     wx.makePhoneCall({
-      phoneNumber: '15730179295',
+      phoneNumber: telephone,
     })
   },
 

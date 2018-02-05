@@ -1,16 +1,16 @@
 <view class="page">
   <!--轮播图  -->
   <swiper class="swiper" indicator-dots="true" autoplay="true" interval="5000" duration="1000">    
-      <block wx:for="{{movies}}" wx:for-index="index" wx:key="k">    
+      <block wx:for="{{hm_landlord_rent.hm_housing_resource_id.hm_view_images}}"  wx:key="k">    
         <swiper-item>    
-          <image src="{{item.url}}" class="slide-image" mode="aspectFill"/>    
+          <image src="{{item.path}}" class="slide-image" mode="aspectFill"/>    
         </swiper-item>    
       </block>    
     </swiper> 
     <!-- 小区名称 -->
     <view class="weui-cells__title">
-      <view class="weui-cells__title_txt">乔庄北区精品两房</view>
-      <view class="weui-panel_header">3500元/月</view>
+      <view class="weui-cells__title_txt" >{{hm_landlord_rent.hm_area_id.address}}</view>
+      <view class="weui-panel_header">{{hm_landlord_rent.hm_lease_id.rent}}元/月</view>
     </view>
     
     
@@ -20,23 +20,23 @@
       <!-- 循坏数据 -->
         <view class="weui-panel_list">
           <view class="weui-panel_list_key">户型:</view>
-          <view class="weui-panel_list_val">2室1厅</view>
+          <view class="weui-panel_list_val">{{hm_landlord_rent.hm_basics_id.habitable_room}}室{{hm_landlord_rent.hm_basics_id.living_room}}厅</view>
         </view>
         <view class="weui-panel_list">
           <view class="weui-panel_list_key">面积:</view>
-          <view class="weui-panel_list_val">86㎡</view>
+          <view class="weui-panel_list_val">{{hm_landlord_rent.hm_basics_id.area}}㎡</view>
         </view>
         <view class="weui-panel_list">
           <view class="weui-panel_list_key">楼层:</view>
-          <view class="weui-panel_list_val">中层/6楼</view>
+          <view class="weui-panel_list_val">{{hm_landlord_rent.hm_community_id.hm_floor_id.present_floor}}/{{hm_landlord_rent.hm_community_id.hm_floor_id.total_floor}}楼</view>
         </view>
         <view class="weui-panel_list">
           <view class="weui-panel_list_key">朝向:</view>
-          <view class="weui-panel_list_val">东南</view>
+          <view class="weui-panel_list_val">{{hm_landlord_rent.hm_basics_id.area.orientation}}</view>
         </view>
         <view class="weui-panel_list">
           <view class="weui-panel_list_key">装修:</view>
-          <view class="weui-panel_list_val">简装</view>
+          <view class="weui-panel_list_val">{{hm_landlord_rent.hm_basics_id.area.decorate_degree}}</view>
         </view>
         <view class="weui-panel_list">
           <view class="weui-panel_list_key">供暖:</view>
@@ -49,107 +49,40 @@
     <view class="weui-panel weui-panel_access">
       <view class="weui-panel_title">房屋配套</view>
       <view class="weui-panel__bd">
+        <block wx:for="{{hm_landlord_rent.hm_lease_id.hm_ancillary_facility}}" wx:key="k">
         <view class="weui-panel___bd_desc">
             <image src='../../dist/images/detail.png'></image>
-            <view class="desc">床</view>
+            <view class="desc">{{item}}</view>
         </view>
-        <view class="weui-panel___bd_desc">
-            <image src='../../dist/images/detail.png'></image>
-            <view class="desc">集中供暖</view>
-        </view>
-        <view class="weui-panel___bd_desc">
-            <image src='../../dist/images/detail.png'></image>
-            <view class="desc">电视</view>
-        </view>
-        <view class="weui-panel___bd_desc">
-            <image src='../../dist/images/detail.png'></image>
-            <view class="desc">冰箱</view>
-        </view>
-        <view class="weui-panel___bd_desc">
-            <image src='../../dist/images/detail.png'></image>
-            <view class="desc">空调</view>
-        </view>
-        <view class="weui-panel___bd_desc">
-            <image src='../../dist/images/detail.png'></image>
-            <view class="desc">热水器</view>
-        </view>
-        <view class="weui-panel___bd_desc">
-            <image src='../../dist/images/detail.png'></image>
-            <view class="desc">洗衣机</view>
-        </view>
-        <view class="weui-panel___bd_desc">
-            <image src='../../dist/images/detail.png'></image>
-            <view class="desc">沙发</view>
-        </view>
-        <view class="weui-panel___bd_desc">
-            <image src='../../dist/images/detail.png'></image>
-            <view class="desc">衣柜</view>
-        </view>
-        <view class="weui-panel___bd_desc">
-            <image src='../../dist/images/detail.png'></image>
-            <view class="desc">可做饭</view>
-        </view>
-        <view class="weui-panel___bd_desc">
-            <image src='../../dist/images/detail.png'></image>
-            <view class="desc">独立卫生间</view>
-        </view>
-        <view class="weui-panel___bd_desc">
-            <image src='../../dist/images/detail.png'></image>
-            <view class="desc">阳台</view>
-        </view>
-        <view class="weui-panel___bd_desc">
-            <image src='../../dist/images/detail.png'></image>
-            <view class="desc">包物业费</view>
-        </view>
-        <view class="weui-panel___bd_desc">
-            <image src='../../dist/images/detail.png'></image>
-            <view class="desc">包取暖费</view>
-        </view>
-
+        </block>
       </view>
     </view>
     <!--周边配套  -->
     <view class="weui-panel weui-panel_access">
-      <view class="weui-panel_title">周边配套</view>
+      <view class="weui-panel_title">周边环境</view>
       <view class="weui-panel__bd fs13">
-        <view>商圈位置 轻轨边上 高品质小区 高性价比 同等户型 低于市场价</view>
-        <view>商圈位置 轻轨边上 高品质小区 高性价比 同等户型 低于市场价</view>
-        <view>商圈位置 轻轨边上 高品质小区 高性价比 同等户型 低于市场价</view>
-        <view>商圈位置 轻轨边上 高品质小区 高性价比 同等户型 低于市场价</view>
-        <view>商圈位置 轻轨边上 高品质小区 高性价比 同等户型 低于市场价</view>
+        {{hm_landlord_rent.hm_housing_resource_id.describe}}
+      </view>
+    </view>
+    <!-- 特点 -->
+    <view class="weui-panel weui-panel_access">
+      <view class="weui-panel_title">特点</view>
+      <view class="weui-panel__bd fs13">
+        {{hm_landlord_rent.hm_housing_resource_id.trait}}
       </view>
     </view>
     <!-- 业主描述 -->
     <view class="weui-panel weui-panel_access">
       <view class="weui-panel_title">业主描述</view>
       <view class="weui-panel__bd fs13">
-        <view>1、房子是正规两室，业主自住装修，全朝中庭，安静舒适！</view>
-        <view>2、家电状况全新空调，全自动洗衣机，电冰箱，液晶电视等电器一应俱全</view>
-        <view>3、家具状况大床，三开门大衣柜，转角布艺沙发，茶几，餐桌椅子等家私应有尽有</view>
-        <view>4、交通状况小区出门就是公交车站，步行*就是轻轨站，出行交通非常方便快捷</view>
-        <view>5、周边配套齐全，超市医院银行等等说生活所需一应俱全</view>
+        {{hm_landlord_rent.hm_owner_id.description}}
       </view>
     </view>
      <!-- 业主要求 -->
     <view class="weui-panel weui-panel_access">
       <view class="weui-panel_title">业主要求</view>
       <view class="weui-panel__bd fs13">
-        <view>1、房子是正规两室，业主自住装修，全朝中庭，安静舒适！</view>
-        <view>2、家电状况全新空调，全自动洗衣机，电冰箱，液晶电视等电器一应俱全</view>
-        <view>3、家具状况大床，三开门大衣柜，转角布艺沙发，茶几，餐桌椅子等家私应有尽有</view>
-        <view>4、交通状况小区出门就是公交车站，步行*就是轻轨站，出行交通非常方便快捷</view>
-        <view>5、周边配套齐全，超市医院银行等等说生活所需一应俱全</view>
-      </view>
-    </view>
-     <!-- 特点 -->
-    <view class="weui-panel weui-panel_access">
-      <view class="weui-panel_title">特点</view>
-      <view class="weui-panel__bd fs13">
-        <view>1、房子是正规两室，业主自住装修，全朝中庭，安静舒适！</view>
-        <view>2、家电状况全新空调，全自动洗衣机，电冰箱，液晶电视等电器一应俱全</view>
-        <view>3、家具状况大床，三开门大衣柜，转角布艺沙发，茶几，餐桌椅子等家私应有尽有</view>
-        <view>4、交通状况小区出门就是公交车站，步行*就是轻轨站，出行交通非常方便快捷</view>
-        <view>5、周边配套齐全，超市医院银行等等说生活所需一应俱全</view>
+        {{hm_landlord_rent.hm_owner_id.demand}}
       </view>
     </view>
     <view class="h60"></view>
@@ -159,10 +92,10 @@
         <image wx:else="{{collectionStatus}}" src='../../dist/images/collect_hover.png'></image>
       </view> 
       <view class="modelCenter">
-        <image class="Img" src='../../dist/images/header.png'></image>
-        <view class="guWenName">刘健</view>
+        <image class="Img" src='{{domain}}{{hm_landlord_rent.hm_counselor_id.head_portrait}}'></image>
+        <view class="guWenName">{{hm_landlord_rent.hm_counselor_id.cname}}</view>
       </view>
-      <view class="modelPhone" bindtap='Callphone'>
+      <view class="modelPhone" bindtap='Callphone' data-phone="{{hm_landlord_rent.hm_counselor_id.telephone}}">
         <image src='../../dist/images/phone.png'></image>
         咨询
       </view>
