@@ -6,7 +6,7 @@ Page({
     domain: app.data.domain,
     userInfo: {},
     hasUserInfo: false,
-    listActive:0,
+    curIndex:"town",
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     movies: [
       { url: '../../dist/images/1.jpg' },
@@ -14,15 +14,18 @@ Page({
       { url: '../../dist/images/3.jpg' },
     ],
     hidden: false,
-    curNav: 1,
-    curIndex: 0,
+    curNav: 0,
+    curIndex: 1,
+    cname:'town',
     navList:[
       {
-        id:'town',
+        id:'0',
+        cname:'town',
         name:'镇'
       },
       {
-        id: 'village',
+        id: '1',
+        cname:'village',        
         name: '乡'
       },
     ],
@@ -474,20 +477,28 @@ Page({
   //左边列表选择
   selectNav(event){
      let id = event.target.dataset.id,
-    index = parseInt(event.target.dataset.index)
-    console.log(index)
+    index = parseInt(event.target.dataset.index);
+    var  cname = event.target.dataset.cname
+    console.log(cname)
      self = this;
     this.setData({
-      curNav: index,
-      curIndex: id
+      curNav: id,
+      curIndex: index,
+      cname:cname
     })
     console.log(this.data.curNav)
-    console.log(this.data.curIndex)
+    console.log(this.data.cname)
   },
+
   //点击地区搜索
   searchTap:function(e){
     var id = e.target.dataset.id
     console.log(id)
+    var  index = parseInt(e.target.dataset.index)
+    this.setData({
+      listActive: index
+    })
+
     wx.navigateTo({
       url: '/pages/index/index',
     })
