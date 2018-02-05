@@ -1,2 +1,36 @@
-<!--pages/recommend/recommend.wxml-->
-<text>pages/recommend/recommend.wxml</text>
+<view class="page">
+  <!-- 详情列表 -->
+  <view class="page__bd">
+        <view class="weui-panel weui-panel_access">
+            <view class="weui-panel__bd" >
+              <!--先判断是否有数据-->
+              <view wx:if="{{hm_landlord_rent}}">
+                <view bindtap='gotoDetail' class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active" wx:for="{{hm_landlord_rent}}" wx:key="k" wx:for-item="v" wx:for-index="i" data-hmlrid="{{v.id}}">
+                    <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+                        <image class="weui-media-box__thumb" src="{{domain}}{{v.hm_housing_resource_id.hm_view_images.path}}" />
+                    </view>
+                    <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+                        <view class="weui-media-box__title">{{v.hm_housing_resource_id.title}}</view>
+                        <view class="weui-media-box__desc">{{v.hm_basics_id.hm_house_type_id.habitable_room}}室{{v.hm_basics_id.hm_house_type_id.living_room}}厅/{{v.hm_basics_id.area}}㎡/{{v.hm_lease_id.hm_lease_manner}}/{{v.hm_housing_resource_id.title}}</view>
+                        <view class="weui-media-box__desc">
+                          <!-- 判断标签 --> 
+                         <text class="lebalStyleDT lebalSty" wx:for="{{v.hm_housing_resource_id.trait}}" wx:key="k" wx:for-index="i">{{item}}</text>
+
+                        </view>
+                        <view class="weui-media-box__desc red">
+                            {{v.hm_lease_id.rent}}元/月
+                        </view>
+                    </view>
+                </view>
+              </view>
+               <view wx:else>
+                <view class="errorMsg">暂无数据~~~</view>
+               </view> 
+            </view>
+        </view>
+  </view>
+
+
+ 
+
+</view>

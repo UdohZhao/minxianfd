@@ -392,7 +392,7 @@ Page({
           //提交
           wx.request({
             url: app.data.domain + '/HmLandlordRent/index?wuid='+wuid,
-            data: {status:2,type:1},
+            data: {status:2,type:1,retype:0},
             method: 'GET',
             header: {
                 'content-type': 'application/json'

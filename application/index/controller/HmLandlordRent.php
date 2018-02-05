@@ -5,6 +5,7 @@ class HmLandlordRent extends Base
     public $id;
     public $status;
     public $type;
+    public $retype;
     /**
      * 构造方法
      */
@@ -13,6 +14,7 @@ class HmLandlordRent extends Base
         $this->id = isset($_GET['id']) ? intval($_GET['id']) : 0;
         $this->status = isset($_GET['status']) ? intval($_GET['status']) : 0;
         $this->type = isset($_GET['type']) ? intval($_GET['type']) : 0;
+        $this->retype = isset($_GET['retype']) ? intval($_GET['retype']) : 0;
     }
 
     // 请求房源发布数据
@@ -22,28 +24,35 @@ class HmLandlordRent extends Base
         if ($this->status == 2 && $this->type == 1)
         {
             // 读取房源模块房东出租表 -> 普通用户
-            $data['hm_landlord_rent'] = db('hm_landlord_rent')->where('status',$this->status)->where('type',$this->type)->where('hm_promotion_id',0)->order('ctime desc')->select();
-            // 读取区域
-            $data['hm_min_xian']['town'] = db('hm_min_xian')->where('type',0)->order('sort asc')->select();
-            $data['hm_min_xian']['village'] = db('hm_min_xian')->where('type',1)->order('sort asc')->select();
-            // 读取出租方式
-            $data['hm_lease_manner'] = db('hm_lease_manner')->order('sort asc')->select();
-            // 读取租金
-            $data['rent'] = config('rent');
-            // 读取卧室
-            $data['bedroom'] = config('bedroom');
-            // 读取卫生间
-            $data['toilet'] = config('toilet');
-            // 读取建筑面积（平方米）
-            $data['covered_area'] = config('covered_area');
-            // 读取楼层
-            $data['floor'] = config('floor');
-            // 读取房源类型
-            $data['housing_resource_genre'] = config('housing_resource_genre');
-            // 读取装修
-            $data['upfitter'] = config('upfitter');
-            // 读取朝向
-            $data['orientation'] = config('orientation');
+            if ($this->retype == 1)
+            {
+                $data['hm_landlord_rent'] = db('hm_landlord_rent')->where('status',$this->status)->where('type',$this->type)->where('hm_promotion_id != 0')->order('ctime desc')->select();
+            }
+            else
+            {
+                $data['hm_landlord_rent'] = db('hm_landlord_rent')->where('status',$this->status)->where('type',$this->type)->where('hm_promotion_id',0)->order('ctime desc')->select();
+                // 读取区域
+                $data['hm_min_xian']['town'] = db('hm_min_xian')->where('type',0)->order('sort asc')->select();
+                $data['hm_min_xian']['village'] = db('hm_min_xian')->where('type',1)->order('sort asc')->select();
+                // 读取出租方式
+                $data['hm_lease_manner'] = db('hm_lease_manner')->order('sort asc')->select();
+                // 读取租金
+                $data['rent'] = config('rent');
+                // 读取卧室
+                $data['bedroom'] = config('bedroom');
+                // 读取卫生间
+                $data['toilet'] = config('toilet');
+                // 读取建筑面积（平方米）
+                $data['covered_area'] = config('covered_area');
+                // 读取楼层
+                $data['floor'] = config('floor');
+                // 读取房源类型
+                $data['housing_resource_genre'] = config('housing_resource_genre');
+                // 读取装修
+                $data['upfitter'] = config('upfitter');
+                // 读取朝向
+                $data['orientation'] = config('orientation');
+            }
         }
         else
         {
