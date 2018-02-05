@@ -770,9 +770,9 @@ Page({
     var  index = parseInt(e.target.dataset.index)
     console.log(index)
     this.setData({
-      listActive: index
+      rentlistActive: index
     })
-    console.log(this.data.listActive)
+    console.log(this.data.rentlistActive)
   }
 
 })
