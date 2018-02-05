@@ -1,0 +1,96 @@
+{include file="layouts/header" /}
+{include file="layouts/nav" /}
+{include file="layouts/menu" /}
+
+<!-- Page -->
+<div class="page animsition">
+  <div class="page-header">
+    <h1 class="page-title"># 房源管理</h1>
+  </div>
+  <div class="page-content">
+    <div class="panel">
+      <div class="panel-heading">
+        <h3 class="panel-title">@ 审核房源列表</h3>
+      </div>
+      <form action="/admin/HmLandlordRent/check" method="post">
+        <div class="input-group" style="width: 300px;float: right;margin-right: 30px;">
+          <input type="text" class="form-control" name="search" placeholder="请输入搜索关键字">
+          <span class="input-group-btn">
+            <button type="submit" class="btn btn-primary"><i class="icon wb-search" aria-hidden="true"></i></button>
+          </span>
+        </div>
+      </form>
+      <div class="panel-body">
+        <table class="table table-hover">
+            <thead>
+              <tr>
+                <th></th>
+                <th>发布时间</th>
+                <th>房东姓名</th>
+                <th>手机号码</th>
+                <th>类型</th>
+                <th>操作</th>
+              </tr>
+            </thead>
+            <tbody>
+            {if condition="($data)"}
+            {foreach name="data" item="v" key="k"}
+              <tr>
+                <td>
+                  {eq name="v.status" value="0"}
+                    <span class="text-info">{待审核}</span>
+                  {/eq}
+                  {eq name="v.status" value="1"}
+                    <span class="text-danger">{审核未通过}</span>
+                  {/eq}
+                  {eq name="v.status" value="2"}
+                    <span class="text-success">{审核通过}</span>
+                  {/eq}
+                </td>
+                <td>{$v.ctime|date='Y-m-d H:i',###}</td>
+                <td>{$v.hm_landlord_id.cname}</td>
+                <td>{$v.hm_landlord_id.phone}</td>
+                <td>
+                  {eq name="v.type" value="0"}
+                    <span class="text-info">{隐藏}</span>
+                  {/eq}
+                  {eq name="v.type" value="1"}
+                    <span class="text-primary">{展示}</span>
+                  {/eq}
+                </td>
+                <td>
+                    <button type="button" class="btn btn-primary btn-xs" onclick="viewDetails({$v.id});">查看详情</button>
+                    {eq name="v.type" value="0"}
+                    <button type="button" class="btn btn-primary btn-xs" onclick="flag({$v.id},1);">展示</button>
+                    {/eq}
+                    {eq name="v.type" value="1"}
+                    <button type="button" class="btn btn-primary btn-xs" onclick="flag({$v.id},0);">隐藏</button>
+                    {/eq}
+                    <button type="button" class="btn btn-default btn-xs" onclick="del({$v.id});">删除</button>
+                </td>
+              </tr>
+            {/foreach}
+            {else /}
+            <tr>
+              <td colspan="10">
+                <blockquote>
+                  <p>暂无数据 ~</p>
+                </blockquote>
+              </td>
+            </tr>
+            {/if}
+            </tbody>
+        </table>
+        <div style="float: right;">
+          {$page}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Page -->
+
+{include file="layouts/footer" /}
+
+<!-- 当前页面js -->
+{js href="/static/admin/hm_landlord_rent/js/check.js" /}

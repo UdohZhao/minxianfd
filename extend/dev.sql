@@ -329,7 +329,9 @@ CREATE TABLE `hm_landlord_rent` (
   `hm_promotion_id` int(10) unsigned NOT NULL COMMENT '\n关联房源置顶推广表主键id',
   `hm_counselor_id` int(10) unsigned NOT NULL COMMENT '\n关联房源租房顾问表主键id',
   `ctime` int(10) unsigned NOT NULL COMMENT '\n时间',
-  `status` tinyint(1) unsigned NOT NULL COMMENT '\n状态？0·启用，1·弃用',
+  `status` tinyint(1) unsigned NOT NULL COMMENT '\n状态？0·待审核，1·审核未通过，2·审核通过',
+  `type` int(10) unsigned NOT NULL COMMENT '\n类型？0·隐藏，1·展示',
+  `msg` varchar(255) NOT NULL COMMENT '\n留言信息',
   PRIMARY KEY (`id`),
   KEY `fk_hm_landlord_rent_weapp_user_idx` (`weapp_user_id`),
   KEY `fk_hm_landlord_rent_basics1_idx` (`hm_basics_id`),
@@ -341,7 +343,7 @@ CREATE TABLE `hm_landlord_rent` (
   KEY `fk_hm_landlord_rent_hm_landlord1_idx` (`hm_landlord_id`),
   KEY `fk_hm_landlord_rent_hm_promotion1_idx` (`hm_promotion_id`),
   KEY `fk_hm_landlord_rent_hm_counselor1_idx` (`hm_counselor_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='房源模块房东出租表'
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='房源模块房东出租表'
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --

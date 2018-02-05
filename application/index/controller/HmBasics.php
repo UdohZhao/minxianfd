@@ -60,7 +60,8 @@ class HmBasics extends Base
         $dataHmlr['weapp_user_id'] = $this->wuid;
         $dataHmlr['hm_basics_id'] = $hm_basics_id;
         $dataHmlr['ctime'] = time();
-        $dataHmlr['status'] = 1;
+        $dataHmlr['status'] = 0;
+        $dataHmlr['type'] = 0;
         return $dataHmlr;
     }
 
