@@ -52,7 +52,6 @@ Page({
                   that.setData({
                     hm_landlord_rent: res.data.data.hm_landlord_rent
                   })
-                   console.log(res.data.data)
               }
               else
               {
@@ -82,8 +81,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    var that = this;
-    console.log(that.data.hm_landlord_rent);
+
   },
 
   /**

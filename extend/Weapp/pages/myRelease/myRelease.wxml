@@ -14,7 +14,9 @@
             <view class="weui-media-box__title_left">{{v.hm_housing_resource_id.title}}</view>
             <!--状态-->
             <!--<view class="box__titleLabel">已置顶</view>-->
-            <view class="box__titleLabel Notplaced ">未置顶</view>
+            <view class="box__titleLabel lebalStyleSSKF lebalSty " wx:if="{{v.status == 0}}" >待审核</view>
+            <view class="box__titleLabel lebalStyleSSKF lebalSty " wx:if="{{v.status == 1}}" >审核未通过</view>
+            <view class="box__titleLabel lebalStyleDT lebalSty " wx:if="{{v.status == 2}}" >审核通过</view>
           </view>
           <view class="weui-media-box__desc">{{v.hm_basics_id.hm_house_type_id.habitable_room}}室{{v.hm_basics_id.hm_house_type_id.living_room}}厅{{v.hm_basics_id.hm_house_type_id.shower_room}}卫/{{v.hm_basics_id.area}}㎡/{{v.hm_community_id.cname}}</view>
           <view class="weui-media-box__desc">
@@ -30,7 +32,8 @@
           <view class="weui-media-box__desc red"> {{v.hm_lease_id.rent}}元/月</view>
           <view wx:if="{{v.hm_promotion_id.type == 0}}">
             <button class="weui-btn mini-btn NotPay" type="default" size="mini">未付款</button>
-            
+            <button class="weui-btn mini-btn NotPay" type="default" size="mini">未付款</button>
+            <button class="weui-btn mini-btn NotPay" type="default" size="mini">未付款</button>
           </view>
        </view>
     </view>
