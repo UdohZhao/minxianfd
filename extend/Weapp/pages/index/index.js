@@ -3,8 +3,10 @@ const app = getApp()
 
 Page({
   data: {
+    domain: app.data.domain,
     userInfo: {},
     hasUserInfo: false,
+    listActive:0,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     movies: [
       { url: '../../dist/images/1.jpg' },
@@ -16,11 +18,11 @@ Page({
     curIndex: 0,
     navList:[
       {
-        id:0,
+        id:'town',
         name:'镇'
       },
       {
-        id: 1,
+        id: 'village',
         name: '乡'
       },
     ],
@@ -394,9 +396,9 @@ Page({
               console.log(res);
               // if 
               if (res.data.status == 0) 
-              {
+              { 
                   that.setData({
-                    hm_landlord_rent: res.data.data,
+                    rent:res.data.data.rent,
                     bedroom:res.data.data.bedroom,
                     covered_area:res.data.data.covered_area,
                     floor:res.data.data.floor,
@@ -409,8 +411,8 @@ Page({
                     //详情列表数据
                     hm_landlord_rent:res.data.data.hm_landlord_rent
                   })
-               // console.log(res.data.data)
-                console.log(res.data.data.hm_landlord_rent)
+                console.log(res.data.data)
+                // console.log(res.data.data.hm_landlord_rent)
                 
               }
               else
@@ -503,11 +505,11 @@ Page({
     console.log(index)
      self = this;
     this.setData({
-      curNav: id,
-      curIndex: index
+      curNav: index,
+      curIndex: id
     })
-    console.log(curNav)
-    console.log(curIndex)
+    console.log(this.data.curNav)
+    console.log(this.data.curIndex)
   },
   //点击地区搜索
   searchTap:function(e){
@@ -753,7 +755,13 @@ Page({
 
   // 租金tap事件
   tapRent: function (e) {
-    console.log(e);
+  
+    var  index = parseInt(e.target.dataset.index)
+    console.log(index)
+    this.setData({
+      listActive: index
+    })
+    console.log(this.data.listActive)
   }
 
 })
