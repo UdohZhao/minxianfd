@@ -427,9 +427,12 @@ Page({
               if (res.data.status == 0) 
               {
                   that.setData({
-                    hm_landlord_rent: res.data.data
+                    hm_landlord_rent: res.data.data,
+                    bedroom:res.data.data.bedroom
                   })
-
+                //console.log(res.data.data)
+                console.log(res.data.data.bedroom)
+                
               }
               else
               {
@@ -447,7 +450,6 @@ Page({
     })
 
   },
-
   tabClick: function (e) {
     this.setData({
         sliderOffset: e.currentTarget.offsetLeft,
@@ -557,20 +559,22 @@ Page({
     that.setData({
       value: e.detail.value
     })
-    //console.log(this.data.value)
-    var items = this.data.items;
-    //console.log(this.data.items)
+    var items = this.data.bedroom;
+    console.log(this.data.items)
     var checkArr = e.detail.value;
-    //console.log(e.detail.value)
+    console.log(checkArr)
     for (var i = 0; i < items.length; i++) {
       if (checkArr.indexOf(i + "") != -1) {
         items[i].checked = true;
+        console.log(items)
       } else {
         items[i].checked = false;
+        console.log(items)
+        
       }
     }
     this.setData({
-      items: items,
+      bedroom: items,
     }) 
   },
   //卫

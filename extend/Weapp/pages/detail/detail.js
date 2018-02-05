@@ -1,4 +1,5 @@
 const app = getApp();
+
 Page({
 
   /**
@@ -62,6 +63,7 @@ Page({
                     hm_landlord_rent: res.data.data
                   })
                   console.log(res.data.data)
+                  
               }
               else
               {
@@ -166,4 +168,8 @@ Page({
       })
     }
   },
+
+
+
+
 })

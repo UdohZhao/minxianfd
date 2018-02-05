@@ -12,7 +12,7 @@
       <view class="weui-cells__title_txt" >{{hm_landlord_rent.hm_area_id.address}}</view>
       <view class="weui-panel_header">{{hm_landlord_rent.hm_lease_id.rent}}元/月
         <!--特点-->
-        <view wx:for="{{hm_landlord_rent.hm_housing_resource_id.trait}}" class="traitStyle">{{item}}</view>
+        <view wx:for="{{hm_landlord_rent.hm_housing_resource_id.trait}}" class="traitStyle" wx:key="k">{{item}}</view>
       </view>
     </view>
     
@@ -81,14 +81,6 @@
         {{hm_landlord_rent.hm_housing_resource_id.describe}}
       </view>
     </view>
-    <!-- 特点 -->
-        <!--需要修改-->
-    <view class="weui-panel weui-panel_access">
-      <view class="weui-panel_title">特点</view>
-      <view class="weui-panel__bd fs13">
-        {{hm_landlord_rent.hm_housing_resource_id.trait}}
-      </view>
-    </view>
     <!-- 业主描述 -->
     <view class="weui-panel weui-panel_access">
       <view class="weui-panel_title">业主描述</view>
@@ -112,10 +104,10 @@
           <view class="weui-panel_list_key">订单编号:</view>
           <view class="weui-panel_list_val">{{hm_landlord_rent.hm_promotion_id.order_number}}</view>
         </view>
-        <view class="weui-panel_list">
+        <!--<view class="weui-panel_list">
           <view class="weui-panel_list_key">订单创建时间:</view>
-          <view class="weui-panel_list_val">{{hm_landlord_rent.hm_promotion_id.ctime}}</view>
-        </view>
+          <view class="weui-panel_list_val">{{ctime}}</view>
+        </view>-->
         <view class="weui-panel_list">
           <view class="weui-panel_list_key">天数:</view>
           <view class="weui-panel_list_val">{{hm_landlord_rent.hm_promotion_id.day}}天</view>
@@ -124,14 +116,14 @@
           <view class="weui-panel_list_key">费用:</view>
           <view class="weui-panel_list_val">{{hm_landlord_rent.hm_promotion_id.cost}}</view>
         </view>
-        <view class="weui-panel_list">
+        <!--<view class="weui-panel_list">
           <view class="weui-panel_list_key">推广开始时间:</view>
-          <view class="weui-panel_list_val">{{hm_landlord_rent.hm_promotion_id.start_time}}</view>
+          <view class="weui-panel_list_val">{{start_time}}</view>
         </view>
         <view class="weui-panel_list">
           <view class="weui-panel_list_key">推广结束时间:</view>
-          <view class="weui-panel_list_val">{{hm_landlord_rent.hm_promotion_id.end_time}}</view>
-        </view>
+          <view class="weui-panel_list_val">{{end_time}}</view>
+        </view>-->
         <view class="weui-panel_list">
           <view class="weui-panel_list_key">类型:</view>
           

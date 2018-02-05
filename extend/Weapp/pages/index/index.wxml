@@ -59,11 +59,11 @@
                   <view class="fxBox">
                     <view class="fxBox_title">卧室</view>
                       <checkbox-group class='fxBox_bd' bindchange="checkChange">
-                        <label bindtap="click"  wx:for="{{items}}" wx:key="{{items}}"
+                        <label bindtap="click"  wx:for="{{bedroom}}" wx:key="{{k}}"
                         class="fxBox_bd_list {{item.checked?'listCctive':''}}">
-                          <checkbox value="{{item.name}}" name="{{item.value}}" 
-                          checked="{{item.checked}}" hidden='true'></checkbox>
-                          <label class="fxBox_title">{{item.value}}</label>
+                          <checkbox value="{{item.start}}" name="{{item.key}}" 
+                          checked="false" hidden='true'></checkbox>
+                          <label class="fxBox_title">{{item.key}}</label>
                         </label>
                       </checkbox-group>
                   </view>
