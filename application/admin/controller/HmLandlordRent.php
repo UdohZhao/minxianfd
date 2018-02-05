@@ -93,6 +93,7 @@ class HmLandlordRent extends Base
         $data['hm_lease_id']['hm_ancillary_facility'] = explode(',', $data['hm_lease_id']['hm_ancillary_facility']);
         // 读取房源数据
         $data['hm_housing_resource_id'] = db('hm_housing_resource')->where('id',$data['hm_housing_resource_id'])->find();
+        $data['hm_housing_resource_id']['trait'] = explode(',', $data['hm_housing_resource_id']['trait']);
         // 读取房源环景图片数据
         $data['hm_housing_resource_id']['hm_view_images'] = db('hm_view_images')->where('hm_housing_resource_id',$data['hm_housing_resource_id']['id'])->select();
         // 读取房源业主数据

@@ -2,13 +2,10 @@
 <!--头像  -->
   <view class="header">
     <image src='../../dist/images/backgroud.png'></image>
-    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
-      <block wx:else>
-        <view class="box">
-          <image src='{{userInfo.avatarUrl}}'></image>
-          <view class="user">{{userInfo.nickName}}</view>
-        </view>
-    </block>
+    <view class="box">
+        <image src='{{userInfo.avatarUrl}}'></image>
+        <view class="user">{{userInfo.nickName}}</view>
+    </view>
   </view>
   <!--内容  -->
   <view class="weui-panel__hd">
