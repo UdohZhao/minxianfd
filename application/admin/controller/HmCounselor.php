@@ -104,6 +104,12 @@ class HmCounselor extends Base
     // 用户列表页面
     public function index()
     {
+        // hmlrid
+        $hmlrid = isset($_GET['hmlrid']) ? intval($_GET['hmlrid']) : 0;
+        $this->assign('hmlrid',$hmlrid);
+
+        slog($hmlrid);
+
         // search
         $search = "%%";
         if (input('?post.search')) $search = "%".input('post.search')."%";

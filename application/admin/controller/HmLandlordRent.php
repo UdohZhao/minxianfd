@@ -102,6 +102,8 @@ class HmLandlordRent extends Base
         $data['hm_landlord_id'] = db('hm_landlord')->where('id',$data['hm_landlord_id'])->find();
         // 读取房源置顶推广数据
         $data['hm_promotion_id'] = db('hm_promotion')->where('id',$data['hm_promotion_id'])->find();
+        // 读取房源租房顾问数据
+        $data['hm_counselor_id'] = db('hm_counselor')->where('id',$data['hm_counselor_id'])->find();
         slog($data);
         // assign
         $this->assign('data',$data);
@@ -246,6 +248,24 @@ class HmLandlordRent extends Base
                 return ajaxReturn(Rs(1,'不受影响的操作！',false));
             }
 
+        }
+    }
+
+    // 配置顾问
+    public function counselor()
+    {
+        // Ajax
+        if ($this->request->isAjax())
+        {
+            $data['hm_counselor_id'] = input('get.hm_counselor_id');
+            if (db('hm_landlord_rent')->where('id',$this->id)->update($data))
+            {
+                return ajaxReturn(Rs(0,'受影响的操作！',true));
+            }
+            else
+            {
+                return ajaxReturn(Rs(1,'不受影响的操作！',false));
+            }
         }
     }
 
