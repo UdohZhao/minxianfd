@@ -327,10 +327,11 @@ CREATE TABLE `hm_landlord_rent` (
   `hm_owner_id` int(10) unsigned NOT NULL COMMENT '\n关联房源业主信息表主键id',
   `hm_landlord_id` int(10) unsigned NOT NULL COMMENT '\n关联房源房东信息表主键id',
   `hm_promotion_id` int(10) unsigned NOT NULL COMMENT '\n关联房源置顶推广表主键id',
-  `hm_promotion_time_id` int(10) unsigned NOT NULL COMMENT '\n关联房源模块推广时间表主键id',
   `hm_counselor_id` int(10) unsigned NOT NULL COMMENT '\n关联房源租房顾问表主键id',
   `ctime` int(10) unsigned NOT NULL COMMENT '\n时间',
-  `status` tinyint(1) unsigned NOT NULL COMMENT '\n状态？0·启用，1·弃用',
+  `status` tinyint(1) unsigned NOT NULL COMMENT '\n状态？0·待审核，1·审核未通过，2·审核通过',
+  `type` int(10) unsigned NOT NULL COMMENT '\n类型？0·隐藏，1·展示',
+  `msg` varchar(255) NOT NULL COMMENT '\n留言信息',
   PRIMARY KEY (`id`),
   KEY `fk_hm_landlord_rent_weapp_user_idx` (`weapp_user_id`),
   KEY `fk_hm_landlord_rent_basics1_idx` (`hm_basics_id`),
@@ -341,9 +342,8 @@ CREATE TABLE `hm_landlord_rent` (
   KEY `fk_hm_landlord_rent_hm_owner1_idx` (`hm_owner_id`),
   KEY `fk_hm_landlord_rent_hm_landlord1_idx` (`hm_landlord_id`),
   KEY `fk_hm_landlord_rent_hm_promotion1_idx` (`hm_promotion_id`),
-  KEY `fk_hm_landlord_rent_hm_counselor1_idx` (`hm_counselor_id`),
-  KEY `fk_hm_landlord_rent_hm_promotion_time1_idx` (`hm_promotion_time_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='房源模块房东出租表';
+  KEY `fk_hm_landlord_rent_hm_counselor1_idx` (`hm_counselor_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='房源模块房东出租表'
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -365,14 +365,12 @@ DROP TABLE IF EXISTS `hm_lease`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `hm_lease` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '\n主键id',
-  `hm_lease_manner_id` int(10) unsigned NOT NULL COMMENT '\n关联房源租赁方式表主键id',
-  `hm_payment_method_id` int(10) unsigned NOT NULL COMMENT '\n关联房源付款方式表主键id',
-  `hm_ancillary_facility` varchar(5000) NOT NULL COMMENT '\n关联房源配套设置表主键id',
+  `hm_lease_manner` varchar(45) NOT NULL COMMENT '\n租赁方式',
+  `hm_payment_method` varchar(45) NOT NULL COMMENT '\n付款方式',
+  `hm_ancillary_facility` varchar(5000) NOT NULL COMMENT '\n房源配套设施',
   `rent` int(10) unsigned NOT NULL COMMENT '\n租金？X元/月',
-  PRIMARY KEY (`id`),
-  KEY `fk_hm_lease_hm_lease_manner1_idx` (`hm_lease_manner_id`),
-  KEY `fk_hm_lease_hm_payment_method1_idx` (`hm_payment_method_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='房源租赁信息表';
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='房源租赁信息表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -579,13 +577,21 @@ DROP TABLE IF EXISTS `hm_promotion`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `hm_promotion` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '\n主键id',
-  `hm_promotion_cost_id` int(10) unsigned NOT NULL COMMENT '\n关联房源置顶推广费用表主键id',
-  `start_time` int(10) unsigned NOT NULL COMMENT '\n开始时间',
-  `end_time` int(10) unsigned NOT NULL COMMENT '\n结束时间',
-  `status` tinyint(1) unsigned NOT NULL COMMENT '\n状态管理？0·启用，1·弃用',
+  `hm_landlord_rent_id` int(10) unsigned NOT NULL COMMENT '\n关联房源模块房东出租表主键id',
+  `weapp_user_id` int(10) unsigned NOT NULL COMMENT '\n关联小程序用户表主键id',
+  `order_number` varchar(45) NOT NULL COMMENT '\n订单编号',
+  `day` int(10) unsigned NOT NULL COMMENT '\n天数',
+  `cost` decimal(14,2) unsigned NOT NULL COMMENT '\n费用',
+  `start_time` int(10) unsigned NOT NULL COMMENT '\n推广开始时间',
+  `end_time` int(10) unsigned NOT NULL COMMENT '\n推广结束时间',
+  `pay_time` int(10) unsigned NOT NULL COMMENT '\n付款时间',
+  `ctime` int(10) unsigned NOT NULL COMMENT '\n订单创建时间',
+  `status` tinyint(1) unsigned NOT NULL COMMENT '\n状态管理？0·未启用，1·使用中，2·已过期',
+  `type` tinyint(1) unsigned NOT NULL COMMENT '\n类型？0·待付款，1·已付款',
   PRIMARY KEY (`id`),
-  KEY `fk_hm_promotion_hm_promotion_cost1_idx` (`hm_promotion_cost_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='房源置顶推广表';
+  KEY `fk_hm_promotion_weapp_user_idx` (`weapp_user_id`),
+  KEY `fk_hm_promotion_hm_landlord_rent1_idx` (`hm_landlord_rent_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='房源置顶推广表'
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -621,31 +627,6 @@ LOCK TABLES `hm_promotion_cost` WRITE;
 /*!40000 ALTER TABLE `hm_promotion_cost` DISABLE KEYS */;
 INSERT INTO `hm_promotion_cost` VALUES (1,1,25.00,1),(2,3,60.00,2),(3,7,100.00,3),(5,30,300.00,4);
 /*!40000 ALTER TABLE `hm_promotion_cost` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `hm_promotion_time`
---
-
-DROP TABLE IF EXISTS `hm_promotion_time`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `hm_promotion_time` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '\n\n主键id',
-  `start_time` int(10) unsigned NOT NULL COMMENT '\n开始时间',
-  `end_time` int(10) unsigned NOT NULL COMMENT '\n结束时间',
-  `status` tinyint(1) unsigned NOT NULL COMMENT '\n状态？0·正常，1·停用',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='房源模块推广时间表';
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `hm_promotion_time`
---
-
-LOCK TABLES `hm_promotion_time` WRITE;
-/*!40000 ALTER TABLE `hm_promotion_time` DISABLE KEYS */;
-/*!40000 ALTER TABLE `hm_promotion_time` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --

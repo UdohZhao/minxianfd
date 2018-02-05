@@ -1,0 +1,59 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/landlord/landlord",
+    "pages/me/me",
+    "pages/detail/detail",
+    "pages/hmHousingResource/hmHousingResource",
+    "pages/myRelease/myRelease",
+    "pages/myCollect/myCollect",
+    "pages/search/search",
+    "pages/Cookies/Cookies",
+    "pages/evaluate/evaluate",
+    "pages/hmDoorplate/hmDoorplate",
+    "pages/hmBasics/hmBasics",
+    "pages/hmLease/hmLease",
+    "pages/hmArea/hmArea",
+    "pages/hmOwner/hmOwner",
+    "pages/hmLandlord/hmLandlord",
+    "pages/pay/pay",
+    "pages/redis/redis",
+    "pages/sms/sms",
+    "pages/wxpay/wxpay",
+    "pages/success/success"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "岷县房东",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#eeeeee",
+    "enablePullDownRefresh": true
+  },
+  "tabBar": {
+    "color": "#000000",
+    "selectedColor": "#00FF00",
+    "backgroundColor": "#F8F8F8",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "index",
+        "iconPath": "dist/images/icon/emoji-1.png",
+        "selectedIconPath": "dist/images/icon/emoji-1.png"
+      },
+      {
+        "pagePath": "pages/landlord/landlord",
+        "text": "landlord",
+        "iconPath": "dist/images/icon/emoji-2.png",
+        "selectedIconPath": "dist/images/icon/emoji-2.png"
+      },
+      {
+        "pagePath": "pages/me/me",
+        "text": "me",
+        "iconPath": "dist/images/icon/emoji-3.png",
+        "selectedIconPath": "dist/images/icon/emoji-3.png"
+      }
+    ]
+  },
+  "debug": true
+}

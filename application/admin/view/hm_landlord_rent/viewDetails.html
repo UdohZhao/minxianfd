@@ -1,0 +1,482 @@
+{include file="layouts/header" /}
+{include file="layouts/nav" /}
+{include file="layouts/menu" /}
+
+<!-- Plugins For This Page -->
+  <link rel="stylesheet" href="/static/assets/vendor/magnific-popup/magnific-popup.css">
+
+<!-- Page -->
+<div class="page animsition">
+  <div class="page-header">
+    <h1 class="page-title">房源管理</h1>
+  </div>
+  <div class="page-content">
+
+    <div class="panel">
+      <div class="panel-heading">
+        <h3 class="panel-title">房东信息</h3>
+      </div>
+      <div class="panel-body">
+        <table class="table table-hover">
+            <tbody>
+              <tr>
+                <td>
+                  <blockquote>
+                    <p>姓名：{$data.hm_landlord_id.cname}</p>
+                  </blockquote>
+                </td>
+                <td>
+                  <blockquote>
+                    <p>手机号码：{$data.hm_landlord_id.phone}</p>
+                  </blockquote>
+                </td>
+                <td>
+                  <blockquote>
+                    <p>发布时间：{$data.ctime|date="Y-m-d H:i",###}</p>
+                  </blockquote>
+                </td>
+              </tr>
+            </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-heading">
+        <h3 class="panel-title">房源信息</h3>
+      </div>
+      <div class="panel-body">
+      <ul class="blocks blocks-100 blocks-xlg-4 blocks-md-3 blocks-sm-2" id="exampleList"
+      data-filterable="true">
+      {foreach name="data.hm_housing_resource_id.hm_view_images" item="v" key="k"}
+        <li data-type="object">
+          <div class="widget widget-shadow">
+            <figure class="widget-header overlay-hover overlay">
+              <img class="overlay-figure overlay-scale" src="{$v.path}"
+              alt="...">
+              <figcaption class="overlay-panel overlay-background overlay-fade overlay-icon">
+                <a class="icon wb-search" href="{$v.path}"></a>
+              </figcaption>
+            </figure>
+            <h4 class="widget-title">环景图片 - {$k}</h4>
+          </div>
+        </li>
+      {/foreach}
+      </ul>
+        <table class="table table-hover">
+            <tbody>
+              <tr>
+                <td>
+                  <blockquote>
+                    <p>标题：{$data.hm_housing_resource_id.title}</p>
+                  </blockquote>
+                </td>
+                <td>
+                  <blockquote>
+                    <p>入住时间：{$data.hm_housing_resource_id.in_time}</p>
+                  </blockquote>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2">
+                  <blockquote>
+                    <p>描述：{$data.hm_housing_resource_id.describe}</p>
+                  </blockquote>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2">
+                  <blockquote>
+                    <p>特点：{$data.hm_housing_resource_id.trait}</p>
+                  </blockquote>
+                </td>
+              </tr>
+            </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-heading">
+        <h3 class="panel-title">基础信息</h3>
+      </div>
+      <div class="panel-body">
+        <table class="table table-hover">
+            <tbody>
+              <tr>
+                <td>
+                  <blockquote>
+                    <p>
+                        房源类型：
+                        {eq name="data.hm_basics_id.housing_resource_genre" value="0"}其他{/eq}
+                        {eq name="data.hm_basics_id.housing_resource_genre" value="1"}住宅{/eq}
+                        {eq name="data.hm_basics_id.housing_resource_genre" value="2"}别墅{/eq}
+                        {eq name="data.hm_basics_id.housing_resource_genre" value="3"}写字楼{/eq}
+                        {eq name="data.hm_basics_id.housing_resource_genre" value="4"}商铺{/eq}
+                    </p>
+                  </blockquote>
+                </td>
+                <td>
+                  <blockquote>
+                    <p>
+                        装修程度：
+                        {eq name="data.hm_basics_id.decorate_degree" value="0"}其他{/eq}
+                        {eq name="data.hm_basics_id.decorate_degree" value="1"}豪华装修{/eq}
+                        {eq name="data.hm_basics_id.decorate_degree" value="2"}精装修{/eq}
+                        {eq name="data.hm_basics_id.decorate_degree" value="3"}中等装修{/eq}
+                        {eq name="data.hm_basics_id.decorate_degree" value="4"}简装修{/eq}
+                        {eq name="data.hm_basics_id.decorate_degree" value="5"}毛坯{/eq}
+                    </p>
+                  </blockquote>
+                </td>
+                <td>
+                  <blockquote>
+                    <p>
+                        朝向：
+                        {eq name="data.hm_basics_id.orientation" value="0"}南北{/eq}
+                        {eq name="data.hm_basics_id.orientation" value="1"}南{/eq}
+                        {eq name="data.hm_basics_id.orientation" value="2"}东南{/eq}
+                        {eq name="data.hm_basics_id.orientation" value="3"}东{/eq}
+                        {eq name="data.hm_basics_id.orientation" value="4"}西南{/eq}
+                        {eq name="data.hm_basics_id.orientation" value="5"}北{/eq}
+                        {eq name="data.hm_basics_id.orientation" value="6"}西{/eq}
+                        {eq name="data.hm_basics_id.orientation" value="7"}东西{/eq}
+                        {eq name="data.hm_basics_id.orientation" value="8"}东北{/eq}
+                        {eq name="data.hm_basics_id.orientation" value="9"}西北{/eq}
+                    </p>
+                  </blockquote>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <blockquote>
+                    <p>面积： {$data.hm_basics_id.area}㎡</p>
+                  </blockquote>
+                </td>
+                <td colspan="2">
+                  <blockquote>
+                    <p>户型：{$data.hm_basics_id.hm_house_type_id.habitable_room}室{$data.hm_basics_id.hm_house_type_id.living_room}厅{$data.hm_basics_id.hm_house_type_id.shower_room}卫</p>
+                  </blockquote>
+                </td>
+              </tr>
+            </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-heading">
+        <h3 class="panel-title">区域信息</h3>
+      </div>
+      <div class="panel-body">
+        <table class="table table-hover">
+            <tbody>
+              <tr>
+                <td>
+                  <blockquote>
+                    <p>
+                        岷县：{$data.hm_area_id.hm_min_xian_id.town_village}
+                    </p>
+                  </blockquote>
+                </td>
+                <td>
+                  <blockquote>
+                    <p>
+                        街道及小区：{$data.hm_area_id.address}
+                    </p>
+                  </blockquote>
+                </td>
+              </tr>
+            </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-heading">
+        <h3 class="panel-title">小区信息</h3>
+      </div>
+      <div class="panel-body">
+        <table class="table table-hover">
+            <tbody>
+              <tr>
+                <td>
+                  <blockquote>
+                    <p>
+                        名称：{$data.hm_community_id.cname}
+                    </p>
+                  </blockquote>
+                </td>
+                <td>
+                  <blockquote>
+                    <p>
+                        小区楼层：{$data.hm_community_id.hm_floor_id.present_floor}/当前楼层，{$data.hm_community_id.hm_floor_id.total_floor}/总楼层
+                    </p>
+                  </blockquote>
+                </td>
+                <td>
+                  <blockquote>
+                    <p>
+                        小区门牌：{$data.hm_community_id.hm_doorplate_id.building}号楼，{$data.hm_community_id.hm_doorplate_id.unit}单元，{$data.hm_community_id.hm_doorplate_id.household}户
+                    </p>
+                  </blockquote>
+                </td>
+              </tr>
+            </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-heading">
+        <h3 class="panel-title">租赁信息</h3>
+      </div>
+      <div class="panel-body">
+        <table class="table table-hover">
+            <tbody>
+              <tr>
+                <td>
+                  <blockquote>
+                    <p>
+                        租赁方式：{$data.hm_lease_id.hm_lease_manner}
+                    </p>
+                  </blockquote>
+                </td>
+                <td>
+                  <blockquote>
+                    <p>
+                        付款方式：{$data.hm_lease_id.hm_payment_method}
+                    </p>
+                  </blockquote>
+                </td>
+                <td>
+                  <blockquote>
+                    <p>
+                        租金：￥{$data.hm_lease_id.rent}/月
+                    </p>
+                  </blockquote>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="3">
+                  <blockquote>
+                    <p>
+                        配套设施：
+                        {foreach name="data.hm_lease_id.hm_ancillary_facility" item="v" key="k"}
+                          <span class="label label-primary">{$v}</span>
+                        {/foreach}
+                    </p>
+                  </blockquote>
+                </td>
+              </tr>
+            </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-heading">
+        <h3 class="panel-title">业主信息</h3>
+      </div>
+      <div class="panel-body">
+        <table class="table table-hover">
+            <tbody>
+              <tr>
+                <td>
+                  <blockquote>
+                    <p>
+                        描述：{$data.hm_owner_id.description}
+                    </p>
+                  </blockquote>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <blockquote>
+                    <p>
+                        要求：{$data.hm_owner_id.demand}
+                    </p>
+                  </blockquote>
+                </td>
+              </tr>
+            </tbody>
+        </table>
+      </div>
+    </div>
+
+    {if condition="($data.hm_promotion_id != 0)"}
+    <div class="panel">
+      <div class="panel-heading">
+        <h3 class="panel-title">置顶推广</h3>
+      </div>
+      <div class="panel-body">
+        <table class="table table-hover">
+            <tbody>
+              <tr>
+                <td>
+                  <blockquote>
+                    <p>
+                        订单编号：{$data.hm_promotion_id.order_number}
+                    </p>
+                  </blockquote>
+                </td>
+                <td>
+                  <blockquote>
+                    <p>
+                        订单创建时间：{$data.hm_promotion_id.ctime|date="Y-m-d H:i",###}
+                    </p>
+                  </blockquote>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <blockquote>
+                    <p>
+                        天数：{$data.hm_promotion_id.day}天
+                    </p>
+                  </blockquote>
+                </td>
+                <td>
+                  <blockquote>
+                    <p>
+                        费用：￥{$data.hm_promotion_id.cost}
+                    </p>
+                  </blockquote>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <blockquote>
+                    <p>
+                        推广开始时间：
+                        {eq name="data.hm_promotion_id.start_time" value="0"}
+                          - - -
+                        {else /}
+                          {$data.hm_promotion_id.start_time|date="Y-m-d H:i",###}
+                        {/eq}
+                    </p>
+                  </blockquote>
+                </td>
+                <td>
+                  <blockquote>
+                    <p>
+                        推广结束时间：
+                        {eq name="data.hm_promotion_id.end_time" value="0"}
+                          - - -
+                        {else /}
+                          {$data.hm_promotion_id.end_time|date="Y-m-d H:i",###}
+                        {/eq}
+                    </p>
+                  </blockquote>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <blockquote>
+                    <p>
+                        类型：
+                        {eq name="data.hm_promotion_id.type" value="0"}<span class="label label-danger">待付款</span>{/eq}
+                        {eq name="data.hm_promotion_id.type" value="1"}<span class="label label-success">已付款</span>{/eq}
+                    </p>
+                  </blockquote>
+                </td>
+                <td>
+                  <blockquote>
+                    <p>
+                        付款时间：
+                        {eq name="data.hm_promotion_id.pay_time" value="0"}
+                          - - -
+                        {else /}
+                          {$data.hm_promotion_id.pay_time|date="Y-m-d H:i",###}
+                        {/eq}
+                    </p>
+                  </blockquote>
+                </td>
+              </tr>
+            </tbody>
+        </table>
+      </div>
+    </div>
+    {/if}
+
+    {if condition="($data.status == 0)"}
+    <div class="panel">
+      <div class="panel-heading">
+        <h3 class="panel-title">操作</h3>
+      </div>
+      <div class="panel-body">
+        <form class="form-horizontal">
+          <div class="form-group">
+            <label class="col-sm-2 control-label">审核原因</label>
+            <div class="col-sm-10">
+              <textarea class="form-control" name="msg" id="msg" rows="3"></textarea>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+              {if condition="(is_array($data.hm_promotion_id))"}
+                <button type="button" class="btn btn-success" onclick="viewDetailsCheck({$id},{$data.hm_promotion_id.id},{$data.hm_promotion_id.day},{$data.hm_promotion_id.type},2);">通过</button>
+                 -
+                <button type="button" class="btn btn-danger" onclick="viewDetailsCheck({$id},{$data.hm_promotion_id.id},{$data.hm_promotion_id.day},{$data.hm_promotion_id.type},1);">不通过</button>
+              {else /}
+                <button type="button" class="btn btn-success" onclick="viewDetailsCheck({$id},0,0,0,2);">通过</button>
+                 -
+                <button type="button" class="btn btn-danger" onclick="viewDetailsCheck({$id},0,0,0,1);">不通过</button>
+              {/if}
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    {else /}
+
+    <div class="panel">
+      <div class="panel-heading">
+        <h3 class="panel-title">操作</h3>
+      </div>
+      <div class="panel-body">
+        <table class="table table-hover">
+            <tbody>
+              <tr>
+                <td>
+                  <blockquote>
+                    <p>
+                      审核状态：
+                      {eq name="data.status" value="1"}
+                        <span class="label label-danger">审核未通过</span>
+                      {/eq}
+                      {eq name="data.status" value="2"}
+                        <span class="label label-success">审核通过</span>
+                      {/eq}
+                    </p>
+                  </blockquote>
+                </td>
+                <td>
+                  <blockquote>
+                    <p>备注原因：{$data.msg}</p>
+                  </blockquote>
+                </td>
+              </tr>
+            </tbody>
+        </table>
+      </div>
+    </div>
+
+    {/if}
+
+  </div>
+</div>
+<!-- End Page -->
+
+{include file="layouts/footer" /}
+
+<!-- Plugins For This Page -->
+<script src="/static/assets/vendor/isotope/isotope.min.js"></script>
+<script src="/static/assets/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+
+<!-- Scripts For This Page -->
+<script src="/static/assets/js/components/filterable.js"></script>
+<script src="/static/assets/examples/js/pages/gallery.js"></script>
+
+<!-- 当前页面js -->
+{js href="/static/admin/hm_landlord_rent/js/viewDetails.js" /}

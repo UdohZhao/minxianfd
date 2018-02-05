@@ -24,6 +24,7 @@ class HmBasics extends Base
         // if
         if ($hm_landlord_rent_id)
         {
+            slog(Rs(0,'受影响的操作！',$hm_landlord_rent_id));
             return ajaxReturn(Rs(0,'受影响的操作！',$hm_landlord_rent_id));
         }
         else
@@ -59,7 +60,8 @@ class HmBasics extends Base
         $dataHmlr['weapp_user_id'] = $this->wuid;
         $dataHmlr['hm_basics_id'] = $hm_basics_id;
         $dataHmlr['ctime'] = time();
-        $dataHmlr['status'] = 1;
+        $dataHmlr['status'] = 0;
+        $dataHmlr['type'] = 0;
         return $dataHmlr;
     }
 

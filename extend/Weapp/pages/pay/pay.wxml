@@ -2,9 +2,9 @@
   <view class="page_weui_hd">置顶推广</view>
   <view class="page_bd">
       <!-- 遍历体 -->
-      <block wx:for="{{payList}}" >
-        <view class="page_list {{curNav == item.id ? 'active' : ''}}"  data-cost="{{item.cost}}" bindtap='payTap' data-index="{{index}}" data-id="{{item.id}}">
-          {{item.num}}
+      <block wx:for="{{hm_promotion_cost_arr}}" wx:key="index">
+        <view class="page_list {{curNav == item.id ? 'active' : ''}}" data-day="{{item.day}}"  data-cost="{{item.cost}}" bindtap="payTap" data-id="{{item.id}}">
+          {{item.day}}天/{{item.cost}}元
         </view>
       </block>
     <view class="h15"></view>
@@ -17,6 +17,6 @@
   </view>
   <!-- 固定底部 支付链接 -->
   <view class="pay">
-    <button class="weui-btn mini-btn" type="primary" bindtap='gotoPay'>立即支付</button>
+    <button class="weui-btn mini-btn" type="primary" bindtap='wxpay'>立即支付</button>
   </view>
 </view>

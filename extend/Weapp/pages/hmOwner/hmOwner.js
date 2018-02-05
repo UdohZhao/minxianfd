@@ -157,7 +157,9 @@ Page({
                 // if
                 if (res.data.status == 0) 
                 {
-                    console.log(res.data);
+                    wx.redirectTo({
+                      url: '/pages/hmLandlord/hmLandlord?hmlrid=' + res.data.data
+                    })
                 } 
                 else
                 {
