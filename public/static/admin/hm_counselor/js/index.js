@@ -99,3 +99,42 @@ function freeze(id,status)
     })
 }
 
+// 配置顾问
+function counselor(id,hmlrid)
+{
+    swal({
+      title: '确认选中吗？',
+      text: '确认后将绑定为该房源顾问！',
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: '确定',
+    }).then(function(){
+      // Ajax
+      $.ajax({
+        type: 'GET',
+        url: '/admin/HmLandlordRent/counselor?id='+hmlrid,
+        data: {hm_counselor_id:id},
+        dataType: 'JSON',
+        success: function(res)
+        {
+            // if
+            if (res.status == 0)
+            {
+                swal('成功提示',res.msg,'success');
+                setTimeout("window.location.href='/admin/HmLandlordRent/check?status=2'",2000);
+            }
+            else
+            {
+                swal('错误提示',res.msg,'error');
+            }
+        },
+        error: function(e)
+        {
+          console.log(e);
+        }
+      });
+    })
+}
+

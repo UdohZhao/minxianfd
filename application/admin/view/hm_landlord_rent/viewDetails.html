@@ -403,6 +403,50 @@
     </div>
     {/if}
 
+    {if condition="($data.hm_counselor_id)"}
+    <div class="panel">
+      <div class="panel-heading">
+        <h3 class="panel-title">顾问信息</h3>
+      </div>
+      <div class="panel-body">
+        <table class="table table-hover">
+            <tbody>
+              <tr>
+                <td colspan="3">
+                    <img src="{$data.hm_counselor_id.head_portrait}" class="img-circle" style="width: 150px; height: 150px;margin-left: 40%;">
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <blockquote>
+                    <p>
+                        姓名：{$data.hm_counselor_id.cname}
+                    </p>
+                  </blockquote>
+                </td>
+                <td>
+                  <blockquote>
+                    <p>
+                        电话号码：{$data.hm_counselor_id.telephone}
+                    </p>
+                  </blockquote>
+                </td>
+                <td>
+                  <blockquote>
+                    <p>
+                        状态：
+                        {eq name="data.hm_counselor_id.status" value="0"}<span class="label label-success">启用</span>{/eq}
+                        {eq name="data.hm_counselor_id.status" value="1"}<span class="label label-danger">弃用</span>{/eq}
+                    </p>
+                  </blockquote>
+                </td>
+              </tr>
+            </tbody>
+        </table>
+      </div>
+    </div>
+    {/if}
+
     {if condition="($data.status == 0)"}
     <div class="panel">
       <div class="panel-heading">

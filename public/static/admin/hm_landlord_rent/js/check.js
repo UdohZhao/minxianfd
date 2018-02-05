@@ -100,4 +100,26 @@ function del(id)
     })
 }
 
+// 初始配置租房顾问
+function counselor(id)
+{
+    window.location.href = "/admin/HmCounselor/index?hmlrid="+id;
+}
+
+// 重新配置租房顾问
+function counselorRe(id)
+{
+    swal({
+      title: '确认重新配置顾问吗？',
+      text: '',
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: '确定',
+    }).then(function(){
+      window.location.href = "/admin/HmCounselor/index?hmlrid="+id;
+    })
+}
+
 

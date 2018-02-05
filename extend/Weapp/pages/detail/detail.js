@@ -1,3 +1,4 @@
+const app = getApp();
 Page({
 
   /**
@@ -16,7 +17,65 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+    var that = this;
+
+    // 房源模块房东出租表主键id
+    that.setData({
+      hmlrid: options.hmlrid
+    })
+
+    // 请求房源发布数据
+    wx.request({
+      url: app.data.domain + '/WxLogin/checkRedis', 
+      data: {
+        threerd_session: wx.getStorageSync('3rd_session')
+      },
+      header: {
+          'content-type': 'application/json'
+      },
+      success: function(res) {
+        // 3rd_session
+        if (res.data.status == 1) 
+        {
+          app.threerdLogin();
+        }
+        else
+        {
+          // 小程序用户id
+          var wuid = res.data.data;
+          
+          //提交
+          wx.request({
+            url: app.data.domain + '/HmLandlordRent/viewDetails?wuid='+wuid+'&id='+that.data.hmlrid,
+            data: {},
+            method: 'GET',
+            header: {
+                'content-type': 'application/json'
+            },
+            success: function (res) {
+              console.log(res);
+              // if 
+              if (res.data.status == 0) 
+              {
+                  that.setData({
+                    hm_landlord_rent: res.data.data
+                  })
+              }
+              else
+              {
+                  that.setData({
+                    hm_landlord_rent: false
+                  })
+              }
+            },
+            fail: function (e) {
+              console.log(e);
+            }
+          })
+        }
+      }
+    })
+
   },
 
   /**

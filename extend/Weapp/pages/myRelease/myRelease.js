@@ -118,5 +118,18 @@ Page({
    */
   onShareAppMessage: function () {
     
+  },
+
+  /**
+   * 去往详细
+   */
+  gotoDetail: function (e) {
+      // 获取hmlrid
+      var hmlrid = e.currentTarget.dataset.hmlrid;
+      wx.navigateTo({
+        url: '/pages/detail/detail?hmlrid=' + hmlrid
+      })
   }
+
+
 })
