@@ -16,46 +16,15 @@ Page({
     curIndex: 0,
     navList:[
       {
-        id:1,
-        name:'热门'
+        id:0,
+        name:'镇'
       },
       {
-        id: 2,
-        name: '镇'
-      },
-      {
-        id: 3,
+        id: 1,
         name: '乡'
       },
     ],
     dishesList:[
-      [
-        {
-          name:'岷阳镇',
-          id:1,
-          num:1,
-        },
-        {
-          name: '蒲麻镇',
-          id: 2,
-          num: 1
-        },
-        {
-          name: '西寨镇',
-          id: 3,
-          num: 1
-        },
-        {
-          name: '清水乡',
-          id: 10,
-          num: 1
-        },
-        {
-          name: '马坞乡',
-          id: 11,
-          num: 1
-        }
-      ],
       [
         {
           name: '岷阳镇',
@@ -428,10 +397,20 @@ Page({
               {
                   that.setData({
                     hm_landlord_rent: res.data.data,
-                    bedroom:res.data.data.bedroom
+                    bedroom:res.data.data.bedroom,
+                    covered_area:res.data.data.covered_area,
+                    floor:res.data.data.floor,
+                    toilet:res.data.data.toilet,
+                    orientation:res.data.data.orientation,
+                    hm_lease_manner:res.data.data.hm_lease_manner,
+                    housing_resource_genre:res.data.data.housing_resource_genre,
+                    upfitter:res.data.data.upfitter,
+                    hm_min_xian:res.data.data.hm_min_xian,
+                    //详情列表数据
+                    hm_landlord_rent:res.data.data.hm_landlord_rent
                   })
-                //console.log(res.data.data)
-                console.log(res.data.data.bedroom)
+               // console.log(res.data.data)
+                console.log(res.data.data.hm_landlord_rent)
                 
               }
               else
@@ -521,11 +500,14 @@ Page({
   selectNav(event){
      let id = event.target.dataset.id,
     index = parseInt(event.target.dataset.index)
+    console.log(index)
      self = this;
     this.setData({
       curNav: id,
       curIndex: index
     })
+    console.log(curNav)
+    console.log(curIndex)
   },
   //点击地区搜索
   searchTap:function(e){
@@ -565,10 +547,10 @@ Page({
     console.log(checkArr)
     for (var i = 0; i < items.length; i++) {
       if (checkArr.indexOf(i + "") != -1) {
-        items[i].checked = true;
+        items[i].checked = false;
         console.log(items)
       } else {
-        items[i].checked = false;
+        items[i].checked = true;
         console.log(items)
         
       }
@@ -584,7 +566,7 @@ Page({
     that.setData({
       value1: e.detail.value
     })
-    var items1 = this.data.items1;
+    var items1 = this.data.toilet;
     console.log(items1)
     var checkArr = e.detail.value;
     console.log(checkArr)
@@ -596,7 +578,7 @@ Page({
       }
     }
     this.setData({
-      items1: items1, 
+      toilet: items1, 
     }) 
   },
   //朝向
@@ -606,7 +588,7 @@ Page({
     that.setData({
       value1: e.detail.value
     })
-    var items2 = this.data.items2;
+    var items2 = this.data.orientation;
     console.log(items2)
     var checkArr = e.detail.value;
     console.log(checkArr)
@@ -618,7 +600,7 @@ Page({
       }
     }
     this.setData({
-      items2: items2,
+      orientation: items2,
     })
   },
   //面积
@@ -628,7 +610,7 @@ Page({
     that.setData({
       value1: e.detail.value
     })
-    var items3 = this.data.items3;
+    var items3 = this.data.covered_area;
     console.log(items3)
     var checkArr = e.detail.value;
     console.log(checkArr)
@@ -640,31 +622,10 @@ Page({
       }
     }
     this.setData({
-      items3: items3,
+      covered_area: items3,
     })
   },
-  //标签
-  checkChangeLebal: function (e) {
-    console.log('radio发生change事件，携带value值为：', e)
-    var that = this
-    that.setData({
-      value1: e.detail.value
-    })
-    var items4 = this.data.items4;
-    console.log(items4)
-    var checkArr = e.detail.value;
-    console.log(checkArr)
-    for (var i = 0; i < items4.length; i++) {
-      if (checkArr.indexOf(i + "") != -1) {
-        items4[i].checked = true;
-      } else {
-        items4[i].checked = false;
-      }
-    }
-    this.setData({
-      items4: items4,
-    })
-  },
+
   //楼层
   checkChangeFloor:function(e) {
     console.log('radio发生change事件，携带value值为：', e)
@@ -672,7 +633,7 @@ Page({
     that.setData({
       value1: e.detail.value
     })
-    var items5 = this.data.items5;
+    var items5 = this.data.floor;
     console.log(items5)
     var checkArr = e.detail.value;
     console.log(checkArr)
@@ -684,7 +645,7 @@ Page({
       }
     }
     this.setData({
-      items5: items5,
+      floor: items5,
     })
   },
   //装修
@@ -694,7 +655,7 @@ Page({
     that.setData({
       value1: e.detail.value
     })
-    var items6 = this.data.items6;
+    var items6 = this.data.upfitter;
     console.log(items6)
     var checkArr = e.detail.value;
     console.log(checkArr)
@@ -706,53 +667,11 @@ Page({
       }
     }
     this.setData({
-      items6: items6,
+      upfitter: items6,
     })
   },
-  //供暖 --单选
-  checkChangeHeating: function (e) {
-    console.log('radio发生change事件，携带value值为：', e)
-    var that = this
-    that.setData({
-      value1: e.detail.value
-    })
-    var items7 = this.data.items7;
-    console.log(items7)
-    var checkArr = e.detail.value;
-    console.log(checkArr)
-    for (var i = 0; i < items7.length; i++) {
-      if (checkArr.indexOf(i + "") != -1) {
-        items7[i].checked = true;
-      } else {
-        items7[i].checked = false;
-      }
-    }
-    this.setData({
-      items7: items7,
-    })
-  },
-  //电梯 --单选
-  checkChangeElevator: function (e) {
-    console.log('radio发生change事件，携带value值为：', e)
-    var that = this
-    that.setData({
-      value1: e.detail.value
-    })
-    var items8 = this.data.items8;
-    console.log(items8)
-    var checkArr = e.detail.value;
-    console.log(checkArr)
-    for (var i = 0; i < items8.length; i++) {
-      if (checkArr.indexOf(i + "") != -1) {
-        items8[i].checked = true;
-      } else {
-        items8[i].checked = false;
-      }
-    }
-    this.setData({
-      items8: items8,
-    })
-  },
+
+  
   //方式 --单选
   checkChangeWay: function (e) {
     console.log('radio发生change事件，携带value值为：', e)
@@ -760,7 +679,7 @@ Page({
     that.setData({
       value1: e.detail.value
     })
-    var items9 = this.data.items9;
+    var items9 = this.data.hm_lease_manner;
     console.log(items9)
     var checkArr = e.detail.value;
     console.log(checkArr)
@@ -772,77 +691,61 @@ Page({
       }
     }
     this.setData({
-      items9: items9,
+      hm_lease_manner: items9,
     })
   },
   //重置 房型
   reset:function(e){
-    var style = this.data.items
+    var style = this.data.bedroom
     for (var i = 0; i < style.length; i++){
       style[i].checked = false;
     }
     this.setData({
-      items: style,
+      bedroom: style,
     })
-    var style2 = this.data.items1
+    var style2 = this.data.toilet
     for (var i = 0; i < style2.length; i++) {
       style2[i].checked = false;
     }
     this.setData({
-      items1: style2,
+      toilet: style2,
     })
   },
   //重置 更多
   resetMore:function(e){
     //朝向
-    var resetMore2 = this.data.items2
+    var resetMore2 = this.data.orientation
     for (var i = 0; i < resetMore2.length; i++) {
       resetMore2[i].checked = false;
     }
     //建筑面积
-    var resetMore3 = this.data.items3
+    var resetMore3 = this.data.covered_area
     for (var i = 0; i < resetMore3.length; i++) {
       resetMore3[i].checked = false;
     }
-    //标签
-    var resetMore4 = this.data.items4
-    for (var i = 0; i < resetMore4.length; i++) {
-      resetMore4[i].checked = false;
-    }
+   
     //楼层
-    var resetMore5 = this.data.items5
+    var resetMore5 = this.data.floor
     for (var i = 0; i < resetMore5.length; i++) {
       resetMore5[i].checked = false;
     }
     //装修
-    var resetMore6 = this.data.items6
+    var resetMore6 = this.data.upfitter
     for (var i = 0; i < resetMore6.length; i++) {
       resetMore6[i].checked = false;
     }
-    //供暖
-    var resetMore7 = this.data.items7
-    for (var i = 0; i < resetMore7.length; i++) {
-      resetMore7[i].checked = false;
-    }
-    //电梯
-    var resetMore8 = this.data.items8
-    for (var i = 0; i < resetMore8.length; i++) {
-      resetMore8[i].checked = false;
-    }
+    
     //方式
-    var resetMore9 = this.data.items9
+    var resetMore9 = this.data.hm_lease_manner
     for (var i = 0; i < resetMore9.length; i++) {
       resetMore9[i].checked = false;
     }
     this.setData({
-      items2: resetMore2,
-      items3: resetMore3,
-      items4: resetMore4,
-      items5: resetMore5,
-      items6: resetMore6,
-      items7: resetMore7,
-      items8: resetMore8,
-      items9: resetMore9,
+      orientation: resetMore2,
+      covered_area: resetMore3,
+      floor: resetMore5,
+      upfitter: resetMore6,
+      hm_lease_manner: resetMore9,
       
     })
 
