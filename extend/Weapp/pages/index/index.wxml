@@ -36,14 +36,14 @@
                    <!--左边内容区域  -->
                     <view class="nav_left">
                       <block wx:for="{{navList}}" wx:key="k">
-                        <view class="nav_list_items {{curNav == item.id ? 'active' : ''}}" bindtap='selectNav' data-index="{{index}}" data-id="{{item.id}}">{{item.name}}</view>
-                      </block>
+                        <view class="nav_list_items {{curNav == item.id ? 'active' : ''}}" bindtap='selectNav' data-cname="{{item.cname}}" data-index="{{index}}" data-id="{{item.id}}">{{item.name}}</view>
+                      </block> 
                     </view>
                       <!-- 右边显示区域 -->
                       <view class="nav_right">
                       <!-- 需要先判断 是否为空 -->
-                        <block wx:for="{{hm_min_xian[curIndex]}}" wx:key="k" wx:for-index="i" >
-                          <scroll-view class="nav_right_items" data-id="{{item.id}}" bindtap='searchTap'>{{item.town_village}}</scroll-view>
+                        <block wx:for="{{hm_min_xian[cname]}}" wx:key="i" wx:for-index="i" wx:for-index="k">
+                          <scroll-view class="nav_right_items {{listActive == k ? 'listActive' : ''}}" data-index="{{k}}" data-id="{{item.id}}" bindtap='searchTap'>{{item.town_village}}</scroll-view>
                         </block> 
                       </view> 
                    </view>
