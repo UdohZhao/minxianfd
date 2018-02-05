@@ -1,4 +1,3 @@
-//index.js
 //获取应用实例
 const app = getApp()
 
@@ -394,54 +393,58 @@ Page({
 
   onLoad: function (e) {
     var that = this;
-    if (app.globalData.userInfo) {
-      that.setData({
-        userInfo: app.globalData.userInfo,
-        hasUserInfo: true
-      })
-    } else if (that.data.canIUse){
-      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-      // 所以此处加入 callback 以防止这种情况
-      app.userInfoReadyCallback = res => {
-        that.setData({
-          userInfo: res.userInfo,
-          hasUserInfo: true
-        })
-      }
-    } else {
-      // 在没有 open-type=getUserInfo 版本的兼容处理
-      wx.getUserInfo({
-        success: res => {
-          app.globalData.userInfo = res.userInfo
-          that.setData({
-            userInfo: res.userInfo,
-            hasUserInfo: true
+    
+    // 请求岷县数据
+    wx.request({
+      url: app.data.domain + '/WxLogin/checkRedis', 
+      data: {
+        threerd_session: wx.getStorageSync('3rd_session')
+      },
+      header: {
+          'content-type': 'application/json'
+      },
+      success: function(res) {
+        // 3rd_session
+        if (res.data.status == 1) 
+        {
+          app.threerdLogin();
+        }
+        else
+        {
+          // 小程序用户id
+          var wuid = res.data.data;
+          //提交
+          wx.request({
+            url: app.data.domain + '/HmLandlordRent/index?wuid='+wuid,
+            data: {status:2,type:1},
+            method: 'GET',
+            header: {
+                'content-type': 'application/json'
+            },
+            success: function (res) {
+              console.log(res);
+              // if 
+              if (res.data.status == 0) 
+              {
+                  that.setData({
+                    hm_landlord_rent: res.data.data
+                  })
+              }
+              else
+              {
+                  that.setData({
+                    hm_landlord_rent: false
+                  })
+              }
+            },
+            fail: function (e) {
+              console.log(e);
+            }
           })
         }
-      })
-    }
-    //发起网络请求，获取数据
-    // wx.request({
-    //     url: app.data.domain + '/Index/indexDemo', 
-    //     header: {
-    //         'content-type': 'application/json'
-    //     },
-    //     success: function(res) {
-    //       console.log('请求成功')
-    //        console.log(res.data);
-    //   },
-    //   fail:function(error){
-    //     console.log(error)
-    //   }
-    // })
-  },
-  getUserInfo: function(e) {
-    console.log(e)
-    app.globalData.userInfo = e.detail.userInfo
-    this.setData({
-      userInfo: e.detail.userInfo,
-      hasUserInfo: true
+      }
     })
+
   },
 
   tabClick: function (e) {
@@ -451,6 +454,7 @@ Page({
         showModalStatus: true
     });
   },
+
   /**
    * 隐藏遮罩层
    */
@@ -474,6 +478,7 @@ Page({
       })
     }.bind(this), 200)
   },
+
   //去房屋详情
   gotoDetail:function(e){
 

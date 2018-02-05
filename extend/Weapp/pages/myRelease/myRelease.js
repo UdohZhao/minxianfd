@@ -50,7 +50,7 @@ Page({
               if (res.data.status == 0) 
               {
                   that.setData({
-                    hm_landlord_rent: res.data.data
+                    hm_landlord_rent: res.data.data.hm_landlord_rent
                   })
                    console.log(res.data.data)
               }

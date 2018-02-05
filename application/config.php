@@ -271,6 +271,10 @@ return [
     'key'           =>  'WaUM7PuMicM3UFKtZIKrc9GrJNORkXCZ',
 
     // 云片网
-    'apikey'        =>  '407405cb91501f840ca121ea0d65d457'
+    'apikey'        =>  '407405cb91501f840ca121ea0d65d457',
+
+    // 租金
+    'rent'          =>  ''
+
 
 ];
