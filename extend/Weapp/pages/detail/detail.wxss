@@ -156,3 +156,14 @@ page,
   margin-right: 10px;
   vertical-align: text-bottom;
 }
+.traitStyle{
+  display: inline-block;
+  padding: 3px;
+  margin-right: 5px;
+}
+.green{
+  color: green;
+}
+.StickStyle .weui-panel_list{
+  width: 100%;
+}

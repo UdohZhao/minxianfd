@@ -3,14 +3,17 @@
   <swiper class="swiper" indicator-dots="true" autoplay="true" interval="5000" duration="1000">    
       <block wx:for="{{hm_landlord_rent.hm_housing_resource_id.hm_view_images}}"  wx:key="k">    
         <swiper-item>    
-          <image src="{{item.path}}" class="slide-image" mode="aspectFill"/>    
+          <image src="{{domain}}{{item.path}}" class="slide-image" mode="aspectFill"/>    
         </swiper-item>    
       </block>    
     </swiper> 
     <!-- 小区名称 -->
     <view class="weui-cells__title">
       <view class="weui-cells__title_txt" >{{hm_landlord_rent.hm_area_id.address}}</view>
-      <view class="weui-panel_header">{{hm_landlord_rent.hm_lease_id.rent}}元/月</view>
+      <view class="weui-panel_header">{{hm_landlord_rent.hm_lease_id.rent}}元/月
+        <!--特点-->
+        <view wx:for="{{hm_landlord_rent.hm_housing_resource_id.trait}}" class="traitStyle">{{item}}</view>
+      </view>
     </view>
     
     
@@ -32,15 +35,29 @@
         </view>
         <view class="weui-panel_list">
           <view class="weui-panel_list_key">朝向:</view>
-          <view class="weui-panel_list_val">{{hm_landlord_rent.hm_basics_id.area.orientation}}</view>
+          <view  wx:if="{{hm_landlord_rent.hm_basics_id.orientation == 0}}"  class="weui-panel_list_val">南北</view>
+          <view  wx:elif="{{hm_landlord_rent.hm_basics_id.orientation == 1}}" class="weui-panel_list_val">南</view>
+          <view  wx:elif="{{hm_landlord_rent.hm_basics_id.orientation == 2}}" class="weui-panel_list_val">东南</view>
+          <view  wx:elif="{{hm_landlord_rent.hm_basics_id.orientation == 3}}" class="weui-panel_list_val">东</view>
+          <view  wx:elif="{{hm_landlord_rent.hm_basics_id.orientation == 4}}" class="weui-panel_list_val">西南</view>
+          <view  wx:elif="{{hm_landlord_rent.hm_basics_id.orientation == 5}}" class="weui-panel_list_val">北</view>
+          <view  wx:elif="{{hm_landlord_rent.hm_basics_id.orientation == 6}}" class="weui-panel_list_val">西</view>
+          <view  wx:elif="{{hm_landlord_rent.hm_basics_id.orientation == 7}}" class="weui-panel_list_val">东西</view>
+          <view  wx:elif="{{hm_landlord_rent.hm_basics_id.orientation == 8}}" class="weui-panel_list_val">东比</view>
+          <view  wx:else class="weui-panel_list_val">西北</view>
         </view>
         <view class="weui-panel_list">
           <view class="weui-panel_list_key">装修:</view>
-          <view class="weui-panel_list_val">{{hm_landlord_rent.hm_basics_id.area.decorate_degree}}</view>
+          <view  wx:if="{{hm_landlord_rent.hm_basics_id.orientation == 0}}"  class="weui-panel_list_val">其它</view>
+          <view  wx:elif="{{hm_landlord_rent.hm_basics_id.orientation == 1}}" class="weui-panel_list_val">豪华装修</view>
+          <view  wx:elif="{{hm_landlord_rent.hm_basics_id.orientation == 2}}" class="weui-panel_list_val">精装修</view>
+          <view  wx:elif="{{hm_landlord_rent.hm_basics_id.orientation == 3}}" class="weui-panel_list_val">中等装修</view>
+          <view  wx:elif="{{hm_landlord_rent.hm_basics_id.orientation == 4}}" class="weui-panel_list_val">简装修</view>
+          <view   wx:else class="weui-panel_list_val">毛坯</view>
         </view>
         <view class="weui-panel_list">
-          <view class="weui-panel_list_key">供暖:</view>
-          <view class="weui-panel_list_val">自供暖</view>
+          <view class="weui-panel_list_key">支付方式:</view>
+          <view class="weui-panel_list_val">{{hm_landlord_rent.hm_lease_id.hm_payment_method}}</view>
         </view>
        
       </view>
@@ -65,6 +82,7 @@
       </view>
     </view>
     <!-- 特点 -->
+        <!--需要修改-->
     <view class="weui-panel weui-panel_access">
       <view class="weui-panel_title">特点</view>
       <view class="weui-panel__bd fs13">
@@ -85,6 +103,49 @@
         {{hm_landlord_rent.hm_owner_id.demand}}
       </view>
     </view>
+    <!-- 置顶推广 -->
+    <block wx:if="{{hm_landlord_rent.hm_promotion_id}}">
+      <view class="weui-panel weui-panel_access StickStyle">
+        <view class="weui-panel_title">置顶推广</view>
+        <view class="weui-panel__bd fs13">
+          <view class="weui-panel_list">
+          <view class="weui-panel_list_key">订单编号:</view>
+          <view class="weui-panel_list_val">{{hm_landlord_rent.hm_promotion_id.order_number}}</view>
+        </view>
+        <view class="weui-panel_list">
+          <view class="weui-panel_list_key">订单创建时间:</view>
+          <view class="weui-panel_list_val">{{hm_landlord_rent.hm_promotion_id.ctime}}</view>
+        </view>
+        <view class="weui-panel_list">
+          <view class="weui-panel_list_key">天数:</view>
+          <view class="weui-panel_list_val">{{hm_landlord_rent.hm_promotion_id.day}}天</view>
+        </view>
+        <view class="weui-panel_list">
+          <view class="weui-panel_list_key">费用:</view>
+          <view class="weui-panel_list_val">{{hm_landlord_rent.hm_promotion_id.cost}}</view>
+        </view>
+        <view class="weui-panel_list">
+          <view class="weui-panel_list_key">推广开始时间:</view>
+          <view class="weui-panel_list_val">{{hm_landlord_rent.hm_promotion_id.start_time}}</view>
+        </view>
+        <view class="weui-panel_list">
+          <view class="weui-panel_list_key">推广结束时间:</view>
+          <view class="weui-panel_list_val">{{hm_landlord_rent.hm_promotion_id.end_time}}</view>
+        </view>
+        <view class="weui-panel_list">
+          <view class="weui-panel_list_key">类型:</view>
+          
+          <view wx:if="{{hm_landlord_rent.hm_promotion_id.type == 0}}" class="weui-panel_list_val">待付款</view>
+          <view wx:else="{{hm_landlord_rent.hm_promotion_id.type == 1}}" class="weui-panel_list_val green">已付款</view>
+          
+        </view>
+        <view class="weui-panel_list">
+          <view class="weui-panel_list_key">付款时间:</view>
+          <view class="weui-panel_list_val">{{hm_landlord_rent.hm_promotion_id.pay_time}}</view>
+        </view>
+        </view>
+      </view>
+    </block>
     <view class="h60"></view>
     <view class="footerModel">
        <view class="modelImg" bindtap='onColletionTap'>
@@ -95,7 +156,7 @@
         <image class="Img" src='{{domain}}{{hm_landlord_rent.hm_counselor_id.head_portrait}}'></image>
         <view class="guWenName">{{hm_landlord_rent.hm_counselor_id.cname}}</view>
       </view>
-      <view class="modelPhone" bindtap='Callphone' data-phone="{{hm_landlord_rent.hm_counselor_id.telephone}}">
+      <view class="modelPhone" bindtap='Callphone' data-telephone="{{hm_landlord_rent.hm_counselor_id.telephone}}">
         <image src='../../dist/images/phone.png'></image>
         咨询
       </view>

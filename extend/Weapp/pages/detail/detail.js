@@ -131,7 +131,7 @@ Page({
   
   //拨打电话
   Callphone:function(e){
-    var telephone = e.current.setData.telephone;
+    var telephone = e.target.dataset.telephone;
     console.log(telephone)
     wx.makePhoneCall({
       phoneNumber: telephone,
@@ -140,7 +140,9 @@ Page({
 
   //点击收藏
   onColletionTap: function (event) {
-
+    // 获取房源ID
+      var id = this.data.hm_landlord_rent.id
+      console.log(id)
     var collectionStatus = this.data.collectionStatus
     if (collectionStatus == true){
       wx.showToast({
@@ -148,7 +150,6 @@ Page({
         title: '收藏成功',
         duration:3000,
         mask:true,
-        
       })
       this.setData({
         collectionStatus:false
@@ -164,5 +165,5 @@ Page({
         collectionStatus: true
       })
     }
-  }
+  },
 })
