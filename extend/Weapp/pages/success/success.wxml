@@ -16,9 +16,9 @@
         <view class="weui-msg__extra-area">
             <view class="weui-footer">
                 <view class="weui-footer__links">
-                    <navigator url="" class="weui-footer__link">底部链接文本</navigator>
+                    <view class="weui-footer__link">重庆存己科技提供技术支持</view>
                 </view>
-                <view class="weui-footer__text">重庆存己科技提供技术支持</view>
+                <!--<view class="weui-footer__text">重庆存己科技提供技术支持</view>-->
             </view>
         </view>
     </view>

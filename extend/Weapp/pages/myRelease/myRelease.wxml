@@ -5,16 +5,29 @@
 
     <!-- 判断是否有发布 -->
     
-    <view wx:for="{{hm_landlord_rent}}" wx:for-index="k" wx:for-item="v" wx:key="*this" bindtap='gotoDetail' data-hmlrid="{{v.id}}" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
+    <view wx:for="{{hm_landlord_rent}}" wx:for-index="k" wx:for-item="v" wx:key="*this" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
        <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
-                        <image class="weui-media-box__thumb" src="{{domain}}{{v.hm_housing_resource_id.hm_view_images.path}}" />
+                        <image bindtap='gotoDetail' data-hmlrid="{{v.id}}" class="weui-media-box__thumb" src="{{domain}}{{v.hm_housing_resource_id.hm_view_images.path}}" />
        </view>
        <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
           <view class="weui-media-box__title">
             <view class="weui-media-box__title_left">{{v.hm_housing_resource_id.title}}</view>
             <!--状态-->
             <!--<view class="box__titleLabel">已置顶</view>-->
-            <view class="box__titleLabel Notplaced ">未置顶</view>
+            <view class="box__titleLabel lebalStyleSSKF lebalSty " wx:if="{{v.status == 0}}" >待审核</view>
+            <view class="box__titleLabel lebalStyleSSKF lebalSty " wx:if="{{v.status == 1}}" >审核未通过</view>
+            <view class="box__titleLabel lebalStyleDT lebalSty " wx:if="{{v.status == 2}}" >审核通过</view>
+            <view class="box__titleLabel lebalStyleSSKF lebalSty " wx:if="{{v.type == 0}}" >隐藏</view>
+            <view class="box__titleLabel lebalStyleDT lebalSty " wx:if="{{v.type == 1}}" >展示</view>
+            <view class="box__titleLabel lebalStyleSSKF lebalSty " wx:if="{{v.hm_promotion_id && v.hm_promotion_id.type == 0}}" >未付款</view>
+            <view class="box__titleLabel lebalStyleDT lebalSty " wx:if="{{v.hm_promotion_id && v.hm_promotion_id.type == 1}}" >已付款</view>
+            <view wx:if="{{v.hm_promotion_id && v.hm_promotion_id.type == 0}}">
+              <button class="weui-btn mini-btn" type="default" size="mini" bindtap="atPay" data-hmlrid="{{v.id}}" data-hm_promotion_id="{{v.hm_promotion_id}}">立即付款</button>
+            </view>
+            <view>
+              <button class="weui-btn mini-btn" type="default" size="mini" bindtap="lookMsg" data-msg="{{v.msg}}">查看备注</button>  
+            </view>          
+
           </view>
           <view class="weui-media-box__desc">{{v.hm_basics_id.hm_house_type_id.habitable_room}}室{{v.hm_basics_id.hm_house_type_id.living_room}}厅{{v.hm_basics_id.hm_house_type_id.shower_room}}卫/{{v.hm_basics_id.area}}㎡/{{v.hm_community_id.cname}}</view>
           <view class="weui-media-box__desc">
@@ -28,10 +41,9 @@
             <!-- <text class="lebalStyleYCW lebalSty">有车位</text> -->
           </view>
           <view class="weui-media-box__desc red"> {{v.hm_lease_id.rent}}元/月</view>
-          <view wx:if="{{v.hm_promotion_id.type == 0}}">
+          <!--<view wx:if="{{v.hm_promotion_id.type == 0}}">
             <button class="weui-btn mini-btn NotPay" type="default" size="mini">未付款</button>
-            
-          </view>
+          </view>-->
        </view>
     </view>
 

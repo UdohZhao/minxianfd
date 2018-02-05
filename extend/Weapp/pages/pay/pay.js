@@ -199,12 +199,13 @@ Page({
                   'paySign': payment.paySign,
                   'success':function(res){
                     console.log(res);
-                    // if 
-                    if (res.errMsg == 'requestPayment:ok') {
-                        wx.reLaunch({
-                          url: '/pages/success/success?hmlrid=' + that.data.hmlrid
-                        })
-                    } else if (res.errMsg == 'requestPayment:fail cancel') {                  
+                    wx.reLaunch({
+                      url: '/pages/success/success?hmlrid=' + that.data.hmlrid
+                    })
+                  },
+                  'fail':function(e){
+                    console.log(e);
+                    if (e.errMsg === 'requestPayment:fail cancel') {                  
                         wx.showModal({
                           title: '提示',
                           content: '您取消了支付，是否离开支付页面？',
@@ -233,9 +234,6 @@ Page({
                           }
                         })
                     }
-                  },
-                  'fail':function(e){
-                    console.log(e);
                   }
                 })
               } else {
