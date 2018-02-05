@@ -394,7 +394,6 @@ Page({
 
   onLoad: function (e) {
     var that = this;
-// <<<<<<< HEAD
     if (app.globalData.userInfo) {
       that.setData({
         userInfo: app.globalData.userInfo,
@@ -422,19 +421,19 @@ Page({
       })
     }
     //发起网络请求，获取数据
-    wx.request({
-        url: app.data.domain + '/Index/indexDemo', 
-        header: {
-            'content-type': 'application/json'
-        },
-        success: function(res) {
-          console.log('请求成功')
-           console.log(res.data);
-      },
-      fail:function(error){
-        console.log(error)
-      }
-    })
+    // wx.request({
+    //     url: app.data.domain + '/Index/indexDemo', 
+    //     header: {
+    //         'content-type': 'application/json'
+    //     },
+    //     success: function(res) {
+    //       console.log('请求成功')
+    //        console.log(res.data);
+    //   },
+    //   fail:function(error){
+    //     console.log(error)
+    //   }
+    // })
   },
   getUserInfo: function(e) {
     console.log(e)
@@ -443,11 +442,6 @@ Page({
       userInfo: e.detail.userInfo,
       hasUserInfo: true
     })
-// =======
-
-//     console.log(wx.getStorageSync('3rd_session'));
-
-// >>>>>>> dev
   },
 
   tabClick: function (e) {
