@@ -4,6 +4,7 @@ class WxPay extends Base
 {
     public $total_fee;
     public $day;
+    public $hmpid;
     /**
      * 构造方法
      */
@@ -11,19 +12,33 @@ class WxPay extends Base
     {
         $this->total_fee = isset($_GET['total_fee']) ? input('get.total_fee') : 0;
         $this->day = isset($_GET['day']) ? input('get.day') : 0;
+        $this->hmpid = isset($_GET['hmpid']) ? input('get.hmpid') : 0;
     }
 
     // 微信支付
     public function pay()
     {
+
         // 测试金额1分钱
         $this->total_fee = '0.01';
 
-        /*** 生成预付推广订单 ***/
-        // dataHmp
-        $dataHmp = $this->getHmpData();
-        // 写入房源置顶推广表
-        $hm_promotion_id = db('hm_promotion')->insertGetId($dataHmp);
+        // hm_promotion_id 如果get参数表示为用户后续补充支付
+        if ($this->hmpid)
+        {
+            $hm_promotion_id = $this->hmpid;
+            // 读取订单编号
+            // $order_number = db('hm_promotion')->where('id',$hm_promotion_id)->value('order_number');
+            $order_number = build_order_no().$this->wuid;
+        }
+        else
+        {
+            /*** 生成预付推广订单 ***/
+            // dataHmp
+            $dataHmp = $this->getHmpData();
+            // 写入房源置顶推广表
+            $hm_promotion_id = db('hm_promotion')->insertGetId($dataHmp);
+            $order_number = $dataHmp['order_number'];
+        }
         slog($hm_promotion_id);
         // if
         if ($hm_promotion_id)
@@ -39,7 +54,7 @@ class WxPay extends Base
             $param['mch_id'] = config('mch_id');
             $param['nonce_str'] = get_rand_str();
             $param['body'] = '岷县房东置顶推广充值';
-            $param['out_trade_no'] = $dataHmp['order_number'];
+            $param['out_trade_no'] = $order_number;
             $param['attach'] = $hm_promotion_id;
             $param['total_fee'] = bcmul($this->total_fee, 100, 0);
             $param['spbill_create_ip'] = $_SERVER['REMOTE_ADDR'];
@@ -114,6 +129,7 @@ class WxPay extends Base
             $hm_promotion_id = $data['attach'];
             $dataHmp = db('hm_promotion')->where('id',$hm_promotion_id)->find();
             slog($dataHmp);
+            // 订单已经支付
             if ($dataHmp && $dataHmp['type'] == 1)
             {
                 // 同步返回给微信
@@ -123,7 +139,44 @@ class WxPay extends Base
                 slog($reex);
                 return $reex;
             }
-            else
+            else if ($dataHmp && $dataHmp['type'] == 0) // 订单补充支付
+            {
+                /*** 效验金额是否一致 ***/
+                // 微信支付通知金额
+                $wx_total_fee = $data['total_fee'];
+                // 订单金额
+                $order_total_fee = bcmul($dataHmp['cost'], 100, 0);
+                // if
+                if ($wx_total_fee == $order_total_fee)
+                {
+                    // 更新房源置顶推广订单
+                    $upDataHmp['pay_time'] = time();
+                    $upDataHmp['type'] = 1;
+                    db('hm_promotion')->where('id',$hm_promotion_id)->update($upDataHmp);
+                    // 读取房源模块房东出租主键id
+                    $hmlrid = db('hm_promotion')->where('id',$hm_promotion_id)->value('hm_landlord_rent_id');
+                    // 更新房源模块房东出租表
+                    $upDataHmlr['status'] = 0;
+                    $upDataHmlr['msg'] = '';
+                    db('hm_landlord_rent')->where('id',$hmlrid)->update($upDataHmlr);
+                    // 同步返回给微信
+                    $reex['return_code'] = 'SUCCESS';
+                    $reex['return_msg'] = '';
+                    $reex = ToXml($reex);
+                    slog($reex);
+                    return $reex;
+                }
+                else
+                {
+                    // 同步返回给微信
+                    $reex['return_code'] = 'FAIL';
+                    $reex['return_msg'] = '支付金额不一致';
+                    $reex = ToXml($reex);
+                    slog($reex);
+                    return $reex;
+                }
+            }
+            else // 最新订单支付
             {
                 /*** 效验金额是否一致 ***/
                 // 微信支付通知金额
