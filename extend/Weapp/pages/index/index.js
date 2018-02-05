@@ -391,14 +391,10 @@ Page({
       }
     ],
   },
-  //事件处理函数
-  bindViewTap: function() {
-    wx.navigateTo({
-      url: '../logs/logs'
-    })
-  },
+
   onLoad: function (e) {
     var that = this;
+// <<<<<<< HEAD
     if (app.globalData.userInfo) {
       that.setData({
         userInfo: app.globalData.userInfo,
@@ -447,7 +443,13 @@ Page({
       userInfo: e.detail.userInfo,
       hasUserInfo: true
     })
+// =======
+
+//     console.log(wx.getStorageSync('3rd_session'));
+
+// >>>>>>> dev
   },
+
   tabClick: function (e) {
     this.setData({
         sliderOffset: e.currentTarget.offsetLeft,
