@@ -51,7 +51,7 @@
                 <view class="weui-tab__content" hidden="{{activeIndex != 1}}">
                   <!-- 租金 -->
                   <block wx:for="{{rent}}" wx:for-index="k" wx:for-item="v" wx:key="i">
-                    <view class="list {{listActive == index ? 'listActive' : ''}} " data-index="{{k}}" data-start="{{v.start}}" data-end="{{v.end}}" bindtap="tapRent">{{v.key}}</view>
+                    <view class="list {{listActive == k ? 'listActive' : ''}} " data-index="{{k}}" data-start="{{v.start}}" data-end="{{v.end}}" bindtap="tapRent">{{v.key}}</view>
                   </block>
                 </view>
                 <view class="weui-tab__content" hidden="{{activeIndex != 2}}">
