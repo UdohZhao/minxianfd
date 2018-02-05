@@ -45,6 +45,10 @@ Page({
         {
           // 小程序用户id
           var wuid = res.data.data;
+
+          that.setData({
+            wuid: wuid
+          });
           
           //提交
           wx.request({

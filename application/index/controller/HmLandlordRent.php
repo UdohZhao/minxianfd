@@ -110,6 +110,13 @@ class HmLandlordRent extends Base
         $data['hm_landlord_id'] = db('hm_landlord')->where('id',$data['hm_landlord_id'])->find();
         // 读取房源置顶推广数据
         $data['hm_promotion_id'] = db('hm_promotion')->where('id',$data['hm_promotion_id'])->find();
+        if ($data['hm_promotion_id'])
+        {
+            $data['hm_promotion_id']['start_time'] = date('Y-m-d H:i',$data['hm_promotion_id']['start_time']);
+            $data['hm_promotion_id']['end_time'] = date('Y-m-d H:i',$data['hm_promotion_id']['end_time']);
+            $data['hm_promotion_id']['pay_time'] = date('Y-m-d H:i',$data['hm_promotion_id']['pay_time']);
+            $data['hm_promotion_id']['ctime'] = date('Y-m-d H:i',$data['hm_promotion_id']['ctime']);
+        }
         // 读取房源租房顾问数据
         $data['hm_counselor_id'] = db('hm_counselor')->where('id',$data['hm_counselor_id'])->find();
         slog($data);

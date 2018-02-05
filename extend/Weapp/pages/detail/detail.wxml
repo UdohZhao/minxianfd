@@ -96,7 +96,7 @@
       </view>
     </view>
     <!-- 置顶推广 -->
-    <block wx:if="{{hm_landlord_rent.hm_promotion_id}}">
+    <block wx:if="{{hm_landlord_rent.hm_promotion_id && hm_landlord_rent.weapp_user_id.id == wuid}}">
       <view class="weui-panel weui-panel_access StickStyle">
         <view class="weui-panel_title">置顶推广</view>
         <view class="weui-panel__bd fs13">
@@ -104,10 +104,10 @@
           <view class="weui-panel_list_key">订单编号:</view>
           <view class="weui-panel_list_val">{{hm_landlord_rent.hm_promotion_id.order_number}}</view>
         </view>
-        <!--<view class="weui-panel_list">
+        <view class="weui-panel_list">
           <view class="weui-panel_list_key">订单创建时间:</view>
-          <view class="weui-panel_list_val">{{ctime}}</view>
-        </view>-->
+          <view class="weui-panel_list_val">{{hm_landlord_rent.hm_promotion_id.ctime}}</view>
+        </view>
         <view class="weui-panel_list">
           <view class="weui-panel_list_key">天数:</view>
           <view class="weui-panel_list_val">{{hm_landlord_rent.hm_promotion_id.day}}天</view>
@@ -116,14 +116,14 @@
           <view class="weui-panel_list_key">费用:</view>
           <view class="weui-panel_list_val">{{hm_landlord_rent.hm_promotion_id.cost}}</view>
         </view>
-        <!--<view class="weui-panel_list">
+        <view class="weui-panel_list">
           <view class="weui-panel_list_key">推广开始时间:</view>
-          <view class="weui-panel_list_val">{{start_time}}</view>
+          <view class="weui-panel_list_val">{{hm_landlord_rent.hm_promotion_id.start_time}}</view>
         </view>
         <view class="weui-panel_list">
           <view class="weui-panel_list_key">推广结束时间:</view>
-          <view class="weui-panel_list_val">{{end_time}}</view>
-        </view>-->
+          <view class="weui-panel_list_val">{{hm_landlord_rent.hm_promotion_id.end_time}}</view>
+        </view>
         <view class="weui-panel_list">
           <view class="weui-panel_list_key">类型:</view>
           
