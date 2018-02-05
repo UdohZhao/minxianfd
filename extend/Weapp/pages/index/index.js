@@ -425,6 +425,20 @@ Page({
         }
       })
     }
+    //发起网络请求，获取数据
+    wx.request({
+        url: app.data.domain + '/Index/indexDemo', 
+        header: {
+            'content-type': 'application/json'
+        },
+        success: function(res) {
+          console.log('请求成功')
+           console.log(res.data);
+      },
+      fail:function(error){
+        console.log(error)
+      }
+    })
   },
   getUserInfo: function(e) {
     console.log(e)

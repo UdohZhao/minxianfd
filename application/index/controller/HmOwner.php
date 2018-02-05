@@ -8,6 +8,7 @@ class HmOwner extends Base
     public function _auto()
     {
 
+
     }
 
     // 添加房源业主数据

@@ -3,8 +3,8 @@
 import wxValidate from 'utils/wxValidate'
 App({
   data: {
-      domain: 'https://ngrok.getcunji.com'
-      // domain: 'dev.minxianfd.vag'
+     //  domain: 'https://ngrok.getcunji.com'
+         domain: 'http://dev.minxianfd.vag'
   },
   onLaunch: function () {
     // 获取用户信息

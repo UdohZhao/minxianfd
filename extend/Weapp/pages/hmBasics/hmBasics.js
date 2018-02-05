@@ -200,9 +200,12 @@ Page({
                 },
                 success: function (res) {
                   console.log(res);
+                  console.log('请求成功')
                 },
                 fail: function (e) {
                   console.log(e);
+                  console.log('请求失败')
+                  
                 }
               })
             }
