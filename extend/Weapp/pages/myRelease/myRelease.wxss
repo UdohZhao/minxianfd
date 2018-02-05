@@ -67,7 +67,14 @@ button[size="mini"]{
   line-height: 1.8;
   color: #999;
 }
-
+.weui-media-box__bd_in-appmsg{
+  position: relative;
+}
+.NotPay{
+  position: absolute;
+  bottom: 0;
+  right:0;
+}
 
 
 
