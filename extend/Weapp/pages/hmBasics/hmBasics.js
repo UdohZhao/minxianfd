@@ -203,10 +203,7 @@ Page({
                     'content-type': 'application/json'
                 },
                 success: function (res) {
-<<<<<<< HEAD
-                  console.log(res);
-                  console.log('请求成功')
-=======
+
                   // if
                   if (res.data.status == 0) {
                     wx.redirectTo({
@@ -219,7 +216,6 @@ Page({
                       showCancel: false
                     })
                   }
->>>>>>> dev
                 },
                 fail: function (e) {
                   console.log(e);
