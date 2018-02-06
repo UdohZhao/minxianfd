@@ -1080,23 +1080,148 @@ Page({
   moreSearch: function (e) {
     var that = this;
 
-    // 获取朝向选中值
-    console.log(that.data.orientationCheckedValue);
-    // 获取建筑面积选中值
-    console.log(that.data.coveredAreaCheckedValue);
-    // 获取楼层选中值
-    console.log(that.data.floorCheckedValue);
-    // 获取装修选中值
-    console.log(that.data.upfitterCheckedValue);
-    // 获取出租方式选中值
-    console.log(that.data.hmLeaseMannerCheckedValue);
-
-    var orientationCheckedValue = that.data.orientationCheckedValue;
-    if (orientationCheckedValue == undefined ||) 
+    var orientationCheckedValue;
+    if (that.data.orientationCheckedValue == undefined || that.data.orientationCheckedValue == []) 
     {
-
+        orientationCheckedValue = false;
+    }
+    else
+    {
+        orientationCheckedValue = that.data.orientationCheckedValue;
     }
 
+    var coveredAreaCheckedValue;
+    if (that.data.coveredAreaCheckedValue == undefined || that.data.coveredAreaCheckedValue == []) 
+    {
+        coveredAreaCheckedValue = false;
+    }
+    else
+    {
+        coveredAreaCheckedValue = that.data.coveredAreaCheckedValue;
+    }
+
+    var floorCheckedValue;
+    if (that.data.floorCheckedValue == undefined || that.data.floorCheckedValue == []) 
+    {
+        floorCheckedValue = false;
+    }
+    else
+    {
+        floorCheckedValue = that.data.floorCheckedValue;
+    }
+
+    var upfitterCheckedValue;
+    if (that.data.upfitterCheckedValue == undefined || that.data.upfitterCheckedValue == []) 
+    {
+        upfitterCheckedValue = false;
+    }
+    else
+    {
+        upfitterCheckedValue = that.data.upfitterCheckedValue;
+    }
+
+    var hmLeaseMannerCheckedValue;
+    if (that.data.hmLeaseMannerCheckedValue == undefined || that.data.hmLeaseMannerCheckedValue == []) 
+    {
+        hmLeaseMannerCheckedValue = false;
+    }
+    else
+    {
+        hmLeaseMannerCheckedValue = that.data.hmLeaseMannerCheckedValue;
+    }
+
+    // 筛选条件
+    if (orientationCheckedValue == false && coveredAreaCheckedValue == false && floorCheckedValue == false && upfitterCheckedValue == false && hmLeaseMannerCheckedValue == false) 
+    {
+          wx.showModal({
+            title: '提示',
+            content: '请选中筛选的条件！',
+            showCancel: false
+          })
+    }
+    else
+    {
+
+          // 获取朝向选中值
+          console.log(orientationCheckedValue);
+          // 获取建筑面积选中值
+          console.log(coveredAreaCheckedValue);
+          // 获取楼层选中值
+          console.log(floorCheckedValue);
+          // 获取装修选中值
+          console.log(upfitterCheckedValue);
+          // 获取出租方式选中值
+          console.log(hmLeaseMannerCheckedValue);
+
+          // 良好的用户体验
+          wx.showLoading({
+            title: '筛选中',
+          })
+
+          // 请求岷县数据
+          wx.request({
+            url: app.data.domain + '/WxLogin/checkRedis', 
+            data: {
+              threerd_session: wx.getStorageSync('3rd_session')
+            },
+            header: {
+                'content-type': 'application/json'
+            },
+            success: function(res) {
+              // 3rd_session
+              if (res.data.status == 1) 
+              {
+                app.threerdLogin();
+              }
+              else
+              {
+                // 小程序用户id
+                var wuid = res.data.data;
+                //提交
+                wx.request({
+                  url: app.data.domain + '/HmLandlordRent/index?wuid='+wuid+'&status=2&type=1&retype=0',
+                  data: {
+                    orientationCheckedValue:orientationCheckedValue.toString(),
+                    coveredAreaCheckedValue:coveredAreaCheckedValue.toString(),
+                    floorCheckedValue:floorCheckedValue.toString(),
+                    upfitterCheckedValue:upfitterCheckedValue.toString(),
+                    hmLeaseMannerCheckedValue:hmLeaseMannerCheckedValue.toString()
+                  },
+                  method: 'POST',
+                  header: {
+                      'content-type': 'application/json'
+                  },
+                  success: function (res) {
+                    console.log(res);
+                    // if 
+                    if (res.data.status == 0) 
+                    { 
+                        that.setData({
+                          //详情列表数据
+                          hm_landlord_rent:res.data.data.hm_landlord_rent
+                        })
+                    }
+                    else
+                    {
+                        that.setData({
+                          hm_landlord_rent: false
+                        })
+                    }
+
+                    // 良好的用户体验
+                    setTimeout(function(){
+                      wx.hideLoading()
+                    },2000)
+
+                  },
+                  fail: function (e) {
+                    console.log(e);
+                  }
+                })
+              }
+            }
+          })
+    }
 
   }
 

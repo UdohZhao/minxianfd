@@ -157,7 +157,32 @@ class HmLandlordRent extends Base
                     }
 
                     // 更多
+                    $orientationCheckedValue = input('post.orientationCheckedValue');// 获取朝向选中值
+                    $coveredAreaCheckedValue = input('post.coveredAreaCheckedValue');// 获取建筑面积选中值
+                    $floorCheckedValue = input('post.floorCheckedValue');// 获取楼层选中值
+                    $upfitterCheckedValue = input('post.upfitterCheckedValue');// 获取装修选中值
+                    $hmLeaseMannerCheckedValue = input('post.hmLeaseMannerCheckedValue');// 获取出租方式选中值
 
+                    // if
+                    if ($orientationCheckedValue && $coveredAreaCheckedValue && $floorCheckedValue && $upfitterCheckedValue && $hmLeaseMannerCheckedValue)
+                    {
+                        $orientationCheckedValue = explode(',', $orientationCheckedValue);
+                        $coveredAreaCheckedValue = explode(',', $coveredAreaCheckedValue);
+                        $floorCheckedValue = explode(',', $floorCheckedValue);
+                        $upfitterCheckedValue = explode(',', $upfitterCheckedValue);
+                        $hmLeaseMannerCheckedValue = explode(',', $hmLeaseMannerCheckedValue);
+
+                        slog($orientationCheckedValue);
+                        slog($coveredAreaCheckedValue);
+                        slog($floorCheckedValue);
+                        slog($upfitterCheckedValue);
+                        slog($hmLeaseMannerCheckedValue);
+
+                        if (in_array($data['hm_landlord_rent'][$k]['hm_basics_id']['orientation'], $orientationCheckedValue))
+                        {}
+
+
+                    }
 
                 }
                 else
