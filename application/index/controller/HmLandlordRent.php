@@ -71,6 +71,19 @@ class HmLandlordRent extends Base
         {
             foreach ($data['hm_landlord_rent'] AS $k => $v)
             {
+                //  POST 条件搜索
+                if ($this->request->isPost())
+                {
+                    // 获取区域岷县id
+                    $hm_min_xian_id = input('post.hm_min_xian_id');
+                    if ($hm_min_xian_id)
+                    {
+                        if (!db('hm_area')->where('hm_min_xian_id',$hm_min_xian_id)->count())
+                        {
+                            unset($data['hm_landlord_rent'][$k]);
+                        }
+                    }
+                }
                 // 读取房源基础数据
                 $data['hm_landlord_rent'][$k]['hm_basics_id'] = db('hm_basics')->where('id',$v['hm_basics_id'])->find();
                 $data['hm_landlord_rent'][$k]['hm_basics_id']['hm_house_type_id'] = db('hm_house_type')->where('id',$data['hm_landlord_rent'][$k]['hm_basics_id']['hm_house_type_id'])->find();

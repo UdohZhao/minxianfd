@@ -422,9 +422,6 @@ Page({
                     //详情列表数据
                     hm_landlord_rent:res.data.data.hm_landlord_rent
                   })
-                console.log(res.data.data)
-                // console.log(res.data.data.hm_landlord_rent)
-                
               }
               else
               {
@@ -505,6 +502,60 @@ Page({
     })
     // 获取区域岷县id
     console.log('获取区域岷县id：' + that.data.hm_min_xian_id);
+
+    // 请求岷县数据
+    wx.request({
+      url: app.data.domain + '/WxLogin/checkRedis', 
+      data: {
+        threerd_session: wx.getStorageSync('3rd_session')
+      },
+      header: {
+          'content-type': 'application/json'
+      },
+      success: function(res) {
+        // 3rd_session
+        if (res.data.status == 1) 
+        {
+          app.threerdLogin();
+        }
+        else
+        {
+          // 小程序用户id
+          var wuid = res.data.data;
+          //提交
+          wx.request({
+            url: app.data.domain + '/HmLandlordRent/index?wuid='+wuid+'&status=2&type=1&retype=0',
+            data: {hm_min_xian_id:that.data.hm_min_xian_id},
+            method: 'POST',
+            header: {
+                'content-type': 'application/json'
+            },
+            success: function (res) {
+              console.log(res);
+              // if 
+              if (res.data.status == 0) 
+              { 
+                  that.setData({
+                    //详情列表数据
+                    hm_landlord_rent:res.data.data.hm_landlord_rent
+                  })
+              }
+              else
+              {
+                  that.setData({
+                    hm_landlord_rent: false
+                  })
+              }
+            },
+            fail: function (e) {
+              console.log(e);
+            }
+          })
+        }
+      }
+    })
+
+
   },
 
   //去定位搜索
@@ -740,7 +791,7 @@ Page({
     // checked赋值为true
     for (var i = 0; i < checkedIndex.length; i++) {
        that.data.hm_lease_manner[checkedIndex[i]].checked = true;
-       hmLeaseMannerCheckedValue.push(that.data.hm_lease_manner[checkedIndex[i]].value);
+       hmLeaseMannerCheckedValue.push(that.data.hm_lease_manner[checkedIndex[i]].id);
     }
 
     that.setData({

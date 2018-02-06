@@ -124,12 +124,12 @@
                  
                   <view class="fxBox">
                     <view class="fxBox_title">出租方式</view>
-                      <checkbox-group class='fxBox_bd' bindchange="checkChangeManner">
+                      <radio-group class='fxBox_bd' bindchange="checkChangeManner">
                         <label wx:for="{{hm_lease_manner}}" wx:key="*this" class="fxBox_bd_list {{item.checked?'listCctive':''}}">
                           <checkbox value="{{index}}" checked="{{item.checked}}" hidden="true"></checkbox>
                           <label class="fxBox_title">{{item.cname}}</label>
                         </label>
-                      </checkbox-group>
+                      </radio-group>
                   </view>
                   
                   <view class="fxBox">
