@@ -130,6 +130,7 @@ button[type="default"]{
   line-height: 1.6;
   color: #333;
   font-size: 12px;
+  letter-spacing: 1px;
 }
 .red{
   font-size: 16px;
