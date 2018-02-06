@@ -292,7 +292,10 @@ return [
         '2'         =>  ['key'=>'三室','value'=>'3','checked'=>false],
         '3'         =>  ['key'=>'四室','value'=>'4','checked'=>false],
         '4'         =>  ['key'=>'五室','value'=>'5','checked'=>false],
-        '5'         =>  ['key'=>'五室以上','value'=>'6','checked'=>false],
+        '5'         =>  ['key'=>'六室','value'=>'6','checked'=>false],
+        '6'         =>  ['key'=>'七室','value'=>'7','checked'=>false],
+        '7'         =>  ['key'=>'八室','value'=>'8','checked'=>false],
+        '8'         =>  ['key'=>'九室','value'=>'9','checked'=>false],
     ],
 
     // 卫生间
@@ -300,7 +303,9 @@ return [
         '0'         =>  ['key'=>'独卫','value'=>'1','checked'=>false],
         '1'         =>  ['key'=>'两卫','value'=>'2','checked'=>false],
         '2'         =>  ['key'=>'三卫','value'=>'3','checked'=>false],
-        '3'         =>  ['key'=>'三卫以上','value'=>'4','checked'=>false]
+        '3'         =>  ['key'=>'四卫','value'=>'4','checked'=>false],
+        '4'         =>  ['key'=>'五卫','value'=>'5','checked'=>false],
+        '5'         =>  ['key'=>'六卫','value'=>'6','checked'=>false],
     ],
 
     // 建筑面积（平方米）

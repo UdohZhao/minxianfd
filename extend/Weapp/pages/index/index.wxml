@@ -134,7 +134,7 @@
                   
                   <view class="fxBox">
                     <button class="weui-btn mini-btn marginRight20"  size="mini" bindtap='resetMore'>重置</button>
-                    <button class="weui-btn mini-btn" type="primary" size="mini">确定</button> 
+                    <button class="weui-btn mini-btn" type="primary" size="mini" bindtap="moreSearch">确定</button> 
                   </view>
                 </view>
             </view>

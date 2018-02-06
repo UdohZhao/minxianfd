@@ -1070,9 +1070,31 @@ Page({
             }
           }
         })
-
-
     } 
+  },
+
+  /**
+   * 更多搜索条件
+   */
+  moreSearch: function (e) {
+    var that = this;
+
+    // 获取朝向选中值
+    console.log(that.data.orientationCheckedValue);
+    // 获取建筑面积选中值
+    console.log(that.data.coveredAreaCheckedValue);
+    // 获取楼层选中值
+    console.log(that.data.floorCheckedValue);
+    // 获取装修选中值
+    console.log(that.data.upfitterCheckedValue);
+    // 获取出租方式选中值
+    console.log(that.data.hmLeaseMannerCheckedValue);
+
+    var orientationCheckedValue = that.data.orientationCheckedValue;
+    if (orientationCheckedValue == undefined ||) 
+    {
+
+    }
 
 
   }

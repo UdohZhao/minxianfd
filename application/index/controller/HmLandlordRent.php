@@ -136,6 +136,28 @@ class HmLandlordRent extends Base
                             unset($data['hm_landlord_rent'][$k]);
                         }
                     }
+                    else if ($bedroomCheckedValue)
+                    {
+                        // 字符串转数组
+                        $bedroomCheckedValue = explode(',', $bedroomCheckedValue);
+                        if (!in_array($data['hm_landlord_rent'][$k]['hm_basics_id']['hm_house_type_id']['habitable_room'], $bedroomCheckedValue))
+                        {
+                            unset($data['hm_landlord_rent'][$k]);
+                        }
+
+                    }
+                    else if ($toiletCheckedValue)
+                    {
+                        // 字符串转数组
+                        $toiletCheckedValue = explode(',', $toiletCheckedValue);
+                        if (!in_array($data['hm_landlord_rent'][$k]['hm_basics_id']['hm_house_type_id']['shower_room'], $toiletCheckedValue))
+                        {
+                            unset($data['hm_landlord_rent'][$k]);
+                        }
+                    }
+
+                    // 更多
+
 
                 }
                 else
