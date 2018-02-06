@@ -39,26 +39,26 @@
       {
         "pagePath": "pages/index/index",
         "text": "出租房源",
-        "iconPath": "dist/images/icon/emoji-1.png",
-        "selectedIconPath": "dist/images/icon/emoji-1.png"
+        "iconPath": "dist/images/icon/house.png",
+        "selectedIconPath": "dist/images/icon/house_hover.png"
       },
       {
         "pagePath": "pages/recommend/recommend",
         "text": "推荐房源",
-        "iconPath": "dist/images/icon/emoji-1.png",
-        "selectedIconPath": "dist/images/icon/emoji-1.png"
+        "iconPath": "dist/images/icon/resource.png",
+        "selectedIconPath": "dist/images/icon/resource_hover.png"
       },
       {
         "pagePath": "pages/landlord/landlord",
         "text": "发布房源",
-        "iconPath": "dist/images/icon/emoji-2.png",
-        "selectedIconPath": "dist/images/icon/emoji-2.png"
+        "iconPath": "dist/images/icon/landlord.png",
+        "selectedIconPath": "dist/images/icon/landlord_hover.png"
       },
       {
         "pagePath": "pages/me/me",
         "text": "我",
-        "iconPath": "dist/images/icon/emoji-3.png",
-        "selectedIconPath": "dist/images/icon/emoji-3.png"
+        "iconPath": "dist/images/icon/me.png",
+        "selectedIconPath": "dist/images/icon/me_hover.png"
       }
     ]
   },
