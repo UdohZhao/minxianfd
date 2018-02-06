@@ -815,7 +815,7 @@ Page({
     // checked赋值为true
     for (var i = 0; i < checkedIndex.length; i++) {
        that.data.hm_lease_manner[checkedIndex[i]].checked = true;
-       hmLeaseMannerCheckedValue.push(that.data.hm_lease_manner[checkedIndex[i]].id);
+       hmLeaseMannerCheckedValue.push(that.data.hm_lease_manner[checkedIndex[i]].cname);
     }
 
     that.setData({
@@ -1083,37 +1083,37 @@ Page({
     var orientationCheckedValue;
     if (that.data.orientationCheckedValue == undefined || that.data.orientationCheckedValue == []) 
     {
-        orientationCheckedValue = false;
+        orientationCheckedValue = 'false';
     }
     else
     {
         orientationCheckedValue = that.data.orientationCheckedValue;
     }
 
-    var coveredAreaCheckedValue;
-    if (that.data.coveredAreaCheckedValue == undefined || that.data.coveredAreaCheckedValue == []) 
-    {
-        coveredAreaCheckedValue = false;
-    }
-    else
-    {
-        coveredAreaCheckedValue = that.data.coveredAreaCheckedValue;
-    }
+    // var coveredAreaCheckedValue;
+    // if (that.data.coveredAreaCheckedValue == undefined || that.data.coveredAreaCheckedValue == []) 
+    // {
+    //     coveredAreaCheckedValue = false;
+    // }
+    // else
+    // {
+    //     coveredAreaCheckedValue = that.data.coveredAreaCheckedValue;
+    // }
 
-    var floorCheckedValue;
-    if (that.data.floorCheckedValue == undefined || that.data.floorCheckedValue == []) 
-    {
-        floorCheckedValue = false;
-    }
-    else
-    {
-        floorCheckedValue = that.data.floorCheckedValue;
-    }
+    // var floorCheckedValue;
+    // if (that.data.floorCheckedValue == undefined || that.data.floorCheckedValue == []) 
+    // {
+    //     floorCheckedValue = false;
+    // }
+    // else
+    // {
+    //     floorCheckedValue = that.data.floorCheckedValue;
+    // }
 
     var upfitterCheckedValue;
     if (that.data.upfitterCheckedValue == undefined || that.data.upfitterCheckedValue == []) 
     {
-        upfitterCheckedValue = false;
+        upfitterCheckedValue = 'false';
     }
     else
     {
@@ -1123,7 +1123,7 @@ Page({
     var hmLeaseMannerCheckedValue;
     if (that.data.hmLeaseMannerCheckedValue == undefined || that.data.hmLeaseMannerCheckedValue == []) 
     {
-        hmLeaseMannerCheckedValue = false;
+        hmLeaseMannerCheckedValue = 'false';
     }
     else
     {
@@ -1131,7 +1131,7 @@ Page({
     }
 
     // 筛选条件
-    if (orientationCheckedValue == false && coveredAreaCheckedValue == false && floorCheckedValue == false && upfitterCheckedValue == false && hmLeaseMannerCheckedValue == false) 
+    if (orientationCheckedValue == 'false' && upfitterCheckedValue == 'false' && hmLeaseMannerCheckedValue == 'false') 
     {
           wx.showModal({
             title: '提示',
@@ -1145,9 +1145,9 @@ Page({
           // 获取朝向选中值
           console.log(orientationCheckedValue);
           // 获取建筑面积选中值
-          console.log(coveredAreaCheckedValue);
+          // console.log(coveredAreaCheckedValue);
           // 获取楼层选中值
-          console.log(floorCheckedValue);
+          // console.log(floorCheckedValue);
           // 获取装修选中值
           console.log(upfitterCheckedValue);
           // 获取出租方式选中值
@@ -1182,8 +1182,6 @@ Page({
                   url: app.data.domain + '/HmLandlordRent/index?wuid='+wuid+'&status=2&type=1&retype=0',
                   data: {
                     orientationCheckedValue:orientationCheckedValue.toString(),
-                    coveredAreaCheckedValue:coveredAreaCheckedValue.toString(),
-                    floorCheckedValue:floorCheckedValue.toString(),
                     upfitterCheckedValue:upfitterCheckedValue.toString(),
                     hmLeaseMannerCheckedValue:hmLeaseMannerCheckedValue.toString()
                   },

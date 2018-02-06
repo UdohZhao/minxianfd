@@ -158,32 +158,98 @@ class HmLandlordRent extends Base
 
                     // 更多
                     $orientationCheckedValue = input('post.orientationCheckedValue');// 获取朝向选中值
-                    $coveredAreaCheckedValue = input('post.coveredAreaCheckedValue');// 获取建筑面积选中值
-                    $floorCheckedValue = input('post.floorCheckedValue');// 获取楼层选中值
-                    $upfitterCheckedValue = input('post.upfitterCheckedValue');// 获取装修选中值
-                    $hmLeaseMannerCheckedValue = input('post.hmLeaseMannerCheckedValue');// 获取出租方式选中值
-
-                    // if
-                    if ($orientationCheckedValue && $coveredAreaCheckedValue && $floorCheckedValue && $upfitterCheckedValue && $hmLeaseMannerCheckedValue)
+                    if ($orientationCheckedValue == '')
                     {
-                        $orientationCheckedValue = explode(',', $orientationCheckedValue);
-                        $coveredAreaCheckedValue = explode(',', $coveredAreaCheckedValue);
-                        $floorCheckedValue = explode(',', $floorCheckedValue);
-                        $upfitterCheckedValue = explode(',', $upfitterCheckedValue);
-                        $hmLeaseMannerCheckedValue = explode(',', $hmLeaseMannerCheckedValue);
-
-                        slog($orientationCheckedValue);
-                        slog($coveredAreaCheckedValue);
-                        slog($floorCheckedValue);
-                        slog($upfitterCheckedValue);
-                        slog($hmLeaseMannerCheckedValue);
-
-                        if (in_array($data['hm_landlord_rent'][$k]['hm_basics_id']['orientation'], $orientationCheckedValue))
-                        {}
-
-
+                        $orientationCheckedValue = 'false';
+                    }
+                    // $coveredAreaCheckedValue = input('post.coveredAreaCheckedValue');// 获取建筑面积选中值
+                    // $floorCheckedValue = input('post.floorCheckedValue');// 获取楼层选中值
+                    $upfitterCheckedValue = input('post.upfitterCheckedValue');// 获取装修选中值
+                    if ($upfitterCheckedValue == '')
+                    {
+                        $upfitterCheckedValue = 'false';
+                    }
+                    $hmLeaseMannerCheckedValue = input('post.hmLeaseMannerCheckedValue');// 获取出租方式选中值
+                    if ($hmLeaseMannerCheckedValue == '')
+                    {
+                        $hmLeaseMannerCheckedValue = 'false';
                     }
 
+                    slog($orientationCheckedValue);
+                    slog($upfitterCheckedValue);
+                    slog($hmLeaseMannerCheckedValue);
+
+                    // if
+                    if ($orientationCheckedValue !='false' && $upfitterCheckedValue !='false' && $hmLeaseMannerCheckedValue !='false')
+                    {
+                        slog('1,2,3');
+                        $orientationCheckedValue = explode(',', $orientationCheckedValue);
+                        $upfitterCheckedValue = explode(',', $upfitterCheckedValue);
+
+                        if (in_array($data['hm_landlord_rent'][$k]['hm_basics_id']['orientation'], $orientationCheckedValue) && in_array($data['hm_landlord_rent'][$k]['hm_basics_id']['decorate_degree'], $upfitterCheckedValue) && $data['hm_landlord_rent'][$k]['hm_lease_id']['hm_lease_manner'] == $hmLeaseMannerCheckedValue) {} else
+                        {
+                            unset($data['hm_landlord_rent'][$k]);
+                        }
+                    }
+                    else if ($orientationCheckedValue !='false' && $upfitterCheckedValue !='false')
+                    {
+                        slog('1,2');
+                        $orientationCheckedValue = explode(',', $orientationCheckedValue);
+                        $upfitterCheckedValue = explode(',', $upfitterCheckedValue);
+
+                        if (in_array($data['hm_landlord_rent'][$k]['hm_basics_id']['orientation'], $orientationCheckedValue) && in_array($data['hm_landlord_rent'][$k]['hm_basics_id']['decorate_degree'], $upfitterCheckedValue)) {} else
+                        {
+                            unset($data['hm_landlord_rent'][$k]);
+                        }
+                    }
+                    else if ($orientationCheckedValue !='false' && $hmLeaseMannerCheckedValue !='false')
+                    {
+                        slog('1,3');
+                        $orientationCheckedValue = explode(',', $orientationCheckedValue);
+                        $upfitterCheckedValue = explode(',', $upfitterCheckedValue);
+
+                        if (in_array($data['hm_landlord_rent'][$k]['hm_basics_id']['orientation'], $orientationCheckedValue) && $data['hm_landlord_rent'][$k]['hm_lease_id']['hm_lease_manner'] == $hmLeaseMannerCheckedValue) {} else
+                        {
+                            unset($data['hm_landlord_rent'][$k]);
+                        }
+                    }
+                    else if ($upfitterCheckedValue !='false' && $hmLeaseMannerCheckedValue !='false')
+                    {
+                        slog('2,3');
+                        $upfitterCheckedValue = explode(',', $upfitterCheckedValue);
+
+                        if (in_array($data['hm_landlord_rent'][$k]['hm_basics_id']['decorate_degree'], $upfitterCheckedValue) && $data['hm_landlord_rent'][$k]['hm_lease_id']['hm_lease_manner'] == $hmLeaseMannerCheckedValue) {} else
+                        {
+                            unset($data['hm_landlord_rent'][$k]);
+                        }
+                    }
+                    else if ($orientationCheckedValue !='false')
+                    {
+                        slog('1');
+                        $orientationCheckedValue = explode(',', $orientationCheckedValue);
+                        if (in_array($data['hm_landlord_rent'][$k]['hm_basics_id']['orientation'], $orientationCheckedValue)) {} else
+                        {
+                            unset($data['hm_landlord_rent'][$k]);
+                        }
+                    }
+                    else if ($upfitterCheckedValue !='false')
+                    {
+                        slog('2');
+                        $upfitterCheckedValue = explode(',', $upfitterCheckedValue);
+
+                        if (in_array($data['hm_landlord_rent'][$k]['hm_basics_id']['decorate_degree'], $upfitterCheckedValue)) {} else
+                        {
+                            unset($data['hm_landlord_rent'][$k]);
+                        }
+                    }
+                    else if ($hmLeaseMannerCheckedValue !='false')
+                    {
+                        slog('3');
+                        if ($data['hm_landlord_rent'][$k]['hm_lease_id']['hm_lease_manner'] == $hmLeaseMannerCheckedValue) {} else
+                        {
+                            unset($data['hm_landlord_rent'][$k]);
+                        }
+                    }
                 }
                 else
                 {

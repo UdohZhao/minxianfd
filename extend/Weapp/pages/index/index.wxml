@@ -92,7 +92,7 @@
                       </checkbox-group>
                   </view>
 
-                  <view class="fxBox">
+                  <!--<view class="fxBox">
                     <view class="fxBox_title">建筑面积（平方米）</view>
                       <checkbox-group class='fxBox_bd' bindchange="checkChangeCoveredArea">
                         <label wx:for="{{covered_area}}" wx:key="*this" class="fxBox_bd_list {{item.checked?'listCctive':''}}">
@@ -100,9 +100,9 @@
                           <label class="fxBox_title">{{item.key}}</label>
                         </label>
                       </checkbox-group>
-                  </view>
+                  </view>-->
              
-                  <view class="fxBox">
+                  <!--<view class="fxBox">
                     <view class="fxBox_title">楼层</view>
                       <checkbox-group class='fxBox_bd' bindchange="checkChangeFloor">
                         <label wx:for="{{floor}}" wx:key="*this" class="fxBox_bd_list {{item.checked?'listCctive':''}}">
@@ -110,7 +110,7 @@
                           <label class="fxBox_title">{{item.key}}</label>
                         </label>
                       </checkbox-group>
-                  </view>
+                  </view>-->
 
                   <view class="fxBox">
                     <view class="fxBox_title">装修</view>

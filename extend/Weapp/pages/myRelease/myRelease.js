@@ -33,9 +33,7 @@ Page({
         else
         {
           // 小程序用户id
-          // var wuid = res.data.data;
-          // 测试小程序用户id
-          var wuid = 1;
+          var wuid = res.data.data;
           //提交
           wx.request({
             url: app.data.domain + '/HmLandlordRent/index?wuid='+wuid,
