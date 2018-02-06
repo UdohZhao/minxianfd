@@ -74,30 +74,92 @@ class HmLandlordRent extends Base
                 //  POST 条件搜索
                 if ($this->request->isPost())
                 {
+                    // 读取房源基础数据
+                    $data['hm_landlord_rent'][$k]['hm_basics_id'] = db('hm_basics')->where('id',$v['hm_basics_id'])->find();
+                    $data['hm_landlord_rent'][$k]['hm_basics_id']['hm_house_type_id'] = db('hm_house_type')->where('id',$data['hm_landlord_rent'][$k]['hm_basics_id']['hm_house_type_id'])->find();
+                    // 读取房源小区数据
+                    $data['hm_landlord_rent'][$k]['hm_community_id'] = db('hm_community')->where('id',$v['hm_community_id'])->find();
+                    // 读取房源租赁数据
+                    $data['hm_landlord_rent'][$k]['hm_lease_id'] = db('hm_lease')->where('id',$v['hm_lease_id'])->find();
+                    // 读取房源数据
+                    $data['hm_landlord_rent'][$k]['hm_housing_resource_id'] = db('hm_housing_resource')->where('id',$v['hm_housing_resource_id'])->find();
+                    $data['hm_landlord_rent'][$k]['hm_housing_resource_id']['trait'] = explode(',', $data['hm_landlord_rent'][$k]['hm_housing_resource_id']['trait']);
+                    // 读取房源环景图片数据
+                    $data['hm_landlord_rent'][$k]['hm_housing_resource_id']['hm_view_images'] = db('hm_view_images')->where('hm_housing_resource_id',$v['hm_housing_resource_id'])->find();
+                    // 读取房源置顶推广数据
+                    $data['hm_landlord_rent'][$k]['hm_promotion_id'] = db('hm_promotion')->where('id',$v['hm_promotion_id'])->find();
+
+                    /*** 条件检测区域 ***/
+
                     // 获取区域岷县id
                     $hm_min_xian_id = input('post.hm_min_xian_id');
                     if ($hm_min_xian_id)
                     {
-                        if (!db('hm_area')->where('hm_min_xian_id',$hm_min_xian_id)->count())
+                        // 读取房源区域数据
+                        $data['hm_landlord_rent'][$k]['hm_area_id'] = db('hm_area')->where('id',$v['hm_area_id'])->find();
+                        // if
+                        if ($data['hm_landlord_rent'][$k]['hm_area_id']['hm_min_xian_id'] == $hm_min_xian_id)
+                        {
+                             unset($data['hm_landlord_rent'][$k]['hm_area_id']);
+                        }
+                        else
                         {
                             unset($data['hm_landlord_rent'][$k]);
                         }
                     }
+
+                    // 租金
+                    $rentStart = input('post.rentStart');
+                    $rentEnd = input('post.rentEnd');
+                    if ($rentStart != null && $rentEnd != null)
+                    {
+                        $rentStart = intval($rentStart);
+                        $rentEnd = intval($rentEnd);
+                        if ($data['hm_landlord_rent'][$k]['hm_lease_id']['rent'] >= $rentStart && $data['hm_landlord_rent'][$k]['hm_lease_id']['rent'] <= $rentEnd) {} else
+                        {
+                            unset($data['hm_landlord_rent'][$k]);
+                        }
+                    }
+
+                    // 户型
+                    $bedroomCheckedValue = input('post.bedroomCheckedValue');
+                    $toiletCheckedValue = input('post.toiletCheckedValue');
+                    if ($bedroomCheckedValue && $toiletCheckedValue)
+                    {
+                        // 字符串转数组
+                        $bedroomCheckedValue = explode(',', $bedroomCheckedValue);
+                        $toiletCheckedValue = explode(',', $toiletCheckedValue);
+
+                        // if
+                        if (in_array($data['hm_landlord_rent'][$k]['hm_basics_id']['hm_house_type_id']['habitable_room'], $bedroomCheckedValue) && in_array($data['hm_landlord_rent'][$k]['hm_basics_id']['hm_house_type_id']['shower_room'], $toiletCheckedValue)) {} else
+                        {
+                            unset($data['hm_landlord_rent'][$k]);
+                        }
+                    }
+
                 }
-                // 读取房源基础数据
-                $data['hm_landlord_rent'][$k]['hm_basics_id'] = db('hm_basics')->where('id',$v['hm_basics_id'])->find();
-                $data['hm_landlord_rent'][$k]['hm_basics_id']['hm_house_type_id'] = db('hm_house_type')->where('id',$data['hm_landlord_rent'][$k]['hm_basics_id']['hm_house_type_id'])->find();
-                // 读取房源小区数据
-                $data['hm_landlord_rent'][$k]['hm_community_id'] = db('hm_community')->where('id',$v['hm_community_id'])->find();
-                // 读取房源租赁数据
-                $data['hm_landlord_rent'][$k]['hm_lease_id'] = db('hm_lease')->where('id',$v['hm_lease_id'])->find();
-                // 读取房源数据
-                $data['hm_landlord_rent'][$k]['hm_housing_resource_id'] = db('hm_housing_resource')->where('id',$v['hm_housing_resource_id'])->find();
-                $data['hm_landlord_rent'][$k]['hm_housing_resource_id']['trait'] = explode(',', $data['hm_landlord_rent'][$k]['hm_housing_resource_id']['trait']);
-                // 读取房源环景图片数据
-                $data['hm_landlord_rent'][$k]['hm_housing_resource_id']['hm_view_images'] = db('hm_view_images')->where('hm_housing_resource_id',$v['hm_housing_resource_id'])->find();
-                // 读取房源置顶推广数据
-                $data['hm_landlord_rent'][$k]['hm_promotion_id'] = db('hm_promotion')->where('id',$v['hm_promotion_id'])->find();
+                else
+                {
+                    // 读取房源基础数据
+                    $data['hm_landlord_rent'][$k]['hm_basics_id'] = db('hm_basics')->where('id',$v['hm_basics_id'])->find();
+                    $data['hm_landlord_rent'][$k]['hm_basics_id']['hm_house_type_id'] = db('hm_house_type')->where('id',$data['hm_landlord_rent'][$k]['hm_basics_id']['hm_house_type_id'])->find();
+                    // 读取房源小区数据
+                    $data['hm_landlord_rent'][$k]['hm_community_id'] = db('hm_community')->where('id',$v['hm_community_id'])->find();
+                    // 读取房源租赁数据
+                    $data['hm_landlord_rent'][$k]['hm_lease_id'] = db('hm_lease')->where('id',$v['hm_lease_id'])->find();
+                    // 读取房源数据
+                    $data['hm_landlord_rent'][$k]['hm_housing_resource_id'] = db('hm_housing_resource')->where('id',$v['hm_housing_resource_id'])->find();
+                    $data['hm_landlord_rent'][$k]['hm_housing_resource_id']['trait'] = explode(',', $data['hm_landlord_rent'][$k]['hm_housing_resource_id']['trait']);
+                    // 读取房源环景图片数据
+                    $data['hm_landlord_rent'][$k]['hm_housing_resource_id']['hm_view_images'] = db('hm_view_images')->where('hm_housing_resource_id',$v['hm_housing_resource_id'])->find();
+                    // 读取房源置顶推广数据
+                    $data['hm_landlord_rent'][$k]['hm_promotion_id'] = db('hm_promotion')->where('id',$v['hm_promotion_id'])->find();
+                }
+            }
+            // $data['hm_landlord_rent']
+            if (!$data['hm_landlord_rent'])
+            {
+                $data['hm_landlord_rent'] = false;
             }
             slog($data);
             return ajaxReturn(Rs(0,'受影响的操作！',$data));
