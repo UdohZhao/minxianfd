@@ -9,9 +9,9 @@ Page({
     curIndex:"town",
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     movies: [
-      { url: '../../dist/images/1.jpg' },
-      { url: '../../dist/images/2.jpg' },
-      { url: '../../dist/images/3.jpg' },
+      { url: '../../dist/images/i1.jpg' },
+      { url: '../../dist/images/i2.jpg' },
+      { url: '../../dist/images/i3.jpg' },
     ],
     hidden: false,
     curNav: 0,
@@ -427,7 +427,8 @@ Page({
                     //详情列表数据
                     hm_landlord_rent:res.data.data.hm_landlord_rent
                   })
-              }
+                  
+              } 
               else
               {
                   that.setData({
