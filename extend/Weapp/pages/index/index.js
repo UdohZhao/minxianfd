@@ -746,15 +746,6 @@ Page({
 
   // 租金tap事件
   tapRent: function (e) {
-<<<<<<< HEAD
-  
-    var  index = parseInt(e.target.dataset.index)
-    console.log(index)
-    this.setData({
-      rentlistActive: index
-    })
-    console.log(this.data.rentlistActive)
-=======
     var that = this;
     that.setData({
       rentIndex: parseInt(e.target.dataset.index),
@@ -764,8 +755,6 @@ Page({
 
     console.log('获取租金开始：' + that.data.rentStart);
     console.log('获取租金结束：' + that.data.rentEnd);
-
->>>>>>> zhaojian
   }
 
 })
