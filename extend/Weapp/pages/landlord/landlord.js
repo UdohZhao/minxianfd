@@ -5,9 +5,11 @@ Page({
    */
   data: {
     movies: [
-      { url: '../../dist/images/1.jpg' },
-      { url: '../../dist/images/2.jpg' },
-      { url: '../../dist/images/3.jpg' },
+      { url: '../../dist/images/u1.jpg' },
+      { url: '../../dist/images/u2.jpg' },
+      { url: '../../dist/images/u3.jpg' },
+      { url: '../../dist/images/u4.jpg' },
+      
     ],
     // gcData:true
   },

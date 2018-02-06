@@ -37,11 +37,11 @@
             </view>
             <view class="weui-media-box__desc red"> {{v.hm_lease_id.rent}}元/月</view>
             <view class="weui-media-box__title">
-              <!--<view wx:if="{{v.hm_promotion_id && v.hm_promotion_id.type == 0}}">-->
+              <view wx:if="{{v.hm_promotion_id && v.hm_promotion_id.type == 0}}">
               <view class="reviewRemark">
                 <button class="weui-btn mini-btn" type="warn" size="mini" bindtap="atPay" data-hmlrid="{{v.id}}" data-hm_promotion_id="{{v.hm_promotion_id}}">立即付款</button>
               </view>
-              <!--</view>-->
+              </view>
               <view class="reviewRemark">
                 <button class="weui-btn mini-btn" type="default" size="mini" bindtap="lookMsg" data-msg="{{v.msg}}">查看备注</button>  
               </view>          
