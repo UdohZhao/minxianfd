@@ -375,6 +375,11 @@ Page({
     var that = this;
 
     console.log(options);
+
+    // 良好的用户体验
+    wx.showLoading({
+      title: '获取中',
+    })
     
     // 请求岷县数据
     wx.request({
@@ -429,6 +434,12 @@ Page({
                     hm_landlord_rent: false
                   })
               }
+
+              // 良好的用户体验
+              setTimeout(function(){
+                wx.hideLoading()
+              },2000)
+
             },
             fail: function (e) {
               console.log(e);
@@ -503,6 +514,12 @@ Page({
     // 获取区域岷县id
     console.log('获取区域岷县id：' + that.data.hm_min_xian_id);
 
+
+    // 良好的用户体验
+    wx.showLoading({
+      title: '筛选中',
+    })
+
     // 请求岷县数据
     wx.request({
       url: app.data.domain + '/WxLogin/checkRedis', 
@@ -546,6 +563,12 @@ Page({
                     hm_landlord_rent: false
                   })
               }
+
+              // 良好的用户体验
+              setTimeout(function(){
+                wx.hideLoading()
+              },2000)
+
             },
             fail: function (e) {
               console.log(e);
@@ -872,6 +895,186 @@ Page({
 
     console.log('获取租金开始：' + that.data.rentStart);
     console.log('获取租金结束：' + that.data.rentEnd);
+
+    // 良好的用户体验
+    wx.showLoading({
+      title: '筛选中',
+    })
+
+    // 请求岷县数据
+    wx.request({
+      url: app.data.domain + '/WxLogin/checkRedis', 
+      data: {
+        threerd_session: wx.getStorageSync('3rd_session')
+      },
+      header: {
+          'content-type': 'application/json'
+      },
+      success: function(res) {
+        // 3rd_session
+        if (res.data.status == 1) 
+        {
+          app.threerdLogin();
+        }
+        else
+        {
+          // 小程序用户id
+          var wuid = res.data.data;
+          //提交
+          wx.request({
+            url: app.data.domain + '/HmLandlordRent/index?wuid='+wuid+'&status=2&type=1&retype=0',
+            data: {rentStart:that.data.rentStart,rentEnd:that.data.rentEnd},
+            method: 'POST',
+            header: {
+                'content-type': 'application/json'
+            },
+            success: function (res) {
+              console.log(res);
+              // if 
+              if (res.data.status == 0) 
+              { 
+                  that.setData({
+                    //详情列表数据
+                    hm_landlord_rent:res.data.data.hm_landlord_rent
+                  })
+              }
+              else
+              {
+                  that.setData({
+                    hm_landlord_rent: false
+                  })
+              }
+
+              // 良好的用户体验
+              setTimeout(function(){
+                wx.hideLoading()
+              },2000)
+
+            },
+            fail: function (e) {
+              console.log(e);
+            }
+          })
+        }
+      }
+    })
+
+  },
+
+  /**
+   * 房型搜索条件
+   */
+  houseTypeSearch: function (e) {
+    var that = this;
+
+    var bedroomCheckedValue;
+    if (that.data.bedroomCheckedValue == undefined || that.data.bedroomCheckedValue == []) 
+    {
+        bedroomCheckedValue = false;
+    }
+    else 
+    {
+        bedroomCheckedValue = that.data.bedroomCheckedValue
+    } 
+
+    var toiletCheckedValue;
+    if (that.data.toiletCheckedValue == undefined || that.data.toiletCheckedValue == []) 
+    {
+        toiletCheckedValue = false;
+    }
+    else 
+    {
+        toiletCheckedValue = that.data.toiletCheckedValue
+    }
+
+    // if
+
+    if (bedroomCheckedValue == false && toiletCheckedValue == false) 
+    {
+          wx.showModal({
+            title: '提示',
+            content: '请选中筛选的条件！',
+            showCancel: false
+          })
+    }
+    else 
+    {
+
+        // 获取卧室选中值
+        console.log(bedroomCheckedValue);
+        // 获取卫生间选中的值
+        console.log(toiletCheckedValue);
+
+        bedroomCheckedValue = bedroomCheckedValue.toString();
+        toiletCheckedValue = toiletCheckedValue.toString();
+
+        // 良好的用户体验
+        wx.showLoading({
+          title: '筛选中',
+        })
+
+        // 请求岷县数据
+        wx.request({
+          url: app.data.domain + '/WxLogin/checkRedis', 
+          data: {
+            threerd_session: wx.getStorageSync('3rd_session')
+          },
+          header: {
+              'content-type': 'application/json'
+          },
+          success: function(res) {
+            // 3rd_session
+            if (res.data.status == 1) 
+            {
+              app.threerdLogin();
+            }
+            else
+            {
+              // 小程序用户id
+              var wuid = res.data.data;
+              //提交
+              wx.request({
+                url: app.data.domain + '/HmLandlordRent/index?wuid='+wuid+'&status=2&type=1&retype=0',
+                data: {bedroomCheckedValue:bedroomCheckedValue,toiletCheckedValue:toiletCheckedValue},
+                method: 'POST',
+                header: {
+                    'content-type': 'application/json'
+                },
+                success: function (res) {
+                  console.log(res);
+                  // if 
+                  if (res.data.status == 0) 
+                  { 
+                      that.setData({
+                        //详情列表数据
+                        hm_landlord_rent:res.data.data.hm_landlord_rent
+                      })
+                  }
+                  else
+                  {
+                      that.setData({
+                        hm_landlord_rent: false
+                      })
+                  }
+
+                  // 良好的用户体验
+                  setTimeout(function(){
+                    wx.hideLoading()
+                  },2000)
+
+                },
+                fail: function (e) {
+                  console.log(e);
+                }
+              })
+            }
+          }
+        })
+
+
+    } 
+
+
   }
 
 })
