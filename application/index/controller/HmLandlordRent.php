@@ -36,6 +36,13 @@ class HmLandlordRent extends Base
                 $data['hm_min_xian']['village'] = db('hm_min_xian')->where('type',1)->order('sort asc')->select();
                 // 读取出租方式
                 $data['hm_lease_manner'] = db('hm_lease_manner')->order('sort asc')->select();
+                if ($data['hm_lease_manner'])
+                {
+                    foreach($data['hm_lease_manner'] AS $k => $v)
+                    {
+                        $data['hm_lease_manner'][$k]['checked'] = false;
+                    }
+                }
                 // 读取租金
                 $data['rent'] = config('rent');
                 // 读取卧室

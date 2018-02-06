@@ -524,169 +524,234 @@ Page({
     })
   },
 
-  //选取搜索条件
+  /**
+   * 卧室事件
+   */
   checkChangeBedroom:function(e){
     var that = this
 
-    console.log(e);
-    return false;
+    // 获取选中下标
+    var checkedIndex = e.detail.value;
+
+    console.log(checkedIndex);
+
+    // checked赋值为false
+    for (var i = 0; i < that.data.bedroom.length; i++) {
+       that.data.bedroom[i].checked = false;
+    }
+
+    var bedroomCheckedValue = [];
+    // checked赋值为true
+    for (var i = 0; i < checkedIndex.length; i++) {
+       that.data.bedroom[checkedIndex[i]].checked = true;
+       bedroomCheckedValue.push(that.data.bedroom[checkedIndex[i]].value);
+    }
 
     that.setData({
-      value: e.detail.value
+        bedroom: that.data.bedroom,
+        bedroomCheckedValue: bedroomCheckedValue
     })
-    var items = this.data.bedroom;
-    console.log(this.data.items)
-    var checkArr = e.detail.value;
-    console.log(checkArr)
-    for (var i = 0; i < items.length; i++) {
-      if (checkArr.indexOf(i + "") != -1) {
-        items[i].checked = false;
-        console.log(items)
-      } else {
-        items[i].checked = true;
-        console.log(items)
-        
-      }
-    }
-    this.setData({
-      bedroom: items,
-    }) 
+
+    console.log('获取卧室CheckedValue：' + that.data.bedroomCheckedValue);
+
   },
-  //卫
+
+  /**
+   * 卫生间事件
+   */
   checkChangeToilet:function(e){
-    console.log('radio发生change事件，携带value值为：', e)
     var that = this
-    that.setData({
-      value1: e.detail.value
-    })
-    var items1 = this.data.toilet;
-    console.log(items1)
-    var checkArr = e.detail.value;
-    console.log(checkArr)
-    for (var i = 0; i < items1.length; i++) {
-      if (checkArr.indexOf(i + "") != -1) {
-        items1[i].checked = true;
-      } else {
-        items1[i].checked = false;
-      }
+
+    // 获取选中下标
+    var checkedIndex = e.detail.value;
+
+    console.log(checkedIndex);
+
+    // checked赋值为false
+    for (var i = 0; i < that.data.toilet.length; i++) {
+       that.data.toilet[i].checked = false;
     }
-    this.setData({
-      toilet: items1, 
-    }) 
-  },
-  //朝向
-  checkChangeDirection: function (e) {
-    console.log('radio发生change事件，携带value值为：', e)
-    var that = this
-    that.setData({
-      value1: e.detail.value
-    })
-    var items2 = this.data.orientation;
-    console.log(items2)
-    var checkArr = e.detail.value;
-    console.log(checkArr)
-    for (var i = 0; i < items2.length; i++) {
-      if (checkArr.indexOf(i + "") != -1) {
-        items2[i].checked = true;
-      } else {
-        items2[i].checked = false;
-      }
+
+    var toiletCheckedValue = [];
+    // checked赋值为true
+    for (var i = 0; i < checkedIndex.length; i++) {
+       that.data.toilet[checkedIndex[i]].checked = true;
+       toiletCheckedValue.push(that.data.toilet[checkedIndex[i]].value);
     }
-    this.setData({
-      orientation: items2,
-    })
-  },
-  //面积
-  checkChangeArea:function(e) {
-    console.log('radio发生change事件，携带value值为：', e)
-    var that = this
+
     that.setData({
-      value1: e.detail.value
+        toilet: that.data.toilet,
+        toiletCheckedValue: toiletCheckedValue
     })
-    var items3 = this.data.covered_area;
-    console.log(items3)
-    var checkArr = e.detail.value;
-    console.log(checkArr)
-    for (var i = 0; i < items3.length; i++) {
-      if (checkArr.indexOf(i + "") != -1) {
-        items3[i].checked = true;
-      } else {
-        items3[i].checked = false;
-      }
-    }
-    this.setData({
-      covered_area: items3,
-    })
+
+    console.log('获取卫生间CheckedValue：' + that.data.toiletCheckedValue);
+
   },
 
-  //楼层
-  checkChangeFloor:function(e) {
-    console.log('radio发生change事件，携带value值为：', e)
+
+  /**
+   * 朝向事件
+   */
+  checkChangeOrientation:function(e){
     var that = this
-    that.setData({
-      value1: e.detail.value
-    })
-    var items5 = this.data.floor;
-    console.log(items5)
-    var checkArr = e.detail.value;
-    console.log(checkArr)
-    for (var i = 0; i < items5.length; i++) {
-      if (checkArr.indexOf(i + "") != -1) {
-        items5[i].checked = true;
-      } else {
-        items5[i].checked = false;
-      }
+
+    // 获取选中下标
+    var checkedIndex = e.detail.value;
+
+    console.log(checkedIndex);
+
+    // checked赋值为false
+    for (var i = 0; i < that.data.orientation.length; i++) {
+       that.data.orientation[i].checked = false;
     }
-    this.setData({
-      floor: items5,
-    })
-  },
-  //装修
-  checkChangeFitment: function (e) {
-    console.log('radio发生change事件，携带value值为：', e)
-    var that = this
-    that.setData({
-      value1: e.detail.value
-    })
-    var items6 = this.data.upfitter;
-    console.log(items6)
-    var checkArr = e.detail.value;
-    console.log(checkArr)
-    for (var i = 0; i < items6.length; i++) {
-      if (checkArr.indexOf(i + "") != -1) {
-        items6[i].checked = true;
-      } else {
-        items6[i].checked = false;
-      }
+
+    var orientationCheckedValue = [];
+    // checked赋值为true
+    for (var i = 0; i < checkedIndex.length; i++) {
+       that.data.orientation[checkedIndex[i]].checked = true;
+       orientationCheckedValue.push(that.data.orientation[checkedIndex[i]].value);
     }
-    this.setData({
-      upfitter: items6,
+
+    that.setData({
+        orientation: that.data.orientation,
+        orientationCheckedValue: orientationCheckedValue
     })
+
+    console.log('获取朝向CheckedValue：' + that.data.orientationCheckedValue);
+
   },
 
-  
-  //方式 --单选
-  checkChangeWay: function (e) {
-    console.log('radio发生change事件，携带value值为：', e)
+
+
+  /**
+   * 建筑面积（平方米）
+   */
+  checkChangeCoveredArea:function(e){
     var that = this
-    that.setData({
-      value1: e.detail.value
-    })
-    var items9 = this.data.hm_lease_manner;
-    console.log(items9)
-    var checkArr = e.detail.value;
-    console.log(checkArr)
-    for (var i = 0; i < items9.length; i++) {
-      if (checkArr.indexOf(i + "") != -1) {
-        items9[i].checked = true;
-      } else {
-        items9[i].checked = false;
-      }
+
+    // 获取选中下标
+    var checkedIndex = e.detail.value;
+
+    console.log(checkedIndex);
+
+    // checked赋值为false
+    for (var i = 0; i < that.data.covered_area.length; i++) {
+       that.data.covered_area[i].checked = false;
     }
-    this.setData({
-      hm_lease_manner: items9,
+
+    var coveredAreaCheckedValue = [];
+    // checked赋值为true
+    for (var i = 0; i < checkedIndex.length; i++) {
+       that.data.covered_area[checkedIndex[i]].checked = true;
+       coveredAreaCheckedValue.push(that.data.covered_area[checkedIndex[i]].value);
+    }
+
+    that.setData({
+        covered_area: that.data.covered_area,
+        coveredAreaCheckedValue: coveredAreaCheckedValue
     })
+
+    console.log('获取建筑面积（平方米）CheckedValue：' + that.data.coveredAreaCheckedValue);
+
   },
+
+  /**
+   * 楼层事件
+   */
+  checkChangeFloor:function(e){
+    var that = this
+
+    // 获取选中下标
+    var checkedIndex = e.detail.value;
+
+    console.log(checkedIndex);
+
+    // checked赋值为false
+    for (var i = 0; i < that.data.floor.length; i++) {
+       that.data.floor[i].checked = false;
+    }
+
+    var floorCheckedValue = [];
+    // checked赋值为true
+    for (var i = 0; i < checkedIndex.length; i++) {
+       that.data.floor[checkedIndex[i]].checked = true;
+       floorCheckedValue.push(that.data.floor[checkedIndex[i]].value);
+    }
+
+    that.setData({
+        floor: that.data.floor,
+        floorCheckedValue: floorCheckedValue
+    })
+
+    console.log('获取楼层CheckedValue：' + that.data.floorCheckedValue);
+
+  },
+
+
+  /**
+   * 装修事件
+   */
+  checkChangeUpfitter:function(e){
+    var that = this
+
+    // 获取选中下标
+    var checkedIndex = e.detail.value;
+
+    console.log(checkedIndex);
+
+    // checked赋值为false
+    for (var i = 0; i < that.data.upfitter.length; i++) {
+       that.data.upfitter[i].checked = false;
+    }
+
+    var upfitterCheckedValue = [];
+    // checked赋值为true
+    for (var i = 0; i < checkedIndex.length; i++) {
+       that.data.upfitter[checkedIndex[i]].checked = true;
+       upfitterCheckedValue.push(that.data.upfitter[checkedIndex[i]].value);
+    }
+
+    that.setData({
+        upfitter: that.data.upfitter,
+        upfitterCheckedValue: upfitterCheckedValue
+    })
+
+    console.log('获取装修CheckedValue：' + that.data.upfitterCheckedValue);
+
+  },
+
+  /**
+   * 出租方式事件
+   */
+  checkChangeManner: function (e) {
+    var that = this
+
+    // 获取选中下标
+    var checkedIndex = e.detail.value;
+
+    console.log(checkedIndex);
+
+    // checked赋值为false
+    for (var i = 0; i < that.data.hm_lease_manner.length; i++) {
+       that.data.hm_lease_manner[i].checked = false;
+    }
+
+    var hmLeaseMannerCheckedValue = [];
+    // checked赋值为true
+    for (var i = 0; i < checkedIndex.length; i++) {
+       that.data.hm_lease_manner[checkedIndex[i]].checked = true;
+       hmLeaseMannerCheckedValue.push(that.data.hm_lease_manner[checkedIndex[i]].value);
+    }
+
+    that.setData({
+        hm_lease_manner: that.data.hm_lease_manner,
+        hmLeaseMannerCheckedValue: hmLeaseMannerCheckedValue
+    })
+
+    console.log('获取出租方式CheckedValue：' + that.data.hmLeaseMannerCheckedValue);
+
+  },
+
   //重置 房型
   reset:function(e){
     var style = this.data.bedroom
@@ -704,6 +769,7 @@ Page({
       toilet: style2,
     })
   },
+
   //重置 更多
   resetMore:function(e){
     //朝向

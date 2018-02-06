@@ -59,20 +59,18 @@
                   <view class="fxBox">
                     <view class="fxBox_title">卧室</view>
                       <checkbox-group class='fxBox_bd' bindchange="checkChangeBedroom">
-                        <label wx:for="{{bedroom}}" wx:key="index" wx:for-index="k" wx:for-item="v" class="fxBox_bd_list {{item.checked?'listCctive':''}}">
-                          <checkbox value="{{v.value}}" checked="{{v.checked}}"></checkbox>
-                          <label class="fxBox_title">{{v.key}}</label>
+                        <label wx:for="{{bedroom}}" wx:key="*this" class="fxBox_bd_list {{item.checked?'listCctive':''}}">
+                          <checkbox value="{{index}}" checked="{{item.checked}}" hidden="true"></checkbox>
+                          <label class="fxBox_title">{{item.key}}</label>
                         </label>
                       </checkbox-group>
                   </view>
                   <view class="fxBox">
                     <view class="fxBox_title">卫生间</view>
                     <checkbox-group class='fxBox_bd' bindchange="checkChangeToilet">
-                        <label wx:for="{{toilet}}" wx:key="{{k}}" wx:for-index="i"
-                        class="fxBox_bd_list {{item.checked?'listCctive':''}}">
-                          <checkbox value="{{i}}" name="{{item.key}}" 
-                          checked="{{item.checked}}" hidden='true'></checkbox>
-                          <label class="fxBox_title" data-start="{{v.start}}" data-end="{{v.end}}">{{item.key}}</label>
+                        <label wx:for="{{toilet}}" wx:key="*this" class="fxBox_bd_list {{item.checked?'listCctive':''}}">
+                          <checkbox value="{{index}}" checked="{{item.checked}}" hidden="true"></checkbox>
+                          <label class="fxBox_title">{{item.key}}</label>
                         </label>
                     </checkbox-group>
                   </view>
@@ -86,72 +84,54 @@
                   <!--朝向，楼层 装修 居室 方式 面积等 -->
                   <view class="fxBox">
                     <view class="fxBox_title">朝向</view>
-                    <view class="fxBox_bd">
-                      <checkbox-group class='fxBox_bd' bindchange="checkChangeDirection">
-                        <label bindtap="click"  wx:for="{{orientation}}" wx:key="k" wx:for-index="i"
-                        class="fxBox_bd_list {{item.checked?'listCctive':''}}">
-                          <checkbox value="{{i}}" name="{{item.key}}" 
-                          checked="{{item.checked}}" hidden='true'></checkbox>
-                          <label class="fxBox_title" data-start="{{v.start}}" data-end="{{v.end}}">{{item.key}}</label>
+                      <checkbox-group class='fxBox_bd' bindchange="checkChangeOrientation">
+                        <label wx:for="{{orientation}}" wx:key="*this" class="fxBox_bd_list {{item.checked?'listCctive':''}}">
+                          <checkbox value="{{index}}" checked="{{item.checked}}" hidden="true"></checkbox>
+                          <label class="fxBox_title">{{item.key}}</label>
                         </label>
-                    </checkbox-group>
-                    </view>
+                      </checkbox-group>
                   </view>
+
                   <view class="fxBox">
-                    <view class="fxBox_title">建筑面积(平)</view>
-                    <view class="fxBox_bd">
-                      <checkbox-group class='fxBox_bd' bindchange="checkChangeArea">
-                        <label bindtap="click"  wx:for="{{covered_area}}" wx:key="k" wx:for-index="i"
-                        class="fxBox_bd_list {{item.checked?'listCctive':''}}">
-                          <checkbox value="{{i}}" name="{{item.key}}" 
-                          checked="{{item.checked}}" hidden='true'></checkbox>
-                          <label class="fxBox_title" data-start="{{v.start}}" data-end="{{v.end}}">{{item.key}}</label>
+                    <view class="fxBox_title">建筑面积（平方米）</view>
+                      <checkbox-group class='fxBox_bd' bindchange="checkChangeCoveredArea">
+                        <label wx:for="{{covered_area}}" wx:key="*this" class="fxBox_bd_list {{item.checked?'listCctive':''}}">
+                          <checkbox value="{{index}}" checked="{{item.checked}}" hidden="true"></checkbox>
+                          <label class="fxBox_title">{{item.key}}</label>
                         </label>
-                    </checkbox-group>
-                    </view>
+                      </checkbox-group>
                   </view>
              
                   <view class="fxBox">
                     <view class="fxBox_title">楼层</view>
-                    <view class="fxBox_bd">
                       <checkbox-group class='fxBox_bd' bindchange="checkChangeFloor">
-                        <label bindtap="click"  wx:for="{{floor}}" wx:key="k" wx:for-index="i"
-                        class="fxBox_bd_list {{item.checked?'listCctive':''}}">
-                          <checkbox value="{{i}}" name="{{item.key}}" 
-                          checked="{{item.checked}}" hidden='true'></checkbox>
-                          <label class="fxBox_title" data-start="{{v.start}}" data-end="{{v.end}}">{{item.key}}</label>
+                        <label wx:for="{{floor}}" wx:key="*this" class="fxBox_bd_list {{item.checked?'listCctive':''}}">
+                          <checkbox value="{{index}}" checked="{{item.checked}}" hidden="true"></checkbox>
+                          <label class="fxBox_title">{{item.key}}</label>
                         </label>
-                    </checkbox-group>
-                    </view>
+                      </checkbox-group>
                   </view>
+
                   <view class="fxBox">
                     <view class="fxBox_title">装修</view>
-                    <view class="fxBox_bd">
-                      <checkbox-group class='fxBox_bd' bindchange="checkChangeFitment">
-                        <label bindtap="click"  wx:for="{{upfitter}}" wx:key="k" wx:for-index="i"
-                        class="fxBox_bd_list {{item.checked?'listCctive':''}}">
-                          <checkbox value="{{i}}" name="{{item.key}}" 
-                          checked="{{item.checked}}" hidden='true'></checkbox>
-                          <label class="fxBox_title" data-start="{{v.start}}" data-end="{{v.end}}">{{item.key}}</label>
+                      <checkbox-group class='fxBox_bd' bindchange="checkChangeUpfitter">
+                        <label wx:for="{{upfitter}}" wx:key="*this" class="fxBox_bd_list {{item.checked?'listCctive':''}}">
+                          <checkbox value="{{index}}" checked="{{item.checked}}" hidden="true"></checkbox>
+                          <label class="fxBox_title">{{item.key}}</label>
                         </label>
-                    </checkbox-group>
-                    </view>
+                      </checkbox-group>
                   </view>
                  
-                  
                   <view class="fxBox">
-                    <view class="fxBox_title">方式</view>
-                    <view class="fxBox_bd">
-                      <radio-group class='fxBox_bd' bindchange="checkChangeWay">
-                        <label bindtap="click"  wx:for="{{hm_lease_manner}}" wx:key="k" wx:for-index="i"
-                        class="fxBox_bd_list {{item.checked?'listCctive':''}}">
-                          <checkbox value="{{i}}" name="{{item.key}}" 
-                          checked="{{item.checked}}" hidden='true'></checkbox>
-                          <label class="fxBox_title" data-id="{{item.id}}">{{item.cname}}</label>
+                    <view class="fxBox_title">出租方式</view>
+                      <checkbox-group class='fxBox_bd' bindchange="checkChangeManner">
+                        <label wx:for="{{hm_lease_manner}}" wx:key="*this" class="fxBox_bd_list {{item.checked?'listCctive':''}}">
+                          <checkbox value="{{index}}" checked="{{item.checked}}" hidden="true"></checkbox>
+                          <label class="fxBox_title">{{item.cname}}</label>
                         </label>
-                    </radio-group>
-                    </view>
+                      </checkbox-group>
                   </view>
+                  
                   <view class="fxBox">
                     <button class="weui-btn mini-btn marginRight20"  size="mini" bindtap='resetMore'>重置</button>
                     <button class="weui-btn mini-btn" type="primary" size="mini">确定</button> 

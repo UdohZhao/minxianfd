@@ -287,40 +287,40 @@ return [
 
     // 卧室
     'bedroom'       =>  [
-        '0'         =>  ['key'=>'一室','value'=>'1','checked'=>'true'],
-        '1'         =>  ['key'=>'二室','value'=>'2','checked'=>'false'],
-        '2'         =>  ['key'=>'三室','value'=>'3','checked'=>'false'],
-        '3'         =>  ['key'=>'四室','value'=>'4','checked'=>'false'],
-        '4'         =>  ['key'=>'五室','value'=>'5','checked'=>'false'],
-        '5'         =>  ['key'=>'五室以上','value'=>'6','checked'=>'false'],
+        '0'         =>  ['key'=>'一室','value'=>'1','checked'=>false],
+        '1'         =>  ['key'=>'二室','value'=>'2','checked'=>false],
+        '2'         =>  ['key'=>'三室','value'=>'3','checked'=>false],
+        '3'         =>  ['key'=>'四室','value'=>'4','checked'=>false],
+        '4'         =>  ['key'=>'五室','value'=>'5','checked'=>false],
+        '5'         =>  ['key'=>'五室以上','value'=>'6','checked'=>false],
     ],
 
     // 卫生间
     'toilet'        =>  [
-        '0'         =>  ['key'=>'独卫','start'=>'1','end'=>'1'],
-        '1'         =>  ['key'=>'两卫','start'=>'2','end'=>'2'],
-        '2'         =>  ['key'=>'三卫','start'=>'3','end'=>'3'],
-        '3'         =>  ['key'=>'三卫以上','start'=>'3','end'=>'1000000']
+        '0'         =>  ['key'=>'独卫','value'=>'1','checked'=>false],
+        '1'         =>  ['key'=>'两卫','value'=>'2','checked'=>false],
+        '2'         =>  ['key'=>'三卫','value'=>'3','checked'=>false],
+        '3'         =>  ['key'=>'三卫以上','value'=>'4','checked'=>false]
     ],
 
     // 建筑面积（平方米）
     'covered_area'  =>  [
-        '0'         =>  ['key'=>'30㎡以下','start'=>'0','end'=>'30'],
-        '1'         =>  ['key'=>'30-50㎡','start'=>'30','end'=>'50'],
-        '2'         =>  ['key'=>'50-70㎡','start'=>'50','end'=>'70'],
-        '3'         =>  ['key'=>'70-90㎡','start'=>'70','end'=>'90'],
-        '4'         =>  ['key'=>'90-120㎡','start'=>'90','end'=>'120'],
-        '5'         =>  ['key'=>'120-150㎡','start'=>'120','end'=>'150'],
-        '6'         =>  ['key'=>'150-200㎡','start'=>'150','end'=>'200'],
-        '7'         =>  ['key'=>'200-300㎡','start'=>'200','end'=>'300'],
-        '8'         =>  ['key'=>'300㎡以上','start'=>'300','end'=>'1000000'],
+        '0'         =>  ['key'=>'30㎡以下','value'=>'0','checked'=>false],
+        '1'         =>  ['key'=>'30-50㎡','value'=>'1','checked'=>false],
+        '2'         =>  ['key'=>'50-70㎡','value'=>'2','checked'=>false],
+        '3'         =>  ['key'=>'70-90㎡','value'=>'3','checked'=>false],
+        '4'         =>  ['key'=>'90-120㎡','value'=>'4','checked'=>false],
+        '5'         =>  ['key'=>'120-150㎡','value'=>'5','checked'=>false],
+        '6'         =>  ['key'=>'150-200㎡','value'=>'6','checked'=>false],
+        '7'         =>  ['key'=>'200-300㎡','value'=>'7','checked'=>false],
+        '8'         =>  ['key'=>'300㎡以上','value'=>'8','checked'=>false],
     ],
 
     // 楼层
     'floor'         =>  [
-        '0'         =>  ['key'=>'低楼层','start'=>'1','end'=>'10'],
-        '1'         =>  ['key'=>'中楼层','start'=>'10','end'=>'20'],
-        '2'         =>  ['key'=>'高楼层','start'=>'20','end'=>'100'],
+        '0'         =>  ['key'=>'低楼层','value'=>'0','checked'=>false],
+        '1'         =>  ['key'=>'中楼层','value'=>'1','checked'=>false],
+        '2'         =>  ['key'=>'高楼层','value'=>'2','checked'=>false],
     ],
 
     // 房源类型
@@ -335,26 +335,26 @@ return [
 
     // 装修
     'upfitter'      =>  [
-        '0'         =>  ['key'=>'其他','value'=>'0'],
-        '1'         =>  ['key'=>'豪华装修','value'=>'1'],
-        '2'         =>  ['key'=>'精装修','value'=>'2'],
-        '3'         =>  ['key'=>'中等装修','value'=>'3'],
-        '4'         =>  ['key'=>'简装修','value'=>'4'],
-        '5'         =>  ['key'=>'毛坯','value'=>'5'],
+        '0'         =>  ['key'=>'其他','value'=>'0','checked'=>false],
+        '1'         =>  ['key'=>'豪华装修','value'=>'1','checked'=>false],
+        '2'         =>  ['key'=>'精装修','value'=>'2','checked'=>false],
+        '3'         =>  ['key'=>'中等装修','value'=>'3','checked'=>false],
+        '4'         =>  ['key'=>'简装修','value'=>'4','checked'=>false],
+        '5'         =>  ['key'=>'毛坯','value'=>'5','checked'=>false],
     ],
 
     // 朝向
     'orientation'   =>  [
-        '0'         =>  ['key'=>'南北','value'=>'0'],
-        '1'         =>  ['key'=>'南','value'=>'1'],
-        '2'         =>  ['key'=>'东南','value'=>'2'],
-        '3'         =>  ['key'=>'东','value'=>'3'],
-        '4'         =>  ['key'=>'西南','value'=>'4'],
-        '5'         =>  ['key'=>'北','value'=>'5'],
-        '6'         =>  ['key'=>'西','value'=>'6'],
-        '7'         =>  ['key'=>'东西','value'=>'7'],
-        '8'         =>  ['key'=>'东北','value'=>'8'],
-        '9'         =>  ['key'=>'西北','value'=>'9'],
+        '0'         =>  ['key'=>'南北','value'=>'0','checked'=>false],
+        '1'         =>  ['key'=>'南','value'=>'1','checked'=>false],
+        '2'         =>  ['key'=>'东南','value'=>'2','checked'=>false],
+        '3'         =>  ['key'=>'东','value'=>'3','checked'=>false],
+        '4'         =>  ['key'=>'西南','value'=>'4','checked'=>false],
+        '5'         =>  ['key'=>'北','value'=>'5','checked'=>false],
+        '6'         =>  ['key'=>'西','value'=>'6','checked'=>false],
+        '7'         =>  ['key'=>'东西','value'=>'7','checked'=>false],
+        '8'         =>  ['key'=>'东北','value'=>'8','checked'=>false],
+        '9'         =>  ['key'=>'西北','value'=>'9','checked'=>false],
     ],
 
 
