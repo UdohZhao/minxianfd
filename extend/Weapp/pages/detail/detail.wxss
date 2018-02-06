@@ -24,6 +24,7 @@ page,
   font-size: 18px;
   font-weight: 600;
   overflow: hidden;
+  
 }
 .weui-panel{
   padding:15px;
@@ -166,4 +167,20 @@ page,
 }
 .StickStyle .weui-panel_list{
   width: 100%;
+}
+.lebalSty{
+  padding: 3px;
+  margin-right: 5px;
+  font-size: 10px;
+  color: #fff;
+  margin-top: 1%;
+}
+.lebalStyleDT{
+  background-color: #DEF2EB;
+  color: #32B983;
+}
+.box__titleLabel{
+  float: right;
+  font-size: 12px;
+  line-height: 1.8;
 }

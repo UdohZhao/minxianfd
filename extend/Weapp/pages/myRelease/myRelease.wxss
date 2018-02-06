@@ -13,6 +13,7 @@ page,
   text-align: center;
   background-color: #fff;
   color: #ff8900;
+  z-index: 2;
 }
 .marTop30{
   margin-top: 30px;
@@ -46,11 +47,7 @@ page,
   font-size: 16px;
 }
 
-.weui-media-box__title_left{
-  display: inline-block;
-  width: 70%;
-  overflow: hidden;
-}
+
 .box__titleLabel{
   float: right;
   font-size: 12px;
@@ -75,10 +72,34 @@ button[size="mini"]{
   bottom: 0;
   right:0;
 }
-
-
-
-
+.weui-media-box_title{
+  width: 100%;
+  height: 35px;
+  line-height: 35px;
+  text-align: right;
+  vertical-align: middle; 
+}
+.weui-media-box__title_left{
+  float: left;
+  padding-left: 15px;
+  width: 50%;
+  overflow: hidden;
+  text-align: left;
+  vertical-align:middle;
+}
+button[size="mini"]{
+  color: #fff;
+}
+.reviewRemark{
+  display: inline-block;
+  margin-right: 10px;
+}
+.weui-media-box__title{
+  margin-top: 2%;
+}
+button[type="default"]{
+  color: #333;
+}
 
 
 
@@ -119,6 +140,7 @@ button[size="mini"]{
   margin-right: 5px;
   font-size: 10px;
   color: #fff;
+  margin-top: 1%;
 }
 .lebalStyleDT{
   background-color: #DEF2EB;
