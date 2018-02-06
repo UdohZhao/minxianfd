@@ -16,17 +16,17 @@ Page({
     hidden: false,
     curNav: 0,
     curIndex: 1,
-    cname:'town',
-    navList:[
+    minxianename:'town',
+    minxian:[
       {
-        id:'0',
-        cname:'town',
-        name:'镇'
+        index: 0,
+        minxianename: 'town',
+        cname:'镇'
       },
       {
-        id: '1',
-        cname:'village',        
-        name: '乡'
+        index: 1,  
+        minxianename: 'village',      
+        cname: '乡'
       },
     ],
     dishesList:[
@@ -363,6 +363,12 @@ Page({
         checked: false,
       }
     ],
+    // 岷县左侧active标示
+    minxianIndex: 0,
+    // 默认镇数据
+    minxianename: 'town',
+
+
   },
 
   onLoad: function (options) {
@@ -476,35 +482,31 @@ Page({
         url: '/pages/detail/detail?hmlrid=' + hmlrid
       })
   },
-  //左边列表选择
-  selectNav(event){
-     let id = event.target.dataset.id,
-    index = parseInt(event.target.dataset.index);
-    var  cname = event.target.dataset.cname
-    console.log(cname)
-     self = this;
-    this.setData({
-      curNav: id,
-      curIndex: index,
-      cname:cname
-    })
-    console.log(this.data.curNav)
-    console.log(this.data.cname)
-  },
 
-  //点击地区搜索
-  searchTap:function(e){
-    var id = e.target.dataset.id
-    console.log(id)
-    var  index = parseInt(e.target.dataset.index)
-    this.setData({
-      listActive: index
+  // 区域左边列表选择
+  selectMinxian(e){
+    var that = this;
+
+    var minxianIndex = e.target.dataset.index;
+    var minxianename = e.target.dataset.minxianename;
+
+    that.setData({
+      minxianIndex: minxianIndex,
+      minxianename: minxianename
     })
 
-    wx.navigateTo({
-      url: '/pages/index/index',
-    })
   },
+
+  // 搜索条件区域岷县id
+  selectMinxianId:function(e){
+    var that = this;
+    that.setData({
+      hm_min_xian_id: e.target.dataset.id
+    })
+    // 获取区域岷县id
+    console.log('获取区域岷县id：' + that.data.hm_min_xian_id);
+  },
+
   //去定位搜索
   gotoLocation:function(e){
     wx.navigateTo({
@@ -523,9 +525,12 @@ Page({
   },
 
   //选取搜索条件
-  checkChange:function(e){
-    console.log('radio发生change事件，携带value值为：', e)
+  checkChangeBedroom:function(e){
     var that = this
+
+    console.log(e);
+    return false;
+
     that.setData({
       value: e.detail.value
     })
@@ -741,13 +746,16 @@ Page({
 
   // 租金tap事件
   tapRent: function (e) {
-  
-    var  index = parseInt(e.target.dataset.index)
-    console.log(index)
-    this.setData({
-      listActive: index
+    var that = this;
+    that.setData({
+      rentIndex: parseInt(e.target.dataset.index),
+      rentStart: e.target.dataset.start,
+      rentEnd: e.target.dataset.end
     })
-    console.log(this.data.listActive)
+
+    console.log('获取租金开始：' + that.data.rentStart);
+    console.log('获取租金结束：' + that.data.rentEnd);
+
   }
 
 })

@@ -35,15 +35,15 @@
                    <view class="containerBox">
                    <!--左边内容区域  -->
                     <view class="nav_left">
-                      <block wx:for="{{navList}}" wx:key="k">
-                        <view class="nav_list_items {{curNav == item.id ? 'active' : ''}}" bindtap='selectNav' data-cname="{{item.cname}}" data-index="{{index}}" data-id="{{item.id}}">{{item.name}}</view>
+                      <block wx:for="{{minxian}}" wx:key="k">
+                        <view class="nav_list_items {{minxianIndex == item.index ? 'active' : ''}}" bindtap='selectMinxian' data-minxianename="{{item.minxianename}}" data-index="{{item.index}}">{{item.cname}}</view>
                       </block> 
                     </view>
                       <!-- 右边显示区域 -->
                       <view class="nav_right">
                       <!-- 需要先判断 是否为空 -->
-                        <block wx:for="{{hm_min_xian[cname]}}" wx:key="i" wx:for-index="i" wx:for-index="k">
-                          <scroll-view class="nav_right_items {{listActive == k ? 'listActive' : ''}}" data-index="{{k}}" data-id="{{item.id}}" bindtap='searchTap'>{{item.town_village}}</scroll-view>
+                        <block wx:for="{{hm_min_xian[minxianename]}}" wx:key="i" wx:for-index="k">
+                          <scroll-view class="nav_right_items {{hm_min_xian_id == item.id ? 'listActive' : ''}}" data-id="{{item.id}}" bindtap='selectMinxianId'>{{item.town_village}}</scroll-view>
                         </block> 
                       </view> 
                    </view>
@@ -51,24 +51,24 @@
                 <view class="weui-tab__content" hidden="{{activeIndex != 1}}">
                   <!-- 租金 -->
                   <block wx:for="{{rent}}" wx:for-index="k" wx:for-item="v" wx:key="i">
-                    <view class="list {{listActive == k ? 'listActive' : ''}} " data-index="{{k}}" data-start="{{v.start}}" data-end="{{v.end}}" bindtap="tapRent">{{v.key}}</view>
+                    <view class="list {{rentIndex == k ? 'listActive' : ''}} " data-index="{{k}}" data-start="{{v.start}}" data-end="{{v.end}}" bindtap="tapRent">{{v.key}}</view>
                   </block>
                 </view>
                 <view class="weui-tab__content" hidden="{{activeIndex != 2}}">
                     <!-- 房型 -->
                   <view class="fxBox">
                     <view class="fxBox_title">卧室</view>
-                      <checkbox-group class='fxBox_bd' bindchange="checkChange">
-                        <label bindtap="click"  wx:for="{{bedroom}}" wx:key="k" wx:for-index="i" class="fxBox_bd_list {{item.checked?'listCctive':''}}">
-                          <checkbox value="{{i}}" name="{{item.key}}" checked="false" hidden='true' ></checkbox>
-                          <label class="fxBox_title" data-start="{{v.start}}" data-end="{{v.end}}">{{item.key}}</label>
+                      <checkbox-group class='fxBox_bd' bindchange="checkChangeBedroom">
+                        <label wx:for="{{bedroom}}" wx:key="index" wx:for-index="k" wx:for-item="v" class="fxBox_bd_list {{item.checked?'listCctive':''}}">
+                          <checkbox value="{{v.value}}" checked="{{v.checked}}"></checkbox>
+                          <label class="fxBox_title">{{v.key}}</label>
                         </label>
                       </checkbox-group>
                   </view>
                   <view class="fxBox">
                     <view class="fxBox_title">卫生间</view>
                     <checkbox-group class='fxBox_bd' bindchange="checkChangeToilet">
-                        <label bindtap="click"  wx:for="{{toilet}}" wx:key="{{k}}" wx:for-index="i"
+                        <label wx:for="{{toilet}}" wx:key="{{k}}" wx:for-index="i"
                         class="fxBox_bd_list {{item.checked?'listCctive':''}}">
                           <checkbox value="{{i}}" name="{{item.key}}" 
                           checked="{{item.checked}}" hidden='true'></checkbox>

@@ -287,12 +287,12 @@ return [
 
     // 卧室
     'bedroom'       =>  [
-        '0'         =>  ['key'=>'一室','start'=>'1','end'=>'1'],
-        '1'         =>  ['key'=>'二室','start'=>'2','end'=>'2'],
-        '2'         =>  ['key'=>'三室','start'=>'3','end'=>'3'],
-        '3'         =>  ['key'=>'四室','start'=>'4','end'=>'4'],
-        '4'         =>  ['key'=>'五室','start'=>'5','end'=>'5'],
-        '5'         =>  ['key'=>'五室以上','start'=>'5','end'=>'1000000'],
+        '0'         =>  ['key'=>'一室','value'=>'1','checked'=>'true'],
+        '1'         =>  ['key'=>'二室','value'=>'2','checked'=>'false'],
+        '2'         =>  ['key'=>'三室','value'=>'3','checked'=>'false'],
+        '3'         =>  ['key'=>'四室','value'=>'4','checked'=>'false'],
+        '4'         =>  ['key'=>'五室','value'=>'5','checked'=>'false'],
+        '5'         =>  ['key'=>'五室以上','value'=>'6','checked'=>'false'],
     ],
 
     // 卫生间
