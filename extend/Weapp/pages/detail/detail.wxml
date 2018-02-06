@@ -10,10 +10,9 @@
     <!-- 小区名称 -->
     <view class="weui-cells__title">
       <view class="weui-cells__title_txt" >{{hm_landlord_rent.hm_area_id.address}}</view>
-      <view class="weui-panel_header">{{hm_landlord_rent.hm_lease_id.rent}}元/月
         <!--特点-->
-        <view wx:for="{{hm_landlord_rent.hm_housing_resource_id.trait}}" class="traitStyle" wx:key="k">{{item}}</view>
-      </view>
+        <view wx:for="{{hm_landlord_rent.hm_housing_resource_id.trait}}" class="box__titleLabel lebalStyleDT lebalSty" wx:key="k">{{item}}</view>
+      <view class="weui-panel_header">{{hm_landlord_rent.hm_lease_id.rent}}元/月</view>
     </view>
     
     

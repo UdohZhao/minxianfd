@@ -52,6 +52,7 @@ Page({
                   that.setData({
                     hm_landlord_rent: res.data.data.hm_landlord_rent
                   })
+                  console.log(res.data.data.hm_landlord_rent)
               }
               else
               {
