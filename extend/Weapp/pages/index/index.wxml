@@ -10,9 +10,9 @@
     </swiper>
      <!-- 固定头部定位 -->
     <view class="search" >
-      <view class="weui-search-bar__form" bindtap='gotoLocation'>
+      <view class="weui-search-bar__form">
         <image src='../../dist/images/location.png'></image>
-        <view class="locationMsg">获取地理位置中</view>
+        <view class="locationMsg">{{address}}</view>
       </view>
     </view>
   </view>

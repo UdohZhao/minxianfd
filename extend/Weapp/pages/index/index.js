@@ -1,6 +1,7 @@
 //获取应用实例
 const app = getApp()
-
+var QQMapWX = require('../../libs/qqmap-wx-jssdk.js');
+var qqmapsdk;
 Page({
   data: {
     domain: app.data.domain,
@@ -29,102 +30,6 @@ Page({
         cname: '乡'
       },
     ],
-    dishesList:[
-      [
-        {
-          name: '岷阳镇',
-          id: 1,
-          num: 1
-        },
-        {
-          name: '蒲麻镇',
-          id: 2,
-          num: 1
-        },
-        {
-          name: '西寨镇',
-          id: 3,
-          num: 1
-        },
-        {
-          name: '梅川镇',
-          id: 4,
-          num: 1
-        },
-        {
-          name: '西江镇',
-          id: 5,
-          num: 1
-        },
-        {
-          name: '闾静镇',
-          id: 6,
-          num: 1
-        },
-        {
-          name: '十里镇',
-          id:7,
-          num: 1
-        },
-        {
-          name: '茶埠镇',
-          id: 8,
-          num: 1
-        },
-        {
-          name: '中寨镇',
-          id: 9,
-          num: 1
-        },
-      ],
-      [
-        {
-          name: '清水乡',
-          id: 10,
-          num: 1
-        },
-        {
-          name: '马坞乡',
-          id: 11,
-          num: 1
-        },
-        {
-          name: '寺沟乡',
-          id: 12,
-          num: 1
-        },
-        {
-          name: '麻子川',
-          id: 13,
-          num: 1
-        },
-        {
-          name: '秦许乡',
-          id: 14,
-          num: 1
-        },
-        {
-          name: '禾驮乡',
-          id: 15,
-          num: 1
-        },
-        {
-          name: '维新乡',
-          id: 16,
-          num: 1
-        },
-        {
-          name: '申都乡',
-          id: 17,
-          num: 1
-        },
-        {
-          name: '锁龙乡',
-          id: 18,
-          num: 1
-        },
-      ],
-    ],
     tabs: ["区域", "租金","房型", "更多"],
     sliderOffset: 0,
     sliderLeft: 0,
@@ -132,261 +37,51 @@ Page({
     inputShowed: false,
     inputVal: "",
     yd:'yd',
-
-    items: [
-      {
-        value:'一室',
-        name:0,
-        checked: false,
-      },
-      {
-        value: '二室',
-        name: 1,
-        checked: false,
-      },
-      {
-        value: '三室',
-        name: 2,
-        checked: false,
-      },
-      {
-        value: '四室',
-        name: 3,
-        checked: false,
-      },
-      {
-        value: '五室',
-        name: 4,
-        checked: false,
-      },
-      {
-        value: '五室以上',
-        name: 5,
-        checked: false,
-      }
-    ],
-    items1: [
-      {
-        value: '独卫',
-        name: 0,
-        checked: false,
-      },
-      {
-        value: '二卫',
-        name: 1,
-        checked: false,
-      },
-      {
-        value: '三卫',
-        name: 2,
-        checked: false,
-      },
-      {
-        value: '三卫以上',
-        name: 3,
-        checked: false,
-      }
-    ],
-    items2: [
-      {
-        value: '朝东',
-        name: 0,
-        checked: false,
-      },
-      {
-        value: '朝西',
-        name: 1,
-        checked: false,
-      },
-      {
-        value: '朝南',
-        name: 2,
-        checked: false,
-      },
-      {
-        value: '朝北',
-        name: 3,
-        checked: false,
-      },
-      {
-        value: '朝南北',
-        name: 4,
-        checked: false,
-      }
-    ],
-    items3: [
-      {
-        value: '30平以下',
-        name: 0,
-        checked: false,
-      },
-      {
-        value: '30-50平',
-        name: 1,
-        checked: false,
-      },
-      {
-        value: '50-70平',
-        name: 2,
-        checked: false,
-      },
-      {
-        value: '70-90平',
-        name: 3,
-        checked: false,
-      },
-      {
-        value: '90-120平',
-        name: 4,
-        checked: false,
-      },
-      {
-        value: '120-150平',
-        name: 5,
-        checked: false,
-      },
-      {
-        value: '150-200平',
-        name: 6,
-        checked: false,
-      },
-      {
-        value: '200-300平',
-        name: 7,
-        checked: false,
-      },
-      {
-        value: '300平以上',
-        name: 8,
-        checked: false,
-      }
-    ],
-    items4: [
-      {
-        value: '近地铁',
-        name: 0,
-        checked: false,
-      },
-      {
-        value: '精装修',
-        name: 1,
-        checked: false,
-      },
-      {
-        value: '新上房源',
-        name: 2,
-        checked: false,
-      },
-      {
-        value: '随时看房',
-        name: 3,
-        checked: false,
-      },
-      {
-        value: '有车位',
-        name: 4,
-        checked: false,
-      }
-    ],
-    items5: [
-      {
-        value: '低楼层',
-        name: 0,
-        checked: false,
-      },
-      {
-        value: '中楼层',
-        name: 1,
-        checked: false,
-      },
-      {
-        value: '高楼层',
-        name: 2,
-        checked: false,
-      }
-    ],
-    items6: [
-      {
-        value: '精装修',
-        name: 0,
-        checked: false,
-      },
-      {
-        value: '普通装修',
-        name: 1,
-        checked: false,
-      },
-      {
-        value: '毛坯房  ',
-        name: 2,
-        checked: false,
-      }
-    ],
-    items7: [
-      {
-        value: '市政供暖',
-        name: 0,
-        checked: false,
-      },
-      {
-        value: '自供暖',
-        name: 1,
-        checked: false,
-      }
-    ],
-    items8: [
-      {
-        value: '有电梯',
-        name: 0,
-        checked: false,
-      },
-      {
-        value: '无电梯',
-        name: 1,
-        checked: false,
-      }
-    ],
-    items9: [
-      {
-        value: '不限',
-        name: 0,
-        checked: false,
-      },
-      {
-        value: '整租',
-        name: 1,
-        checked: false,
-      },
-      {
-        value: '合租',
-        name: 2,
-        checked: false,
-      }
-    ],
     // 岷县左侧active标示
     minxianIndex: 0,
     // 默认镇数据
     minxianename: 'town',
-
+    // 获取用户地理位置
+    address: '获取地理位置中'
+  
 
   },
 
   onLoad: function (options) {
     var that = this;
 
-    console.log(options);
+    // 实例化API核心类
+    qqmapsdk = new QQMapWX({
+        key: 'TQIBZ-WXKCO-RLCWU-SLTK3-FYZ43-7LBEY'
+    });
 
     // 获取地理位置
-    // wx.getLocation({
-    //   type: 'wgs84',
-    //   success: function(res) {
-    //     console.log(res);
-    //     var latitude = res.latitude
-    //     var longitude = res.longitude
-    //     var speed = res.speed
-    //     var accuracy = res.accuracy
-    //   }
-    // })
+    wx.getLocation({
+      type: 'wgs84',
+      success: function(res) {
+        console.log(res);
+        // 调用接口
+        qqmapsdk.reverseGeocoder({
+            location: {
+                latitude: res.latitude,
+                longitude: res.longitude
+            },
+            coord_type: 3,
+            success: function(res) {
+                console.log(res);
+                that.setData({
+                  address: res.result.address
+                });
+            },
+            fail: function(res) {
+                console.log(res);
+            },
+            complete: function(res) {
+
+            }
+        });
+      }
+    })
 
     // 良好的用户体验
     wx.showLoading({
@@ -463,6 +158,56 @@ Page({
     })
 
   },
+
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function () {
+    
+  },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
+     
+  },
+
+  /**
+   * 生命周期函数--监听页面隐藏
+   */
+  onHide: function () {
+    
+  },
+
+  /**
+   * 生命周期函数--监听页面卸载
+   */
+  onUnload: function () {
+    
+  },
+
+  /**
+   * 页面相关事件处理函数--监听用户下拉动作
+   */
+  onPullDownRefresh: function () {
+    
+  },
+
+  /**
+   * 页面上拉触底事件的处理函数
+   */
+  onReachBottom: function () {
+    
+  },
+
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function () {
+    
+  },
+
   tabClick: function (e) {
     this.setData({
         sliderOffset: e.currentTarget.offsetLeft,
