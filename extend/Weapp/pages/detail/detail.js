@@ -66,8 +66,13 @@ Page({
                   that.setData({
                     hm_landlord_rent: res.data.data
                   })
-                  console.log(res.data.data)
-                  
+                  // 当前用户是否收藏该房源
+                  if (that.data.hm_landlord_rent.hm_owner_collect_id) 
+                  {
+                        that.setData({
+                          collectionStatus:false
+                        })
+                  }
               }
               else
               {
@@ -145,32 +150,80 @@ Page({
   },
 
   //点击收藏
-  onColletionTap: function (event) {
-    // 获取房源ID
-      var id = this.data.hm_landlord_rent.id
-      console.log(id)
-    var collectionStatus = this.data.collectionStatus
-    if (collectionStatus == true){
-      wx.showToast({
-        icon:'success',
-        title: '收藏成功',
-        duration:3000,
-        mask:true,
-      })
-      this.setData({
-        collectionStatus:false
-      })
-    }else{
-      wx.showToast({
-        icon: 'success',
-        title: '取消成功',
-        duration: 3000,
-        mask: true
-      })
-      this.setData({
-        collectionStatus: true
-      })
-    }
+  onColletionTap: function (e) {
+    var that = this;
+  
+    // 收藏房源
+    wx.request({
+      url: app.data.domain + '/WxLogin/checkRedis', 
+      data: {
+        threerd_session: wx.getStorageSync('3rd_session')
+      },
+      header: {
+          'content-type': 'application/json'
+      },
+      success: function(res) {
+        // 3rd_session
+        if (res.data.status == 1) 
+        {
+          app.threerdLogin();
+        }
+        else
+        {
+          // 小程序用户id
+          var wuid = res.data.data;
+
+          // 判断是收藏事件还是取消收藏事件
+          var requestUrl;
+          if (that.data.collectionStatus) 
+          {
+              requestUrl = app.data.domain + '/HmLandlordRent/collect?wuid='+wuid+'&hmlrid='+that.data.hm_landlord_rent.id;
+          }
+          else
+          {
+              requestUrl = app.data.domain + '/HmLandlordRent/unCollect?wuid='+wuid+'&hmocid='+that.data.hm_landlord_rent.hm_owner_collect_id;
+          }
+
+          //提交
+          wx.request({
+            url: requestUrl,
+            data: {},
+            method: 'GET',
+            header: {
+                'content-type': 'application/json'
+            },
+            success: function (res) {
+              console.log(res);
+              // if 
+              if (res.data.status == 0) 
+              {
+                wx.showToast({
+                  icon:'success',
+                  title: res.data.msg,
+                  duration:3000,
+                  mask:true,
+                })
+                that.setData({
+                  collectionStatus: res.data.data
+                })
+              }
+              else
+              {
+                  wx.showModal({
+                    title: '提示',
+                    content: res.data.msg,
+                    showCancel: false
+                  })
+              }
+            },
+            fail: function (e) {
+              console.log(e);
+            }
+          })
+        }
+      }
+    })
+    
   },
 
 

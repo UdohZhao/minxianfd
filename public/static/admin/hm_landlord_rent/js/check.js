@@ -122,4 +122,43 @@ function counselorRe(id)
     })
 }
 
+// 推广过期
+function staleDated(id,hm_promotion_id)
+{
+    swal({
+      title: '确认此操作吗？',
+      text: '确认后该房源不再显示在小程序推荐房源列表中！',
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: '确定',
+    }).then(function(){
+      // Ajax
+      $.ajax({
+        type: 'GET',
+        url: '/admin/HmLandlordRent/staleDated',
+        data: {id:id,hmpid:hm_promotion_id},
+        dataType: 'JSON',
+        success: function(res)
+        {
+            // if
+            if (res.status == 0)
+            {
+                swal('成功提示',res.msg,'success');
+                setTimeout('window.location.reload();',2000);
+            }
+            else
+            {
+                swal('错误提示',res.msg,'error');
+            }
+        },
+        error: function(e)
+        {
+          console.log(e);
+        }
+      });
+    })
+}
+
 

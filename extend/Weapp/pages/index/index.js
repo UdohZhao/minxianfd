@@ -376,6 +376,18 @@ Page({
 
     console.log(options);
 
+    // 获取地理位置
+    // wx.getLocation({
+    //   type: 'wgs84',
+    //   success: function(res) {
+    //     console.log(res);
+    //     var latitude = res.latitude
+    //     var longitude = res.longitude
+    //     var speed = res.speed
+    //     var accuracy = res.accuracy
+    //   }
+    // })
+
     // 良好的用户体验
     wx.showLoading({
       title: '获取中',

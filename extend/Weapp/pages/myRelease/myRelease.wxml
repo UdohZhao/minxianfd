@@ -1,10 +1,9 @@
 <view class="page">
   <view class="page_weui_hd">我的发布</view>
   <view class="page__bd marTop30">
-
-
-    <!-- 判断是否有发布 -->
     
+    <!--先判断是否有数据-->
+    <view wx:if="{{hm_landlord_rent}}">
     <scroll-view scroll-y  wx:for="{{hm_landlord_rent}}" wx:for-index="k" wx:for-item="v" wx:key="*this" >
         <!--设置标签-->
         <view class="weui-media-box_title">
@@ -28,7 +27,7 @@
             <view class="weui-media-box__desc">
                 <!-- 判断标签 -->
               <view wx:for="{{v.hm_housing_resource_id.trait}}" wx:for-index="kk" wx:for-item="vv" wx:key="index">
-                <text class="lebalStyleDT lebalSty">{{vv}}</text>
+                <text class="lebalStyleJZX lebalSty">{{vv}}</text>
               </view>
               <!--<text class="lebalStyleSSKF lebalSty">随时看房</text>
               <text class="lebalStyleXSFY lebalSty">新上房源</text>
@@ -52,6 +51,10 @@
         </view>
        </view>
     </scroll-view>
+      </view>
+      <view wx:else>
+      <view class="errorMsg">暂无数据~~~</view>
+      </view> 
 
 
   </view>

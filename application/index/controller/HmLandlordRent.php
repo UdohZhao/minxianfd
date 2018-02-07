@@ -323,10 +323,96 @@ class HmLandlordRent extends Base
         }
         // 读取房源租房顾问数据
         $data['hm_counselor_id'] = db('hm_counselor')->where('id',$data['hm_counselor_id'])->find();
+        // 读取当前用户是否收藏
+        $data['hm_owner_collect_id'] = db('hm_owner_collect')->where('hm_landlord_rent_id',$this->id)->where('weapp_user_id',$this->wuid)->value('id');
+
         slog($data);
 
         return ajaxReturn(Rs(0,'受影响的操作！',$data));
 
     }
+
+    // 收藏房源
+    public function collect()
+    {
+        // dataHmoc
+        $dataHmoc = $this->getHmocData();
+        // 防止重复收藏
+        if (db('hm_owner_collect')->where('hm_landlord_rent_id',$this->hmlrid)->where('weapp_user_id',$this->wuid)->count())
+        {
+            return ajaxReturn(Rs(2,'请勿重复收藏！',false));
+        }
+        // 写入房源模块业主收藏表
+        if (db('hm_owner_collect')->insert($dataHmoc))
+        {
+            return ajaxReturn(Rs(0,'收藏成功',false));
+        }
+        else
+        {
+            return ajaxReturn(Rs(1,'收藏失败',false));
+        }
+    }
+
+    // 初始化房源模块业主收藏数据
+    private function getHmocData()
+    {
+        $dataHmoc['hm_landlord_rent_id'] = $this->hmlrid;
+        $dataHmoc['weapp_user_id'] = $this->wuid;
+        $dataHmoc['ctime'] = time();
+        return $dataHmoc;
+    }
+
+    // 取消收藏
+    public function unCollect()
+    {
+        $hmocid = input('get.hmocid');
+        if (db('hm_owner_collect')->where('id',$hmocid)->delete())
+        {
+            return ajaxReturn(Rs(0,'取消收藏成功',true));
+        }
+        else
+        {
+            return ajaxReturn(Rs(1,'取消收藏失败',false));
+        }
+    }
+
+    // 收藏列表页面
+    public function listCollect()
+    {
+        // 读取当前用户收藏房源
+        $dataHmoc = db('hm_owner_collect')->where('weapp_user_id',$this->wuid)->order('ctime desc')->column('hm_landlord_rent_id');
+        if (!$dataHmoc)
+        {
+            return ajaxReturn(Rs(2,'暂未收藏房源！',false));
+        }
+        // foreach
+        foreach ($dataHmoc AS $k => $v)
+        {
+            $data['hm_landlord_rent'][] = db('hm_landlord_rent')->where('id',$v)->where('status',2)->where('type',1)->find();
+        }
+        // foreach
+        foreach ($data['hm_landlord_rent'] AS $k => $v)
+        {
+            // 读取房源基础数据
+            $data['hm_landlord_rent'][$k]['hm_basics_id'] = db('hm_basics')->where('id',$v['hm_basics_id'])->find();
+            $data['hm_landlord_rent'][$k]['hm_basics_id']['hm_house_type_id'] = db('hm_house_type')->where('id',$data['hm_landlord_rent'][$k]['hm_basics_id']['hm_house_type_id'])->find();
+            // 读取房源小区数据
+            $data['hm_landlord_rent'][$k]['hm_community_id'] = db('hm_community')->where('id',$v['hm_community_id'])->find();
+            // 读取房源租赁数据
+            $data['hm_landlord_rent'][$k]['hm_lease_id'] = db('hm_lease')->where('id',$v['hm_lease_id'])->find();
+            // 读取房源数据
+            $data['hm_landlord_rent'][$k]['hm_housing_resource_id'] = db('hm_housing_resource')->where('id',$v['hm_housing_resource_id'])->find();
+            $data['hm_landlord_rent'][$k]['hm_housing_resource_id']['trait'] = explode(',', $data['hm_landlord_rent'][$k]['hm_housing_resource_id']['trait']);
+            // 读取房源环景图片数据
+            $data['hm_landlord_rent'][$k]['hm_housing_resource_id']['hm_view_images'] = db('hm_view_images')->where('hm_housing_resource_id',$v['hm_housing_resource_id'])->find();
+            // 读取房源置顶推广数据
+            $data['hm_landlord_rent'][$k]['hm_promotion_id'] = db('hm_promotion')->where('id',$v['hm_promotion_id'])->find();
+        }
+
+        slog($data);
+        return ajaxReturn(Rs(0,'受影响的操作！',$data));
+
+    }
+
 
 }

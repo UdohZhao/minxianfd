@@ -74,6 +74,9 @@ App({
               {
                 // 本地缓存
                 wx.setStorageSync('3rd_session', res.data.data);
+                wx.reLaunch({
+                  url: '/pages/index/index'
+                })
               }
               else
               {

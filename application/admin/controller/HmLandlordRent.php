@@ -4,6 +4,7 @@ class HmLandlordRent extends Base
 {
     public $id;
     public $status;
+    public $type;
     /**
      * 构造方法
      */
@@ -11,8 +12,10 @@ class HmLandlordRent extends Base
     {
         $this->id = isset($_GET['id']) ? intval($_GET['id']) : 0;
         $this->status = isset($_GET['status']) ? intval($_GET['status']) : 0;
+        $this->type = isset($_GET['type']) ? intval($_GET['type']) : 0;
         $this->assign('id',$this->id);
         $this->assign('status',$this->status);
+        $this->assign('type',$this->type);
     }
 
     // 审核房源
@@ -21,8 +24,17 @@ class HmLandlordRent extends Base
         // search
         $search = "%%";
         if (input('?post.search')) $search = "%".input('post.search')."%";
-        // 读取待审核房源
-        $list = db('hm_landlord_rent')->where('status',$this->status)->order('ctime desc')->paginate(config('pages'),false,['query' => request()->param()]);
+        // type
+        if ($this->type == 0)
+        {
+            // 读取待审核房源
+            $list = db('hm_landlord_rent')->where('status',$this->status)->where('hm_promotion_id',0)->order('ctime desc')->paginate(config('pages'),false,['query' => request()->param()]);
+        }
+        else
+        {
+            // 读取待审核房源
+            $list = db('hm_landlord_rent')->where('status',$this->status)->where('hm_promotion_id != 0')->order('ctime desc')->paginate(config('pages'),false,['query' => request()->param()]);
+        }
         // data
         $data = $list->all();
         // if
@@ -267,6 +279,39 @@ class HmLandlordRent extends Base
                 return ajaxReturn(Rs(1,'不受影响的操作！',false));
             }
         }
+    }
+
+    // 推广过期
+    public function staleDated()
+    {
+        $hmpid = input('get.hmpid');
+        // dataUpHmp
+        $dataUpHmp = $this->getHmpUpData();
+        if (db('hm_promotion')->where('id',$hmpid)->update($dataUpHmp))
+        {
+            // dataUpHmlr
+            $dataUpHmlr = $this->getHmlrUpData();
+            db('hm_landlord_rent')->where('id',$this->id)->update($dataUpHmlr);
+            return ajaxReturn(Rs(0,'受影响的操作！',true));
+        }
+        else
+        {
+            return ajaxReturn(Rs(1,'不受影响的操作！',false));
+        }
+    }
+
+    // 初始化房源置顶推广数据
+    private function getHmpUpData()
+    {
+        $dataUpHmp['status'] = 2;
+        return $dataUpHmp;
+    }
+
+    // 初始化房源模块房东出租数据
+    private function getHmlrUpData()
+    {
+        $dataUpHmlr['hm_promotion_id'] = 0;
+        return $dataUpHmlr;
     }
 
 

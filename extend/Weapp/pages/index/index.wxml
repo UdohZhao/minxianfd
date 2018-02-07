@@ -12,7 +12,7 @@
     <view class="search" >
       <view class="weui-search-bar__form" bindtap='gotoLocation'>
         <image src='../../dist/images/location.png'></image>
-        <view class="locationMsg">果园西总屯精品次卧</view>
+        <view class="locationMsg">获取地理位置中</view>
       </view>
     </view>
   </view>
