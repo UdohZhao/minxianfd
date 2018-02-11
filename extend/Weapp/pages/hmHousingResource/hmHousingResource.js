@@ -295,7 +295,7 @@ Page({
                 if (res.data.status == 0) 
                 {
                     wx.redirectTo({
-                      url: '/pages/hmOwner/hmOwner?hmlrid=' + res.data.data
+                      url: '/pages/hmLandlord/hmLandlord?hmlrid=' + res.data.data
                     })
                 } 
                 else

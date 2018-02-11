@@ -38,7 +38,7 @@
     "list": [
       {
         "pagePath": "pages/index/index",
-        "text": "出租房源",
+        "text": "查找房源",
         "iconPath": "dist/images/icon/house.png",
         "selectedIconPath": "dist/images/icon/house_hover.png"
       },
@@ -56,7 +56,7 @@
       },
       {
         "pagePath": "pages/me/me",
-        "text": "我",
+        "text": "个人中心 ",
         "iconPath": "dist/images/icon/me.png",
         "selectedIconPath": "dist/images/icon/me_hover.png"
       }

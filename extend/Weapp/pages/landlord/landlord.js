@@ -9,6 +9,7 @@ Page({
       { url: '../../dist/images/u2.jpg' },
       { url: '../../dist/images/u3.jpg' },
       { url: '../../dist/images/u4.jpg' },
+      { url: '../../dist/images/u5.jpg' },
       
     ],
     // gcData:true

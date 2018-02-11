@@ -30,7 +30,7 @@ Page({
         cname: '乡'
       },
     ],
-    tabs: ["区域", "租金","房型", "更多"],
+    tabs: ["区域", "租金","户型", "更多"],
     sliderOffset: 0,
     sliderLeft: 0,
     autoplay: false,
