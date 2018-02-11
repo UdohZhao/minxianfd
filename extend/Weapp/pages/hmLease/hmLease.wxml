@@ -2,12 +2,12 @@
   <form bindsubmit="formSubmit" bindreset="formReset">
      <!-- 租赁信息 开始 -->
         <view class="page_bd">
-          <view class="body_title">租赁信息</view>
+          <view class="body_title">租售信息</view>
           <!-- 需要单独设定租出方式 付款方式 配套设施等 -->
             <view class="weui-cell_input weui-cell">
               <view class="weui-btn-area">
                 <picker bindchange="bindPickerChange1" value="{{hm_lease_manner_index}}"  range="{{hm_lease_manner_cname}}" name="hm_lease_manner_index">
-                    <view class="labelStyle">出租方式 : {{hm_lease_manner_cname[hm_lease_manner_index]}}</view>
+                    <view class="labelStyle">租售方式 : {{hm_lease_manner_cname[hm_lease_manner_index]}}</view>
                     <view class="labelRightStyle">
                       <image src='../../dist/images/down.png'></image>
                     </view>
@@ -22,6 +22,7 @@
                       <image src='../../dist/images/down.png'></image>
                     </view>
                 </picker>
+             
               </view>
             </view>
           <view class="weui-cell weui-cell_input">

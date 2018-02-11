@@ -19,13 +19,9 @@
                 <input class="input"  name="building"></input>
                 号楼
               </view>
-              <view class="weui_cell_box_input">
+              <view class="weui_cell_box_input w31">
                 <input class="input"  name="unit"></input>
                 单元
-              </view>
-              <view class="weui_cell_box_input">
-                <input class="input"  name="household"></input>
-                户
               </view>
             </view>
             <view class="weui_cell_box">
@@ -34,12 +30,13 @@
                 <input class="input" type='number' name="present_floor"></input>
                 当前
               </view>
-              <view class="weui_cell_box_input w31">
+              <view class="weui_cell_box_input ">
                 <input class="input" type='number' name="total_floor"></input>
                 总楼层
               </view>
             </view>
           </view>
+          
         </view>
         <!-- 小区信息 结束 -->
         <view class="page__bd page__bd_spacing">

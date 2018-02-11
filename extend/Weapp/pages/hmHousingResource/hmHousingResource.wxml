@@ -29,29 +29,7 @@
               </view>
             </view>
           </view>
-          <!-- 上传图片结束 -->
-          <view class="weui-cell weui-cell_input">
-            <view class="weui-cell__hd">
-              <view class="weui-label">房源标题</view>
-            </view>
-            <view class="weui-cell__bd">
-              <input class="weui-input " name="title" placeholder="请输入房源标题"/>
-            </view>
-          </view>
-          
-
-          
-          <!--入住时间  -->
-          <view class="weui-cell_input weui-cell">
-            <view class="weui-btn-area">
-              <picker bindchange="bindDateChange" value="{{date}}"  mode="date" start="2018-01-01" end="2020-09-01" name="in_time">
-                  <view class="labelStyle">入住时间 : {{date}}</view>
-                  <view class="labelRightStyle">
-                    <image src='../../dist/images/down.png'></image>
-                  </view>
-              </picker>
-            </view>
-          </view>
+        
           <!-- 特点 -->
           <view class="weui-cells__title">房屋特点</view>
           <view class="weui-cells weui-cells_after-title">

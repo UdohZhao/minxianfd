@@ -39,12 +39,6 @@ Page({
           min: 0,
           max: 100
         },
-        household: {
-          required: true,
-          digits: true,
-          min: 0,
-          max: 100
-        },
         present_floor: {
           required: true,
           digits: true,
@@ -67,9 +61,6 @@ Page({
         },
         unit: {
           required: '请输入单元号',
-        },
-        household: {
-          required: '请输入门户号',
         },
         present_floor: {
           required: '请输入楼层',
@@ -176,6 +167,7 @@ Page({
             console.log(e.detail.value.cname)
             console.log(e.detail.value.building)
             console.log(e.detail.value.unit)
+            // 取消户属性
             console.log(e.detail.value.household)
             console.log(e.detail.value.present_floor)
             console.log(e.detail.value.total_floor)
@@ -187,7 +179,7 @@ Page({
                 cname: e.detail.value.cname,
                 building: e.detail.value.building,
                 unit: e.detail.value.unit,
-                household: e.detail.value.household,
+                household: 1,
                 present_floor: e.detail.value.present_floor,
                 total_floor: e.detail.value.total_floor
               },

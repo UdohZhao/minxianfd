@@ -45,6 +45,10 @@
                 厅
               </view>
               <view class="weui_cell_box_input">
+                <input class="input"  name="kitchen_room"></input>
+                厨
+              </view>
+              <view class="weui_cell_box_input">
                 <input class="input"  name="shower_room"></input>
                 卫
               </view>
